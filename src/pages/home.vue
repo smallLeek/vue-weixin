@@ -3,7 +3,7 @@
     <pht-modal v-show=show></pht-modal>
     <pht-loading v-show=show></pht-loading>
     {{loginStatus}}
-    {{userInfo}}
+    {{userInfo.data}}
   </div>
 </template>
 
