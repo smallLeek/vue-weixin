@@ -36,9 +36,9 @@
           cancelButtonMessage:"取消",//取消按钮的默认文字
           autoCloseTime:2200,//弹出窗多久后自动关闭
           modalWidth:'80%',//模态窗默认宽度
-          errorImgUrl:'../../assets/images/dialog/list_box_fail.png',
-          successImgUrl:'../../assets/images/dialog/success.png',
-          noticeImgUrl:'../../assets/images/dialog/list_box_notice.png',
+          errorImgUrl:'../../../static/images/dialog/list_box_fail.png',
+          successImgUrl:'../../../static/images/dialog/success.png',
+          noticeImgUrl:'../../../static/images/dialog/list_box_notice.png',
           maskClass:'.pht_modal_mask',//遮罩类
           modalImgClass:'.pht_modal_img',
           messageTopClass:".modal_info_top",
@@ -390,21 +390,21 @@
     width: 100%;
     height: 0.55rem;
     margin: 0 auto;
-    background: url("../../assets/images/list_box_fail.png") no-repeat 0 0;
+    background: url("../../../static/images/list_box_fail.png") no-repeat 0 0;
     background-size: 100%;
     position: absolute;
     top: -0.46rem;
   }
   .pht-dialog-header.ok{
-    background: url("../../assets/images/success.png") no-repeat 0 0;
+    background: url("../../../static/images/success.png") no-repeat 0 0;
     background-size: 100%;
   }
   .pht-dialog-header.fail{
-    background: url("../../assets/images/list_box_fail.png") no-repeat 0 0;
+    background: url("../../../static/images/list_box_fail.png") no-repeat 0 0;
     background-size: 100%;
   }
   .pht-dialog-header.notice{
-    background: url("../../assets/images/list_box_notice.png") no-repeat 0 0;
+    background: url("../../../static/images/list_box_notice.png") no-repeat 0 0;
     background-size: 100%;
   }
   .pht-dialog-content{

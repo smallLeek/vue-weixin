@@ -1,21 +1,16 @@
 <template>
     <div class="news">
         <div class="news_title">
-            <router-link to="">
-                <img src="../assets/images/goBack.png">
-            </router-link>
+            <a>
+                <img src="../../static/images/goBack.png">
+            </a>
             <span>新闻</span>
         </div>
-        <div class="news_content">
-            新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻
-            <img src="../assets/images/user_menu_icon.png">
-            新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻
-            <img src="../assets/images/user_menu_icon.png">
-            新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻
-            <img src="../assets/images/user_menu_icon.png">
-            新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻
-            <img src="../assets/images/user_menu_icon.png">
-        </div>
+        <scroller class="news_content" :on-refresh="refresh" :on-infinite="infinite">
+          <div class="content">
+            <li v-for="item in items">{{item}}<img src="../../static/images/user_menu_icon.png"></li>
+          </div>
+        </scroller>
     </div>
 </template>
 <script>
@@ -26,60 +21,62 @@
 export default {
    data () {
     return {
-      show:false
-
+      items:[]
     }
 },
   computed: {
-    ...mapGetters([
-      'loginStatus','userInfo'
 
-    ])
   },
 
   mounted:function () {
-   this.showModal();
-   this.connectServer();
-   this.getAccess();
-    phtServer.initWxJsAPI().then(function () {
-      alert(phtServer.getNetworkType().subtype);
-    });
+    for (var i = 1; i <= 10; i++) {
+      this.items.push(i +  - '新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻');
+    }
+    this.top = 1;
+    this.bottom = 10;
 
+    let _this=this;
+    // 返回上一路由
     $('.news_title a').click(function(){
-      history.go(-1)
+      if(_this.$route.query.name.indexOf('news_list')>-1){
+        _this.$router.push({ path: "/news_list" })
+      }else if(_this.$route.query.name.indexOf('gg_list')>-1){
+        _this.$router.push({ path: "/announcement_list" })
+      }else if(_this.$route.query.name.indexOf('home')>-1){
+        _this.$router.push({ path: "/home" })
+      }
     })
   },
   methods:{
-    ...mapActions({ setUserInfo: 'setUserInfo'}),
-    connectServer() {
-      this.setUserInfo({data:'1111',age:'18',height:'183'})
-     console.log(JSON.parse(phtServer.getStore('userInfo')).data)
+    //   上拉刷新下拉加载
+      refresh: function (done) {
+        //   alert(1)
+        var self = this
+        setTimeout(function () {
+          var start = self.top - 1
+          for (var i = start; i > start - 10; i--) {
+            self.items.splice(0, 0, i + ' - 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻');
+          }
+          self.top = self.top - 10;
+          done();
+        }, 1500)
+      },
 
-    },
-     showModal:function () {
-//       $.showphtModal({
-//         errorMsg: '小白菜地里黄两三岁没了娘',
-//         withOneButton:0,
-//         type:2
-//       })
-     },
-    getData:function () {
-      phtServer.initWxJsAPI().then(function () {
-        phtServer.scanQRCode()
-
-      });
-
-    },
-    getAccess:function () {
-      phtServer.globalGetData('/list/cgi-bin/token?grant_type=client_credential&appid=wx8f11eee482052822&secret=1f139593d8d1b11675c99ff4348057d6').then((data)=>{
-        console.log(data)
-      },(error)=>{
-      console.log(error)
-      })
-
-    },
+      infinite: function (done) {
+        //   alert(2)
+        var self = this
+        setTimeout(function () {
+          var start = self.bottom + 1;
+          for (var i = start; i < start + 10; i++) {
+            self.items.push(i + ' - 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻');
+          }
+          self.bottom = self.bottom + 10;
+          done();
+        }, 1500)
+      },
 
   },
+
 
   components: {
     phtModal,
@@ -88,44 +85,6 @@ export default {
 
 }
 </script>
-<style scoped>
-.news{
-  background: url(../assets/images/background_img_1x.png);
-  padding-bottom: 0.5rem;
-  padding-top: 1rem;
-}
-/* title */
-.news_title{
-    margin: auto;
-    width: 7.5rem;
-    height: 1rem;
-    line-height: 1rem;
-    font-size: 0.4rem;
-    text-align: center;
-    color: #fff;
-    background-color: #fb4747;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-}
-.news_title img{
-    position: absolute;
-    left: 0.2rem;
-    top: 0.25rem;
-    height: 0.5rem;
-}
-.news_title a:hover{
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-  -webkit-user-select: none;
-  -moz-user-focus: none;
-  -moz-user-select: none;  
-  text-decoration: none;
-}
-.news_content{
-    font-size: 0.3rem;
-    padding: .2rem;
-}
-.news_content img{
-    width: 100%;
-}
+<style lang="less" scoped>
+@import "../assets/css/news.less";
 </style>

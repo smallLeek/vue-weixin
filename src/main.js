@@ -11,7 +11,9 @@ import'./assets/js/common.js';
 import echarts from 'echarts';
 import wx from 'weixin-js-sdk'
 import VueScroller from 'vue-scroller'
+import Scroller from 'vue-infinite-scroll'
 Vue.use(VueScroller)
+Vue.use(Scroller)
 Vue.prototype.$echarts = echarts
 Vue.prototype.http =axios;
 Vue.config.productionTip = false;

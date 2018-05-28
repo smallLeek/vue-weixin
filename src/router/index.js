@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 const home = resolve => require(['../pages/home.vue'], resolve);
 const account = resolve => require(['../pages/account.vue'], resolve);
-const announcement = resolve => require(['../pages/announcement.vue'], resolve);
+const announcement_list = resolve => require(['../pages/announcement_list.vue'], resolve);
+const news_list = resolve => require(['../pages/news_list.vue'], resolve);
 const news = resolve => require(['../pages/news.vue'], resolve);
 
 const router = new VueRouter({
@@ -24,8 +25,12 @@ const router = new VueRouter({
       component: account,
     },
     {
-      path: '/announcement',
-      component: announcement,
+      path: '/announcement_list',
+      component: announcement_list,
+    },
+    {
+      path: '/news_list',
+      component: news_list,
     },
     {
       path: '/news',
