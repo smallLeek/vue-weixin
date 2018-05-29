@@ -3,38 +3,38 @@
         <!-- title -->
         <div class="announcement_title">
             <router-link to="/home">
-                <img src="../../static/images/goBack.png">
+                <img src="../../../static/images/goBack.png">
             </router-link>
             <span>平台公告</span>
         </div>
         <!-- tab -->
         <div class="announcement_nav">
-            <router-link to="/announcement_list">
+            <router-link to="/announcementList">
                 <li>
-                    <span>公告<img src="../../static/images/announcement_news_sign.png"></span>
+                    <span>公告<img src="../../../static/images/announcement_news_sign.png"></span>
                 </li>
             </router-link>
-            <router-link to="/news_list">
+            <router-link to="/newsList">
                 <li>
-                    <span class="on">新闻<img src="../../static/images/announcement_news_sign.png"></span>
+                    <span class="on">新闻<img src="../../../static/images/announcement_news_sign.png"></span>
                 </li>
             </router-link>
         </div>
         <!-- 新闻列表 -->
         <scroller class="news_list" :on-refresh="refresh" :on-infinite="infinite">
             <ul>
-                <router-link :to="{path: 'news', query: {  name: 'news_list'+'123'}}" v-for="item in items">
+                <router-link :to="{path: 'news', query: {  name: 'newsList'+'123'}}" v-for="item in items">
                     <li>
                         <h1>关于招商银行恢复使用公告</h1>
                         <h2>{{item}}</h2>
-                        <img src="../../static/images/announcement_details.png">
+                        <img src="../../../static/images/announcement_details.png">
                     </li>
                 </router-link>
-                <router-link :to="{path: 'news', query: {  name: 'news_list'+'123'}}" v-for="item in items">
+                <router-link :to="{path: 'news', query: {  name: 'newsList'+'123'}}" v-for="item in items">
                     <li>
                         <h1>{{item}}</h1>
                         <h2>2017-03-22 14:41:27</h2>
-                        <img src="../../static/images/announcement_details.png">
+                        <img src="../../../static/images/announcement_details.png">
                     </li>
                 </router-link>
             </ul>
@@ -42,20 +42,12 @@
     </div>
 </template>
 <script>
-  import phtModal from '../components/modal/modal.vue';
-  import phtLoading from '../components/loading/loading.vue';
-  import {phtServer}  from '../assets/js/phtServer'
-  import {mapGetters, mapActions,mapState} from 'vuex'
-
 export default {
    data () {
     return {
         items: []
     }
 },
-  computed: {
-
-  },
 
   mounted:function () {
       for (var i = 1; i <= 10; i++) {
@@ -92,15 +84,9 @@ export default {
           done();
         }, 1500)
       }
-  },
-
-  components: {
-    phtModal,
-    phtLoading
   }
-
 }
 </script>
 <style lang="less" scoped>
-@import "../assets/css/news_list.less";
+@import "../../assets/css/newsList.less";
 </style>

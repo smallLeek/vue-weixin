@@ -2,31 +2,24 @@
     <div class="news">
         <div class="news_title">
             <a>
-                <img src="../../static/images/goBack.png">
+                <img src="../../../static/images/goBack.png">
             </a>
             <span>新闻</span>
         </div>
         <scroller class="news_content" :on-refresh="refresh" :on-infinite="infinite">
           <div class="content">
-            <li v-for="item in items">{{item}}<img src="../../static/images/user_menu_icon.png"></li>
+            <li v-for="item in items">{{item}}<img src="../../../static/images/user_menu_icon.png"></li>
           </div>
         </scroller>
     </div>
 </template>
 <script>
-  import phtModal from '../components/modal/modal.vue';
-  import phtLoading from '../components/loading/loading.vue';
-  import {phtServer}  from '../assets/js/phtServer'
-  import {mapGetters, mapActions,mapState} from 'vuex'
 export default {
    data () {
     return {
       items:[]
     }
 },
-  computed: {
-
-  },
 
   mounted:function () {
     for (var i = 1; i <= 10; i++) {
@@ -38,10 +31,10 @@ export default {
     let _this=this;
     // 返回上一路由
     $('.news_title a').click(function(){
-      if(_this.$route.query.name.indexOf('news_list')>-1){
-        _this.$router.push({ path: "/news_list" })
-      }else if(_this.$route.query.name.indexOf('gg_list')>-1){
-        _this.$router.push({ path: "/announcement_list" })
+      if(_this.$route.query.name.indexOf('newsList')>-1){
+        _this.$router.push({ path: "/newsList" })
+      }else if(_this.$route.query.name.indexOf('announcementList')>-1){
+        _this.$router.push({ path: "/announcementList" })
       }else if(_this.$route.query.name.indexOf('home')>-1){
         _this.$router.push({ path: "/home" })
       }
@@ -75,16 +68,10 @@ export default {
         }, 1500)
       },
 
-  },
-
-
-  components: {
-    phtModal,
-    phtLoading
   }
 
 }
 </script>
 <style lang="less" scoped>
-@import "../assets/css/news.less";
+@import "../../assets/css/news.less";
 </style>

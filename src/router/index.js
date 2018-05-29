@@ -2,10 +2,22 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 const home = resolve => require(['../pages/home.vue'], resolve);
-const account = resolve => require(['../pages/account.vue'], resolve);
-const announcement_list = resolve => require(['../pages/announcement_list.vue'], resolve);
-const news_list = resolve => require(['../pages/news_list.vue'], resolve);
-const news = resolve => require(['../pages/news.vue'], resolve);
+// 账户
+const account = resolve => require(['../pages/account/account.vue'], resolve);
+const accountExplain = resolve => require(['../pages/account/accountExplain.vue'], resolve);
+const beingCapital = resolve => require(['../pages/account/beingCapital.vue'], resolve);
+const ttyAccount = resolve => require(['../pages/account/ttyAccount.vue'], resolve);
+// 新闻
+const announcementList = resolve => require(['../pages/news/announcementList.vue'], resolve);
+const newsList = resolve => require(['../pages/news/newsList.vue'], resolve);
+const news = resolve => require(['../pages/news/news.vue'], resolve);
+// 详情
+const dcyParticulars = resolve => require(['../pages/particulars/dcyParticulars.vue'], resolve);
+const ttyParticulars = resolve => require(['../pages/particulars/ttyParticulars.vue'], resolve);
+const yyyParticulars = resolve => require(['../pages/particulars/yyyParticulars.vue'], resolve);
+// 记录
+const tradingRecord = resolve => require(['../pages/record/tradingRecord.vue'], resolve);
+const ttyRecord = resolve => require(['../pages/record/ttyRecord.vue'], resolve);
 
 const router = new VueRouter({
   base: 'phtMobile',
@@ -25,16 +37,48 @@ const router = new VueRouter({
       component: account,
     },
     {
-      path: '/announcement_list',
-      component: announcement_list,
+      path: '/announcementList',
+      component: announcementList,
     },
     {
-      path: '/news_list',
-      component: news_list,
+      path: '/newsList',
+      component: newsList,
     },
     {
       path: '/news',
       component: news,
+    },
+    {
+      path: '/accountExplain',
+      component: accountExplain,
+    },
+    {
+      path: '/beingCapital',
+      component: beingCapital,
+    },
+    {
+      path: '/ttyAccount',
+      component: ttyAccount,
+    },
+    {
+      path: '/dcyParticulars',
+      component: dcyParticulars,
+    },
+    {
+      path: '/ttyParticulars',
+      component: ttyParticulars,
+    },
+    {
+      path: '/yyyParticulars',
+      component: yyyParticulars,
+    },
+    {
+      path: '/tradingRecord',
+      component: tradingRecord,
+    },
+    {
+      path: '/ttyRecord',
+      component: ttyRecord,
     }
   ]
 });

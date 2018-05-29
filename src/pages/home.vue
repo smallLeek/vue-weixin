@@ -30,7 +30,7 @@
     </div>
     <!-- 公告 -->
     <div class="news">
-      <div class="news_img"><router-link to="/announcement_list"><img src="../../static/images/home_announcement.png"></router-link></div>
+      <div class="news_img"><router-link to="/announcementList"><img src="../../static/images/home_announcement.png"></router-link></div>
       <b class="shuxian"></b>
       <div class="news_content">
         <ul>
@@ -89,54 +89,58 @@
         <img src="../../static/images/home_yyy_title.png" class="area_title_img">
         <router-link to=""><span>更多<img src="../../static/images/home_more.png"></span></router-link>
       </div>
-      <ul>
-        <li>月月盈2015502</li>
-        <li>
-          <span>
-            <b>13</b>%
-          </span>
-          <span>
-            <b>6</b>个月
-          </span>
-          <span>
-            <b>400,000</b>元
-          </span>
-        </li>
-        <li>
-          <span>年化收益</span>
-          <span>投资期限</span>
-          <span>剩余可投</span>
-        </li>
-        <!-- 进度条 -->
-        <li>
-          <span><b><s></s></b></span>
-          <span>60%</span>
-        </li>
-      </ul>
-      <ul>
-        <li>月月盈2015502</li>
-        <li>
-          <span>
-            <b>13</b>%
-          </span>
-          <span>
-            <b>6</b>个月
-          </span>
-          <span>
-            <b>400,000</b>元
-          </span>
-        </li>
-        <li>
-          <span>年化收益</span>
-          <span>投资期限</span>
-          <span>剩余可投</span>
-        </li>
-        <!-- 进度条 -->
-        <li>
-          <span><b><s></s></b></span>
-          <span>60%</span>
-        </li>
-      </ul>
+        <router-link :to="{path: 'yyyParticulars', query: {  name: 'home'+'123'}}">
+          <ul>
+            <li>月月盈2015502</li>
+            <li>
+              <span>
+                <b>13</b>%
+              </span>
+              <span>
+                <b>6</b>个月
+              </span>
+              <span>
+                <b>400,000</b>元
+              </span>
+            </li>
+            <li>
+              <span>年化收益</span>
+              <span>投资期限</span>
+              <span>剩余可投</span>
+            </li>
+            <!-- 进度条 -->
+            <li>
+              <span><b><s></s></b></span>
+              <span>60%</span>
+            </li>
+          </ul>
+        </router-link>
+        <router-link :to="{path: 'yyyParticulars', query: {  name: 'home'+'123'}}">
+          <ul>
+            <li>月月盈2015502</li>
+            <li>
+              <span>
+                <b>13</b>%
+              </span>
+              <span>
+                <b>6</b>个月
+              </span>
+              <span>
+                <b>400,000</b>元
+              </span>
+            </li>
+            <li>
+              <span>年化收益</span>
+              <span>投资期限</span>
+              <span>剩余可投</span>
+            </li>
+            <!-- 进度条 -->
+            <li>
+              <span><b><s></s></b></span>
+              <span>60%</span>
+            </li>
+          </ul>
+        </router-link>
     </div>
     <!-- 定存盈专区 -->
     <div class="yyy_area">
@@ -245,9 +249,6 @@ export default {
       show:false
     }
 },
-  computed: {
-
-  },
 
   mounted:function () {
 
