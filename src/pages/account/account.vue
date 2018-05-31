@@ -32,13 +32,13 @@
                         <span>定投盈</span>
                     </li>
                 </router-link>
-                <router-link to="">
+                <router-link to="/tradingRecord">
                     <li>
                         <img src="../../../static/images/user_Transaction_icon.png">
                         <span>交易记录</span>
                     </li>
                 </router-link>
-                <router-link to="">
+                <router-link to="/recharge">
                     <li>
                         <img src="../../../static/images/user_recharge_icon.png">
                         <span>账户充值</span>

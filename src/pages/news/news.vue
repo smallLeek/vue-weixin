@@ -31,11 +31,11 @@ export default {
     let _this=this;
     // 返回上一路由
     $('.news_title a').click(function(){
-      if(_this.$route.query.name.indexOf('newsList')>-1){
+      if(_this.$route.query.url.indexOf('newsList')>-1){
         _this.$router.push({ path: "/newsList" })
-      }else if(_this.$route.query.name.indexOf('announcementList')>-1){
+      }else if(_this.$route.query.url.indexOf('announcementList')>-1){
         _this.$router.push({ path: "/announcementList" })
-      }else if(_this.$route.query.name.indexOf('home')>-1){
+      }else if(_this.$route.query.url.indexOf('home')>-1){
         _this.$router.push({ path: "/home" })
       }
     })

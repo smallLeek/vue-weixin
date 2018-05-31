@@ -4,7 +4,6 @@ Vue.use(VueRouter);
 const home = resolve => require(['../pages/home.vue'], resolve);
 // 账户
 const account = resolve => require(['../pages/account/account.vue'], resolve);
-const accountExplain = resolve => require(['../pages/account/accountExplain.vue'], resolve);
 const beingCapital = resolve => require(['../pages/account/beingCapital.vue'], resolve);
 const ttyAccount = resolve => require(['../pages/account/ttyAccount.vue'], resolve);
 // 新闻
@@ -18,6 +17,8 @@ const yyyParticulars = resolve => require(['../pages/particulars/yyyParticulars.
 // 记录
 const tradingRecord = resolve => require(['../pages/record/tradingRecord.vue'], resolve);
 const ttyRecord = resolve => require(['../pages/record/ttyRecord.vue'], resolve);
+// 充值
+const recharge = resolve => require(['../pages/recharge/recharge.vue'], resolve);
 
 const router = new VueRouter({
   base: 'phtMobile',
@@ -49,10 +50,6 @@ const router = new VueRouter({
       component: news,
     },
     {
-      path: '/accountExplain',
-      component: accountExplain,
-    },
-    {
       path: '/beingCapital',
       component: beingCapital,
     },
@@ -79,6 +76,10 @@ const router = new VueRouter({
     {
       path: '/ttyRecord',
       component: ttyRecord,
+    },
+    {
+      path: '/recharge',
+      component: recharge,
     }
   ]
 });

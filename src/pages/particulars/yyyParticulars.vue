@@ -118,23 +118,81 @@
                 </ul>
             </div>
             <div class="content2">
-
+                <h1>一: 项目介绍</h1>
+                <p>重庆***科技有限公司，成立于2012年5月，专业从事软装设计、软装工程服务与软装产品销售、建筑材料及建筑装饰材料的销售。重庆***科技有限公司品牌崇尚自然与关爱的幸福理念。倡导环保与优雅的生活品质，追求艺术与技术的和谐统一，立足创新，专业质量，诚信服务，真诚合作，共同发展是公司始终如一的追求，为客户提供优质，安全，可靠的技术和产品是公司用户的方针。公司自创立以来，已成功的为很多星级酒店、知名房地产会所、样板房、别墅宅邸、高尚住宅、商业空间等项目提供了全新理念的整体软装饰解决方案和一站式整体软装工程服务，赢得广大消费者和业内同行的认可与赞誉。</p>
+                <h1>二: 借款用途</h1>
+                <p>增加企业流动资金</p>
+                <h1>三: 还款来源</h1>
+                <p>公司与多家星级酒店、知名房地产商具有长久合作关系，具备稳定经营收入和一定的品牌实力，还款来源有保障。</p>
             </div>
             <div class="content3">
-
+                <h1>
+                    <span>用户</span>
+                    <span>投资金额(元)</span>
+                    <span>时间</span>
+                </h1>
+                <ul>
+                    <li>
+                        <span>15*******86</span>
+                        <span>3,000</span>
+                        <span>2018-05-30 11:14:41</span>
+                    </li>
+                    <li>
+                        <span>15*******86</span>
+                        <span>3,000</span>
+                        <span>2018-05-30 11:14:41</span>
+                    </li>
+                    <li>
+                        <span>15*******86</span>
+                        <span>3,000</span>
+                        <span>2018-05-30 11:14:41</span>
+                    </li>
+                    <li>
+                        <span>15*******86</span>
+                        <span>3,000</span>
+                        <span>2018-05-30 11:14:41</span>
+                    </li>
+                    <li>
+                        <span>15*******86</span>
+                        <span>3,000</span>
+                        <span>2018-05-30 11:14:41</span>
+                    </li>
+                    <li>
+                        <span>15*******86</span>
+                        <span>3,000</span>
+                        <span>2018-05-30 11:14:41</span>
+                    </li>
+                </ul>
+                <p>已投资6笔，投资总额66,700元</p>
             </div>
         </div>
-    </div>    
+        <div class="bottom_input">
+            <div class="input_text">
+                <input type="number" placeholder="投资金额">
+                <span>元</span>
+            </div>
+            <div class="input_submit">
+                <router-link to="">立即投资</router-link>
+                <!-- <router-link to="" class="end">已售罄</router-link> -->
+            </div>
+        </div>
+    </div>
 </template>
 <script>
 export default {
-    
+    mounted(){
+        // tab
+        $('.tab ul li').click(function(){
+            $(this).addClass('on').siblings('li').removeClass('on')
+            $('.tab_content>div').eq($(this).index()).show().siblings('div').hide()
+        })
+    }
 }
 </script>
 <style lang="less" scoped>
 .yyy{
     background: url(../../../static/images/background_img_1x.png);
-    padding-bottom: 1.5rem;
+    padding-bottom: 0.94rem;
 }
 /* title */
 .title{
@@ -272,13 +330,14 @@ export default {
 .schedule{
     margin-top: 0.2rem;
     ul{
-        padding: 0 0.2rem;
+        padding-left: 0.2rem;
         background-color: #fff;
         border-top: 1px solid #e0e0e0;
         border-bottom: 1px solid #e0e0e0;
         li{
             height: 1rem;
             line-height: 1rem;
+            padding-right: 0.2rem;
             border-bottom: 1px solid #e0e0e0;
             span:first-child{
                 color: #666666;
@@ -379,6 +438,8 @@ export default {
 }
 .tab_content{
     .content1{
+        padding-bottom: 1rem;
+        background-color: #fff;
         .content1_title{
             height: 1rem;
             line-height: 1rem;
@@ -394,6 +455,171 @@ export default {
                 float: right;
                 color: #333333
             }
+        }
+        ul{
+            width: 6.7rem;
+            margin: auto;
+            margin-top: 0.4rem;
+            border: 1px solid #C0504D;
+            li{
+                height: 0.6rem;
+                line-height: 0.6rem;
+                color: #333333;
+                border-bottom: 1px solid #C0504D;
+                span{
+                    float: left;
+                    text-align: center;
+                    font-size: 0.2rem;
+                    border-right: 1px solid #949393;
+                    box-sizing: border-box;
+                }
+                span:first-child{
+                    width: 52%;
+                }
+                span:nth-child(2){
+                    width: 20%;
+                }
+                span:last-child{
+                    width: 28%;
+                    border-right: none;
+                }
+            }
+            li:first-child{
+                color: #fff;
+                background-color: #C0504D;
+            }
+            li:last-child{
+                border-bottom: none;
+            }
+        }
+    }
+    .content2{
+        display: none;
+        padding: 0 0.2rem;
+        padding-bottom: 1rem;
+        background-color: #fff;
+        h1{
+            font-size: 0.3rem;
+            color: #333333;
+            line-height: 0.8rem;
+        }
+        p{
+            font-size: 0.26rem;
+            color: #666666;
+            text-align: justify;
+        }
+    }
+    .content3{
+        display: none;
+        background-color: #fff;
+        padding-bottom: 0.5rem;
+        h1{
+            padding: 0 0.3rem;
+            line-height: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            span{
+                flex: 1;
+                font-size: 0.3rem;
+            }
+            span:nth-child(2){
+                text-align: center
+            }
+        }
+        ul{
+            padding: 0 0.2rem;
+            li{
+                display: flex;
+                height: 1rem;
+                line-height: 1rem;
+                border-bottom: 1px solid #e0e0e0;
+                span{
+                    flex: 1;
+                    font-size: 0.24rem;
+                }
+                span:nth-child(2){
+                    font-size: 0.26rem;
+                    text-align: center;
+                    color: #C0504D;
+                }
+            }
+        }
+        p{
+            text-align: right;
+            color: #C0504D;
+            height: 0.5rem;
+            line-height: 0.5rem;
+            padding-right: 0.2rem; 
+        }
+    }
+}
+.bottom_input{
+    position: fixed;
+    bottom: 0;
+    height: 0.94rem;
+    width: 7.5rem;
+    margin: auto;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    .input_text{
+        float: left;
+        margin-top: 0.2rem;
+        margin-left: 0.2rem;
+        width: 4.7rem;
+        height: 0.6rem;
+        line-height: 0.67rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 1rem;
+        input{
+            margin-left: 0.2rem;
+            font-size: 0.3rem;
+            border: none;
+            outline:medium;
+            color: #333333;
+        }
+        ::-moz-placeholder {
+            color: #999999;
+        }
+        :-ms-input-placeholder {
+            color: #999999;
+        }
+        ::-webkit-input-placeholder {
+            color: #999999;
+        }
+        span{
+            float: right;
+            margin-right: 0.2rem;
+            font-size: 0.3rem;
+            color: #333333;
+        }
+    }
+    .input_submit{
+        float: right;
+        width: 2.3rem;
+        height: 0.94rem;
+        line-height: 0.94rem;
+        color: #fff;
+        font-size: 0.32rem;
+        text-align: center;
+        a{
+            display: block;
+            width: 2.3rem;
+            height: 0.94rem;
+            line-height: 0.94rem;
+            color: #fff;
+            font-size: 0.32rem;
+            text-align: center;
+            background-color: #ffae00;
+        }
+        a:hover{
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            -webkit-user-select: none;
+            -moz-user-focus: none;
+            -moz-user-select: none;  
+            text-decoration: none;
+        }
+        .end{
+            background-color: #bbbbbb;
         }
     }
 }
