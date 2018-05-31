@@ -19,6 +19,8 @@ const tradingRecord = resolve => require(['../pages/record/tradingRecord.vue'], 
 const ttyRecord = resolve => require(['../pages/record/ttyRecord.vue'], resolve);
 // 充值
 const recharge = resolve => require(['../pages/recharge/recharge.vue'], resolve);
+// 签到
+const signIn = resolve => require(['../pages/signIn/signIn.vue'], resolve);
 
 const router = new VueRouter({
   base: 'phtMobile',
@@ -80,6 +82,10 @@ const router = new VueRouter({
     {
       path: '/recharge',
       component: recharge,
+    },
+    {
+      path: '/signIn',
+      component: signIn,
     }
   ]
 });

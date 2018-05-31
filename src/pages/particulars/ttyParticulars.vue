@@ -95,7 +95,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .tty{
-    background: url(../../../static/images/background_img_1x.png);
+    background-color: #f8f8f8;
     padding-bottom: 0.94rem;
 }
 /* title */

@@ -65,7 +65,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .recharge{
-    background: url(../../../static/images/background_img_1x.png);
+    background-color: #f8f8f8;
 }
 /* title */
 .title{
