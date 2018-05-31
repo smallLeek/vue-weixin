@@ -357,7 +357,7 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 1000;
-    background-color: rgba(0, 0, 0,0.8);
+    background-color: rgba(0, 0, 0,0.7);
     color: #fff;
     h1{
         width: 6.8rem;

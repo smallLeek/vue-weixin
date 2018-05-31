@@ -130,11 +130,11 @@ export default {
     }
 }
 .header{
-    width: 100%;
+    width: 7.5rem;
     height: 0.64rem;
     line-height: 0.64rem;
     top: 1rem;
-    left: 0;
+    margin: auto;
     font-size: 0.3rem;
     color: #333333;
     position: fixed;
