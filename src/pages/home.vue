@@ -6,10 +6,12 @@
     <!-- 头部 -->
     <!-- <div class="header">
       {{loginStatus}}
-      {{userInfo.data}}      
+      {{userInfo.data}}
     </div> -->
     <!-- 轮播 -->
-    <div class="swiper">轮播</div>
+    <div class="swiper">
+      <loop></loop>
+    </div>
     <!-- 上部导航 -->
     <div class="nav">
       <li>
@@ -244,6 +246,7 @@
 
 <script>
   import phtModal from '../components/modal/modal.vue';
+  import loop from '../components/loop/loop.vue';
   import phtLoading from '../components/loading/loading.vue';
   import {phtServer}  from '../assets/js/phtServer'
   import {mapGetters, mapActions,mapState} from 'vuex'
@@ -264,7 +267,8 @@ export default {
 
   components: {
     phtModal,
-    phtLoading
+    phtLoading,
+    loop
   }
 
 }
