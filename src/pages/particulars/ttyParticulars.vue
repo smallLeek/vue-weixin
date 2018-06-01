@@ -40,7 +40,7 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="">
+                    <router-link to="/ttyInvestmentList">
                         <span>投资列表</span>
                         <span>71笔<img src="../../../static/images/home_more.png"></span>
                     </router-link>

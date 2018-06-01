@@ -8,7 +8,7 @@
             </span>
             <span>月月盈20170300</span>
             <span>
-                <router-link class="explainBtn" to="">收益试算</router-link>
+                <router-link class="explainBtn" to="/earnings">收益试算</router-link>
             </span>
         </div>
         <div class="fund">

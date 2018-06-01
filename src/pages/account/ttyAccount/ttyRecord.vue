@@ -2,7 +2,7 @@
     <div class="ttyRecord">
         <div class="title">
             <router-link to="/ttyAccount">
-                <img src="../../../static/images/goBack.png">
+                <img src="../../../../static/images/goBack.png">
             </router-link>
             <span>天天盈交易记录</span>
         </div>

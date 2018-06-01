@@ -4,6 +4,49 @@ import {phtServer} from './phtServer'
 
 
 /**
+ * 获取首页公告
+ * @param NOTICE_TYPE
+ * @param CUST_TYPE
+ * @param CURR_PAGE_NUM
+ * @param PER_PAGE_SIZE
+ */
+
+function getNotice(NOTICE_TYPE,CUST_TYPE,CURR_PAGE_NUM,PER_PAGE_SIZE){
+  return phtServer.globalPostData(urls.api_url_getnotice, phtServer.submitData({
+    "NOTICE_TYPE": NOTICE_TYPE,
+    "CUST_TYPE": CUST_TYPE,
+    "CURR_PAGE_NUM": CURR_PAGE_NUM,
+    "PER_PAGE_SIZE": PER_PAGE_SIZE,
+  }))
+}
+
+
+
+/**
+ * 获取首页数据统计
+ */
+
+function getDataStatistics(){
+  return phtServer.globalPostData(urls.api_url_dataStatisticss, phtServer.submitData({
+  }))
+}
+
+
+
+/**
+ * 获取首页推荐项目
+ */
+
+function recommendedProject(){
+  return phtServer.globalPostData(urls.api_url_recommendedProject, phtServer.submitData({
+  }))
+}
+
+
+
+
+
+/**
  *发送验证码
  * @param MOBILE
  * @param USER_TYPE
@@ -20,7 +63,7 @@ function sendMessageMobileValidCode(MOBILE,USER_TYPE,VALID_TYPE) {
 
 /**
  * 融资端注册
- * @param MOBILE
+ * @param MOBILE 
  * @param LOGIN_CODE
  * @param PASSWORD
  * @param NEWPASSWORD
@@ -109,7 +152,10 @@ export  {
   XWnewAddPerson,
   getBanner,
   queryMainPageTotalData,
-  queryNewAddPersonAsync
+  queryNewAddPersonAsync,
+  getNotice,
+  getDataStatistics,
+  recommendedProject
 
 }
 

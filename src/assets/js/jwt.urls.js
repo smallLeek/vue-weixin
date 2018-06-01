@@ -14,6 +14,15 @@ const api_url_base_newPerson = env.origin_baseUrl+env.origin_ProxyPath_texts+env
 //获取移动端轮播图
 const api_url_base_getbanner = env.origin_baseUrl+env.origin_ProxyPath_datas;
 
+// 获取首页公告
+const api_url_base_getnotice = env.origin_baseUrl+env.origin_ProxyPath_datas;
+
+// 获取首页数据统计
+const api_url_base_dataStatisticss = env.origin_baseUrl+env.origin_ProxyPath_datas;
+
+// 首页功能接口-推荐项目接口
+const api_url_base_recommendedProject = env.origin_baseUrl+env.origin_ProxyPath_xwpdss;
+
 //获取撮合资金
 const api_url_base_queryMainPageTotalData = env.origin_baseUrl+env.origin_ProxyPath_datas;
 
@@ -60,6 +69,22 @@ export const api_url_newAddPersonXW = api_url_base_newPerson + "/query/1.0/newAd
  * @type {string}
  */
 export const api_url_getbanner = api_url_base_getbanner + "/msgcenter/query/1.0/getBanner/1.0";
+/**
+ * 获取首页公告接口url
+ * @type {string}
+ */
+export const api_url_getnotice = api_url_base_getnotice + "/msgcenter/query/1.0/getNotice/1.0";
+/**
+ * 获取首页数据统计接口url
+ * @type {string}
+ */
+export const api_url_dataStatisticss = api_url_base_dataStatisticss + "/msgcenter/query/1.0/queryMainPageTotalData/1.0";
+/**
+ * 获取首页功能接口-推荐项目接口url
+ * @type {string}
+ */
+export const api_url_recommendedProject = api_url_base_recommendedProject + "/pds/query/1.0/selectHomePageRecommendAll/1.0";
+
 /**
  * 获取撮合钱数接口url
  * @type {string}
