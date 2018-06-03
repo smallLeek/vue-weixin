@@ -36,7 +36,7 @@
       <b class="shuxian"></b>
       <div class="news_content">
         <ul>
-          <router-link :to="{path: 'news', query: {  name: '123',url: 'home'}}" v-for="item in announcement">
+          <router-link :to="{path: 'news', query: {  name: '123',url: 'home'}}" v-for="(item,index) in announcement">
             <li>
               <img src="../../../static/images/home_announcement_sign.png">
               <span>{{item.NOTICE_TITLE}}</span>
@@ -85,7 +85,7 @@
         <img src="../../../static/images/home_yyy_title.png" class="area_title_img">
         <router-link to="/yyyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link>
       </div>
-        <router-link :to="{path: 'yyyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}" v-for="item in recommendedProject_yyy">
+        <router-link :to="{path: 'yyyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}" v-for="(item , index) in recommendedProject_yyy">
           <ul>
             <li>{{item.PROJ_NAME}}</li>
             <li>
@@ -118,7 +118,7 @@
         <img src="../../../static/images/home_dcy_title.png" class="area_title_img">
         <router-link to="/dcyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link>
       </div>
-      <router-link :to="{path: 'dcyParticulars', query: {  name: '123',url: 'home'}}" v-for="item in recommendedProject_dcy">
+      <router-link :to="{path: 'dcyParticulars', query: {  name: '123',url: 'home'}}" v-for="(item ,index) in recommendedProject_dcy" :key="index">
         <ul>
           <li>{{item.PROJ_NAME}}</li>
           <li>
@@ -191,7 +191,7 @@
   import loop from '../../components/loop/loop.vue';
   import phtLoading from '../../components/loading/loading.vue';
   import {mapGetters, mapActions,mapState} from 'vuex'
-
+  import {getUserInfo} from '../../assets/js/getUserInfo'
   import { phtServer } from '../../assets/js/phtServer'
   import * as apis from '../../assets/js/jwt.apis'
 export default {
@@ -209,9 +209,10 @@ export default {
 },
 
   mounted:function () {
-    this.announcementList(),
-    this.dataStatistics(),
+    this.announcementList();
+    this.dataStatistics();
     this.recommendedProjectList()
+    this.getUserInfo();
   },
   methods:{
     // 获取首页公告
@@ -235,9 +236,9 @@ export default {
     // 获取推荐项目
     recommendedProjectList(){
         let that =this;
-        function formatNum(num) {  
-          return (num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
-        };  
+        function formatNum(num) {
+          return (num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        };
         apis.recommendedProject().then((data)=> {
           this.recommendedProject_tty=data.result.main_data.main_dataTTY;
           this.recommendedProject_yyy=data.result.main_data.main_dataYYY;
@@ -252,6 +253,10 @@ export default {
             this.recommendedProject_dcy[i].SURPLUS_AMOUNT=formatNum(this.recommendedProject_dcy[i].SURPLUS_AMOUNT)
           }
         });
+    },
+    getUserInfo() {
+      getUserInfo.getCode()
+
     }
   },
 
