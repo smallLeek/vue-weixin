@@ -28,12 +28,13 @@
     },
     methods:{
       init() {
+        var self =this;
         var phtModalEntity={
           defaultErrorMsg:"网络繁忙请稍等",
           fadeOutTime:200,//模态窗关闭的动画时间
           messageBottom:"您确定吗？",//底部提示信息的默认值
           oneButtonMessage:"确定",//底部只有一个按钮时，按钮的默认文字
-          cancelButtonMessage:"取消",//取消按钮的默认文字
+          cancelButtonMessage:"由于您长时间未操作请重新登录！",
           autoCloseTime:2200,//弹出窗多久后自动关闭
           modalWidth:'80%',//模态窗默认宽度
           errorImgUrl:'../../../static/images/dialog/list_box_fail.png',
@@ -185,11 +186,6 @@
                   }).bind('touchstart', function () {
                     //$(this).css('background','#E3E3E3');
                   });
-                  if(sessionStorage.isTest){
-                    $(modal_confirm_btn).bind('click', function () {
-                      $(this).trigger('touchend')
-                    });
-                  }
                   if(opts.callBackForCancel){
                     $(modal_cancel_btn).bind('touchend',function(e){
                       e.preventDefault();
@@ -246,11 +242,6 @@
                       }
                     });
                   });
-                  if(sessionStorage.isTest){
-                    $(modal_confirm_btn).bind('click', function () {
-                      $(this).trigger('touchend')
-                    });
-                  }
                 }
               }else{
                 //如果有取消按钮，则绑定关闭弹出窗事件n
@@ -259,11 +250,6 @@
                   e.stopPropagation();
                   $.hidephtModal();
                 });
-                if(sessionStorage.isTest){
-                  $(modal_confirm_btn).bind('click', function () {
-                    $(this).trigger('touchend')
-                  });
-                }
               }
 
 
@@ -273,9 +259,15 @@
                 showOkHeader();
               }else if(opts.type==2){
                 showNoticeHeader();
+                //token过期之后的操作
+                $(modal_confirm_btn).bind('touchend',function () {
+                  self.$router.push({ path: "/ttyMore"})
+                })
               }else if(opts.type==0){
                 showFailHeader();
               }else if(opts.type == 3){
+                //接口请求失败之后的操作
+
                 showFailHeader();
               }
             }
@@ -333,6 +325,7 @@
             //$(phtModalEntity.maskClass).fadeOut(phtModalEntity.fadeOutTime);
             //关闭时直接关掉，否则底部页面会闪亮一下，应该是过渡动画导致的色彩叠加
             $(phtModalEntity.pht_modal_class).hide();
+
           },
 
           showphtMask:function(){
