@@ -261,7 +261,9 @@ export default {
         });
     },
     getUserInfo() {
-      // getUserInfo.getCode()
+
+//      getUserInfo.getCode()
+
 
     }
   },
