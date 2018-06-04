@@ -63,7 +63,7 @@ function sendMessageMobileValidCode(MOBILE,USER_TYPE,VALID_TYPE) {
 
 /**
  * 融资端注册
- * @param MOBILE 
+ * @param MOBILE
  * @param LOGIN_CODE
  * @param PASSWORD
  * @param NEWPASSWORD
@@ -120,7 +120,7 @@ function XWnewAddPerson(MOBILE,LOGIN_CODE,PASSWORD,NEWPASSWORD,MOBILE_VER_CODE,R
  * @param FILE_TYPE
  */
 function getBanner(FILE_TYPE) {
-  return phtServer.globalPostData(urls.api_url_getbanner, phtServer.submitData({
+  return phtServer.globalPostData(urls.api_url_getBanner, phtServer.submitData({
     "FILE_TYPE": FILE_TYPE,
   }))
 }
