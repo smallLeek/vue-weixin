@@ -44,7 +44,11 @@ const router = new VueRouter({
     },
     {
       path: '/home',
+      name: 'home',
       component: home,
+      // meta: {
+      //   keepAlive: true // 需要被缓存
+      // }
     },
     {
       path: '/account',

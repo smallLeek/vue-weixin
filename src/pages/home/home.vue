@@ -1,4 +1,5 @@
 <template>
+<keep-alive include="home">
   <div class="home"  v-title="'融资'">
     <!-- loading -->
     <pht-modal v-show=show></pht-modal>
@@ -183,6 +184,8 @@
       </li>
     </div>
   </div>
+</keep-alive>
+
 
 </template>
 
@@ -212,6 +215,11 @@ export default {
     this.announcementList(),
     this.dataStatistics(),
     this.recommendedProjectList()
+  },
+    beforeRouteLeave(to, from, next) {
+        // 设置下一个路由的 meta
+      to.meta.keepAlive = true;  // B 跳转到 A 时，让 A 缓存，即不刷新
+      next();
   },
   methods:{
     // 获取首页公告
