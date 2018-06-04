@@ -7,9 +7,44 @@ import wx from 'weixin-js-sdk'
 
 let phtServer = {}
 
-/*
-* get请求
-* */
+
+/**
+ * 时间格式化  yyyy-MM-dd HH:mm:ss
+ */
+phtServer.farmatDate=function () {
+  let date = new Date();
+  let seperator1 = "-";
+  let seperator2 = ":";
+  let month = date.getMonth() + 1;
+  let strDate = date.getDate();
+  let strHourse = date.getHours();
+  let strMinutes = date.getMinutes();
+  let strSeconds = date.getSeconds();
+  if (month >= 1 && month <= 9) {
+    month = "0" + month;
+  }
+  if (strDate >= 0 && strDate <= 9) {
+    strDate = "0" + strDate;
+  }
+  if (strHourse >= 1 && strHourse <= 9) {
+    strHourse = "0" + strHourse;
+  }
+  if (strMinutes >= 0 && strMinutes <= 9) {
+    strMinutes = "0" + strMinutes;
+  }
+  if (strSeconds >= 0 && strSeconds <= 9) {
+    strSeconds = "0" + strSeconds;
+  }
+  let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+    + " " + strHourse + seperator2 + strMinutes
+    + seperator2 + strSeconds;
+  return currentdate;
+}
+/**
+ * get请求
+ * @param url
+ * @returns {*}
+ */
 phtServer.globalGetData = function (url) {
   let deferred = $.Deferred();
   let promise = deferred.promise();
@@ -20,9 +55,12 @@ phtServer.globalGetData = function (url) {
   })
   return promise
 }
-/*
-* post请求
-* */
+/**
+ * post请求
+ * @param url
+ * @param data
+ * @returns {*}
+ */
 phtServer.globalPostData = function (url, data) {
   //新建一个Deferred 对象
   let deferred = $.Deferred();
@@ -30,15 +68,17 @@ phtServer.globalPostData = function (url, data) {
   let promise = deferred.promise();
   axios.post(url,data).then((data) => {
     //改变Deferred对象的执行状态
-    deferred.resolve(data.data.response)
+    deferred.resolve(data)
   }, (err) => {
     deferred.resolve(err);
   });
   return promise
 }
-/*
-* 参数加签名
-* */
+/**
+ * 参数加签名
+ * @param params
+ * @returns {string}
+ */
 phtServer.addSign = function (params) {
   function objKeySort(params) {
     let newkey = Object.keys(params).sort();
@@ -60,7 +100,9 @@ phtServer.addSign = function (params) {
   return sign
 }
 /**
- * 格式化数据
+ * 格式化请求数据
+ * @param params
+ * @returns {{}}
  */
 phtServer.submitData =function (params) {
   let submitData ={};
@@ -72,6 +114,7 @@ phtServer.submitData =function (params) {
     "version": "1.0"
   }
   submitData.request={}
+  params.TIMESTAMPS = phtServer.farmatDate();
   submitData.request = {"params":params}
   submitData.saveOperTokenCode =''
   submitData.tokenCode =''
@@ -79,7 +122,9 @@ phtServer.submitData =function (params) {
   return submitData
 };
 /**
- * 存储localStorage
+ * 获取localStorage
+ * @param name
+ * @param content
  */
 phtServer.setStore = (name, content) => {
   if (!name) return;
@@ -91,6 +136,7 @@ phtServer.setStore = (name, content) => {
 
 /**
  * 获取localStorage
+ * @param name
  */
 phtServer.getStore = name => {
   if (!name) return;
@@ -99,6 +145,7 @@ phtServer.getStore = name => {
 
 /**
  * 删除localStorage
+ * @param name
  */
 phtServer.removeStore = name => {
   if (!name) return;
@@ -106,6 +153,8 @@ phtServer.removeStore = name => {
 };
 /**
  * 判断手机号
+ * @param mobile
+ * @returns {boolean}
  */
 phtServer.reg_mobile =function (mobile) {
   if (!mobile) return;
@@ -116,6 +165,8 @@ phtServer.reg_mobile =function (mobile) {
 
 /**
  * 判断密码
+ * @param password
+ * @returns {boolean}
  */
 phtServer.reg_password =function (password) {
   if (!password) return;
@@ -123,9 +174,12 @@ phtServer.reg_password =function (password) {
   return reg.test(password)
 
 };
-/*
-* md5加密
-* */
+/**
+ * md5加密
+ * @param pwd
+ * @returns {*}
+ * @constructor
+ */
 phtServer.CalcuMD5 = function (pwd) {
   var totleStr = "WUJIANDONG20150101PHTFDATA";
   pwd = pwd.toUpperCase();
@@ -147,12 +201,10 @@ phtServer.CalcuMD5lower = function (pwd) {
   pwd = md5(pwd);
   return pwd;
 }
-
 /**
- *
  * 微信开发sdk的引入
+ * @returns {*}
  */
-
 phtServer.initWxJsAPI =function () {
   let deferred = $.Deferred();
   let promise = deferred.promise();

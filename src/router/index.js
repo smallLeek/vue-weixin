@@ -110,6 +110,7 @@ const router = new VueRouter({
     },
     {
       path: '/ttyMore',
+      name: 'ttyMore',
       component: ttyMore,
     },
     {
