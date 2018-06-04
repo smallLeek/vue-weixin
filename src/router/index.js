@@ -13,10 +13,17 @@ const dcyMore = resolve => require(['../pages/home/yyyDcy/dcyMore.vue'], resolve
 const account = resolve => require(['../pages/account/account.vue'], resolve);
 const tradingRecord = resolve => require(['../pages/account/tradingRecord.vue'], resolve);
 const recharge = resolve => require(['../pages/account/recharge.vue'], resolve);
+const setting = resolve => require(['../pages/account/setting/setting.vue'], resolve);
+const datum = resolve => require(['../pages/account/setting/datum.vue'], resolve);
+const about = resolve => require(['../pages/account/setting/about.vue'], resolve);
+
 // 天天盈账户
 const beingCapital = resolve => require(['../pages/account/ttyAccount/beingCapital.vue'], resolve);
 const ttyAccount = resolve => require(['../pages/account/ttyAccount/ttyAccount.vue'], resolve);
 const ttyRecord = resolve => require(['../pages/account/ttyAccount/ttyRecord.vue'], resolve);
+
+// 定投盈账户
+const dty = resolve => require(['../pages/account/dty/dty.vue'], resolve);
 
 // 新闻
 const announcementList = resolve => require(['../pages/news/announcementList.vue'], resolve);
@@ -44,11 +51,7 @@ const router = new VueRouter({
     },
     {
       path: '/home',
-      name: 'home',
       component: home,
-      // meta: {
-      //   keepAlive: true // 需要被缓存
-      // }
     },
     {
       path: '/account',
@@ -126,6 +129,22 @@ const router = new VueRouter({
     {
       path: '/ttyInvestmentList',
       component: ttyInvestmentList,
+    },
+    {
+      path: '/setting',
+      component: setting,
+    },
+    {
+      path: '/datum',
+      component: datum,
+    },
+    {
+      path: '/about',
+      component: about,
+    },
+    {
+      path: '/dty',
+      component: dty,
     }
   ]
 });

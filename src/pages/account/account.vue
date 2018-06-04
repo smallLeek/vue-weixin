@@ -26,7 +26,7 @@
                         <span>天天盈</span>
                     </li>
                 </router-link>
-                <router-link to="">
+                <router-link to="/dty">
                     <li>
                         <img src="../../../static/images/user_dty_icon.png">
                         <span>定投盈</span>
@@ -68,7 +68,7 @@
                         <span>安全中心</span>
                     </li>
                 </router-link>
-                <router-link to="">
+                <router-link to="/setting">
                     <li>
                         <img src="../../../static/images/user_intercalate_icon.png">
                         <span>设置</span>

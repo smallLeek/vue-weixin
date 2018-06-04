@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <keep-alive include="home">
     <div class="home" v-title="'融资'">
       <!-- loading -->
@@ -20,6 +21,62 @@
           <span>当前用户</span>
           <span><b>{{dataStatisticss_CUST_SUM}}</b> 万人</span>
         </li>
+=======
+  <div class="home"  v-title="'融资'">
+    <!-- loading -->
+    <pht-modal v-show=show></pht-modal>
+    <pht-loading v-show=show></pht-loading>
+    <!-- 头部 -->
+    <!-- <div class="header">
+      {{loginStatus}}
+      {{userInfo.data}}
+    </div> -->
+    <!-- 轮播 -->
+    <div class="swiper">
+      <loop></loop>
+    </div>
+    <!-- 上部导航 -->
+    <div class="nav">
+      <li>
+        <img src="../../../static/images/home_users_Num.png">
+        <span>当前用户</span>
+        <span><b>{{dataStatisticss_CUST_SUM}}</b> 万人</span>
+      </li>
+      <li>
+        <img src="../../../static/images/home_financing.png">
+        <span>撮合融资</span>
+        <span><b>{{dataStatisticss_INCOME_SUM}}</b> 亿元</span>
+      </li>
+      <li>
+        <img src="../../../static/images/home_income.png">
+        <span>赚取收益</span>
+        <span><b>{{(dataStatisticss_INVEST_SUM/10000).toFixed(2)}}</b> 万元</span>
+      </li>
+    </div>
+    <!-- 公告 -->
+    <div class="news">
+      <div class="news_img"><router-link to="/announcementList"><img src="../../../static/images/home_announcement.png"></router-link></div>
+      <b class="shuxian"></b>
+      <div class="news_content">
+        <ul>
+          <router-link :to="{path: 'news', query: {  name: '123',url: 'home'}}" v-for="(item,index) in announcement">
+            <li>
+              <img src="../../../static/images/home_announcement_sign.png">
+              <span>{{item.NOTICE_TITLE}}</span>
+            </li>
+          </router-link>
+        </ul>
+      </div>
+    </div>
+    <!-- 天天盈专区 -->
+    <div class="tty_area">
+      <div class="area_title">
+        <img src="../../../static/images/home_tty_title.png" class="area_title_img">
+        <!-- <router-link to="/ttyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
+      </div>
+      <ul v-for="item in recommendedProject_tty">
+        <li>{{item.PROJ_NAME}}（{{item.RATE}}%）</li>
+>>>>>>> 93feb75a09c2cafea732c87a6a020a8a63640cdb
         <li>
           <img src="../../../static/images/home_financing.png">
           <span>撮合融资</span>
@@ -66,6 +123,7 @@
             <span>
             <b>{{item.REDEEM_MAX_AMOUNT}}</b>元
           </span>
+<<<<<<< HEAD
           </li>
           <li>
             <span>年化收益</span>
@@ -81,6 +139,29 @@
             <router-link :to="{path: 'ttyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}">立即投资</router-link>
           </li>
         </ul>
+=======
+        </li>
+        <li>
+          <span>年化收益</span>
+          <span>需求金额</span>
+          <span>剩余可投</span>
+        </li>
+        <!-- 进度条 -->
+        <li>
+          <span><s :style="{width:(item.REDEEM_STATUS)+'%'}"></s></span>
+          <span>{{item.REDEEM_STATUS}}%</span>
+        </li>
+        <li>
+          <router-link :to="{path: 'ttyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}">立即投资</router-link>
+        </li>
+      </ul>
+    </div>
+    <!-- 月月盈专区 -->
+    <div class="yyy_area">
+      <div class="area_title">
+        <img src="../../../static/images/home_yyy_title.png" class="area_title_img">
+        <!-- <router-link to="/yyyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
+>>>>>>> 93feb75a09c2cafea732c87a6a020a8a63640cdb
       </div>
       <!-- 月月盈专区 -->
       <div class="yyy_area">
@@ -115,6 +196,15 @@
             </li>
           </ul>
         </router-link>
+<<<<<<< HEAD
+=======
+    </div>
+    <!-- 定存盈专区 -->
+    <div class="yyy_area">
+      <div class="area_title">
+        <img src="../../../static/images/home_dcy_title.png" class="area_title_img">
+        <!-- <router-link to="/dcyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
+>>>>>>> 93feb75a09c2cafea732c87a6a020a8a63640cdb
       </div>
       <!-- 定存盈专区 -->
       <div class="yyy_area">
@@ -136,6 +226,7 @@
               <span>
               <b>{{item.SURPLUS_AMOUNT}}</b>元
             </span>
+<<<<<<< HEAD
             </li>
             <li>
               <span>年化收益</span>
@@ -148,6 +239,56 @@
               <span>{{100 - (item.SURPLUS_PART * 100 / item.BID_AMOUNT).toFixed(2)}}%</span>
             </li>
           </ul>
+=======
+          </li>
+          <li>
+            <span>年化收益</span>
+            <span>投资期限</span>
+            <span>剩余可投</span>
+          </li>
+          <!-- 进度条 -->
+          <li>
+            <span><b><s :style="{width:100-(item.SURPLUS_PART/item.BID_AMOUNT)*100+'%'}"></s></b></span>
+            <span>{{100-(item.SURPLUS_PART*100/item.BID_AMOUNT).toFixed(2)}}%</span>
+          </li>
+        </ul>
+      </router-link>
+    </div>
+    <!-- 安全保障 -->
+    <div class="insurance ">
+      <h1><img src="../../../static/images/home_insurance _title.png"></h1>
+      <ul>
+        <a href="https://www.phtfdata.com/web6/hander/newBankHerd.do">
+          <li>
+            <img src="../../../static/images/home_xwbank_cg.png">
+            <span>新网银行存管</span>
+          </li>
+        </a>
+        <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do">
+          <li>
+            <img src="../../../static/images/home_insurance.png">
+            <span>安全保障</span>
+          </li>
+        </a>
+        <a href="https://www.phtfdata.com/web6/hander/Mabout.do?index=0">
+          <li>
+            <img src="../../../static/images/home_information_disclosure.png">
+            <span>信息披露</span>
+          </li>
+        </a>
+      </ul>
+    </div>
+    <!-- 底部 -->
+    <div class="bottom">
+      <li class="on">
+        <router-link to="/home">
+        <span><img src="../../../static/images/homeOn.png"></span><span>首页</span>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/account">
+        <span><img src="../../../static/images/user.png"></span><span>我的</span>
+>>>>>>> 93feb75a09c2cafea732c87a6a020a8a63640cdb
         </router-link>
       </div>
       <!-- 安全保障 -->
@@ -188,7 +329,11 @@
         </li>
       </div>
     </div>
+<<<<<<< HEAD
   </keep-alive>
+=======
+  </div>
+>>>>>>> 93feb75a09c2cafea732c87a6a020a8a63640cdb
 
 
 </template>
@@ -268,6 +413,7 @@
             this.recommendedProject_dcy[i].SURPLUS_AMOUNT = formatNum(this.recommendedProject_dcy[i].SURPLUS_AMOUNT)
           }
         });
+<<<<<<< HEAD
       },
       //获取微信用户的code
       getUserInfo() {
@@ -285,6 +431,14 @@
       phtModal,
       phtLoading,
       loop
+=======
+    },
+    getUserInfo() {
+
+//      getUserInfo.getCode()
+
+
+>>>>>>> 93feb75a09c2cafea732c87a6a020a8a63640cdb
     }
 
   }
