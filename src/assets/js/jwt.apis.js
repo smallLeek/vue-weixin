@@ -2,7 +2,7 @@
 import * as urls from './jwt.urls'
 import {phtServer} from './phtServer'
 
-
+let TIMESTAMPS = phtServer.farmatDate;
 /**
  * 获取首页公告
  * @param NOTICE_TYPE
@@ -12,7 +12,7 @@ import {phtServer} from './phtServer'
  */
 
 function getNotice(NOTICE_TYPE,CUST_TYPE,CURR_PAGE_NUM,PER_PAGE_SIZE){
-  return phtServer.globalPostData(urls.api_url_getnotice, phtServer.submitData({
+  return phtServer.globalPostData(urls.api_url_getNotice, phtServer.submitData({
     "NOTICE_TYPE": NOTICE_TYPE,
     "CUST_TYPE": CUST_TYPE,
     "CURR_PAGE_NUM": CURR_PAGE_NUM,
@@ -27,7 +27,7 @@ function getNotice(NOTICE_TYPE,CUST_TYPE,CURR_PAGE_NUM,PER_PAGE_SIZE){
  */
 
 function getDataStatistics(){
-  return phtServer.globalPostData(urls.api_url_dataStatisticss, phtServer.submitData({
+  return phtServer.globalPostData(urls.api_url_queryMainPageTotalData, phtServer.submitData({
   }))
 }
 
@@ -38,7 +38,7 @@ function getDataStatistics(){
  */
 
 function recommendedProject(){
-  return phtServer.globalPostData(urls.api_url_recommendedProject, phtServer.submitData({
+  return phtServer.globalPostData(urls.api_url_selectHomePageRecommendAll, phtServer.submitData({
   }))
 }
 
@@ -57,7 +57,7 @@ function sendMessageMobileValidCode(MOBILE,USER_TYPE,VALID_TYPE) {
   return phtServer.globalPostData(urls.api_url_sendMessageMobileValidCode,phtServer.submitData({
     "MOBILE": MOBILE,
     "USER_TYPE": USER_TYPE,
-    "VALID_TYPE": VALID_TYPE
+    "VALID_TYPE": VALID_TYPE,
   }))
 }
 
@@ -110,7 +110,7 @@ function XWnewAddPerson(MOBILE,LOGIN_CODE,PASSWORD,NEWPASSWORD,MOBILE_VER_CODE,R
     "PASSWORD": PASSWORD,
     "NEWPASSWORD": NEWPASSWORD,
     "MOBILE_VER_CODE": MOBILE_VER_CODE,
-    "RECO_TEL": RECO_TEL
+    "RECO_TEL": RECO_TEL,
   }))
 
 }
