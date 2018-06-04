@@ -1,5 +1,4 @@
 <template>
-<keep-alive include="home">
   <div class="home"  v-title="'融资'">
     <!-- loading -->
     <pht-modal v-show=show></pht-modal>
@@ -50,7 +49,7 @@
     <div class="tty_area">
       <div class="area_title">
         <img src="../../../static/images/home_tty_title.png" class="area_title_img">
-        <router-link to="/ttyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link>
+        <!-- <router-link to="/ttyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
       </div>
       <ul v-for="item in recommendedProject_tty">
         <li>{{item.PROJ_NAME}}（{{item.RATE}}%）</li>
@@ -84,7 +83,7 @@
     <div class="yyy_area">
       <div class="area_title">
         <img src="../../../static/images/home_yyy_title.png" class="area_title_img">
-        <router-link to="/yyyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link>
+        <!-- <router-link to="/yyyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
       </div>
         <router-link :to="{path: 'yyyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}" v-for="(item , index) in recommendedProject_yyy">
           <ul>
@@ -117,7 +116,7 @@
     <div class="yyy_area">
       <div class="area_title">
         <img src="../../../static/images/home_dcy_title.png" class="area_title_img">
-        <router-link to="/dcyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link>
+        <!-- <router-link to="/dcyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
       </div>
       <router-link :to="{path: 'dcyParticulars', query: {  name: '123',url: 'home'}}" v-for="(item ,index) in recommendedProject_dcy" :key="index">
         <ul>
@@ -150,24 +149,24 @@
     <div class="insurance ">
       <h1><img src="../../../static/images/home_insurance _title.png"></h1>
       <ul>
-        <router-link to="">
+        <a href="https://www.phtfdata.com/web6/hander/newBankHerd.do">
           <li>
             <img src="../../../static/images/home_xwbank_cg.png">
             <span>新网银行存管</span>
           </li>
-        </router-link>
-        <router-link to="">
+        </a>
+        <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do">
           <li>
             <img src="../../../static/images/home_insurance.png">
             <span>安全保障</span>
           </li>
-        </router-link>
-        <router-link to="">
+        </a>
+        <a href="https://www.phtfdata.com/web6/hander/Mabout.do?index=0">
           <li>
             <img src="../../../static/images/home_information_disclosure.png">
             <span>信息披露</span>
           </li>
-        </router-link>
+        </a>
       </ul>
     </div>
     <!-- 底部 -->
@@ -184,7 +183,6 @@
       </li>
     </div>
   </div>
-</keep-alive>
 
 
 </template>
@@ -263,7 +261,7 @@ export default {
         });
     },
     getUserInfo() {
-      getUserInfo.getCode()
+      // getUserInfo.getCode()
 
     }
   },
