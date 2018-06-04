@@ -52,5 +52,3 @@ export function regexList(vue,regList) {
     return true;
 
 }
-
-
