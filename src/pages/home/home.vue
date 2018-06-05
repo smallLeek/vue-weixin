@@ -36,7 +36,7 @@
       <b class="shuxian"></b>
       <div class="news_content">
         <ul>
-          <router-link :to="{path: 'news', query: {  name: '123',url: 'home'}}" v-for="(item,index) in announcement" :key="index">
+          <router-link :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}" v-for="(item,index) in announcement">
             <li>
               <img src="../../../static/images/home_announcement_sign.png">
               <span>{{item.NOTICE_TITLE}}</span>
@@ -228,6 +228,7 @@ export default {
         let PER_PAGE_SIZE=2;
         apis.getNotice("重要公告","网站",CURR_PAGE_NUM,PER_PAGE_SIZE).then((data)=> {
           this.announcement =data.result.main_data.data;
+          console.log(data)
         });
     },
     // 获取数据统计
