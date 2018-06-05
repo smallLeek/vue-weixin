@@ -34,7 +34,6 @@ import * as apis from '../../../assets/js/jwt.apis'
   import { phtServer } from '../../../assets/js/phtServer'
 export default {
     mounted(){
-        this.login()
         $('#eye').click(function(){
             if($('#password').attr('type')=='password'){
                 $('#password').attr('type','text');
@@ -64,13 +63,16 @@ export default {
             return currentdate;
         },
         submit(){
-            regexfun.regex(this,'mobile',$('#phonenum').val());
-            alert(regexfun.regex(this,'mobile',$('#phonenum').val()))
+            let flag=false;
+            flag=regexfun.regex(this,'mobile',$('#phonenum').val());
+            if(flag==true){
+                this.login()
+            }
         },
         login(){
-            alert(phtServer.CalcuMD5lower("qwe123456"))
-            apis.newLogin("13588885001",phtServer.CalcuMD5lower("qwe123456"),phtServer.CalcuMD5lower("qwe123456"),this.getNowFormatDate(),"1").then((data)=> {
-                console.log(data)
+            let user_type="1";
+            apis.newLogin($('#phonenum').val(),phtServer.CalcuMD5lower($('#password').val()),phtServer.CalcuMD5lower($('#password').val()),this.getNowFormatDate(),user_type).then((data)=> {
+                this.$router.push({ path: "/home" })
             })
         }
     }

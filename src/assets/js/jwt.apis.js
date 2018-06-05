@@ -65,11 +65,15 @@ function recommendedProject(){
 
 
 /**
- * 获取项目详情
+ * 获取公告详情
+ * @param ID
+ * @param TIMESTAMPS
  */
 
-function getNoticeInfo(){
+function getNoticeInfo(ID,TIMESTAMPS){
   return phtServer.globalPostData(urls.api_url_getNoticeInfo, phtServer.submitData({
+    "ID": ID,
+    "TIMESTAMPS": TIMESTAMPS,
   }))
 }
 
