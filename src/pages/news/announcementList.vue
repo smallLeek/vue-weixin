@@ -23,14 +23,14 @@
         <!-- 公告列表 -->
         <scroller class="announcement_list" :on-refresh="refresh" :on-infinite="infinite">
             <ul>
-                <router-link :to="{path: 'news', query: {  name: '123',url:'announcementList'}}" v-for="item in items">
+                <router-link :to="{path: 'news', query: {  name: '123',url:'announcementList'}}" v-for="(item,index) in items" :key="index">
                     <li>
                         <h1>{{item}}</h1>
                         <h2>2017-03-22 14:41:27</h2>
                         <img src="../../../static/images/announcement_details.png">
                     </li>
                 </router-link>
-                <router-link :to="{path: 'news', query: {  name: '123',url:'announcementList'}}" v-for="item in items">
+                <router-link :to="{path: 'news', query: {  name: '123',url:'announcementList'}}" v-for="(item,index) in items" :key="index">
                     <li>
                         <h1>关于招商银行恢复使用公告</h1>
                         <h2>{{item}}</h2>
