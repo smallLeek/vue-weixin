@@ -44,7 +44,7 @@ const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmen
 const signIn = resolve => require(['../pages/signIn/signIn.vue'], resolve);
 
 const router = new VueRouter({
-  base: 'phtMobile',
+  base: 'wx',
   mode: 'history',
   saveScrollPosition: true,
   routes: [
