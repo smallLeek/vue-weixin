@@ -17,7 +17,13 @@ app.use(historyApiFallback({
   verbose: true,
 }));
 
-app.get('*', express.static(path.join(__dirname, '../dist')));
+app.get('*', express.static(path.join(__dirname, './dist')));
+
+
+app.post('/m/finance/register/isHand*',function(req, res){
+  const url = req.url;
+  res.redirect(url);
+})
 
 //代理1
 const apiProxy = proxy('/apis', { target: 'https://www.phtfdata.com',changeOrigin: true,pathRewrite:{
@@ -26,28 +32,32 @@ const apiProxy = proxy('/apis', { target: 'https://www.phtfdata.com',changeOrigi
 app.use('/apis', apiProxy);
 
 //代理2
-const apiProxy1 = proxy('/datas', { target: 'http://139.129.12.93:8097/',changeOrigin: true,pathRewrite:{
-  '^/datas': ''
+const apiProxy1 = proxy('/texts', { target: 'http://139.129.12.93:8093',changeOrigin: true,pathRewrite:{
+  '^/texts': ''
 } });
-app.use('/datas', apiProxy1);
+app.use('/texts', apiProxy1);
 
 //代理3
-const apiProxy2 = proxy('/aptis', { target: 'http://139.129.12.93:8089/',changeOrigin: true,pathRewrite:{
-  '^/aptis': ''
+const apiProxy2 = proxy('/datas', { target: 'http://139.129.12.93:8097/msgcenter/',changeOrigin: true,pathRewrite:{
+  '^/datas': ''
 } });
-app.use('/aptis', apiProxy2);
+app.use('/datas', apiProxy2);
 
-app.use(function (res,req,next) {
-  console.log(res.url)
 
-})
+//代理3
+const apiProxy3 = proxy('/apts', { target: 'http://139.129.12.93:8089/',changeOrigin: true,pathRewrite:{
+  '^/apts': ''
+} });
+app.use('/apts', apiProxy3);
+
+
 //使用压缩
 app.use(compress());
 //自定义数据
 
 
 // 监听端口
-var server  = app.listen(8888, function () {
+var server  = app.listen(8089, function () {
   var host = server.address().address;
   var port = server.address().port;
 
