@@ -21,6 +21,26 @@ function getNotice(NOTICE_TYPE,CUST_TYPE,CURR_PAGE_NUM,PER_PAGE_SIZE){
 }
 
 
+/**
+ * 登录
+ * @param LOGIN_CODE
+ * @param NEWPASSWORD
+ * @param PASSWORD
+ * @param TIMESTAMPS
+ * @param USER_TYPE
+ */
+
+function newLogin(LOGIN_CODE,NEWPASSWORD,PASSWORD,TIMESTAMPS,USER_TYPE){
+  return phtServer.globalPostData(urls.api_url_newLogin, phtServer.submitData({
+    "LOGIN_CODE": LOGIN_CODE,
+    "NEWPASSWORD": NEWPASSWORD,
+    "PASSWORD": PASSWORD,
+    "TIMESTAMPS": TIMESTAMPS,
+    "USER_TYPE": USER_TYPE,
+  }))
+}
+
+
 
 /**
  * 获取首页数据统计
@@ -39,6 +59,17 @@ function getDataStatistics(){
 
 function recommendedProject(){
   return phtServer.globalPostData(urls.api_url_selectHomePageRecommendAll, phtServer.submitData({
+  }))
+}
+
+
+
+/**
+ * 获取项目详情
+ */
+
+function getNoticeInfo(){
+  return phtServer.globalPostData(urls.api_url_getNoticeInfo, phtServer.submitData({
   }))
 }
 
@@ -155,7 +186,8 @@ export  {
   queryNewAddPersonAsync,
   getNotice,
   getDataStatistics,
-  recommendedProject
-
+  recommendedProject,
+  getNoticeInfo,
+  newLogin
 }
 

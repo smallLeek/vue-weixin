@@ -15,7 +15,7 @@ import './assets/css/swiper.css'
 Vue.use(VueScroller)
 Vue.prototype.$echarts = echarts
 Vue.prototype.http =axios;
-// vue.prototype.bs =new vue();
+Vue.prototype.bs =new Vue();
 Vue.config.productionTip = false;
 new Vue({
   el: '#app',

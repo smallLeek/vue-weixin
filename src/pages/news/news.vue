@@ -14,6 +14,7 @@
     </div>
 </template>
 <script>
+import * as apis from '../../assets/js/jwt.apis'
 export default {
    data () {
     return {
@@ -22,6 +23,7 @@ export default {
 },
 
   mounted:function () {
+    this.getNoticeInfo()
     for (var i = 1; i <= 10; i++) {
       this.items.push(i +  - '新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻');
     }
@@ -41,6 +43,15 @@ export default {
     })
   },
   methods:{
+    // 获取公告详情
+    getNoticeInfo(){
+        apis.getNotice(this.$route.query.id).then((data)=> {
+          console.log(data)
+        });
+    },
+
+
+
     //   上拉刷新下拉加载
       refresh: function (done) {
         //   alert(1)
