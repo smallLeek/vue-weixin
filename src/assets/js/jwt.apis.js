@@ -26,16 +26,14 @@ function getNotice(NOTICE_TYPE,CUST_TYPE,CURR_PAGE_NUM,PER_PAGE_SIZE){
  * @param LOGIN_CODE
  * @param NEWPASSWORD
  * @param PASSWORD
- * @param TIMESTAMPS
  * @param USER_TYPE
  */
 
-function newLogin(LOGIN_CODE,NEWPASSWORD,PASSWORD,TIMESTAMPS,USER_TYPE){
+function newLogin(LOGIN_CODE,NEWPASSWORD,PASSWORD,USER_TYPE){
   return phtServer.globalPostData(urls.api_url_newLogin, phtServer.submitData({
     "LOGIN_CODE": LOGIN_CODE,
     "NEWPASSWORD": NEWPASSWORD,
     "PASSWORD": PASSWORD,
-    "TIMESTAMPS": TIMESTAMPS,
     "USER_TYPE": USER_TYPE,
   }))
 }

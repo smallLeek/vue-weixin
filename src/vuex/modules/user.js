@@ -38,7 +38,7 @@ const actions = {
     },
 
   getTokenCode({ commit },res){
-    commit(types.SET_USER_INFO, res)
+    commit(types.SET_TOKEN_CODE, res)
   }
 }
 
@@ -46,6 +46,7 @@ const getters = {
 
     loginStatus: state => state.loginStatus,
     userInfo: state => state.userInfo,
+    tokenCode:state => state.tokenCode
 }
 
 const mutations = {
@@ -56,6 +57,9 @@ const mutations = {
     [types.SET_LOGIN_STATUS](state, status) {
         state.loginStatus = status
     },
+  [types.SET_TOKEN_CODE](state, status) {
+    state.tokenCode = status
+  },
 
 
 }
