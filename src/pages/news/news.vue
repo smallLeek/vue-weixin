@@ -8,7 +8,7 @@
         </div>
         <scroller class="news_content" :on-refresh="refresh" :on-infinite="infinite">
           <div class="content">
-            <li v-for="item in items">{{item}}<img src="../../../static/images/user_menu_icon.png"></li>
+            <li v-html="content"></li>
           </div>
         </scroller>
     </div>
@@ -18,7 +18,8 @@ import * as apis from '../../assets/js/jwt.apis'
 export default {
    data () {
     return {
-      items:[]
+      items:[],
+      content:null,
     }
 },
 
@@ -43,10 +44,27 @@ export default {
     })
   },
   methods:{
+    getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                + " " + date.getHours() + seperator2 + date.getMinutes()
+                + seperator2 + date.getSeconds();
+        return currentdate;
+    },
     // 获取公告详情
     getNoticeInfo(){
-        apis.getNotice(this.$route.query.id).then((data)=> {
-          console.log(data)
+        apis.getNoticeInfo(this.$route.query.id,this.getNowFormatDate()).then((data)=> {
+          this.content=data.result.main_data.data[0].CONTENT
         });
     },
 
@@ -58,9 +76,7 @@ export default {
         var self = this
         setTimeout(function () {
           var start = self.top - 1
-          for (var i = start; i > start - 10; i--) {
-            self.items.splice(0, 0, i + ' - 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻');
-          }
+          self.getNoticeInfo()
           self.top = self.top - 10;
           done();
         }, 1500)
@@ -71,9 +87,7 @@ export default {
         var self = this
         setTimeout(function () {
           var start = self.bottom + 1;
-          for (var i = start; i < start + 10; i++) {
-            self.items.push(i + ' - 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻');
-          }
+          self.getNoticeInfo()
           self.bottom = self.bottom + 10;
           done();
         }, 1500)
