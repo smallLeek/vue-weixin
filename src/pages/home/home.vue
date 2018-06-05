@@ -85,7 +85,7 @@
         <img src="../../../static/images/home_yyy_title.png" class="area_title_img">
         <!-- <router-link to="/yyyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
       </div>
-        <router-link :to="{path: 'yyyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}" v-for="(item , index) in recommendedProject_yyy">
+        <router-link :to="{path: 'yyyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}" v-for="(item , index) in recommendedProject_yyy" :key="index">
           <ul>
             <li>{{item.PROJ_NAME}}</li>
             <li>
