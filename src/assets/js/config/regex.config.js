@@ -20,5 +20,16 @@ export default{
         description:'推荐人手机号格式不正确'
       }
     ]
+  },
+  user_name:{
+    name:'用户名',
+    type:0,
+    isMust:true,
+    rules:[
+      {
+        rule:/[a-zA-Z0-9_@.]{6,20}$/,
+        description:'用户名由6-20位数字或字母组成'
+      }
+    ]
   }
 }
