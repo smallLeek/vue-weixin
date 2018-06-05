@@ -17,17 +17,17 @@
       <li>
         <img src="../../../static/images/home_users_Num.png">
         <span>当前用户</span>
-        <span><b>{{dataStatisticss_CUST_SUM}}</b> 万人</span>
+        <span><b v-text="dataStatisticss_CUST_SUM"></b> 万人</span>
       </li>
       <li>
         <img src="../../../static/images/home_financing.png">
         <span>撮合融资</span>
-        <span><b>{{dataStatisticss_INCOME_SUM}}</b> 亿元</span>
+        <span><b v-text="dataStatisticss_INCOME_SUM"></b> 亿元</span>
       </li>
       <li>
         <img src="../../../static/images/home_income.png">
         <span>赚取收益</span>
-        <span><b>{{(dataStatisticss_INVEST_SUM/10000).toFixed(2)}}</b> 万元</span>
+        <span><b v-text="(dataStatisticss_INVEST_SUM/10000).toFixed(2)"></b> 万元</span>
       </li>
     </div>
     <!-- 公告 -->
@@ -36,10 +36,10 @@
       <b class="shuxian"></b>
       <div class="news_content">
         <ul>
-          <router-link :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}" v-for="(item,index) in announcement">
+          <router-link :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}" v-for="(item,index) in announcement" :key="index">
             <li>
               <img src="../../../static/images/home_announcement_sign.png">
-              <span>{{item.NOTICE_TITLE}}</span>
+              <span v-text="item.NOTICE_TITLE"></span>
             </li>
           </router-link>
         </ul>
@@ -55,13 +55,13 @@
         <li>{{item.PROJ_NAME}}（{{item.RATE}}%）</li>
         <li>
           <span>
-            <b>{{item.RATE}}</b>%
+            <b v-text="item.RATE"></b>%
           </span>
           <span>
-            <b>{{item.MAX_AMOUNT/10000}}</b>万元
+            <b v-text="item.MAX_AMOUNT/10000"></b>万元
           </span>
           <span>
-            <b>{{item.REDEEM_MAX_AMOUNT}}</b>元
+            <b v-text="item.REDEEM_MAX_AMOUNT"></b>元
           </span>
         </li>
         <li>
@@ -72,7 +72,7 @@
         <!-- 进度条 -->
         <li>
           <span><s :style="{width:(item.REDEEM_STATUS)+'%'}"></s></span>
-          <span>{{item.REDEEM_STATUS}}%</span>
+          <span v-text="item.REDEEM_STATUS+'%'"></span>
         </li>
         <li>
           <router-link :to="{path: 'ttyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}">立即投资</router-link>
@@ -87,16 +87,16 @@
       </div>
         <router-link :to="{path: 'yyyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}" v-for="(item , index) in recommendedProject_yyy" :key="index">
           <ul>
-            <li>{{item.PROJ_NAME}}</li>
+            <li v-text="item.PROJ_NAME"></li>
             <li>
               <span>
-                <b>{{item.ANNUAL_RATE}}</b>%
+                <b v-text="item.ANNUAL_RATE"></b>%
               </span>
               <span>
-                <b>{{item.LOAN_LIMITTIME}}</b>个月
+                <b v-text="item.LOAN_LIMITTIME"></b>个月
               </span>
               <span>
-                <b>{{item.SURPLUS_AMOUNT}}</b>元
+                <b v-text="item.SURPLUS_AMOUNT"></b>元
               </span>
             </li>
             <li>
@@ -120,16 +120,16 @@
       </div>
       <router-link :to="{path: 'dcyParticulars', query: {  name: '123',url: 'home'}}" v-for="(item ,index) in recommendedProject_dcy" :key="index">
         <ul>
-          <li>{{item.PROJ_NAME}}</li>
+          <li v-text="item.PROJ_NAME"></li>
           <li>
             <span>
-              <b>{{item.ANNUAL_RATE}}</b>%
+              <b v-text="item.ANNUAL_RATE"></b>%
             </span>
             <span>
-              <b>{{item.LOAN_LIMITTIME}}</b>个月
+              <b v-text="item.LOAN_LIMITTIME"></b>个月
             </span>
             <span>
-              <b>{{item.SURPLUS_AMOUNT}}</b>元
+              <b v-text="item.SURPLUS_AMOUNT"></b>元
             </span>
           </li>
           <li>
@@ -234,7 +234,6 @@ export default {
         let PER_PAGE_SIZE=2;
         apis.getNotice("重要公告","网站",CURR_PAGE_NUM,PER_PAGE_SIZE).then((data)=> {
           this.announcement =data.result.main_data.data;
-          console.log(data)
         });
     },
     // 获取数据统计
