@@ -8,3 +8,100 @@ li{list-style:none}
 img{border:0;vertical-align:middle}
 table{border-collapse:collapse;border-spacing:0}
 p{word-wrap:break-word}
+
+/*圆角*/
+.br10 {
+  border-radius: 0.1rem;
+  -moz-border-radius: 0.1rem;
+  -khtml-border-radius: 0.1rem;
+  -webkit-border-radius: 0.1rem;
+}
+.br28 {
+  border-radius: 0.28rem;
+  -moz-border-radius: 0.28rem;
+  -khtml-border-radius: 0.28rem;
+  -webkit-border-radius: 0.28rem;
+}
+/*下划线*/
+.borLine{
+  border-bottom: 1px solid #ddd;
+}
+/*字体大小*/
+.font24{
+  font-size: 0.24rem;
+}
+.font26{
+  font-size: 0.26rem;
+}
+.font28{
+  font-size: 0.28rem;
+}
+.font30{
+  font-size: 0.30rem;
+}
+.font25{
+  font-size: 0.25rem;
+}
+.font32{
+  font-size: 0.32rem;
+}
+.font23{
+  font-size: 0.23rem;
+}
+/*字体颜色*/
+.color333{
+  color: #333;
+}
+.color666{
+  color: #666;
+}
+.colorff970f{
+  color: #ff970f;
+}
+.colorfff{
+  color: #fff;
+}
+.colorffa626{
+  color:#ffa626;
+}
+.color2597c7{
+  color: #2597c7;
+}
+/*首行缩进2字符*/
+.textIndent{
+  text-indent: 2em;
+}
+.swiper-paginationzidingyi span.swiper-pagination-bullet{
+  display: inline-block;
+  width: 0.17rem;
+  height:0.17rem;
+  border-radius: 0.17rem;
+  -moz-border-radius: 0.17rem;
+  -khtml-border-radius: 0.17rem;
+  -webkit-border-radius: 0.17rem;
+  background:#c6ced0 ;
+  margin-left:0.1rem ;
+}
+.swiper-paginationzidingyi span.swiper-pagination-bullet-active{
+  display: inline-block;
+  width: 0.49rem;
+  height:0.17rem;
+  border-radius: 0.17rem;
+  -moz-border-radius: 0.17rem;
+  -khtml-border-radius: 0.17rem;
+  -webkit-border-radius: 0.17rem;
+  background:#63d0e8;
+}
+/*右对齐*/
+.justify {
+  text-align: justify;
+}
+
+.noviceAnsTotal .noviceMiddle span{
+  display: inline-block;
+  padding:0 0.3rem;
+  font-size: 0.4rem;
+  line-height: 0.44rem;
+  color: #823a00;
+}
+

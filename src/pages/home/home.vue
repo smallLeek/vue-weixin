@@ -220,6 +220,12 @@ export default {
       to.meta.keepAlive = true;  // B 跳转到 A 时，让 A 缓存，即不刷新
       next();
   },
+  computed:{
+
+    ...mapGetters([
+      'showLoading',
+    ]),
+  },
   methods:{
     // 获取首页公告
     announcementList(){
