@@ -30,8 +30,11 @@
 </template>
 <script>
 import * as regexfun from '../../../../src/assets/js/jwt.regex';
+import * as apis from '../../../assets/js/jwt.apis'
+  import { phtServer } from '../../../assets/js/phtServer'
 export default {
     mounted(){
+        this.login()
         $('#eye').click(function(){
             if($('#password').attr('type')=='password'){
                 $('#password').attr('type','text');
@@ -43,8 +46,32 @@ export default {
         })
     },
     methods:{
+        getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "-";
+            var seperator2 = ":";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                    + " " + date.getHours() + seperator2 + date.getMinutes()
+                    + seperator2 + date.getSeconds();
+            return currentdate;
+        },
         submit(){
-            regexfun.regex(this,'mobile','15383052067');
+            regexfun.regex(this,'mobile',$('#phonenum').val());
+            alert(regexfun.regex(this,'mobile',$('#phonenum').val()))
+        },
+        login(){
+            alert(phtServer.CalcuMD5lower("qwe123456"))
+            apis.newLogin("13588885001",phtServer.CalcuMD5lower("qwe123456"),phtServer.CalcuMD5lower("qwe123456"),this.getNowFormatDate(),"1").then((data)=> {
+                console.log(data)
+            })
         }
     }
 }
