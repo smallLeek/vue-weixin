@@ -8,12 +8,16 @@ const state = {
     userInfo: JSON.parse(phtServer.getStore('userInfo')) || {},
     // 用户数据信息
     userData: [],
+    //用户的token
+    tokenCode:null
 }
 
 const actions = {
-    /**
-     * 用户登录
-     */
+  /**
+   * 用户登录
+   * @param commit
+   * @param res
+   */
     setUserInfo({ commit }, res) {
       phtServer.setStore('userInfo', JSON.stringify(res))
         // phtservice.setStore('userInfo', res)
@@ -22,32 +26,24 @@ const actions = {
         commit(types.SET_LOGIN_STATUS, true)
     },
 
-    /**
-     * 退出登录
-     */
-    setSignOut({ commit }) {
+  /**
+   * 退出登录
+   * @param commit
+   */
+  setSignOut({ commit }) {
       phtServer.removeStore('loginStatus')
       phtServer.removeStore('userInfo')
         commit(types.SET_LOGIN_STATUS, false)
         commit(types.SET_USER_INFO, {})
     },
 
-    /**
-     * 请求用户信息
-     */
-    getUserData({ commit }, id) {
-        commit(types.COM_LOADING_STATUS, true)
-      phtServer.globalPostData(id)
-
-            .then(res => {
-                commit(types.COM_LOADING_STATUS, false)
-                commit(types.GET_USER_DATA, res.data)
-            })
-    }
+  getTokenCode({ commit },res){
+    commit(types.SET_USER_INFO, res)
+  }
 }
 
 const getters = {
-    getUserData: state => state.userData,
+
     loginStatus: state => state.loginStatus,
     userInfo: state => state.userInfo,
 }
@@ -61,9 +57,6 @@ const mutations = {
         state.loginStatus = status
     },
 
-    [types.GET_USER_DATA](state, res) {
-        state.userData = res
-    }
 
 }
 
