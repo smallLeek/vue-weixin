@@ -8,8 +8,8 @@ const version = '1.0';
  * 2。0是2.0 1。0的时候是''
  * @type {string}
  */
-const XinWangversion = '';
-// const XinWangversion = '/2.0';
+// const XinWangversion = '';
+const XinWangversion = '/2.0';
 
 
 /**

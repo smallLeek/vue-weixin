@@ -28,7 +28,7 @@ const ttyAccount = resolve => require(['../pages/account/ttyAccount/ttyAccount.v
 const ttyRecord = resolve => require(['../pages/account/ttyAccount/ttyRecord.vue'], resolve);
 
 // 定投盈账户
-const dty = resolve => require(['../pages/account/dty/dty.vue'], resolve);
+// const dty = resolve => require(['../pages/account/dty/dty.vue'], resolve);
 
 // 新闻
 const announcementList = resolve => require(['../pages/news/announcementList.vue'], resolve);
@@ -147,10 +147,10 @@ const router = new VueRouter({
       path: '/about',
       component: about,
     },
-    {
-      path: '/dty',
-      component: dty,
-    },
+    // {
+    //   path: '/dty',
+    //   component: dty,
+    // },
     {
       path: '/loginRegister',
       component: loginRegister,

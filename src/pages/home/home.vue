@@ -17,17 +17,17 @@
       <li>
         <img src="../../../static/images/home_users_Num.png">
         <span>当前用户</span>
-        <span><b v-text="dataStatisticss_CUST_SUM"></b> 万人</span>
+        <span><b>{{dataStatisticss_CUST_SUM|farmatDataWan}}</b> 万人</span>
       </li>
       <li>
         <img src="../../../static/images/home_financing.png">
         <span>撮合融资</span>
-        <span><b v-text="dataStatisticss_INCOME_SUM"></b> 亿元</span>
+        <span><b>{{dataStatisticss_INCOME_SUM|farmatDataWan}}</b> 万元</span>
       </li>
       <li>
         <img src="../../../static/images/home_income.png">
         <span>赚取收益</span>
-        <span><b v-text="(dataStatisticss_INVEST_SUM/10000).toFixed(0)"></b> 万元</span>
+        <span><b>{{dataStatisticss_INVEST_SUM|farmatDataYi}}</b> 亿元</span>
       </li>
     </div>
     <!-- 公告 -->
@@ -46,105 +46,11 @@
       </div>
     </div>
     <!-- 天天盈专区 -->
-    <div class="tty_area">
-      <div class="area_title">
-        <img src="../../../static/images/home_tty_title.png" class="area_title_img">
-        <!-- <router-link to="/ttyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
-      </div>
-      <ul v-for="item in recommendedProject_tty">
-        <li>{{item.PROJ_NAME}}（{{item.RATE}}%）</li>
-        <li>
-          <span>
-            <b v-text="item.RATE"></b>%
-          </span>
-          <span>
-            <b v-text="item.MAX_AMOUNT/10000"></b>万元
-          </span>
-          <span>
-            <b v-text="item.REDEEM_MAX_AMOUNT"></b>元
-          </span>
-        </li>
-        <li>
-          <span>年化收益</span>
-          <span>需求金额</span>
-          <span>剩余可投</span>
-        </li>
-        <!-- 进度条 -->
-        <li>
-          <span><s :style="{width:(item.REDEEM_STATUS)+'%'}"></s></span>
-          <span v-text="item.REDEEM_STATUS+'%'"></span>
-        </li>
-        <li>
-          <router-link :to="{path: 'ttyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}">立即投资</router-link>
-        </li>
-      </ul>
-    </div>
+    <pht-ttyList></pht-ttyList>
     <!-- 月月盈专区 -->
-    <div class="yyy_area">
-      <div class="area_title">
-        <img src="../../../static/images/home_yyy_title.png" class="area_title_img">
-        <!-- <router-link to="/yyyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
-      </div>
-        <router-link :to="{path: 'yyyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}" v-for="(item , index) in recommendedProject_yyy" :key="index">
-          <ul>
-            <li v-text="item.PROJ_NAME"></li>
-            <li>
-              <span>
-                <b v-text="item.ANNUAL_RATE"></b>%
-              </span>
-              <span>
-                <b v-text="item.LOAN_LIMITTIME"></b>个月
-              </span>
-              <span>
-                <b v-text="item.SURPLUS_AMOUNT"></b>元
-              </span>
-            </li>
-            <li>
-              <span>年化收益</span>
-              <span>投资期限</span>
-              <span>剩余可投</span>
-            </li>
-            <!-- 进度条 -->
-            <li>
-              <span><b><s :style="{width:100-(item.SURPLUS_PART/item.BID_AMOUNT)*100+'%'}"></s></b></span>
-              <span>{{100-(item.SURPLUS_PART*100/item.BID_AMOUNT).toFixed(2)}}%</span>
-            </li>
-          </ul>
-        </router-link>
-    </div>
+    <pht-yyyList></pht-yyyList>
     <!-- 定存盈专区 -->
-    <div class="yyy_area">
-      <div class="area_title">
-        <img src="../../../static/images/home_dcy_title.png" class="area_title_img">
-        <!-- <router-link to="/dcyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
-      </div>
-      <router-link :to="{path: 'dcyParticulars', query: {  name: '123',url: 'home'}}" v-for="(item ,index) in recommendedProject_dcy" :key="index">
-        <ul>
-          <li v-text="item.PROJ_NAME"></li>
-          <li>
-            <span>
-              <b v-text="item.ANNUAL_RATE"></b>%
-            </span>
-            <span>
-              <b v-text="item.LOAN_LIMITTIME"></b>个月
-            </span>
-            <span>
-              <b v-text="item.SURPLUS_AMOUNT"></b>元
-            </span>
-          </li>
-          <li>
-            <span>年化收益</span>
-            <span>投资期限</span>
-            <span>剩余可投</span>
-          </li>
-          <!-- 进度条 -->
-          <li>
-            <span><b><s :style="{width:100-(item.SURPLUS_PART/item.BID_AMOUNT)*100+'%'}"></s></b></span>
-            <span>{{100-(item.SURPLUS_PART*100/item.BID_AMOUNT).toFixed(2)}}%</span>
-          </li>
-        </ul>
-      </router-link>
-    </div>
+    <pht-dcyList></pht-dcyList>
     <!-- 安全保障 -->
     <div class="insurance ">
       <h1><img src="../../../static/images/home_insurance _title.png"></h1>
@@ -180,10 +86,14 @@
   import phtModal from '../../components/modal/modal.vue';
   import loop from '../../components/loop/loop.vue';
   import phtLoading from '../../components/loading/loading.vue';
+  import phtTtyList from './tty/ttyList.vue';
+  import phtYyyList from './yyyDcy/yyyList.vue';
+  import phtDcyList from './yyyDcy/dcyList.vue';
   import phtBottomnav from '../../components/bottom/bottomnav.vue';
   import {mapGetters, mapActions,mapState} from 'vuex'
   import {getUserInfo} from '../../assets/js/getUserInfo'
   import { phtServer } from '../../assets/js/phtServer'
+  import '../../assets/js/filter'
   import * as apis from '../../assets/js/jwt.apis'
 export default {
    data () {
@@ -193,19 +103,16 @@ export default {
       dataStatisticss_CUST_SUM:null,
       dataStatisticss_INCOME_SUM:null,
       dataStatisticss_INVEST_SUM:null,
-      recommendedProject_tty:null,
-      recommendedProject_yyy:null,
-      recommendedProject_dcy:null,
     }
 },
 
   mounted:function () {
-    $('.bottom li:first-child img').attr('src','../../../static/images/homeOn.png')
+    $('.bottom li:first-child img').attr('src',require('../../../static/images/homeOn.png'))
     $('.bottom li:first-child').addClass('on')
     this.announcementList();
     this.dataStatistics();
-    this.recommendedProjectList()
     this.getUserInfo();
+    
   },
     beforeRouteLeave(to, from, next) {
         // 设置下一个路由的 meta
@@ -237,27 +144,7 @@ export default {
           this.dataStatisticss_INVEST_SUM =data.result.main_data.data[0].INVEST_SUM;
         });
     },
-    // 获取推荐项目
-    recommendedProjectList(){
-        let that =this;
-        function formatNum(num) {
-          return (num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        };
-        apis.recommendedProject().then((data)=> {
-          this.recommendedProject_tty=data.result.main_data.main_dataTTY;
-          this.recommendedProject_yyy=data.result.main_data.main_dataYYY;
-          this.recommendedProject_dcy=data.result.main_data.main_dataDCY;
-          for (let i=0;i<this.recommendedProject_tty.length;i++){
-            this.recommendedProject_tty[i].REDEEM_MAX_AMOUNT=formatNum(this.recommendedProject_tty[i].REDEEM_MAX_AMOUNT)
-          }
-          for (let i=0;i<this.recommendedProject_yyy.length;i++){
-            this.recommendedProject_yyy[i].SURPLUS_AMOUNT=formatNum(this.recommendedProject_yyy[i].SURPLUS_AMOUNT)
-          }
-          for (let i=0;i<this.recommendedProject_dcy.length;i++){
-            this.recommendedProject_dcy[i].SURPLUS_AMOUNT=formatNum(this.recommendedProject_dcy[i].SURPLUS_AMOUNT)
-          }
-        });
-    },
+
     getUserInfo() {
 
 //      getUserInfo.getCode()
@@ -270,7 +157,10 @@ export default {
     phtModal,
     phtLoading,
     loop,
-    phtBottomnav
+    phtBottomnav,
+    phtTtyList,
+    phtYyyList,
+    phtDcyList,
   }
 
 }

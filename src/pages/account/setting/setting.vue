@@ -65,10 +65,14 @@ export default {
     top: 0;
     z-index: 100;
     img{
-        position: absolute;
-        left: 0.2rem;
-        top: 0.25rem;
         height: 0.5rem;
+    }
+    a{
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        left: 0;
+        top: -0.02rem
     }
     a:hover{
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -134,13 +138,12 @@ export default {
         border: none;
         border-top: 1px solid #e0e0e0;
         border-bottom: 1px solid #e0e0e0;
+        outline:none
     }
 }
 .bottom{
-    width: 7.5rem;
-    position: fixed;
-    bottom: 0.2rem;
-    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
     text-align: center;
     img{
         width: 5rem;

@@ -12,6 +12,7 @@ import echarts from 'echarts';
 import wx from 'weixin-js-sdk'
 import VueScroller from 'vue-scroller'
 import './assets/css/swiper.css'
+
 Vue.use(VueScroller)
 Vue.prototype.$echarts = echarts
 Vue.prototype.http =axios;

@@ -26,7 +26,7 @@
                         <span>天天盈</span>
                     </li>
                 </router-link>
-                <router-link to="/dty">
+                <router-link to="">
                     <li>
                         <img src="../../../static/images/user_dty_icon.png">
                         <span>定投盈</span>
@@ -90,7 +90,7 @@ export default {
 },
 
   mounted:function () {
-    $('.bottom li:last-child img').attr('src','../../../static/images/userOn.png')
+    $('.bottom li:last-child img').attr('src',require('../../../static/images/userOn.png'))
     $('.bottom li:last-child').addClass('on')
 
   },

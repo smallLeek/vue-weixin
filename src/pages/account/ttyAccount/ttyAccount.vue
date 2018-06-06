@@ -129,9 +129,9 @@ export default {
     position: fixed;
     top: 0;
     z-index: 100;
-    display: flex;
     span{
-        flex: 1;
+        float: left;
+        height: 1rem;
         img{
             position: absolute;
             left: 0.2rem;
@@ -146,10 +146,20 @@ export default {
             text-decoration: none;
         }
     }
+    span:first-child{
+        width: 25%;
+        a{
+            display: block;
+            width: 1rem;
+            height: 1rem;
+        }
+    }
     span:nth-child(2){
+        width: 50%;
         font-size: 0.36rem;
     }
     span:last-child{
+        width: 25%;
         a{
             color: #ffc2c4;
             float: right;

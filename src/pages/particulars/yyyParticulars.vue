@@ -226,6 +226,11 @@ export default {
     }
     span:first-child{
         width: 25%;
+        a{
+            display: block;
+            width: 1rem;
+            height: 1rem;
+        }
     }
     span:nth-child(2){
         width: 50%;

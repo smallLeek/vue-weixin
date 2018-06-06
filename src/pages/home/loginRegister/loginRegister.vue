@@ -20,6 +20,7 @@
                         <span><img id="eye" src="../../../../static/images/login_eye_b.png"></span>
                     </li>
                 </ul>
+                <p><router-link to="">找回密码？</router-link></p>
                 <input class="submit" @click="submit()"  type="button" value="提交">
             </div>
             <div class="login_register">
@@ -106,51 +107,57 @@ export default {
     .login_login{
         display: block;
         position: relative;
-        width: 5.8rem;
+        width: 6.9rem;
         margin: auto;
         s{
             position: absolute;
-            left: 0.95rem;
-            top: -0.45rem;
+            left: 1.45rem;
+            top: -0.44rem;
             width: 0.2rem;
             height: 0.2rem;
             background-color: #f8f8f8;
             transform: rotate(45deg)
         }
+        p{
+            text-align: right;
+            font-size: 0.27rem;
+            color: #666666;
+            line-height: 0.9rem;
+        }
         ul{
             border: 1px solid #e0e0e0;
             li{
                 width: 100%;
-                height: 0.8rem;
-                line-height: 0.8rem;
+                height: 0.9rem;
+                line-height: 0.9rem;
                 background-color: #fff;
                 span{
-                    height: 0.8rem;
+                    height: 0.9rem;
                     float: left;
                     input{
                         color: #333333;
-                        font-size: 0.26rem;
+                        font-size: 0.3rem;
                         border: none;
                         outline:medium;
                     }
                     ::-moz-placeholder {
-                        font-size: 0.26rem;
+                        font-size: 0.3rem;
                         color: #999999;
                     }
                     :-ms-input-placeholder {
-                        font-size: 0.26rem;
+                        font-size: 0.3rem;
                         color: #999999;
                     }
                     ::-webkit-input-placeholder {
-                        font-size: 0.26rem;
+                        font-size: 0.3rem;
                         color: #999999;
                     }
                 }
                 span:first-child{
-                    width: 0.7rem;
+                    width: 1rem;
                     text-align: center;
                     img{
-                        width: 0.25rem;
+                        width: 0.3rem;
                     }
                 }
             }
@@ -161,19 +168,18 @@ export default {
                 span:last-child{
                     float: right;
                     img{
-                        width: 0.4rem;
+                        width: 0.5rem;
                         margin-right: 0.2rem;
                     }
                 }
             }
         }
         .submit{
-            width: 5.8rem;
-            height: 0.7rem;
+            width: 6.9rem;
+            height: 0.9rem;
             margin: auto;
-            margin-top: 0.6rem;
             border-radius: 0.06rem;
-            font-size: 0.3rem;
+            font-size: 0.35rem;
             background-color: #fc7f7f;
             border: none;
             color: #fff;
