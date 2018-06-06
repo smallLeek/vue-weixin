@@ -62,13 +62,11 @@ export default {
           }
       },
       login() {
-          let user_type="1"
-        apis.newLogin($('#phonenum').val(), phtServer.CalcuMD5lower($('#password').val()), phtServer.CalcuMD5lower($('#password').val()),  user_type).then((data) => {
-          console.log(data)
+        apis.newLogin("13588885001", phtServer.CalcuMD5lower("qwe123456"), phtServer.CalcuMD5lower("qwe123456"), "8" , "1").then((data) => {
           this.setUserInfo(data.result.main_data.data[0]);
           this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token)
-          console.log(JSON.parse(phtServer.getStore('userInfo')))
-        this.$router.push({ path: "/home" })
+
+
         })
 
       }
