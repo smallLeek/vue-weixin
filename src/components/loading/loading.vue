@@ -1,6 +1,12 @@
 <template>
   <div class="loading">
-    <img src="../../../static/images/loading.gif" alt="">
+    <div class="loadingBg br10">
+      <div class="loadingLine">
+        <img src="../../../static/images/loading.gif" alt="">
+        <p>加载中</p>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -23,13 +29,36 @@ export default {
   position: fixed;
   z-index: 99999999;
 }
-.loading img{
-  height: 50px;
-  width: 50px;
+.loadingBg{
+  height: 1.8rem;
+  width: 1.6rem;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -25px;
-  margin-left: -25px;
+  margin: auto;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  background: rgba(0,0,0,0.8);
+}
+.loadingLine{
+  height: 1.34rem;
+  width: 1.6rem;
+  position: absolute;
+  margin: auto;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+}
+.loadingBg img{
+  height: 0.82rem;
+  width: 0.82rem;
+}
+.loadingBg p{
+  font-size: 0.28rem;
+  color: #fff;
+  margin-top: 0.24rem;
 }
 </style>
