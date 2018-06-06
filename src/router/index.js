@@ -45,14 +45,13 @@ const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmen
 // 签到
 const signIn = resolve => require(['../pages/signIn/signIn.vue'], resolve);
 
-<<<<<<< HEAD
+
 //分享页面
 
 const share =resolve => require (['../pages/share/share.vue'], resolve);
-=======
+
 //自定义键盘
 // const keycode = resolve => require(['../pages/keycode/kbdblg'], resolve);
->>>>>>> 69fb3b6dd542900b100d20766c88de62053371c0
 
 const router = new VueRouter({
   base: 'wx',
