@@ -36,7 +36,7 @@
       <b class="shuxian"></b>
       <div class="news_content">
         <ul>
-          <router-link :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}" v-for="(item,index) in announcement">
+          <router-link :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}" v-for="(item,index) in announcement" :key="index">
             <li>
               <img src="../../../static/images/home_announcement_sign.png">
               <span>{{item.NOTICE_TITLE}}</span>
@@ -215,11 +215,6 @@ export default {
     this.recommendedProjectList()
     this.getUserInfo();
   },
-    beforeRouteLeave(to, from, next) {
-        // 设置下一个路由的 meta
-      to.meta.keepAlive = true;  // B 跳转到 A 时，让 A 缓存，即不刷新
-      next();
-  },
   methods:{
     // 获取首页公告
     announcementList(){
@@ -228,7 +223,6 @@ export default {
         let PER_PAGE_SIZE=2;
         apis.getNotice("重要公告","网站",CURR_PAGE_NUM,PER_PAGE_SIZE).then((data)=> {
           this.announcement =data.result.main_data.data;
-          console.log(data)
         });
     },
     // 获取数据统计

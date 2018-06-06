@@ -47,7 +47,7 @@ app.use(compress());
 
 
 // 监听端口
-var server  = app.listen(8888, function () {
+var server  = app.listen(8090, function () {
   var host = server.address().address;
   var port = server.address().port;
 

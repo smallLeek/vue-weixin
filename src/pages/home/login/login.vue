@@ -59,11 +59,9 @@ export default {
         alert(regexfun.regex(this, 'mobile', $('#phonenum').val()))
       },
       login() {
-        apis.newLogin("13588885001", phtServer.CalcuMD5lower("qwe123456"), phtServer.CalcuMD5lower("qwe123456"),  "1").then((data) => {
-          console.log(data)
+        apis.newLogin("13588885001", phtServer.CalcuMD5lower("qwe123456"), phtServer.CalcuMD5lower("qwe123456"), "8" , "1").then((data) => {
           this.setUserInfo(data.result.main_data.data[0]);
           this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token)
-          console.log(JSON.parse(phtServer.getStore('userInfo')))
 
         })
 

@@ -43,8 +43,12 @@ const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmen
 // 签到
 const signIn = resolve => require(['../pages/signIn/signIn.vue'], resolve);
 
+//分享页面
+
+const share =resolve => require (['../pages/share/share.vue'], resolve);
+
 const router = new VueRouter({
-  base: 'phtMobile',
+  base: 'wx',
   mode: 'history',
   saveScrollPosition: true,
   routes: [
@@ -152,6 +156,10 @@ const router = new VueRouter({
     {
       path: '/login',
       component: login,
+    },
+    {
+      path: '/share',
+      component: share,
     }
   ]
 });
