@@ -2,7 +2,9 @@
   <div id="app">
     <modal></modal>
     <alert></alert>
+    <keep-alive>
     <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

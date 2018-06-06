@@ -3,7 +3,7 @@ const api_env_keys = {
   dev:"dev",
 };
 //生产环境
-const api_env = api_env_keys.product;
+const api_env = api_env_keys.dev;
 
 const config = {
   dev:{

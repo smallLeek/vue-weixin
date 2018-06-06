@@ -210,11 +210,11 @@ phtServer.initWxJsAPI =function () {
   let promise = deferred.promise();
   wx.config({
     debug : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-    appId : 'wx8f11eee482052822', // 必填，公众号的唯一标识
+    appId : 'wx5e02454342005e14', // 必填，公众号的唯一标识
     timestamp : '1520233958', // 必填，生成签名的时间戳
     nonceStr : 'BpDYxYFzerGJeWAp6CSpwyFBdydtsiyQ', // 必填，生成签名的随机串
-    signature :'f73f526d93dbd19e9c0235dd11ab10fe9f3ef6f8',// 必填，签名，见附录1
-    jsApiList :['getNetworkType','scanQRCode']//必填，需要使用的JS接口列表
+    signature :'ac9dc9a9fb874f301b5fa344e9b862fcd564442e',// 必填，签名，见附录1
+    jsApiList :['getNetworkType','scanQRCode','onMenuShareAppMessage']//必填，需要使用的JS接口列表
   });
   wx.ready(function () {
     deferred.resolve(wx);
@@ -227,8 +227,10 @@ phtServer.initWxJsAPI =function () {
 phtServer.getNetworkType=function(){
   wx.getNetworkType({
     success: function (res) {
-      //let networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
+      let networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
+      alert(networkType)
       return res;
+
     }
   });
 }
@@ -243,6 +245,22 @@ phtServer.scanQRCode=function () {
      alert(res); // 当needResult 为 1 时，扫码返回的结果
     }
   });
+}
+
+phtServer.onMenuShareAppMessage =function () {
+  wx.onMenuShareAppMessage({
+    title: '普惠通数据信息技术有限公司', // 分享标题
+    desc: '这是分享的描述', // 分享描述
+    link: 'https://www.phtfdata.com/wx', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    imgUrl: 'https://www.phtfdata.com/web6/images/logo-logo.png', // 分享图标
+    type: 'link', // 分享类型,music、video或link，不填默认为link
+    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+    success: function () {
+// 用户点击了分享后执行的回调函数
+
+    }
+  });
+
 }
 
 export {phtServer}
