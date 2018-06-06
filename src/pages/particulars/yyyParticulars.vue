@@ -244,12 +244,11 @@ export default {
 }
 .fund{
     margin-top: 1rem;
-    height: 2.6rem;
+    height: 2.7rem;
     background:linear-gradient(to bottom,#fb4747 0%,#fb6547 100%);
     text-align: center;
     color: #fff;
     h2{
-        padding-top: 0.1rem;
         font-size: 0.26rem;
         font-weight: 500;
         color: #fff;
@@ -266,17 +265,19 @@ export default {
         }
     }
     h1{
+        font-weight: 500;
         font-size: 1.4rem;
         span{
             font-size: 0.46rem;
         }
     }
     ul{
-        width: 4.14rem;
+        width: 5rem;
         height: 0.38rem;
         margin: auto;
+        display: flex;
         li{
-            float: left;
+            flex: 1;
             height: 0.38rem;
             line-height: 0.36rem;
             margin-right: 0.2rem;
@@ -285,16 +286,8 @@ export default {
             border: 1px solid #fff;
             box-sizing: border-box;
         }
-        li:first-child{
-            width: 1.18rem
-        }
-        li:nth-child(2){
-            width: 1.18rem
-        }
         li:last-child{
-            width: 1.38rem;
-            float: right;
-            margin: 0;
+            margin-right: 0;
         }
     }
 }
@@ -305,22 +298,22 @@ export default {
     border-bottom: 1px solid #e0e0e0;
     li{
         flex: 1;
-        height: 0.6rem;
+        height: 0.75rem;
         border-right: 1px solid #e0e0e0;
         text-align: center;
-        margin-top: 0.3rem;
+        margin-top: 0.23rem;
         span{
             display: block;
         }
         span:first-child{
             font-size: 0.26rem;
             color: #666666;
-            margin-top: -0.07rem;
+            margin-top: -0.05rem;
         }
         span:last-child{
             font-size: 0.32rem;
             color: #333333;
-            margin-top: 0.1rem;
+            font-family: 黑体;
         }
     }
     li:last-child{
@@ -361,7 +354,7 @@ export default {
                 color: #fb4747
             }
             span:nth-child(2){
-                width: 5.1rem;
+                width: 68%;
                 height: 0.07rem;
                 margin-left: 0.2rem;
                 margin-top: 0.37rem;
@@ -521,9 +514,10 @@ export default {
             span{
                 flex: 1;
                 font-size: 0.3rem;
-            }
-            span:nth-child(2){
                 text-align: center
+            }
+            span:last-child{
+                flex: 1.5;
             }
         }
         ul{
@@ -536,11 +530,14 @@ export default {
                 span{
                     flex: 1;
                     font-size: 0.24rem;
+                text-align: center
                 }
                 span:nth-child(2){
                     font-size: 0.26rem;
-                    text-align: center;
                     color: #C0504D;
+                }
+                span:last-child{
+                    flex: 1.5
                 }
             }
         }

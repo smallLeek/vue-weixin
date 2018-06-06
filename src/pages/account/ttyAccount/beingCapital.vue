@@ -164,19 +164,20 @@ export default {
             span:first-child{
                 font-size: 0.3rem;
                 color: #333333;
-                margin-top: 0.27rem;
+                margin-top: 0.2rem;
             }
             span:last-child{
                 font-size: 0.26rem;
                 color: #666666;
-                margin-top: 0.16rem;
+                margin-top: 0.08rem;
             }
         }
         li:last-child{
             float: right;
             line-height: 1.3rem;
             font-size: 0.32rem;
-            color: #fb4747
+            color: #fb4747;
+            font-family: 黑体;
         }
     }
     a:first-child{

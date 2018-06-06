@@ -129,6 +129,7 @@ export default {
 h1{
     position: fixed;
     top: 1rem;
+    font-weight: 500;
     margin: auto;
     z-index: 100;
     width: 7.5rem;
@@ -151,6 +152,7 @@ h1{
     margin-top: 1.8rem;
     ul{
         li{
+            font-family: 黑体;
             height: 1.2rem;
             padding: 0 0.2rem;
             border-bottom: 1px solid #e0e0e0;

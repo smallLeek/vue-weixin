@@ -54,16 +54,20 @@ export default {
     methods: {
       ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode'}),
       submit() {
-        regexfun.regex(this, 'mobile', $('#phonenum').val());
-        alert(regexfun.regex(this, 'mobile', $('#phonenum').val()))
+          let flag=false;
+          flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
+          if(flag==true){
+              this.login()
+          }
       },
       login() {
-        apis.newLogin("13588885001", phtServer.CalcuMD5lower("qwe123456"), phtServer.CalcuMD5lower("qwe123456"),  "1").then((data) => {
+          let user_type="1"
+        apis.newLogin($('#phonenum').val(), phtServer.CalcuMD5lower($('#password').val()), phtServer.CalcuMD5lower($('#password').val()),  user_type).then((data) => {
           console.log(data)
           this.setUserInfo(data.result.main_data.data[0]);
           this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token)
           console.log(JSON.parse(phtServer.getStore('userInfo')))
-
+        this.$router.push({ path: "/home" })
         })
 
       }

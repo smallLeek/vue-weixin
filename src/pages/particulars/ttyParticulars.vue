@@ -127,12 +127,11 @@ export default {
 }
 .fund{
     margin-top: 1rem;
-    height: 2.6rem;
+    height: 2.7rem;
     background:linear-gradient(to bottom,#fb4747 0%,#fb6547 100%);
     text-align: center;
     color: #fff;
     h2{
-        padding-top: 0.1rem;
         font-size: 0.26rem;
         font-weight: 500;
         color: #fff;
@@ -149,16 +148,19 @@ export default {
         }
     }
     h1{
+        font-weight: 500;
         font-size: 1.4rem;
         span{
             font-size: 0.46rem;
         }
     }
     ul{
-        width: 4.14rem;
+        width: 5rem;
         height: 0.38rem;
         margin: auto;
+        display: flex;
         li{
+            flex: 1;
             float: left;
             height: 0.38rem;
             line-height: 0.36rem;
@@ -168,16 +170,8 @@ export default {
             border: 1px solid #fff;
             box-sizing: border-box;
         }
-        li:first-child{
-            width: 1.18rem
-        }
-        li:nth-child(2){
-            width: 1.18rem
-        }
         li:last-child{
-            width: 1.38rem;
-            float: right;
-            margin: 0;
+            margin-right: 0;
         }
     }
 }
@@ -227,6 +221,7 @@ export default {
 .creditor_list{
     margin-top: 0.3rem;
     h1{
+        font-weight: 500;
         padding-left: 0.2rem;
         height: 0.8rem;
         line-height: 0.8rem;
