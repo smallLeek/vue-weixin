@@ -163,6 +163,7 @@ export default {
         }
     }
     h1{
+        font-weight: 500;
         font-size: 0.28rem;
         color: #666666;
         padding-top: 0.3rem;
@@ -170,6 +171,7 @@ export default {
         padding-left: 0.3rem;
     }
     h2{
+        font-weight: 500;
         text-align: right;
         padding-right: 0.2rem;
         margin-top: 0.2rem;

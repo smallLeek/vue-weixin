@@ -9,6 +9,25 @@ var chalk = require('chalk')
 var webpack = require('webpack')
 var config = require('../config')
 var webpackConfig = require('./webpack.prod.conf')
+const spawn = require('child_process');
+
+/**
+ * config
+ */
+const root_path = path.join(__dirname,'../dist');
+
+try {
+//清除本地修改
+  execSync('git reset HEAD --hard');
+//拉去最新版本
+  execSync('git pull');
+//删除dist下所有文件 不包括.git文件夹
+  execSync('rm -rf *');
+  console.log("dist 文件夹初始化完成")
+}catch (err){
+  console.log(err)
+}
+
 
 var spinner = ora('building for production...')
 spinner.start()
@@ -38,3 +57,12 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
     ))
   })
 })
+
+
+/**
+ * 在root path 下执行脚本
+ * @param cmd
+ */
+function execSync(cmd) {
+  return spawn.execSync(cmd,{cwd:root_path}).toString();
+}

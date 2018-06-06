@@ -77,21 +77,11 @@
             </ul>
         </div>
         <!-- 底部 -->
-        <div class="bottom">
-            <li>
-                <router-link to="/home">
-                <span><img src="../../../static/images/home.png"></span><span>首页</span>
-                </router-link>
-            </li>
-            <li class="on">
-                <router-link to="/account">
-                <span><img src="../../../static/images/userOn.png"></span><span>我的</span>
-                </router-link>
-            </li>
-        </div>
+        <pht-bottomnav></pht-bottomnav>
     </div>
 </template>
 <script>
+  import phtBottomnav from '../../components/bottom/bottomnav.vue';
 export default {
    data () {
     return {
@@ -100,11 +90,16 @@ export default {
 },
 
   mounted:function () {
-
+    $('.bottom li:last-child img').attr('src','../../../static/images/userOn.png')
+    $('.bottom li:last-child').addClass('on')
 
   },
   methods:{
 
+  },
+  
+  components: {
+    phtBottomnav
   }
 
 }

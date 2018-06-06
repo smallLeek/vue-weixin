@@ -18,7 +18,9 @@ const datum = resolve => require(['../pages/account/setting/datum.vue'], resolve
 const about = resolve => require(['../pages/account/setting/about.vue'], resolve);
 
 // 登录注册
-const login = resolve => require(['../pages/home/login/login.vue'], resolve);
+const loginRegister = resolve => require(['../pages/home/loginRegister/loginRegister.vue'], resolve);
+const login = resolve => require(['../pages/home/loginRegister/login.vue'], resolve);
+const register = resolve => require(['../pages/home/loginRegister/register.vue'], resolve);
 
 // 天天盈账户
 const beingCapital = resolve => require(['../pages/account/ttyAccount/beingCapital.vue'], resolve);
@@ -43,9 +45,14 @@ const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmen
 // 签到
 const signIn = resolve => require(['../pages/signIn/signIn.vue'], resolve);
 
+<<<<<<< HEAD
 //分享页面
 
 const share =resolve => require (['../pages/share/share.vue'], resolve);
+=======
+//自定义键盘
+// const keycode = resolve => require(['../pages/keycode/kbdblg'], resolve);
+>>>>>>> 69fb3b6dd542900b100d20766c88de62053371c0
 
 const router = new VueRouter({
   base: 'wx',
@@ -60,6 +67,10 @@ const router = new VueRouter({
       path: '/home',
       component: home,
     },
+ /*   {
+      path: '/keycode',
+      component: keycode,
+    },*/
     {
       path: '/account',
       component: account,
@@ -154,12 +165,21 @@ const router = new VueRouter({
       component: dty,
     },
     {
+      path: '/loginRegister',
+      component: loginRegister,
+    },
+    {
       path: '/login',
       component: login,
     },
     {
+
       path: '/share',
       component: share,
+
+      path: '/register',
+      component: register,
+
     }
   ]
 });

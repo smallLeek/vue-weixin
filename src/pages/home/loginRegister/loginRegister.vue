@@ -35,7 +35,6 @@ import { phtServer } from '../../../assets/js/phtServer'
 import {mapGetters, mapActions,mapState} from 'vuex'
 export default {
     mounted(){
-        this.login()
         $('#eye').click(function(){
             if($('#password').attr('type')=='password'){
                 $('#password').attr('type','text');
@@ -55,13 +54,17 @@ export default {
     methods: {
       ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode'}),
       submit() {
-        regexfun.regex(this, 'mobile', $('#phonenum').val());
-        alert(regexfun.regex(this, 'mobile', $('#phonenum').val()))
+          let flag=false;
+          flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
+          if(flag==true){
+              this.login()
+          }
       },
       login() {
         apis.newLogin("13588885001", phtServer.CalcuMD5lower("qwe123456"), phtServer.CalcuMD5lower("qwe123456"), "8" , "1").then((data) => {
           this.setUserInfo(data.result.main_data.data[0]);
           this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token)
+
 
         })
 

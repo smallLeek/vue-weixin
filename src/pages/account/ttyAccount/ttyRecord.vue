@@ -152,10 +152,11 @@ export default {
             p:first-child{
                 color: #333333;
                 font-size: 0.3rem;
-                padding-top: 0.25rem;
+                padding-top: 0.2rem;
                 span:last-child{
                     color: #ff8400;
                     font-size: 0.32rem;
+                    font-family: 黑体;
                 }
                 span.on{
                     color: #387eff
@@ -164,7 +165,7 @@ export default {
             p:last-child{
                 color: #666666;
                 font-size: 0.26rem;
-                padding-top: 0.16rem;
+                padding-top: 0.05rem;
             }
         }
     }

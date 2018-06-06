@@ -16,7 +16,7 @@
     li{
         margin-top: 0.3rem;
         flex: 1;
-        padding-bottom: .4rem;
+        padding-bottom: .2rem;
         text-align: center;
         font-size: .24rem;
         img{
@@ -26,7 +26,7 @@
         }
         span{
             display: block;
-            margin-top: .2rem;
+            margin-top: .1rem;
         }
         span:first-child{
             color: #333333;
@@ -38,6 +38,7 @@
             line-height: .4rem;
             b{
                 font-size: .38rem;
+                font-weight: 500;
             }
         }
     }
@@ -46,6 +47,7 @@
 .news{
     height: 1.1rem;
     background-color: #fff;
+    border-bottom: 1px solid @colore5;
     .shuxian{
         height: .66rem;
         margin-top: 0.22rem;
@@ -67,17 +69,24 @@
         margin-left: 0.2rem;
         margin-top: 0.08rem;
         ul{
-            margin-top: 0.08rem;
+            margin-top: 0.17rem;
             li{
-                line-height: 0.4rem;
+                line-height: 0.3rem;
                 font-size: 0.24rem;
                 img{
                     width: 0.1rem;
-                    margin-top: -0.07rem;
-                    a:active{
-                        text-decoration:none
-                    }
+                    margin-top: -0.2rem;
                 }
+                span{
+                    width: 5.7rem;
+                    display: inline-block;
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space: nowrap; 
+                }
+            }
+            a:active{
+                text-decoration:none
             }
         }
     }
@@ -88,6 +97,7 @@
     line-height: 1rem;
     margin-top: 0.2rem;
     background-color: #fff;
+    border-top: 1px solid @colore5;
     border-bottom: 1px solid @colore5;
     .area_title_img{
         width: 4.5rem;
@@ -135,18 +145,21 @@
                 flex: 1;
                 text-align: center;
                 font-size: 0.28rem;
-                margin-top: 0.52rem;
+                margin-top: 0.4rem;
                 color: #666666;
                 b{
+                    font-family: 黑体;
+                    font-weight: 500;
                     font-size: 0.4rem;
                     color: #333333
                 }
             }
             span:first-child{
                 color: @color47;
-                margin-top: .24rem;
+                margin-top: 0;
                 font-size: 0.34rem;
                 b{
+                    font-weight: 500;
                     font-size: 0.94rem;
                     color: @color47
                 }
@@ -167,11 +180,11 @@
             }
         }
         li:nth-child(4){
-            margin-top: 0.24rem;
+            margin-top: 0.05rem;
             span:first-child{
                 float: left;
                 margin-top: 0.16rem;
-                width: 6rem;
+                width: 82%;
                 height: 0.05rem;
                 background-color: @colore8;
                 border-radius: 10px;
@@ -222,6 +235,7 @@
 .tty_area ul{
     padding-left: 0.3rem;
     padding-right: 0.4rem;
+    border-bottom: 1px solid @colore5;
   }
 .yyy_area ul{
     padding-left: 0.3rem;
@@ -275,46 +289,5 @@
             -moz-user-select: none;
             text-decoration: none;
         }
-    }
-}
-/* 底部 */
-.bottom{
-    display: flex;
-    position: fixed;
-    z-index: 100;
-    bottom: 0;
-    margin: auto;
-    width: 7.5rem;
-    height: 1rem;
-    max-height: 80px;
-    background-color: #fff;
-    border-top: 1px solid @colore5;
-    li{
-        flex: 1;
-        text-align: center;
-        color: #666666;
-        span:first-child{
-            display: block;
-            font-size: 0.5rem;
-            margin-top: 0.06rem;
-            img{
-                height: 0.45rem;
-            }
-        }
-        span:last-child{
-            display: block;
-            font-size: 0.24rem;
-            margin-top: 0.06rem;
-        }
-        a:hover{
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            -webkit-user-select: none;
-            -moz-user-focus: none;
-            -moz-user-select: none;
-            text-decoration: none;
-        }
-    }
-    li.on a{
-        color: @color47
     }
 }
