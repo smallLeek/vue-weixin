@@ -117,7 +117,6 @@ phtServer.submitData =function (params) {
   params.TIMESTAMPS = phtServer.farmatDate();
   submitData.request = {"params":params}
   submitData.saveOperTokenCode =''
-  console.log(store.state.user)
   submitData.tokenCode =store.state.user.userInfo.token
   submitData.sign = phtServer.addSign( submitData.request)
   return submitData

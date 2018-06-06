@@ -168,15 +168,18 @@ export default {
         text-align: center;
         font-size: 1.4rem;
         margin-top: 0.2rem;
+        font-weight: 500;
         color: #fff;
+        font-family: 黑体;
         span{
             font-size: 0.46rem;
         }
     }
     h2{
+        font-weight: 500;
         text-align: center;
         font-size: 0.26rem;
-        padding-top: 0.26rem;
+        padding-top: 0.2rem;
         color: #ffc2c4;
         img{
             height: 0.3rem;
@@ -203,12 +206,14 @@ export default {
             }
             span:first-child{
                 font-size: 0.26rem;
+                margin-top: -0.05rem;
                 color: #ffc2c4;
             }
             span:last-child{
-                margin-top: 0.05rem;
+                margin-top: 0.03rem;
                 font-size: 0.34rem;
                 color: #fff;
+                font-family: 黑体;
             }
         }
         li:last-child{
@@ -222,14 +227,14 @@ export default {
     padding: 0 0.2rem;
     a{
         width: 3.44rem;
-        height: 1.5rem;
+        height: 1.3rem;
         background-color: #fff;
         border-radius: 0.1rem;
         border: 1px solid #e2e2e2;
         span{
             float: left;
             text-align: center;
-            margin-top: 0.4rem;
+            margin-top: 0.3rem;
         }
         span:first-child{
             margin-left: 0.3rem;
@@ -241,6 +246,7 @@ export default {
         span:last-child{
             h1{
                 font-size: 0.3rem;
+                margin-top: -0.1rem;
                 color: #fb4747
             }
             h2{
@@ -269,7 +275,7 @@ export default {
     }
 }
 .operation{
-    margin-top: 0.2rem;
+    margin-top: 0.1rem;
     a{
         height: 1.78rem;
         margin-top: 0.1rem;
@@ -293,7 +299,8 @@ export default {
                 margin-top: 0.15rem;
                 font-size: 0.6rem;
                 font-weight: 700;
-                color: #fb4747
+                color: #fb4747;
+                font-family: 黑体;
             }
         }
         li:last-child{
@@ -316,7 +323,7 @@ export default {
     }
 }
 .btn{
-    margin-top: 0.6rem;
+    margin-top: 0.3rem;
     padding: 0 0.29rem;
     a{
         width: 3.3rem;
@@ -363,16 +370,16 @@ export default {
         width: 6.8rem;
         font-size: 0.36rem;
         margin: auto;
-        margin-top: 0.6rem;
+        margin-top: 0.4rem;
         padding-bottom: 0.28rem;
         text-align: center;
         border-bottom: 1px solid #fff;
     }
     ul{
         padding: 0 0.35rem;
-        margin-top: 0.7rem;
+        margin-top: 0.3rem;
         li{
-            margin-top: 0.6rem;
+            margin-top: 0.2rem;
             h2{
                 font-size: 0.3rem;
                 font-weight: 500;
@@ -386,7 +393,7 @@ export default {
     .closeBtn{
         display: block;
         margin: auto;
-        margin-top: 0.5rem;
+        margin-top: 0.3rem;
         width: 1rem;
     }
 }

@@ -149,7 +149,7 @@ export default {
 .content{
     background-color: #fff;
     padding: 0 0.3rem;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     .operation{
         ul{
             padding-top: 0.5rem;
