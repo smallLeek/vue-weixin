@@ -18,7 +18,9 @@ const datum = resolve => require(['../pages/account/setting/datum.vue'], resolve
 const about = resolve => require(['../pages/account/setting/about.vue'], resolve);
 
 // 登录注册
-const login = resolve => require(['../pages/home/login/login.vue'], resolve);
+const loginRegister = resolve => require(['../pages/home/loginRegister/loginRegister.vue'], resolve);
+const login = resolve => require(['../pages/home/loginRegister/login.vue'], resolve);
+const register = resolve => require(['../pages/home/loginRegister/register.vue'], resolve);
 
 // 天天盈账户
 const beingCapital = resolve => require(['../pages/account/ttyAccount/beingCapital.vue'], resolve);
@@ -150,8 +152,16 @@ const router = new VueRouter({
       component: dty,
     },
     {
+      path: '/loginRegister',
+      component: loginRegister,
+    },
+    {
       path: '/login',
       component: login,
+    },
+    {
+      path: '/register',
+      component: register,
     }
   ]
 });

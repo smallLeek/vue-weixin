@@ -27,7 +27,7 @@
       <li>
         <img src="../../../static/images/home_income.png">
         <span>赚取收益</span>
-        <span><b v-text="(dataStatisticss_INVEST_SUM/10000).toFixed(2)"></b> 万元</span>
+        <span><b v-text="(dataStatisticss_INVEST_SUM/10000).toFixed(0)"></b> 万元</span>
       </li>
     </div>
     <!-- 公告 -->
@@ -149,19 +149,19 @@
     <div class="insurance ">
       <h1><img src="../../../static/images/home_insurance _title.png"></h1>
       <ul>
-        <a href="https://www.phtfdata.com/web6/hander/newBankHerd.do">
+        <a href="https://www.phtfdata.com/web6/hander/newBankHerd.do" target="_blank">
           <li>
             <img src="../../../static/images/home_xwbank_cg.png">
             <span>新网银行存管</span>
           </li>
         </a>
-        <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do">
+        <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do" target="_blank">
           <li>
             <img src="../../../static/images/home_insurance.png">
             <span>安全保障</span>
           </li>
         </a>
-        <a href="https://www.phtfdata.com/web6/hander/Mabout.do?index=0">
+        <a href="https://www.phtfdata.com/web6/hander/Mabout.do?index=0" target="_blank">
           <li>
             <img src="../../../static/images/home_information_disclosure.png">
             <span>信息披露</span>
@@ -170,18 +170,7 @@
       </ul>
     </div>
     <!-- 底部 -->
-    <div class="bottom">
-      <li class="on">
-        <router-link to="/home">
-        <span><img src="../../../static/images/homeOn.png"></span><span>首页</span>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/account">
-        <span><img src="../../../static/images/user.png"></span><span>我的</span>
-        </router-link>
-      </li>
-    </div>
+    <pht-bottomnav></pht-bottomnav>
   </div>
 
 
@@ -191,6 +180,7 @@
   import phtModal from '../../components/modal/modal.vue';
   import loop from '../../components/loop/loop.vue';
   import phtLoading from '../../components/loading/loading.vue';
+  import phtBottomnav from '../../components/bottom/bottomnav.vue';
   import {mapGetters, mapActions,mapState} from 'vuex'
   import {getUserInfo} from '../../assets/js/getUserInfo'
   import { phtServer } from '../../assets/js/phtServer'
@@ -210,6 +200,8 @@ export default {
 },
 
   mounted:function () {
+    $('.bottom li:first-child img').attr('src','../../../static/images/homeOn.png')
+    $('.bottom li:first-child').addClass('on')
     this.announcementList();
     this.dataStatistics();
     this.recommendedProjectList()
@@ -224,7 +216,7 @@ export default {
     // 获取首页公告
     announcementList(){
         let that =this;
-        let CURR_PAGE_NUM=1;
+        let CURR_PAGE_NUM=4;
         let PER_PAGE_SIZE=2;
         apis.getNotice("重要公告","网站",CURR_PAGE_NUM,PER_PAGE_SIZE).then((data)=> {
           this.announcement =data.result.main_data.data;
@@ -271,7 +263,8 @@ export default {
   components: {
     phtModal,
     phtLoading,
-    loop
+    loop,
+    phtBottomnav
   }
 
 }
