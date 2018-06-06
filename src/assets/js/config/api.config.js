@@ -62,7 +62,7 @@ const config = {
 
     //定投盈
     origin_ProxyPath_xwpdss:'',
-    origin_ProxyPath_pds:'/pds',
+    origin_ProxyPath_pds:'/xwpds',
 
     //天天盈服务
     origin_ProxyPath_xwddss:'',
