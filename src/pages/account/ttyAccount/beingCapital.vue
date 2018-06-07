@@ -7,7 +7,7 @@
             <span>在投本金</span>
         </div>
         <div class="header">
-            <img src="../../../../static/images/account__invest.png">正在投资以下债权
+            <img src="../../../../static/images/account/account_invest.png">正在投资以下债权
         </div>
         <div class="list">
             <ul>

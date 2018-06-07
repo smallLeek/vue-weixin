@@ -2,24 +2,13 @@
 import * as urls from './jwt.urls'
 import {phtServer} from './phtServer'
 
-let TIMESTAMPS = phtServer.farmatDate;
 /**
  * 获取首页公告
- * @param NOTICE_TYPE
- * @param CUST_TYPE
- * @param CURR_PAGE_NUM
- * @param PER_PAGE_SIZE
  */
-
-function getNotice(NOTICE_TYPE,CUST_TYPE,CURR_PAGE_NUM,PER_PAGE_SIZE){
-  return phtServer.globalPostData(urls.api_url_getNotice, phtServer.submitData({
-    "NOTICE_TYPE": NOTICE_TYPE,
-    "CUST_TYPE": CUST_TYPE,
-    "CURR_PAGE_NUM": CURR_PAGE_NUM,
-    "PER_PAGE_SIZE": PER_PAGE_SIZE,
-  }))
+function indexNotice(){
+  console.log(urls.api_url_indexNotice)
+  return phtServer.globalPostData(urls.api_url_indexNotice, phtServer.submitData({}))
 }
-
 
 /**
  * 登录
@@ -29,10 +18,9 @@ function getNotice(NOTICE_TYPE,CUST_TYPE,CURR_PAGE_NUM,PER_PAGE_SIZE){
  * @param USER_TYPE
  */
 
-function newLogin(LOGIN_CODE,NEWPASSWORD,PASSWORD,USER_TYPE){
+function newLogin(LOGIN_CODE,PASSWORD,USER_TYPE){
   return phtServer.globalPostData(urls.api_url_newLogin, phtServer.submitData({
     "LOGIN_CODE": LOGIN_CODE,
-    "NEWPASSWORD": NEWPASSWORD,
     "PASSWORD": PASSWORD,
     "USER_TYPE": USER_TYPE,
   }))
@@ -190,6 +178,7 @@ export  {
   getDataStatistics,
   recommendedProject,
   getNoticeInfo,
-  newLogin
+  newLogin,
+  indexNotice
 }
 

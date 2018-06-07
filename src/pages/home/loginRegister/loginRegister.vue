@@ -11,13 +11,13 @@
                 <s></s>
                 <ul>
                     <li>
-                        <span><img src="../../../../static/images/login_num.png"></span>
+                        <span><img src="../../../../static/images/login/login_num.png"></span>
                         <span><input id="phonenum" type="number" placeholder="请输入手机号"></span>
                     </li>
                     <li>
-                        <span><img src="../../../../static/images/login_password.png"></span>
+                        <span><img src="../../../../static/images/login/login_password.png"></span>
                         <span><input id="password" type="password" placeholder="请输入登录密码"></span>
-                        <span><img id="eye" src="../../../../static/images/login_eye_b.png"></span>
+                        <span><img id="eye" src="../../../../static/images/login/login_eye_b.png"></span>
                     </li>
                 </ul>
                 <p><router-link to="">找回密码？</router-link></p>
@@ -39,10 +39,10 @@ export default {
         $('#eye').click(function(){
             if($('#password').attr('type')=='password'){
                 $('#password').attr('type','text');
-                $(this).attr('src','../../../../static/images/login_eye_z.png')
+                $(this).attr('src','../../../../static/images/login/login_eye_z.png')
             }else{
                 $('#password').attr('type','password');
-                $(this).attr('src','../../../../static/images/login_eye_b.png')
+                $(this).attr('src','../../../../static/images/login/login_eye_b.png')
             }
         })
     },
@@ -62,8 +62,11 @@ export default {
           }
       },
       login() {
-        let user_type="1"
-        apis.newLogin($('#phonenum').val(), phtServer.CalcuMD5lower($('#password').val()), phtServer.CalcuMD5lower($('#password').val()),  user_type).then((data) => {
+        let user_type="1";
+        let phonenum = $('#phonenum').val();
+        let password = phtServer.CalcuMD5lower($('#password').val());
+        let pwd =phtServer.CalcuMD5lower($('#password').val());
+        apis.newLogin(phonenum, password, user_type).then((data) => {
           this.setUserInfo(data.result.main_data.data[0]);
           this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token);
           this.$router.push({ path: "/home" })
@@ -78,7 +81,7 @@ export default {
 }
 .head{
     height: 4.1rem;
-    background: url(../../../../static/images/login_bg.png);
+    background: url(../../../../static/images/login/login_bg.png);
     background-size: 100% 100%;
     position: relative;
     .tab{

@@ -25,24 +25,24 @@
             <p>已累计签到14天，再签5天即可获得额外奖励</p>
         </div>
         <div class="list">
-            <h1><img src="../../../static/images/sign_in_title.png"></h1>
+            <h1><img src="../../../static/images/sign_in/sign_in_title.png"></h1>
             <ul>
                 <li>
-                    <img src="../../../static/images/sign_in_33.png">
-                    <img src="../../../static/images/sign_in_66.png">
-                    <img src="../../../static/images/sign_in_88.png">
-                    <img src="../../../static/images/sign_in_99.png">
+                    <img src="../../../static/images/sign_in/sign_in_33.png">
+                    <img src="../../../static/images/sign_in/sign_in_66.png">
+                    <img src="../../../static/images/sign_in/sign_in_88.png">
+                    <img src="../../../static/images/sign_in/sign_in_99.png">
                 </li>
                 <li>
-                    <img src="../../../static/images/sign_in_axis.png">
-                    <img src="../../../static/images/sign_in_position.png">
-                    <img src="../../../static/images/sign_in_axis.png">
-                    <img src="../../../static/images/sign_in_position.png">
-                    <img src="../../../static/images/sign_in_axis.png">
-                    <img src="../../../static/images/sign_in_position.png">
-                    <img src="../../../static/images/sign_in_axis.png">
-                    <img src="../../../static/images/sign_in_position.png">
-                    <img src="../../../static/images/sign_in_axis.png">
+                    <img src="../../../static/images/sign_in/sign_in_axis.png">
+                    <img src="../../../static/images/sign_in/sign_in_position.png">
+                    <img src="../../../static/images/sign_in/sign_in_axis.png">
+                    <img src="../../../static/images/sign_in/sign_in_position.png">
+                    <img src="../../../static/images/sign_in/sign_in_axis.png">
+                    <img src="../../../static/images/sign_in/sign_in_position.png">
+                    <img src="../../../static/images/sign_in/sign_in_axis.png">
+                    <img src="../../../static/images/sign_in/sign_in_position.png">
+                    <img src="../../../static/images/sign_in/sign_in_axis.png">
                 </li>
                 <li>
                     <span>当月累计签到10天，即可获得33积分</span>

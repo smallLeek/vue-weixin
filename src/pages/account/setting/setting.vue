@@ -10,25 +10,25 @@
             <ul>
                 <router-link to="/datum">
                     <li>
-                        <span><img src="../../../../static/images/setting_datum.png"></span>
+                        <span><img src="../../../../static/images/setting/setting_datum.png"></span>
                         <span>我的资料</span>
                     </li>
                 </router-link>
                 <router-link to="">
                     <li>
-                        <span><img src="../../../../static/images/setting_risk.png"></span>
+                        <span><img src="../../../../static/images/setting/setting_risk.png"></span>
                         <span>风险承受能力评估</span>
                     </li>
                 </router-link>
                 <router-link to="">
                     <li>
-                        <span><img src="../../../../static/images/setting_security.png"></span>
+                        <span><img src="../../../../static/images/setting/setting_security.png"></span>
                         <span>安全保障</span>
                     </li>
                 </router-link>
                 <router-link to="/about">
                     <li>
-                        <span><img src="../../../../static/images/setting_about.png"></span>
+                        <span><img src="../../../../static/images/setting/setting_about.png"></span>
                         <span>关于我们</span>
                     </li>
                 </router-link>
@@ -38,7 +38,7 @@
             <input type="button" value="退出当前账号">
         </div>
         <div class="bottom">
-            <img src="../../../../static/images/setting_service.png">
+            <img src="../../../../static/images/setting/setting_service.png">
         </div>
     </div>
 </template>
