@@ -22,7 +22,6 @@ axios.interceptors.request.use(config => {
 })
 // http响应拦截器
 axios.interceptors.response.use(data => {
-  console.log(data.data.response)
 
   //加载成功之前显示加载中
 
