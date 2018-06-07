@@ -1,18 +1,27 @@
-html, body{background: #f8f8f8;}
-body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select{margin:0;padding:0}
-body{font:12px"SansSerif","宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
-a{color:#2d374b;text-decoration:none}
-a:hover{color:#cd0200;text-decoration:underline}
-em{font-style:normal}
-li{list-style:none}
-img{border:0;vertical-align:middle}
-table{border-collapse:collapse;border-spacing:0}
-p{word-wrap:break-word}
-@font-face { 
-    font-family: SansSerif; /*这里是说明调用来的字体名字*/ 
-    src: url('../../../static/font/SansSerif.ttf'); /*这里是字体文件路径*/ 
-  } 
+@import "reset.css";
 
+@font-face {
+    font-family: SansSerif; /*这里是说明调用来的字体名字*/
+    src: url('../../../static/font/SansSerif.ttf'); /*这里是字体文件路径*/
+  }
+/*css为clearfix，清除浮动*/
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  height: 0;
+  line-height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1; /*IE/7/6*/
+}
 /*圆角*/
 .br10 {
   border-radius: 0.1rem;
@@ -75,37 +84,8 @@ p{word-wrap:break-word}
 .textIndent{
   text-indent: 2em;
 }
-.swiper-paginationzidingyi span.swiper-pagination-bullet{
-  display: inline-block;
-  width: 0.17rem;
-  height:0.17rem;
-  border-radius: 0.17rem;
-  -moz-border-radius: 0.17rem;
-  -khtml-border-radius: 0.17rem;
-  -webkit-border-radius: 0.17rem;
-  background:#c6ced0 ;
-  margin-left:0.1rem ;
-}
-.swiper-paginationzidingyi span.swiper-pagination-bullet-active{
-  display: inline-block;
-  width: 0.49rem;
-  height:0.17rem;
-  border-radius: 0.17rem;
-  -moz-border-radius: 0.17rem;
-  -khtml-border-radius: 0.17rem;
-  -webkit-border-radius: 0.17rem;
-  background:#63d0e8;
-}
 /*右对齐*/
 .justify {
   text-align: justify;
-}
-
-.noviceAnsTotal .noviceMiddle span{
-  display: inline-block;
-  padding:0 0.3rem;
-  font-size: 0.4rem;
-  line-height: 0.44rem;
-  color: #823a00;
 }
 

@@ -5,7 +5,6 @@
         <div class="swiper-slide" v-for="list in bannerList" :style="{backgroundImage: 'url(' +list.FILE_PATH+ ')'}"  @click="changeBanner(list)">
         </div>
       </div>
-      <div class="swiper-pagination"></div>
     </div>
   </div>
 
@@ -36,14 +35,13 @@
         setTimeout(function () {
           let swiper = new Swiper('.swiper-container', {
             loop: true,
-            autoplay: 3000,
+            autoplay: 5000,
             paginationClickable: true,
             preventClicks: false,
             nextButton: '.swiper-button-next',
             prevButton: '.swiper-button-prev',
             noSwiping: true,
             effect: false,
-            pagination : '.swiper-pagination',
             autoplayDisableOnInteraction: false,
             observer: true,//修改swiper自己或子元素时，自动初始化swiper
             observeParents:true,

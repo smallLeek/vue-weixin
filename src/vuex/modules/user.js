@@ -17,11 +17,13 @@ const actions = {
    * 用户登录
    * @param commit
    * @param res
+   *
    */
     setUserInfo({ commit }, res) {
       phtServer.setStore('userInfo', JSON.stringify(res))
         // phtservice.setStore('userInfo', res)
       phtServer.setStore('loginStatus', true)
+    //要唤醒一个 mutation handler，你需要以相应的 type 调用 store.commit 方法：
         commit(types.SET_USER_INFO, res)
         commit(types.SET_LOGIN_STATUS, true)
     },
@@ -50,6 +52,12 @@ const getters = {
 }
 
 const mutations = {
+  /**
+   * 每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。
+   * 这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数：
+   * @param state
+   * @param res
+   */
     [types.SET_USER_INFO](state, res) {
         state.userInfo = res
     },

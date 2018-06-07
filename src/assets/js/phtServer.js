@@ -7,7 +7,15 @@ import wx from 'weixin-js-sdk'
 
 let phtServer = {}
 
+phtServer.idCard = function(){
+  let isLogin = store.state.user.userInfo.loginStatus;
+  let state = store.state.user.userInfo.STATE;
+  if(isLogin == false){
+    this.$router.push('/loginRegister')
+  }else if(state == '6'){
 
+  }
+}
 /**
  * 时间格式化  yyyy-MM-dd HH:mm:ss
  */

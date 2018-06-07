@@ -46,9 +46,9 @@ export default {
         })
     },
   computed: {
+      //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
     ...mapGetters([
       'loginStatus','userInfo','tokenCode'
-
     ])
   },
     methods: {
@@ -61,15 +61,12 @@ export default {
           }
       },
       login() {
-          let user_type="1"
+        let user_type="1"
         apis.newLogin($('#phonenum').val(), phtServer.CalcuMD5lower($('#password').val()), phtServer.CalcuMD5lower($('#password').val()),  user_type).then((data) => {
-          console.log(data)
           this.setUserInfo(data.result.main_data.data[0]);
-          this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token)
-          console.log(JSON.parse(phtServer.getStore('userInfo')))
-        this.$router.push({ path: "/home" })
+          this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token);
+          this.$router.push({ path: "/home" })
         })
-
       }
     }
 }

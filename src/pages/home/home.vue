@@ -3,11 +3,6 @@
     <!-- loading -->
     <pht-modal v-show=show></pht-modal>
     <pht-loading v-show=show></pht-loading>
-    <!-- 头部 -->
-    <!-- <div class="header">
-      {{loginStatus}}
-      {{userInfo.data}}
-    </div> -->
     <!-- 轮播 -->
     <div class="swiper">
       <loop></loop>
