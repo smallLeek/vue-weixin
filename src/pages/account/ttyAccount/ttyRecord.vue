@@ -111,15 +111,19 @@ export default {
     font-size: 0.36rem;
     text-align: center;
     color: #fff;
-    background-color: #fd4747;
+    background-color: #fb4747;
     position: fixed;
     top: 0;
     z-index: 100;
     img{
-        position: absolute;
-        left: 0.2rem;
-        top: 0.25rem;
         height: 0.5rem;
+    }
+    a{
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        left: 0;
+        top: -0.02rem
     }
     a:hover{
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0);

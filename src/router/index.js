@@ -28,7 +28,7 @@ const ttyAccount = resolve => require(['../pages/account/ttyAccount/ttyAccount.v
 const ttyRecord = resolve => require(['../pages/account/ttyAccount/ttyRecord.vue'], resolve);
 
 // 定投盈账户
-const dty = resolve => require(['../pages/account/dty/dty.vue'], resolve);
+// const dty = resolve => require(['../pages/account/dty/dty.vue'], resolve);
 
 // 新闻
 const announcementList = resolve => require(['../pages/news/announcementList.vue'], resolve);
@@ -44,6 +44,11 @@ const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmen
 
 // 签到
 const signIn = resolve => require(['../pages/signIn/signIn.vue'], resolve);
+
+
+//分享页面
+
+const share =resolve => require (['../pages/share/share.vue'], resolve);
 
 //自定义键盘
 // const keycode = resolve => require(['../pages/keycode/kbdblg'], resolve);
@@ -154,10 +159,10 @@ const router = new VueRouter({
       path: '/about',
       component: about,
     },
-    {
-      path: '/dty',
-      component: dty,
-    },
+    // {
+    //   path: '/dty',
+    //   component: dty,
+    // },
     {
       path: '/loginRegister',
       component: loginRegister,
@@ -167,8 +172,13 @@ const router = new VueRouter({
       component: login,
     },
     {
+
+      path: '/share',
+      component: share,
+
       path: '/register',
       component: register,
+
     }
   ]
 });

@@ -17,38 +17,56 @@ app.use(historyApiFallback({
   verbose: true,
 }));
 
-app.get('*', express.static(path.join(__dirname, './dist')));
+app.get('*', express.static(path.join(__dirname, '../dist')));
 
 
 app.post('/m/finance/register/isHand*',function(req, res){
+  console.log("dddddd");
   const url = req.url;
   res.redirect(url);
 })
 
-//代理1
-const apiProxy = proxy('/apis', { target: 'https://www.phtfdata.com',changeOrigin: true,pathRewrite:{
-  '^/apis': ''
+//************************************proxy start *******************************************************************************************
+//红包服务
+const proxy_redpackets = proxy('/redpackets', { target: 'http://139.129.12.93:8094',changeOrigin: true,pathRewrite:{
+  '^/redpackets': ''
 } });
-app.use('/apis', apiProxy);
+app.use('/redpackets', proxy_redpackets);
 
-//代理2
-const apiProxy1 = proxy('/texts', { target: 'http://139.129.12.93:8093',changeOrigin: true,pathRewrite:{
-  '^/texts': ''
+
+//定投盈服务
+const proxyXwpdss = proxy('/xwpdss', { target: 'http://139.129.12.93:8096',changeOrigin: true,pathRewrite:{
+  '^/xwpdss': ''
 } });
-app.use('/texts', apiProxy1);
+app.use('/xwpdss', proxyXwpdss);
 
-//代理3
-const apiProxy2 = proxy('/datas', { target: 'http://139.129.12.93:8097/msgcenter/',changeOrigin: true,pathRewrite:{
+//消息服务
+const proxy_datas = proxy('/datas', { target: 'http://139.129.12.93:8097',changeOrigin: true,pathRewrite:{
   '^/datas': ''
 } });
-app.use('/datas', apiProxy2);
+app.use('/datas', proxy_datas);
 
 
-//代理3
-const apiProxy3 = proxy('/apts', { target: 'http://139.129.12.93:8089/',changeOrigin: true,pathRewrite:{
+//天天盈服务
+const proxy_xwddss = proxy('/xwddss', { target: 'http://139.129.12.93:8087',changeOrigin: true,pathRewrite:{
+  '^/xwddss': ''
+} });
+app.use('/xwddss', proxy_xwddss);
+
+
+//优惠券服务
+const proxy_coupons = proxy('/coupons', { target: 'http://139.129.12.93:8099',changeOrigin: true,pathRewrite:{
+  '^/coupons': ''
+} });
+app.use('/coupons', proxy_coupons);
+
+//新网银行注册绑卡
+const proxy_apts = proxy('/apts', { target: 'http://139.129.12.93:8089',changeOrigin: true,pathRewrite:{
   '^/apts': ''
 } });
-app.use('/apts', apiProxy3);
+app.use('/apts', proxy_coupons);
+
+//************************************proxy end *******************************************************************************************
 
 
 //使用压缩
@@ -57,7 +75,7 @@ app.use(compress());
 
 
 // 监听端口
-var server  = app.listen(8089, function () {
+var server  = app.listen(8090, function () {
   var host = server.address().address;
   var port = server.address().port;
 

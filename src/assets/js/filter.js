@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 //把数字格式化为亿元
 Vue.filter('farmatDataYi',function (value) {
   if(!value) return ''
@@ -12,7 +12,7 @@ Vue.filter('farmatDataWan',function (value) {
 /**
  * 时间格式化  yyyy-MM-dd HH:mm:ss
  */
-vue.filter('farmatDate',function () {
+Vue.filter('farmatDate',function () {
   let date = new Date();
   let seperator1 = "-";
   let seperator2 = ":";

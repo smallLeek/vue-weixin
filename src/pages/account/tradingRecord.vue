@@ -212,6 +212,13 @@ export default {
         $('.inquire .box li').click(function(){
             $('.inquire').hide()
         })
+
+$(document).mouseup(function(e){
+  let _con = $('.inquire .box');   
+  if(!_con.is(e.target) && _con.has(e.target).length === 0){
+    $('.inquire').hide()
+  }
+});
     }
 }
 </script>
@@ -251,6 +258,11 @@ export default {
             top: 0.25rem;
             height: 0.5rem;
         }
+        a{
+            display: block;
+            width: 1rem;
+            height: 1rem;
+        }
     }
     span:nth-child(2){
         font-size: 0.36rem;
@@ -260,6 +272,8 @@ export default {
             float: right;
             margin-right: 0.3rem;
             margin-top: 0.05rem;
+            width: 1rem;
+            height: 1rem;
         }
         img{
             margin-top: -0.1rem;
