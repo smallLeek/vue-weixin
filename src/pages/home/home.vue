@@ -29,7 +29,7 @@
     <div class="news">
       <div class="news_img">
         <router-link to="/announcementList">
-          <img src="../../../static/images/home_announcement.png">
+          <img src="../../../static/images/home/home_announcement.png">
         </router-link>
       </div>
       <b class="shuxian"></b>
