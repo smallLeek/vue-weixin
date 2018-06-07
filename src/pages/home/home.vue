@@ -27,7 +27,11 @@
     </div>
     <!-- 公告 -->
     <div class="news">
-      <div class="news_img"><router-link to="/announcementList"><img src="../../../static/images/home_announcement.png"></router-link></div>
+      <div class="news_img">
+        <router-link to="/announcementList">
+          <img src="../../../static/images/home_announcement.png">
+        </router-link>
+      </div>
       <b class="shuxian"></b>
       <div class="news_content">
         <ul>
@@ -107,7 +111,7 @@ export default {
     this.announcementList();
     this.dataStatistics();
     this.getUserInfo();
-    
+
   },
   computed:{
 
@@ -119,9 +123,7 @@ export default {
     // 获取首页公告
     announcementList(){
         let that =this;
-        let CURR_PAGE_NUM=4;
-        let PER_PAGE_SIZE=2;
-        apis.getNotice("重要公告","网站",CURR_PAGE_NUM,PER_PAGE_SIZE).then((data)=> {
+        apis.indexNotice().then((data)=> {
           this.announcement =data.result.main_data.data;
         });
     },
