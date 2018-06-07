@@ -10,30 +10,30 @@
     <!-- 上部导航 -->
     <div class="nav">
       <li>
-        <img src="../../../static/images/home_users_Num.png">
+        <img src="../../../static/images/home/home_users_Num.png">
         <span>当前用户</span>
         <span><b>{{dataStatisticss_CUST_SUM|farmatDataWan}}</b> 万人</span>
       </li>
       <li>
-        <img src="../../../static/images/home_financing.png">
+        <img src="../../../static/images/home/home_financing.png">
         <span>撮合融资</span>
         <span><b>{{dataStatisticss_INCOME_SUM|farmatDataWan}}</b> 万元</span>
       </li>
       <li>
-        <img src="../../../static/images/home_income.png">
+        <img src="../../../static/images/home/home_income.png">
         <span>赚取收益</span>
         <span><b>{{dataStatisticss_INVEST_SUM|farmatDataYi}}</b> 亿元</span>
       </li>
     </div>
     <!-- 公告 -->
     <div class="news">
-      <div class="news_img"><router-link to="/announcementList"><img src="../../../static/images/home_announcement.png"></router-link></div>
+      <div class="news_img"><router-link to="/announcementList"><img src="../../../static/images/home/home_announcement.png"></router-link></div>
       <b class="shuxian"></b>
       <div class="news_content">
         <ul>
           <router-link :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}" v-for="(item,index) in announcement" :key="index">
             <li>
-              <img src="../../../static/images/home_announcement_sign.png">
+              <img src="../../../static/images/home/home_announcement_sign.png">
               <span v-text="item.NOTICE_TITLE"></span>
             </li>
           </router-link>
@@ -48,23 +48,23 @@
     <pht-dcyList></pht-dcyList>
     <!-- 安全保障 -->
     <div class="insurance ">
-      <h1><img src="../../../static/images/home_insurance _title.png"></h1>
+      <h1><img src="../../../static/images/home/home_insurance _title.png"></h1>
       <ul>
         <a href="https://www.phtfdata.com/web6/hander/newBankHerd.do" target="_blank">
           <li>
-            <img src="../../../static/images/home_xwbank_cg.png">
+            <img src="../../../static/images/home/home_xwbank_cg.png">
             <span>新网银行存管</span>
           </li>
         </a>
         <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do" target="_blank">
           <li>
-            <img src="../../../static/images/home_insurance.png">
+            <img src="../../../static/images/home/home_insurance.png">
             <span>安全保障</span>
           </li>
         </a>
         <a href="https://www.phtfdata.com/web6/hander/Mabout.do?index=0" target="_blank">
           <li>
-            <img src="../../../static/images/home_information_disclosure.png">
+            <img src="../../../static/images/home/home_information_disclosure.png">
             <span>信息披露</span>
           </li>
         </a>

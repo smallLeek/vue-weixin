@@ -9,15 +9,15 @@
         <div class="fund">
             <ul>
                 <li>
-                    <span><img src="../../../static/images/recharge_cardlg.png"></span>
-                    <span><img src="../../../static/images/recharge_bank.png"></span>
+                    <span><img src="../../../static/images/recharge/recharge_cardlg.png"></span>
+                    <span><img src="../../../static/images/recharge/recharge_bank.png"></span>
                     <span>民生银行尾号:3669</span>
                 </li>
                 <li>
-                    <span><img src="../../../static/images/recharge_right.png"></span>
+                    <span><img src="../../../static/images/recharge/recharge_right.png"></span>
                 </li>
                 <li>
-                    <span><img src="../../../static/images/recharge_balance.png"></span>
+                    <span><img src="../../../static/images/recharge/recharge_balance.png"></span>
                     <span>账户余额</span>
                 </li>
             </ul>
@@ -32,7 +32,7 @@
                     <li>
                         <span>￥</span>
                         <span><input onfocus="this.blur();" id="amount" type="text" placeholder="请输入充值金额"></span>
-                        <span id="close"><img src="../../../static/images/recharge_close.png"></span>
+                        <span id="close"><img src="../../../static/images/recharge/recharge_close.png"></span>
                     </li>
                     <li>
                         <span>充值后余额(元)：<b>6326.33</b></span>
@@ -69,10 +69,10 @@
                 <li>9</li>
                 <li>.</li>
                 <li>0</li>
-                <li class="keyboard_down"><img src="../../../static/images/keyboardDown.png"></li>
+                <li class="keyboard_down"><img src="../../../static/images/keyboard/keyboardDown.png"></li>
             </ul>
             <ul class="right">
-                <li class="keyboardClose"><img src="../../../static/images/keyboardReturn.png"></li>
+                <li class="keyboardClose"><img src="../../../static/images/keyboard/keyboardReturn.png"></li>
                 <li class="keyboard_down">确定</li>
             </ul>
         </div>
@@ -102,6 +102,9 @@ export default {
                 if($('#amount').val().length>$('#amount').val().indexOf('.')+2){
                     return
                 }
+            }
+            if($('#amount').val().length>=9){
+                return
             }
             document.getElementById('amount').value+=$(this).html()
         })
@@ -285,6 +288,7 @@ export default {
                         color: #333333;
                         border: none;
                         outline:medium;
+                        display: inherit;
                     }
                     ::-moz-placeholder {
                         color: #999999;
@@ -302,7 +306,8 @@ export default {
                 span:last-child{
                     float: right;
                     width: 0.8rem;
-                    line-height: 0.8rem;
+                    height: 0.8rem;
+                    line-height: 0.3rem;
                     margin-right: 0.05rem;
                     text-align: right;
                     img{

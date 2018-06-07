@@ -56,7 +56,7 @@
                 <li>
                     <router-link to="">
                         <span>借款及担保合同服务范文</span>
-                        <span><img src="../../../static/images/home_more.png"></span>
+                        <span><img src="../../../static/images/more.png"></span>
                     </router-link>
                 </li>
             </ul>
@@ -410,6 +410,7 @@ export default {
             font-size: 0.3rem;
             border: 1px solid #fb4747;
             flex: 1;
+            height: 0.6rem;
             line-height: 0.6rem;
             text-align: center;
             box-sizing: border-box;
@@ -569,11 +570,13 @@ export default {
         margin-left: 0.2rem;
         width: 4.7rem;
         height: 0.6rem;
-        line-height: 0.67rem;
+        line-height: 0.55rem;
         border: 1px solid #e0e0e0;
         border-radius: 1rem;
         input{
+            float: left;
             margin-left: 0.2rem;
+            margin-top: 0.1rem;
             font-size: 0.3rem;
             border: none;
             outline:medium;

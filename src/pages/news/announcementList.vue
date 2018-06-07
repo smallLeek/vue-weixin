@@ -11,12 +11,12 @@
         <div class="announcement_nav">
             <router-link to="/announcementList">
                 <li>
-                    <span class="on">公告<img src="../../../static/images/announcement_news_sign.png"></span>
+                    <span class="on">公告<img src="../../../static/images/announcement/announcement_news_sign.png"></span>
                 </li>
             </router-link>
             <router-link to="/newsList">
                 <li>
-                    <span>新闻<img src="../../../static/images/announcement_news_sign.png"></span>
+                    <span>新闻<img src="../../../static/images/announcement/announcement_news_sign.png"></span>
                 </li>
             </router-link>
         </div>
@@ -27,14 +27,14 @@
                     <li>
                         <h1>{{item}}</h1>
                         <h2>2017-03-22 14:41:27</h2>
-                        <img src="../../../static/images/announcement_details.png">
+                        <img src="../../../static/images/announcement/announcement_details.png">
                     </li>
                 </router-link>
                 <router-link :to="{path: 'news', query: {  name: '123',url:'announcementList'}}" v-for="(item,index) in items" :key="index">
                     <li>
                         <h1>关于招商银行恢复使用公告</h1>
                         <h2>{{item}}</h2>
-                        <img src="../../../static/images/announcement_details.png">
+                        <img src="../../../static/images/announcement/announcement_details.png">
                     </li>
                 </router-link>
             </ul>

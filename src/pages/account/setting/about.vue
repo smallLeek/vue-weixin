@@ -10,7 +10,7 @@
             <ul>
                 <li>
                     <span>注册协议</span>
-                    <span><img src="../../../../static/images/home_more.png" alt=""></span>
+                    <span><img src="../../../../static/images/more.png" alt=""></span>
                 </li>
                 <li>
                     <span>微信公众号</span>

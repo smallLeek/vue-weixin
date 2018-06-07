@@ -12,7 +12,7 @@
             </span>
         </div>
         <div class="fund">
-            <h2><img src="../../../../static/images/account_rate.png"> 昨日年化收益:</h2>
+            <h2><img src="../../../../static/images/account/account_rate.png"> 昨日年化收益:</h2>
             <h1>10.20<span>%</span></h1>
             <ul class="fund_model">
                 <li>
@@ -31,14 +31,14 @@
         </div>
         <div class="nav">
             <router-link to="/ttyRecord">
-                <span><img src="../../../../static/images/account_deal.png"></span>
+                <span><img src="../../../../static/images/account/account_deal.png"></span>
                 <span>
                     <h1>交易记录</h1>
                     <h2>查看详情</h2>
                 </span>
             </router-link>
             <router-link to="">
-                <span><img src="../../../../static/images/account_ticket.png"></span>
+                <span><img src="../../../../static/images/account/account_ticket.png"></span>
                 <span>
                     <h1>我的加息卡</h1>
                     <h2>收益翻倍在这里</h2>
@@ -95,7 +95,7 @@
                     <p>以上收益计算后少于0.01元的部分，累计至大于等于0.01元发放</p>
                 </li>
             </ul>
-            <img class="closeBtn" src="../../../../static/images/account_close.png">
+            <img class="closeBtn" src="../../../../static/images/account/account_close.png">
         </div>
     </div>
 </template>
