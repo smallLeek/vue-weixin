@@ -36,7 +36,7 @@
 </template>
 <script>
 export default {
-    
+
 }
 </script>
 <style lang="less" scoped>
@@ -71,7 +71,7 @@ export default {
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
         -webkit-user-select: none;
         -moz-user-focus: none;
-        -moz-user-select: none;  
+        -moz-user-select: none;
         text-decoration: none;
     }
 }
@@ -107,6 +107,13 @@ export default {
             }
         li:nth-child(2n){
             margin-left: 0.16rem;
+        }
+        a:hover{
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            -webkit-user-select: none;
+            -moz-user-focus: none;
+            -moz-user-select: none;
+            text-decoration: none;
         }
     }
 }

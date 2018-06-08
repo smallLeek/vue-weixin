@@ -4,16 +4,16 @@
         <div class="asset">
             <div class="asset_top">
                 <h2>资产总计(元)</h2>
-                <h1>34,000.82</h1>
+                <h1>{{this.amount_count | farmatAmount}}</h1>
             </div>
             <div class="asset_bottom">
                 <li>
                     <span>可用余额(元)</span>
-                    <span>14,000.12</span>
+                    <span>{{this.available_balance | farmatAmount}}</span>
                 </li>
                 <li>
                     <span>累计收益(元)</span>
-                    <span>20,000.7</span>
+                    <span>{{this.lj_amount_count | farmatAmount}}</span>
                 </li>
             </div>
         </div>
@@ -82,27 +82,45 @@
 </template>
 <script>
   import phtBottomnav from '../../components/bottom/bottomnav.vue';
-export default {
-   data () {
-    return {
-
-    }
-},
-
+  import * as apis from '../../assets/js/jwt.apis'
+  import '../../assets/js/filter'
+  import {mapGetters, mapActions,mapState} from 'vuex'
+  export default {
+     data () {
+      return {
+        amount_count:'',
+        available_balance:'',
+        lj_amount_count:''
+      }
+  },
+  computed: {
+    ...mapGetters([
+      'loginStatus','userInfo','tokenCode'
+    ])
+  },
   mounted:function () {
+    this.newAccountDataForApp()
     $('.bottom li:last-child img').attr('src',require('../../../static/images/userOn.png'))
     $('.bottom li:last-child').addClass('on')
 
   },
   methods:{
-
+     //我的-资产总计(元)/可用余额(元)/累计收益
+    newAccountDataForApp() {
+      let userId = this.userInfo.ID;
+      let userType = this.userInfo.USER_TYPE;
+      apis.newAccountDataForApp(userId,userType).then( (data) => {
+        let AccountData = data.result.main_data.data[0];
+        this.amount_count =AccountData.AMOUNT_COUNT;
+        this.available_balance   =AccountData.AVAILABLE_BALANCE;
+        this.lj_amount_count =AccountData.LJ_AMOUNT_COUNT;
+      })
+    }
   },
-
   components: {
     phtBottomnav
   }
-
-}
+  }
 </script>
 <style lang="less" scoped>
 @import "../../assets/css/account.less";
