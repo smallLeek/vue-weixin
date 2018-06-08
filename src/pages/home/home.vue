@@ -111,7 +111,6 @@ export default {
     this.announcementList();
     this.dataStatistics();
     this.getUserInfo();
-    this.showMarquee(this.num)
   },
   computed:{
 
