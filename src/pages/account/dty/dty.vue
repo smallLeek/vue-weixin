@@ -41,19 +41,19 @@
             <h1><span>我的定投盈</span></h1>
             <ul>
                 <li class="on">
-                    <span><img src="../../../../static/images/dcy_icon01_on.png"></span>
+                    <span><img src="../../../../static/images/dcy/dcy_icon01_on.png"></span>
                     <span>所有项目</span>
                 </li>
                 <li>
-                    <span><img src="../../../../static/images/dcy_icon02.png"></span>
+                    <span><img src="../../../../static/images/dcy/dcy_icon02.png"></span>
                     <span>投资中</span>
                 </li>
                 <li>
-                    <span><img src="../../../../static/images/dcy_icon03.png"></span>
+                    <span><img src="../../../../static/images/dcy/dcy_icon03.png"></span>
                     <span>已收益</span>
                 </li>
                 <li>
-                    <span><img src="../../../../static/images/dcy_icon04.png"></span>
+                    <span><img src="../../../../static/images/dcy/dcy_icon04.png"></span>
                     <span>收益查询</span>
                 </li>
             </ul>

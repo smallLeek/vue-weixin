@@ -3,8 +3,8 @@
     <!-- 天天盈专区 -->
     <div class="tty_area">
       <div class="area_title">
-        <img src="../../../../static/images/home_tty_title.png" class="area_title_img">
-        <!-- <router-link to="/ttyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
+        <img src="../../../../static/images/home/home_tty_title.png" class="area_title_img">
+        <!-- <router-link to="/ttyMore"><span>更多<img src="../../../static/images/home/more.png"></span></router-link> -->
       </div>
       <ul v-for="item in recommendedProject_tty">
         <li>{{item.PROJ_NAME}}（{{item.RATE}}%）</li>

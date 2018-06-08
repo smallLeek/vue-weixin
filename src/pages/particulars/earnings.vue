@@ -10,17 +10,17 @@
             <h1>项目简介</h1>
             <ul>
                 <li>
-                    <span><img src="../../../static/images/earnings_icon1.png">项目名称</span>
+                    <span><img src="../../../static/images/earnings/earnings_icon1.png">项目名称</span>
                     <span>按揭宝2015924</span>
                 </li>
                 <li>
-                    <span><img src="../../../static/images/earnings_icon2.png">收益率 <b>15%</b></span>
-                    <span><img src="../../../static/images/earnings_icon3.png">期限 <b>9个月</b></span>
+                    <span><img src="../../../static/images/earnings/earnings_icon2.png">收益率 <b>15%</b></span>
+                    <span><img src="../../../static/images/earnings/earnings_icon3.png">期限 <b>9个月</b></span>
                 </li>
             </ul>
             <h1>输入本金</h1>
             <p>
-                <span><img src="../../../static/images/earnings_icon4.png">计划投入本金</span>
+                <span><img src="../../../static/images/earnings/earnings_icon4.png">计划投入本金</span>
                 <span><input type="number" placeholder="请输入起投金额整数倍"></span>
             </p>
             <h2>起投金额100元</h2>

@@ -13,7 +13,6 @@ function indexNotice(){
 /**
  * 登录
  * @param LOGIN_CODE
- * @param NEWPASSWORD
  * @param PASSWORD
  * @param USER_TYPE
  */

@@ -2,8 +2,8 @@
     <div class="dcyList">
         <div class="dcy_area">
         <div class="area_title">
-            <img src="../../../../static/images/home_dcy_title.png" class="area_title_img">
-            <!-- <router-link to="/dcyMore"><span>更多<img src="../../../static/images/home_more.png"></span></router-link> -->
+            <img src="../../../../static/images/home/home_dcy_title.png" class="area_title_img">
+            <!-- <router-link to="/dcyMore"><span>更多<img src="../../../static/images/home/more.png"></span></router-link> -->
         </div>
             <router-link :to="{path: 'dcyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}" v-for="(item , index) in recommendedProject_dcy" :key="index">
             <ul>
