@@ -41,4 +41,35 @@ Vue.filter('farmatDate',function () {
     + seperator2 + strSeconds;
   return currentdate;
 })
+/**
+ *数字格式化    千分隔
+ */
+Vue.filter('farmatAmount', function(amount) {
+  let result = "";
+  let arg0=(amount+"").split(".");
+  let len= arg0[0].length;
+  let count = parseInt(len/3);
+  let fl = len%3;
+
+  if(fl != 0){
+    if(count != 0){
+      result =arg0[0].substr(0 , fl)+ ",";
+    }else{
+      result =arg0[0].substr(0 , fl);
+    }
+  }
+  for(let j = count ; j> 0;j--){
+    if(j == 1){
+      result += arg0[0].substr( (count -j)*3 + fl, 3);
+    }else{
+      result += arg0[0].substr( (count -j)*3 + fl, 3)+",";
+    }
+  }
+  if(arg0[1] != null ){
+    return result + "."+ arg0[1];
+  }else{
+    return result;
+  }
+  return result;
+})
 
