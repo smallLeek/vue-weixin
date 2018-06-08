@@ -14,12 +14,10 @@
                         <span>我的资料</span>
                     </li>
                 </router-link>
-                <router-link to="">
-                    <li>
-                        <span><img src="../../../../static/images/setting/setting_risk.png"></span>
-                        <span>风险承受能力评估</span>
-                    </li>
-                </router-link>
+                  <li>
+                      <span><img src="../../../../static/images/setting/setting_risk.png"></span>
+                      <span>风险承受能力评估</span>
+                  </li>
                 <router-link to="">
                     <li>
                         <span><img src="../../../../static/images/setting/setting_security.png"></span>
@@ -44,7 +42,7 @@
 </template>
 <script>
 export default {
-    
+
 }
 </script>
 <style lang="less" scoped>
@@ -78,7 +76,7 @@ export default {
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
         -webkit-user-select: none;
         -moz-user-focus: none;
-        -moz-user-select: none;  
+        -moz-user-select: none;
         text-decoration: none;
     }
 }
@@ -121,7 +119,7 @@ export default {
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
             -webkit-user-select: none;
             -moz-user-focus: none;
-            -moz-user-select: none;  
+            -moz-user-select: none;
             text-decoration: none;
         }
     }

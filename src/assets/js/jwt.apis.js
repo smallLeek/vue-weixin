@@ -6,10 +6,34 @@ import {phtServer} from './phtServer'
  * 获取首页公告
  */
 function indexNotice(){
-  console.log(urls.api_url_indexNotice)
   return phtServer.globalPostData(urls.api_url_indexNotice, phtServer.submitData({}))
 }
 
+/**
+ * 获取用户信息
+ * @param CUST_ID  用户Id
+ * @param USER_TYPE   用户类型
+ * @returns {*}       返回用户信息
+ */
+function userBaseData(CUST_ID, USER_TYPE) {
+  return phtServer.globalPostData(urls.api_url_userBaseData, phtServer.submitData({
+    "CUST_ID": CUST_ID,
+    "USER_TYPE": USER_TYPE
+  }))
+}
+
+/**
+ * 我的-资产总计(元)/可用余额(元)/累计收益
+ * @param CUST_ID  用户id
+ * @param USER_TYPE  用户类型  1 个人  2 企业
+ * @returns {*}
+ */
+function newAccountDataForApp(CUST_ID, CUST_TYPE) {
+  return phtServer.globalPostData(urls.api_url_newAccountDataForApp, phtServer.submitData({
+    "CUST_ID": CUST_ID,
+    "CUST_TYPE": CUST_TYPE
+  }))
+}
 /**
  * 登录
  * @param LOGIN_CODE
@@ -178,6 +202,8 @@ export  {
   recommendedProject,
   getNoticeInfo,
   newLogin,
-  indexNotice
+  indexNotice,
+  userBaseData,
+  newAccountDataForApp
 }
 
