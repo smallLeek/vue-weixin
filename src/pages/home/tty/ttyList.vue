@@ -68,7 +68,7 @@ export default {
 /* 专区 */
 .area_title{
     height: 1rem;
-    line-height: 0.6rem;
+    line-height: 0.7rem;
     margin-top: 0.2rem;
     background-color: #fff;
     border-top: 1px solid #e5e5e5;
@@ -120,7 +120,7 @@ export default {
                 flex: 1;
                 text-align: center;
                 font-size: 0.28rem;
-                margin-top: 0.44rem;
+                margin-top: 0.6rem;
                 color: #666666;
                 b{
                     font-family: 黑体;
