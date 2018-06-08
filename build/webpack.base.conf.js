@@ -3,11 +3,15 @@ var utils = require('./utils')
 var webpack = require("webpack");
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
-// const PrerenderSPAPlugin = require('prerender-spa-plugin')
+
+// const vuxLoader = require('vux-loader') // 原来的 module.exports 代码赋值给变量 webpackConfig
+// const webpackConfig = originalConfig
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
+
+// var originalConfig = vuxLoader.merge(webpackConfig, { plugins: ['vux-ui'] })
 
 module.exports = {
   plugins: [
@@ -37,7 +41,7 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.less'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),

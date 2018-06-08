@@ -20,60 +20,60 @@
         <!-- 菜单 -->
         <div class="menu">
             <ul>
-                <router-link to="/ttyAccount">
                     <li>
+                <router-link to="">
                         <img src="../../../static/images/user/user_tty_icon.png">
                         <span>天天盈</span>
-                    </li>
                 </router-link>
-                <router-link to="">
+                    </li>
                     <li>
+                <router-link to="">
                         <img src="../../../static/images/user/user_dty_icon.png">
                         <span>定投盈</span>
-                    </li>
                 </router-link>
-                <router-link to="/tradingRecord">
+                    </li>
                     <li>
+                <router-link to="">
                         <img src="../../../static/images/user/user_Transaction_icon.png">
                         <span>交易记录</span>
-                    </li>
                 </router-link>
-                <router-link to="/recharge">
+                    </li>
                     <li>
+                <router-link to="/recharge">
                         <img src="../../../static/images/user/user_recharge_icon.png">
                         <span>账户充值</span>
-                    </li>
                 </router-link>
-                <router-link to="">
+                    </li>
                     <li>
+                <router-link to="">
                         <img src="../../../static/images/user/user_withdraw_deposit_icon.png">
                         <span>账户提现</span>
-                    </li>
                 </router-link>
-                <router-link to="">
+                    </li>
                     <li>
+                <router-link to="">
                         <img src="../../../static/images/user/user_help_icon.png">
                         <span>新手帮助</span>
-                    </li>
                 </router-link>
-                <router-link to="">
+                    </li>
                     <li>
+                <router-link to="">
                         <img src="../../../static/images/user/user_share_icon.png">
                         <span>分享邀请</span>
-                    </li>
                 </router-link>
-                <router-link to="">
+                    </li>
                     <li>
+                <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do" target="_blank">
                         <img src="../../../static/images/user/user_security_center_icon.png">
                         <span>安全中心</span>
+                </a>
                     </li>
-                </router-link>
-                <router-link to="/setting">
                     <li>
+                <router-link to="/setting">
                         <img src="../../../static/images/user/user_intercalate_icon.png">
                         <span>设置</span>
-                    </li>
                 </router-link>
+                    </li>
             </ul>
         </div>
         <!-- 底部 -->

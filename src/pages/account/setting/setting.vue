@@ -66,6 +66,7 @@ export default {
     z-index: 100;
     img{
         height: 0.5rem;
+        vertical-align: middle;
     }
     a{
         position: absolute;
@@ -138,7 +139,8 @@ export default {
         border: none;
         border-top: 1px solid #e0e0e0;
         border-bottom: 1px solid #e0e0e0;
-        outline:none
+        outline:none;
+        -webkit-appearance:none;
     }
 }
 .bottom{

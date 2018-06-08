@@ -90,7 +90,15 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return{
+        }
+    },
+    mounted(){
+        $('.input_text').click(function(){
+            $('.bottom_input').css('bottom','4.68rem')
+        })
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -113,6 +121,7 @@ export default {
     z-index: 100;
     img{
         height: 0.5rem;
+        vertical-align: middle;
     }
     a{
         position: absolute;
@@ -270,11 +279,11 @@ export default {
         margin-left: 0.2rem;
         width: 4.7rem;
         height: 0.6rem;
-        line-height: 0.55rem;
         border: 1px solid #e0e0e0;
         border-radius: 1rem;
         input{
             float: left;
+            width: 3.5rem;
             margin-left: 0.2rem;
             margin-top: 0.1rem;
             font-size: 0.3rem;

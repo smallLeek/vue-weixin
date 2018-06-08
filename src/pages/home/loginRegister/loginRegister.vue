@@ -12,7 +12,7 @@
                 <ul>
                     <li>
                         <span><img src="../../../../static/images/login/login_num.png"></span>
-                        <span><input id="phonenum" type="number" placeholder="请输入手机号"></span>
+                        <span><input id="phonenum" type="text" placeholder="请输入手机号"></span>
                     </li>
                     <li>
                         <span><img src="../../../../static/images/login/login_password.png"></span>

@@ -85,6 +85,8 @@
     "vue-scroller": "^2.2.4",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.4.2",
+    "vux": "^2.9.1",
+    "vux-loader": "^1.2.9",
     "webpack": "^2.6.1",
     "webpack-bundle-analyzer": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
