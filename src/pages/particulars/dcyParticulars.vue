@@ -410,6 +410,7 @@ export default {
             font-size: 0.3rem;
             border: 1px solid #fb4747;
             flex: 1;
+            height: 0.6rem;
             line-height: 0.6rem;
             text-align: center;
             box-sizing: border-box;
@@ -575,6 +576,7 @@ export default {
         border-radius: 1rem;
         input{
             float: left;
+            width: 3.5rem;
             margin-left: 0.2rem;
             margin-top: 0.1rem;
             font-size: 0.3rem;

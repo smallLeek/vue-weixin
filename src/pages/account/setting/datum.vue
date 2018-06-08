@@ -56,6 +56,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.datum{
+    padding-bottom: 1rem;
+}
 /* title */
 .title{
     margin: auto;
@@ -71,6 +74,7 @@ export default {
     z-index: 100;
     img{
         height: 0.5rem;
+        vertical-align: middle;
     }
     a{
         position: absolute;
