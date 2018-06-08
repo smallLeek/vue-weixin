@@ -4,7 +4,7 @@ import store from '../../vuex/store'
 
 
 /**
- * prototype设计模式
+ * 判断登陆
  * @param whereToGo
  * @param isNeedLogin
  * @param isNeedRealName
@@ -23,7 +23,6 @@ export  class AccessAuth{
   accessAuthWithNoDeal = function () {
     let result = true;
 
-    //判断需要登陆而没有登陆让他去登陆
     if(!(this.isNeedLogin && this.isLogin)){
       result = false;
       return result;
@@ -35,7 +34,9 @@ export  class AccessAuth{
     return result;
 
   };
-
+  isRealNameAuth =function(){
+    return true;
+  }
   accessAuth = function () {
     let result = true;
     if(!(this.isNeedLogin && this.isLogin())){
@@ -48,19 +49,26 @@ export  class AccessAuth{
     return result;
 
   };
+  dealRealName =function(){
 
+
+  }
   dealLogin = function () {
-    //tologin
-    if(this.isRealNameAuth && this.isRealNameAuth()){
-      //to whereToGo
-    }else{
-      dealRealName();
-      //
-      //不是---有可能需要到首页。。。 首页判断一遍
-      //也有可能是到哪去
+    if(!(this.isNeedLogin && this.isLogin)){
+      location.href = location.origin + "/wx/loginRegister"
     }
 
+    if(this.isRealNameAuth && this.isNeedRealName){
+      location.href = location.origin + this.whereToGo
+
+    }else{
+      this.dealRealName();
+
+    }
+
+
   };
+
 
 
 }

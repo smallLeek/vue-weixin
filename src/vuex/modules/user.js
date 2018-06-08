@@ -11,7 +11,9 @@ const state = {
   //用户的token
   tokenCode: null,
   //用户实名状态
-  isRealName: null
+  isRealName: null,
+  //实名的url
+  isRealNameUrl:null
 }
 
 const actions = {
@@ -55,7 +57,16 @@ const actions = {
   setIsRealName({commit}, res) {
     commit(types.SET_IS_REAL_NAME, res)
 
+  },
+  /**
+   * 新网实名URL
+   * @param commit
+   * @param res
+   */
+  setIsRealNameUrl({commit},res){
+    commit (types.SET_IS_REAL_NAME_URl,res)
   }
+
 
 }
 
@@ -63,7 +74,8 @@ const getters = {
   loginStatus: state => state.loginStatus,
   userInfo: state => state.userInfo,
   tokenCode: state => state.tokenCode,
-  isRealName: state => state.isRealName
+  isRealName: state => state.isRealName,
+  isRealNameUrl:state =>state.isRealNameUrl
 }
 
 const mutations = {
@@ -105,6 +117,15 @@ const mutations = {
   [types.SET_IS_REAL_NAME](state, status) {
     state.isRealName = status
   },
+  /**
+   * 新网实名URl
+   * @param state
+   * @param status
+   */
+  [types.SET_IS_REAL_NAME_URL](state, status) {
+    state.isRealNameUrl = status
+  },
+
 
 }
 

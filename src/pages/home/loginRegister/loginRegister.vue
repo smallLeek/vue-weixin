@@ -1,7 +1,6 @@
 <template>
     <div class="login">
         <div class="head">
-          {{loginStatus}}
             <div class="tab">
                 <span>手机登录</span>
                 <span>免费注册</span>
@@ -61,7 +60,7 @@ export default {
           // if(flag==true){
           //     this.login()
           // }
-        console.log(this.aa('/home',false,false))
+        console.log(this.accessAuth.setAccessAuthInstance('/home',true,true).dealLogin)
       },
       login() {
         let user_type="1";
