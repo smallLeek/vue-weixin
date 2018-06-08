@@ -96,6 +96,7 @@ export default {
             img{
                 width: 0.5rem;
                 margin-right: 0.1rem;
+                margin-top: -0.1rem;
                 vertical-align: middle;
             }
         }
@@ -139,6 +140,7 @@ export default {
         img{
             width: 0.5rem;
             margin-right: 0.1rem;
+            margin-top: -0.1rem;
             vertical-align: middle
         }
         span:first-child{
@@ -156,14 +158,17 @@ export default {
             ::-moz-placeholder {
                 font-size: 0.3rem;
                 color: #999999;
+                line-height: 0.35rem;
             }
             :-ms-input-placeholder {
                 font-size: 0.3rem;
                 color: #999999;
+                line-height: 0.35rem;
             }
             ::-webkit-input-placeholder {
                 font-size: 0.3rem;
                 color: #999999;
+                line-height: 0.35rem;
             }
         }
     }

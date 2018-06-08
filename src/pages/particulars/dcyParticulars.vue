@@ -1,5 +1,5 @@
 <template>
-    <div class="dcy">
+    <div class="dcy"  v-title="'定存盈'">
         <div class="title">
             <span>
                 <router-link to="/home">
@@ -554,6 +554,7 @@ export default {
             height: 0.5rem;
             line-height: 0.5rem;
             padding-right: 0.2rem; 
+            font-size: 0.3rem;
         }
     }
 }
@@ -586,16 +587,20 @@ export default {
         }
         ::-moz-placeholder {
             color: #999999;
+            line-height: 0.35rem;
         }
         :-ms-input-placeholder {
             color: #999999;
+            line-height: 0.35rem;
         }
         ::-webkit-input-placeholder {
             color: #999999;
+            line-height: 0.35rem;
         }
         span{
             float: right;
             margin-right: 0.2rem;
+            line-height: 0.6rem;
             font-size: 0.3rem;
             color: #333333;
         }

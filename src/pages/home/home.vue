@@ -89,7 +89,7 @@
   import phtYyyList from './yyyDcy/yyyList.vue';
   import phtDcyList from './yyyDcy/dcyList.vue';
   import phtBottomnav from '../../components/bottom/bottomnav.vue';
-  // import {textSwiper} from 'vux'
+  import {textSwiper} from 'vux'
   import {mapGetters, mapActions,mapState} from 'vuex'
   import {getUserInfo} from '../../assets/js/getUserInfo'
   import { phtServer } from '../../assets/js/phtServer'
@@ -112,7 +112,7 @@ export default {
     this.announcementList();
     this.dataStatistics();
     this.getUserInfo();
-
+    this.showMarquee(this.num)
   },
   computed:{
 
@@ -154,7 +154,7 @@ export default {
     phtTtyList,
     phtYyyList,
     phtDcyList,
-    // textSwiper
+    textSwiper
   }
 
 }
