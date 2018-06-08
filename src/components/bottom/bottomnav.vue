@@ -40,12 +40,16 @@ export default {
             // margin-top: 0.06rem;
             img{
                 height: 0.45rem;
+                vertical-align: middle;
             }
         }
         span:last-child{
             display: block;
             font-size: 0.24rem;
             // margin-top: 0.06rem;
+        }
+        a{
+            color: #666666;
         }
         a:hover{
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0);

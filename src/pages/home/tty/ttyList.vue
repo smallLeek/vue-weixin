@@ -68,7 +68,7 @@ export default {
 /* 专区 */
 .area_title{
     height: 1rem;
-    line-height: 1rem;
+    line-height: 0.7rem;
     margin-top: 0.2rem;
     background-color: #fff;
     border-top: 1px solid #e5e5e5;
@@ -111,14 +111,16 @@ export default {
             font-size: 0.28rem;
             color: #333333;
             margin-top: 0.2rem;
+            line-height: 1;
         }
         li:nth-child(2){
             display: flex;
+            line-height: 1;
             span{
                 flex: 1;
                 text-align: center;
                 font-size: 0.28rem;
-                margin-top: 0.4rem;
+                margin-top: 0.6rem;
                 color: #666666;
                 b{
                     font-family: 黑体;
@@ -129,7 +131,7 @@ export default {
             }
             span:first-child{
                 color: #fb4747;
-                margin-top: 0;
+                margin-top: 0.3rem;
                 font-size: 0.34rem;
                 b{
                     font-weight: 500;
@@ -153,11 +155,12 @@ export default {
             }
         }
         li:nth-child(4){
-            margin-top: 0.05rem;
+            margin-top: 0.24rem;
+            position: relative;
             span:first-child{
                 float: left;
                 margin-top: 0.16rem;
-                width: 82%;
+                width: 5.8rem;
                 height: 0.05rem;
                 background-color: #e8e8e8;
                 border-radius: 10px;
@@ -170,15 +173,16 @@ export default {
                 }
             }
             span:last-child{
-                float: right;
+                position: absolute;
                 color: #999999;
                 font-size: 0.24rem;
                 line-height: 0.4rem;
+                right: 0;
             }
         }
         li:nth-child(5){
             clear: both;
-            padding-top: 0.1rem;
+            padding-top: 0.3rem;
             padding-bottom: 0.3rem;
             a{
                 display: block;
