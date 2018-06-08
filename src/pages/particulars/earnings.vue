@@ -64,6 +64,7 @@ export default {
     z-index: 100;
     img{
         height: 0.5rem;
+        vertical-align: middle
     }
     a{
         position: absolute;
@@ -94,8 +95,8 @@ export default {
             border-bottom: 1px solid #e0e0e0;
             img{
                 width: 0.5rem;
-                margin-top: -0.15rem;
                 margin-right: 0.1rem;
+                vertical-align: middle;
             }
         }
         li:first-child{
@@ -137,8 +138,8 @@ export default {
         padding: 0 0.2rem;
         img{
             width: 0.5rem;
-            margin-top: -0.15rem;
             margin-right: 0.1rem;
+            vertical-align: middle
         }
         span:first-child{
             color: #999999
@@ -218,6 +219,7 @@ export default {
         border: 1px solid #e0e0e0;
         border-top: none;
         span:first-child{
+            float: left;
             margin-left: 0.2rem;
             font-size: 0.3rem;
             color: #333333;

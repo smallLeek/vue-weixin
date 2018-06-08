@@ -7,8 +7,8 @@
             <span>新闻</span>
         </div>
         <div class="news_content">
-          <div class="content">
-            <li v-html="content"></li>
+          <div class="content" v-html="content">
+            <!-- <li></li> -->
           </div>
         </div>
     </div>
@@ -24,6 +24,7 @@ export default {
 },
 
   mounted:function () {
+    $('.content p').css('background','#f8f8f8')
     this.getNoticeInfo()
     let _this=this;
     // 返回上一路由

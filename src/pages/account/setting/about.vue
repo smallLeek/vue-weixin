@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <span>官方网站</span>
-                    <span><a href="https://www.phtfdata.com">https://www.phtfdata.com</a></span>
+                    <span>https://www.phtfdata.com</span>
                 </li>
                 <li>
                     <span>企业全称</span>
@@ -57,6 +57,7 @@ export default {
     z-index: 100;
     img{
         height: 0.5rem;
+        vertical-align: middle;
     }
     a{
         position: absolute;
@@ -79,6 +80,7 @@ export default {
         padding-left: 0.2rem;
         background-color: #fff;
         li{
+            clear: both;
             height: 1rem;
             line-height: 1rem;
             padding-right: 0.2rem;
@@ -94,22 +96,10 @@ export default {
                 color: #999999;
             }
         }
-        li:nth-child(4){
-            span:last-child{
-                a{
-                    color: #999999;
-                }
-                a:hover{
-                    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-                    -webkit-user-select: none;
-                    -moz-user-focus: none;
-                    -moz-user-select: none;  
-                    text-decoration: none;
-                }
-            }
-        }
         li:first-child{
             span:last-child{
+                height: 1rem;
+                line-height: 1.2rem;
                 img{
                     height: 0.35rem;
                 }
