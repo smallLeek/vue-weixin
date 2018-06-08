@@ -12,11 +12,8 @@ import echarts from 'echarts';
 import wx from 'weixin-js-sdk'
 import VueScroller from 'vue-scroller'
 import './assets/css/swiper.css'
-<<<<<<< HEAD
-=======
 import './assets/js/jwt.accessAuth'
 
->>>>>>> 25e66bffa9ca6f946e4ae4c40ef9a721d9df79b8
 Vue.use(VueScroller)
 Vue.prototype.$echarts = echarts
 Vue.prototype.http =axios;
