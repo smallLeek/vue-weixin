@@ -11,7 +11,7 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-// var originalConfig = vuxLoader.merge(webpackConfig, { plugins: ['vux-ui'] })
+// module.exports = vuxLoader.merge(webpackConfig, { plugins: ['vux-ui'] })
 
 module.exports = {
   plugins: [

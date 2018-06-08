@@ -8,30 +8,22 @@
         </div>
         <div class="nav">
             <ul>
-                <router-link to="/datum">
-                    <li>
-                        <span><img src="../../../../static/images/setting/setting_datum.png"></span>
-                        <span>我的资料</span>
-                    </li>
-                </router-link>
-                <router-link to="">
-                    <li>
-                        <span><img src="../../../../static/images/setting/setting_risk.png"></span>
-                        <span>风险承受能力评估</span>
-                    </li>
-                </router-link>
-                <router-link to="">
-                    <li>
-                        <span><img src="../../../../static/images/setting/setting_security.png"></span>
-                        <span>安全保障</span>
-                    </li>
-                </router-link>
-                <router-link to="/about">
-                    <li>
-                        <span><img src="../../../../static/images/setting/setting_about.png"></span>
-                        <span>关于我们</span>
-                    </li>
-                </router-link>
+                <li>
+                    <span><img src="../../../../static/images/setting/setting_datum.png"></span>
+                    <span>我的资料</span>
+                </li>
+                <li>
+                    <span><img src="../../../../static/images/setting/setting_risk.png"></span>
+                    <span>风险承受能力评估</span>
+                </li>
+                <li>
+                    <span><img src="../../../../static/images/setting/setting_security.png"></span>
+                    <span>安全保障</span>
+                </li>
+                <li>
+                    <span><img src="../../../../static/images/setting/setting_about.png"></span>
+                    <span>关于我们</span>
+                </li>
             </ul>
         </div>
         <div class="exit">
@@ -88,10 +80,9 @@ export default {
     ul{
         padding: 0 0.17rem;
         margin-top: 1rem;
-        a{
-            float: left;
-            margin-top: 0.16rem;
             li{
+                float: left;
+                margin-top: 0.16rem;
                 width: 3.5rem;
                 height: 3.5rem;
                 background-color: #fff;
@@ -114,16 +105,8 @@ export default {
                     color: #333333;
                 }
             }
-        }
-        a:nth-child(2n){
+        li:nth-child(2n){
             margin-left: 0.16rem;
-        }
-        a:hover{
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            -webkit-user-select: none;
-            -moz-user-focus: none;
-            -moz-user-select: none;  
-            text-decoration: none;
         }
     }
 }
