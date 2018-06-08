@@ -213,7 +213,7 @@ export const api_url_tradAllRecordDetail = origin_ProxyPath_pds + "/pdsInvset/" 
 export const api_url_queryProjDetail = origin_ProxyPath_pds + "/pdsInvset/" + version + "/queryProjDetail/" + version;
 //定期详情页投资记录
 export const api_url_queryInvestedListApp = origin_ProxyPath_pds + "/pdsInvset/" + version + "/queryInvestedListApp/" + version;
-//2.33.首页功能接口-推荐项目接口-天天盈(在投/售罄)-月月盈(在投/售罄)-定存赢（再投/售罄）
+//首页功能接口-推荐项目接口-天天盈(在投/售罄)-月月盈(在投/售罄)-定存赢（再投/售罄）
 export const api_url_selectHomePageRecommendAll = origin_ProxyPath_pds + "/query/" + version + "/selectHomePageRecommendAll/" + version;
 //理财项目-售罄-列表接口 月月盈
 export const api_url_selectMoneyManagementSQy = origin_ProxyPath_pds + "/query/" + version + "/selectMoneyManagementSQy/" + version;

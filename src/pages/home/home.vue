@@ -1,5 +1,5 @@
 <template>
-  <div class="home"  v-title="'融资'">
+  <div class="home"  v-title="'首页'">
     <!-- loading -->
     <pht-modal v-show=show></pht-modal>
     <pht-loading v-show=show></pht-loading>

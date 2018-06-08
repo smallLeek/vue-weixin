@@ -1,5 +1,5 @@
 <template>
-    <div class="account" v-title="'融资'">
+    <div class="account" v-title="'账户信息'">
         <!-- 资产 -->
         <div class="asset">
             <div class="asset_top">
@@ -97,7 +97,7 @@ export default {
   methods:{
 
   },
-  
+
   components: {
     phtBottomnav
   }
