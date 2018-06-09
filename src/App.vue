@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <div class="xwUrl"></div>
     <modal></modal>
     <alert></alert>
     <keep-alive>
     <router-view></router-view>
     </keep-alive>
+    <div class="xwUrl"></div>
   </div>
 </template>
 
