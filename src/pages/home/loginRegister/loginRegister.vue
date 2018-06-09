@@ -1,7 +1,6 @@
 <template>
     <div class="login">
         <div class="head">
-          {{loginStatus}}
             <div class="tab">
                 <span>手机登录</span>
                 <span>免费注册</span>
@@ -56,12 +55,11 @@ export default {
     methods: {
       ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode'}),
       submit() {
-          // let flag=false;
-          // flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
-          // if(flag==true){
-          //     this.login()
-          // }
-        console.log(this.aa('/home',false,false))
+           let flag=false;
+           flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
+           if(flag==true){
+               this.login()
+           }
       },
       login() {
         let user_type="1";
