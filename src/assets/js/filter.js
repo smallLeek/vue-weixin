@@ -72,4 +72,11 @@ Vue.filter('farmatAmount', function(amount) {
   }
   return result;
 })
+Vue.filter('farmatBankcode', function (str) {
+  if(( typeof str ) != "string"){
+    return
+  }
+  let len = str.length;
+  return str.substring(len-4);
+})
 

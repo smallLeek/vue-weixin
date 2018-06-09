@@ -34,6 +34,19 @@ function newAccountDataForApp(CUST_ID, CUST_TYPE) {
     "CUST_TYPE": CUST_TYPE
   }))
 }
+
+/**
+ *新网银行卡信息查询  充值限额说明
+ * @param BIND_TYPE 绑卡类型
+ * @param PAY_FLAG 支付标识
+ * @returns {*}
+ */
+function selectXwBank(BIND_TYPE, PAY_FLAG) {
+  return phtServer.globalPostData(urls.api_url_selectXwBank, phtServer.submitData({
+    "BIND_TYPE": BIND_TYPE,
+    "PAY_FLAG": PAY_FLAG
+  }))
+}
 /**
  * 登录
  * @param LOGIN_CODE
