@@ -55,11 +55,11 @@ export default {
     methods: {
       ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode'}),
       submit() {
-          let flag=false;
-          flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
-          if(flag==true){
-              this.login()
-          }
+           let flag=false;
+           flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
+           if(flag==true){
+               this.login()
+           }
       },
       login() {
         let user_type="1";

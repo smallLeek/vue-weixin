@@ -34,14 +34,14 @@
       </div>
       <b class="shuxian"></b>
       <div class="news_content">
-        <ul>
-          <li v-for="(item,index) in announcement" :key="index">
+        <swiper auto height="20px" direction="vertical" :interval=2500 class="text-scroll newsSwiper" :show-dots="false">
+          <swiper-item class="newsSwipers" v-for="(item,index) in announcement" :key="index">
             <router-link :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}">
               <img src="../../../static/images/home/home_announcement_sign.png">
               <span v-text="item.NOTICE_TITLE"></span>
             </router-link>
-          </li>
-        </ul>
+          </swiper-item>
+        </swiper>
       </div>
     </div>
     <!-- 天天盈专区 -->
@@ -92,8 +92,10 @@
   import {mapGetters, mapActions,mapState} from 'vuex'
   import {getUserInfo} from '../../assets/js/getUserInfo'
   import { phtServer } from '../../assets/js/phtServer'
+  import { Swiper,SwiperItem } from 'vux'
   import '../../assets/js/filter'
   import * as apis from '../../assets/js/jwt.apis'
+import { setTimeout } from 'timers';
 export default {
    data () {
     return {
@@ -106,6 +108,10 @@ export default {
 },
 
   mounted:function () {
+
+    setTimeout(function(){
+      $('.vux-swiper').css('height',parseInt($('.vux-swiper').css('height'))*2+'px')
+    },10)
     $('.bottom li:first-child img').attr('src',require('../../../static/images/homeOn.png'))
     $('.bottom li:first-child').addClass('on')
     this.announcementList();
@@ -150,6 +156,8 @@ export default {
     phtTtyList,
     phtYyyList,
     phtDcyList,
+    Swiper,
+    SwiperItem
   }
 
 }

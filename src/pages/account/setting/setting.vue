@@ -12,7 +12,7 @@
                     <span><img src="../../../../static/images/setting/setting_datum.png"></span>
                     <span>我的资料</span>
                 </li>
-                <li>
+                <li v-on:click="goRisk()">
                     <span><img src="../../../../static/images/setting/setting_risk.png"></span>
                     <span>风险承受能力评估</span>
                 </li>
@@ -35,8 +35,39 @@
     </div>
 </template>
 <script>
+  import { phtServer } from '../../../assets/js/phtServer'
+  import * as apis from '../../../assets/js/jwt.apis'
+  import {mapGetters, mapActions,mapState} from 'vuex'
 export default {
+  data() {
+    return {
 
+    }
+  },
+  computed:{
+    ...mapGetters([
+      'loginStatus','userInfo','tokenCode'
+    ])
+  },
+  methods:{
+    //去风险承受能力评估
+    goRisk() {
+      let userId = this.userInfo.ID;
+      let userType = this.userInfo.USER_TYPE;
+      apis.userBaseData(userId,userType).then( (data) => {
+        this.userData = data.result.main_data;
+        let investscore = this.userData.INVESTSCORE;
+        let invest_score = this.userData.INVEST_SCORE;
+        if (investscore == "0") {
+          let url = 'http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID=' + userId;
+          window.location.href = url;
+        } else{
+          let url = 'http://139.129.12.93:3102/web2/hander/investorResult.do?CUST_ID=' + userId + '&INVEST_SCORE=' + invest_score;
+          window.location.href = url;
+        }
+      })
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
