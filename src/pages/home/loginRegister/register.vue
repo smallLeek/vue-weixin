@@ -62,7 +62,7 @@ export default {
 
     methods: {
         verification(){
-            var time1=10;
+            var time1=60;
             var verification=setInterval(function(){
                 $('#verificationBtn').val(time1+"S后重发")
                 $('#verificationBtn').addClass('on')
@@ -74,7 +74,7 @@ export default {
                   $('#verificationBtn').removeClass('on')
                   clearInterval(verification);
                 }
-            },6000)
+            },1000)
         }
     }
 }
