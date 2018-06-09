@@ -268,7 +268,32 @@ phtServer.onMenuShareAppMessage =function () {
 
     }
   });
-
 }
+/**
+ * 银行卡后四位
+ * @param str
+ * @returns {string}
+ */
+phtServer.farmatBankcode = function (str) {
+  if(( typeof str ) != "string"){
+    return
+  }
+  let len = str.length;
+  return str.substring(len-4);
+}
+/**
+ * 金额只能输入两位小数
+ * @param obj
+ */
+phtServer.clearNoNum = function (obj){
+  obj.value = obj.value.replace(/[^\d.]/g,"");
+  obj.value = obj.value.replace(/\.{2,}/g,".");
+  obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+  obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');
+  if(obj.value.indexOf(".")< 0 && obj.value !=""){
+    obj.value= parseFloat(obj.value);
+  }
+}
+
 
 export {phtServer}
