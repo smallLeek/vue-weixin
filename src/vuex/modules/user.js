@@ -13,7 +13,8 @@ const state = {
   //用户实名状态
   isRealName: null,
   //实名的url
-  isRealNameUrl:null
+  isRealNameUrl:null,
+
 }
 
 const actions = {
@@ -64,7 +65,7 @@ const actions = {
    * @param res
    */
   setIsRealNameUrl({commit},res){
-    commit (types.SET_IS_REAL_NAME_URl,res)
+    commit (types.SET_XW_URL,res)
   }
 
 
@@ -122,7 +123,7 @@ const mutations = {
    * @param state
    * @param status
    */
-  [types.SET_IS_REAL_NAME_URL](state, status) {
+  [types.SET_XW_URL](state, status) {
     state.isRealNameUrl = status
   },
 
