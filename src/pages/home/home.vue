@@ -138,8 +138,6 @@ export default {
 
     getUserInfo() {
 
-//      getUserInfo.getCode()
-
 
     }
   },
