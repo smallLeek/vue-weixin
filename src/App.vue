@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="xwUrl"></div>
     <modal></modal>
     <alert></alert>
     <keep-alive>

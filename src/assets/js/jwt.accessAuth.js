@@ -49,10 +49,16 @@ export  class AccessAuth{
     return result;
 
   };
+  /**
+   * 处理实名
+   */
   dealRealName =function(){
 
 
   }
+  /**
+   * 处理登陆实名逻辑
+   */
   dealLogin = function () {
     if(!(this.isNeedLogin && this.isLogin)){
       location.href = location.origin + "/wx/loginRegister"
@@ -74,7 +80,9 @@ export  class AccessAuth{
 }
 
 
-
+/**
+ * 创建类
+ */
 export class AccessAuthInstanceUtil{
 
   constructor() {
