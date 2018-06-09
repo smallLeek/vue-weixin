@@ -4,11 +4,12 @@ var webpack = require("webpack");
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
+const vuxLoader = require('vux-loader')
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
-module.exports = {
+const webpackConfig = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('common.js'),
     new webpack.ProvidePlugin({
@@ -36,7 +37,7 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json', '.less'],
+    extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
@@ -85,3 +86,5 @@ module.exports = {
     ]
   }
 }
+
+module.exports = vuxLoader.merge(webpackConfig, { plugins: ['vux-ui'] })
