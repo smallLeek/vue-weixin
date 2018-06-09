@@ -12,27 +12,34 @@
                 <ul>
                     <li>
                         <span><img src="../../../../static/images/login/login_num.png"></span>
-                        <span><input id="phonenum" type="text" placeholder="请输入您的手机号"></span>
+                        <span><input id="phonenum" type="text" placeholder="请输入您的手机号" maxlength="11"></span>
                         <span><img src="../../../../static/images/login/login_close.png"><input id="verificationBtn" @click="verification()" type="button" value="获取验证码"></span>
                     </li>
                     <li>
                         <span><img src="../../../../static/images/login/login_verification.png"></span>
-                        <span><input type="text" placeholder="短信验证码"></span>
+                        <span><input type="text" placeholder="短信验证码" maxlength="6"></span>
                     </li>
                     <li>
                         <span><img src="../../../../static/images/login/login_password.png"></span>
-                        <span><input type="password" placeholder="6~18位数字或字母为登陆密码"></span>
+                        <span><input type="password" placeholder="6~18位数字或字母为登陆密码" maxlength="18"></span>
                     </li>
                     <li>
                         <span><img src="../../../../static/images/login/login_password.png"></span>
-                        <span><input type="password" placeholder="请再次输入以上登陆密码"></span>
+                        <span><input type="password" placeholder="请再次输入以上登陆密码" maxlength="18"></span>
                     </li>
                 </ul>
                 <p>
                   <span><img src="../../../../static/images/login/login_recommend.png"></span>
                   <span><input type="text" placeholder="如您有推荐人，请输入手机号（选填）"></span>
                 </p>
-                <h1><span id="selectBtn"><img id="selectImg" class="on" src="../../../../static/images/login/login_selectOn.png">阅读并同意</span><a href="javascript:;">《注册协议》</a>
+                <h1>
+                  <span  v-if="registerAgree">
+                    <img class="on" src="../../../../static/images/login/login_selectOn.png" >阅读并同意
+                  </span>
+                  <span  v-if="!registerAgree">
+                    <img class="on" src="../../../../static/images/login/login_select.png" >阅读并同意
+                  </span>
+                  <a href="javascript:;">《注册协议》</a>
                 </h1>
                 <input class="submit" type="button" value="提交">
             </div>
@@ -46,37 +53,38 @@ import { phtServer } from '../../../assets/js/phtServer'
 import {mapGetters, mapActions,mapState} from 'vuex'
 import { setInterval, setTimeout } from 'timers';
 export default {
-    mounted(){
-        $('#selectBtn').click(function(){
-            let btnclass=document.getElementById('selectImg').className
-            if(btnclass=='on'){
-                $('#selectImg').attr('src',require('../../../../static/images/login/login_select.png'))
-                $('#selectImg').removeClass('on')
-            }else{
-                $('#selectImg').attr('src',require('../../../../static/images/login/login_selectOn.png'))
-                $('#selectImg').addClass('on')
-            }
-        })
-
-    },
-
-    methods: {
-        verification(){
-            var time1=60;
-            var verification=setInterval(function(){
-                $('#verificationBtn').val(time1+"S后重发")
-                $('#verificationBtn').addClass('on')
-                $("#verificationBtn").attr("disabled", true);
-                time1--
-                if (time1 < 0) {
-                    $("#verificationBtn").attr("disabled", false);
-                  $("#verificationBtn").val("获取验证码");
-                  $('#verificationBtn').removeClass('on')
-                  clearInterval(verification);
-                }
-            },1000)
-        }
+  data() {
+    return{
+      registerMobile:'',
+      registerCode:'',
+      registerPwd:'',
+      registerRepwd: '',
+      registerRefmobile: '',
+      registerAgree:true
     }
+  },
+  mounted(){
+
+  },
+
+  methods: {
+    //发送短信验证码
+      verification(){
+          var time1=60;
+          var verification=setInterval(function(){
+              $('#verificationBtn').val(time1+"S后重发")
+              $('#verificationBtn').addClass('on')
+              $("#verificationBtn").attr("disabled", true);
+              time1--
+              if (time1 < 0) {
+                  $("#verificationBtn").attr("disabled", false);
+                $("#verificationBtn").val("获取验证码");
+                $('#verificationBtn').removeClass('on')
+                clearInterval(verification);
+              }
+          },1000)
+      }
+  }
 }
 </script>
 <style lang="less" scoped>
