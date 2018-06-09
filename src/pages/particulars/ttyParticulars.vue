@@ -1,5 +1,5 @@
 <template>
-    <div class="tty">
+    <div class="tty"  v-title="'天天盈'">
         <div class="title">
             <router-link to="/home">
                 <img src="../../../static/images/goBack.png">
@@ -95,9 +95,7 @@ export default {
         }
     },
     mounted(){
-        $('.input_text').click(function(){
-            $('.bottom_input').css('bottom','4.68rem')
-        })
+
     }
 }
 </script>
@@ -293,16 +291,20 @@ export default {
         }
         ::-moz-placeholder {
             color: #999999;
+            line-height: 0.35rem;
         }
         :-ms-input-placeholder {
             color: #999999;
+            line-height: 0.35rem;
         }
         ::-webkit-input-placeholder {
             color: #999999;
+            line-height: 0.35rem;
         }
         span{
             float: right;
             margin-right: 0.2rem;
+            line-height: 0.6rem;
             font-size: 0.3rem;
             color: #333333;
         }

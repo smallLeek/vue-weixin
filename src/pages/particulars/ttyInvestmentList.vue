@@ -114,6 +114,7 @@ export default {
     z-index: 100;
     img{
         height: 0.5rem;
+        vertical-align: middle;
     }
     a{
         position: absolute;
@@ -155,6 +156,7 @@ h1{
 .list{
     margin-top: 1.8rem;
     ul{
+        background-color: #fff;
         li{
             font-family: 黑体;
             height: 1.2rem;

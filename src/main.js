@@ -17,12 +17,7 @@ Vue.use(VueScroller)
 Vue.prototype.$echarts = echarts
 Vue.prototype.http =axios;
 Vue.prototype.bs =new Vue();
-
-
-
 Vue.prototype.accessAuth = new AccessAuthInstanceUtil();
-
-
 Vue.config.productionTip = false;
 new Vue({
   el: '#app',
