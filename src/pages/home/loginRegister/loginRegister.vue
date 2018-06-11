@@ -67,10 +67,17 @@ export default {
         let password = phtServer.CalcuMD5lower($('#password').val());
         let pwd =phtServer.CalcuMD5lower($('#password').val());
         apis.newLogin(phonenum, password, user_type).then((data) => {
-          console.log(data)
-          this.setUserInfo(data.result.main_data.data[0]);
-          this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token);
-          this.$router.push({ path: "/home" })
+          if(data.status =='6027'){
+            regexfun.handleFailMsg(this,data.message)
+          }else if (data.status=='6026'){
+            regexfun.handleFailMsg(this,data.message)
+          }else {
+            this.setUserInfo(data.result.main_data.data[0]);
+            this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token);
+            console.log(this.accessAuth.setAccessAuthInstance("/home",true,true))
+            console.log(this.accessAuth.getAccessAuthInstance())
+          }
+
         })
       }
     }

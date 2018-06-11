@@ -1,7 +1,7 @@
 
 //获取用户状态
 import store from '../../vuex/store'
-import * as apis from '../../assets/js/jwt.apis'
+import * as apis from './jwt.apis'
 import { phtServer } from '../../assets/js/phtServer'
 
 
@@ -51,13 +51,7 @@ export  class AccessAuth{
     return result;
 
   };
-  /**
-   * 处理实名
-   */
-  dealRealName =function(){
 
-
-  }
   /**
    * 处理登陆实名逻辑
    */
@@ -76,6 +70,19 @@ export  class AccessAuth{
 
 
   };
+  /**
+   * 处理实名
+   */
+  dealRealName =function (){
+    let userInfoList = store.state.user.userInfo
+    console.log(userInfoList)
+    apis.xwbankWebNotify(userInfoList.YJF_ID,userInfoList.USER_TYPE,userInfoList.USER_ROLE,userInfoList.ID,userInfoList.USER_TYPE).then((data) => {
+      //$('.xwUrl').append(data.result.main_data.url)
+
+    })
+
+  }
+
 
 
 

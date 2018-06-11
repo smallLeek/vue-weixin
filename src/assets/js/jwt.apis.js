@@ -227,13 +227,13 @@ export  {
   getBanner,
   queryMainPageTotalData,
   queryNewAddPersonAsync,
-  getNotice,
   getDataStatistics,
   recommendedProject,
   getNoticeInfo,
   newLogin,
   indexNotice,
   userBaseData,
-  newAccountDataForApp
+  newAccountDataForApp,
+  xwbankWebNotify
 }
 

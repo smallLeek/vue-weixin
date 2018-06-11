@@ -7,7 +7,7 @@ import regexConfig from './config/regex.config'
  * @param vue
  * @param msg
  */
-function handleFailMsg(vue,msg) {
+export function handleFailMsg(vue,msg) {
   vue.bs.$emit('e:alert',msg);
 }
 
