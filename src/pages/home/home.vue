@@ -143,8 +143,7 @@ export default {
     },
 
     getUserInfo() {
-
-//      getUserInfo.getCode()
+      //console.log($('.xwUrl').append('<h1>11111</h1>'))
 
 
     }

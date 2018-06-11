@@ -34,6 +34,19 @@ function newAccountDataForApp(CUST_ID, CUST_TYPE) {
     "CUST_TYPE": CUST_TYPE
   }))
 }
+
+/**
+ *新网银行卡信息查询  充值限额说明
+ * @param BIND_TYPE 绑卡类型
+ * @param PAY_FLAG 支付标识
+ * @returns {*}
+ */
+function selectXwBank(BIND_TYPE, PAY_FLAG) {
+  return phtServer.globalPostData(urls.api_url_selectXwBank, phtServer.submitData({
+    "BIND_TYPE": BIND_TYPE,
+    "PAY_FLAG": PAY_FLAG
+  }))
+}
 /**
  * 登录
  * @param LOGIN_CODE
@@ -120,12 +133,11 @@ function sendMessageMobileValidCode(MOBILE,USER_TYPE,VALID_TYPE) {
  * @param TRUSTEE_TYPE
  * @param redirectUrl
  */
-function newAddPersonXW(MOBILE,LOGIN_CODE,PASSWORD,NEWPASSWORD,MOBILE_VER_CODE,RECO_TEL,CHANNEL,ASSURE_COMPANY,USER_ROLE,TRUSTEE_ID,TRUSTEE_TYPE,redirectUrl) {
+function newAddPersonXW(MOBILE,LOGIN_CODE,PASSWORD,MOBILE_VER_CODE,RECO_TEL,CHANNEL,ASSURE_COMPANY,USER_ROLE,TRUSTEE_ID,TRUSTEE_TYPE,redirectUrl) {
   return phtServer.globalPostData(urls.api_url_newAddPersonXW, phtServer.submitData({
     "MOBILE": MOBILE,
     "LOGIN_CODE": LOGIN_CODE,
     "PASSWORD": PASSWORD,
-    "NEWPASSWORD": NEWPASSWORD,
     "MOBILE_VER_CODE": MOBILE_VER_CODE,
     "RECO_TEL": RECO_TEL,
     "CHANNEL": CHANNEL,
@@ -147,14 +159,14 @@ function newAddPersonXW(MOBILE,LOGIN_CODE,PASSWORD,NEWPASSWORD,MOBILE_VER_CODE,R
  * @param RECO_TEL
  * @constructor
  */
-function XWnewAddPerson(MOBILE,LOGIN_CODE,PASSWORD,NEWPASSWORD,MOBILE_VER_CODE,RECO_TEL) {
+function XWnewAddPerson(MOBILE,LOGIN_CODE,PASSWORD,MOBILE_VER_CODE,RECO_TEL,redirectUrl) {
   return phtServer.globalPostData(urls.api_url_newAddPersonXW, phtServer.submitData({
     "MOBILE": MOBILE,
     "LOGIN_CODE": LOGIN_CODE,
     "PASSWORD": PASSWORD,
-    "NEWPASSWORD": NEWPASSWORD,
     "MOBILE_VER_CODE": MOBILE_VER_CODE,
     "RECO_TEL": RECO_TEL,
+    "redirectUrl": redirectUrl
   }))
 
 }
@@ -188,6 +200,24 @@ function queryNewAddPersonAsync(REQUEST_NO,METHOD_NAME) {
     "METHOD_NAME": METHOD_NAME,
   }))
 
+}
+
+/**
+ * 激活用户
+ * @param platformUserNo
+ * @param cust_type
+ * @param userRole
+ * @param USER_ID
+ * @param USER_TYPE
+ */
+function xwbankWebNotify (platformUserNo, cust_type, userRole, USER_ID, USER_TYPE) {
+  return phtServer.globalPostData(urls.api_url_activateStockedUser, phtServer.submitData({
+    "platformUserNo": platformUserNo,
+    "cust_type": cust_type,
+    "userRole":userRole,
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE
+  }))
 }
 
 export  {
