@@ -138,13 +138,6 @@ export default {
             top: 0.25rem;
             height: 0.5rem;
         }
-        a:hover{
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            -webkit-user-select: none;
-            -moz-user-focus: none;
-            -moz-user-select: none;  
-            text-decoration: none;
-        }
     }
     span:first-child{
         width: 25%;
@@ -267,13 +260,6 @@ export default {
             }
         }
     }
-    a:hover{
-        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-        -webkit-user-select: none;
-        -moz-user-focus: none;
-        -moz-user-select: none;  
-        text-decoration: none;
-    }
     a:first-child{
         float: left;
     }
@@ -321,13 +307,6 @@ export default {
             margin-right: 0.3rem;
         }
     }
-    a:hover{
-        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-        -webkit-user-select: none;
-        -moz-user-focus: none;
-        -moz-user-select: none;  
-        text-decoration: none;
-    }
     a:first-child{
         margin: 0
     }
@@ -343,13 +322,6 @@ export default {
         font-size: 0.34rem;
         text-align: center;
         border-radius: 1rem;
-    }
-    a:hover{
-        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-        -webkit-user-select: none;
-        -moz-user-focus: none;
-        -moz-user-select: none;  
-        text-decoration: none;
     }
     a:first-child{
         float: left;

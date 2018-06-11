@@ -128,13 +128,6 @@ export default {
         left: 0;
         top: -0.02rem
     }
-    a:hover{
-        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-        -webkit-user-select: none;
-        -moz-user-focus: none;
-        -moz-user-select: none;  
-        text-decoration: none;
-    }
 }
 .fund{
     margin-top: 1rem;
@@ -215,13 +208,6 @@ export default {
             a{
                 display: block;
                 height: 0.9rem;
-            }
-            a:hover{
-                -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-                -webkit-user-select: none;
-                -moz-user-focus: none;
-                -moz-user-select: none;  
-                text-decoration: none;
             }
         }
         li:last-child{
@@ -326,13 +312,6 @@ export default {
             font-size: 0.32rem;
             text-align: center;
             background-color: #ffae00;
-        }
-        a:hover{
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            -webkit-user-select: none;
-            -moz-user-focus: none;
-            -moz-user-select: none;  
-            text-decoration: none;
         }
         .end{
             background-color: #bbbbbb;
