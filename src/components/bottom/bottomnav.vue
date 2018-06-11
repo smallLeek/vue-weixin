@@ -22,7 +22,7 @@ export default {
 .bottom{
     display: flex;
     position: fixed;
-    z-index: 100;
+    z-index: 10000;
     bottom: 0;
     margin: auto;
     width: 7.5rem;
@@ -50,13 +50,6 @@ export default {
         }
         a{
             color: #666666;
-        }
-        a:hover{
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            -webkit-user-select: none;
-            -moz-user-focus: none;
-            -moz-user-select: none;
-            text-decoration: none;
         }
     }
     li.on a{

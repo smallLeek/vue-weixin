@@ -33,6 +33,9 @@
           <router-link :to="{path: 'ttyParticulars', query: {  name: 'home',id: item.PROJ_CODE}}">立即投资</router-link>
         </li>
       </ul>
+      <ul class="noProject" v-show="false">
+          <img src="../../../../static/images/home/noProject.png">
+      </ul>
     </div>
     </div>
 </template>
@@ -88,24 +91,10 @@ export default {
             margin-right: 0.3rem;
         }
     }
-    a:hover{
-        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-        -webkit-user-select: none;
-        -moz-user-focus: none;
-        -moz-user-select: none;
-        text-decoration: none
-    }
   }
 .tty_area
 {
   background-color: #fff;
-  a:hover{
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    -webkit-user-select: none;
-    -moz-user-focus: none;
-    -moz-user-select: none;
-    text-decoration: none
-}
   ul{
         li:first-child{
             font-size: 0.28rem;
@@ -196,17 +185,19 @@ export default {
                 text-align: center;
                 margin: auto;
             }
-            a:hover{
-                -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-                -webkit-user-select: none;
-                -moz-user-focus: none;
-                -moz-user-select: none;
-                text-decoration: none;
-            }
             a:active{
                 background-color: #de2626;
             }
         }
+  }
+  ul.noProject{
+      text-align: center;
+      height: 2.4rem;
+      line-height: 2.4rem;
+      img{
+          width: 3rem;
+          vertical-align: middle
+      }
   }
 }
 .tty_area ul{

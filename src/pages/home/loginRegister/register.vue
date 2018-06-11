@@ -62,8 +62,8 @@ export default {
 
     methods: {
         verification(){
-            var time1=60;
-            var verification=setInterval(function(){
+            let time1=60;
+            window.verification=setInterval(function(){
                 $('#verificationBtn').val(time1+"S后重发")
                 $('#verificationBtn').addClass('on')
                 $("#verificationBtn").attr("disabled", true);
@@ -72,7 +72,7 @@ export default {
                     $("#verificationBtn").attr("disabled", false);
                   $("#verificationBtn").val("获取验证码");
                   $('#verificationBtn').removeClass('on')
-                  clearInterval(verification);
+                  clearInterval(window.verification);
                 }
             },1000)
         }
@@ -191,6 +191,7 @@ export default {
               }
               span:last-child{
                 float: right;
+                height: 0.5rem;
                 line-height: 0.5rem;
                 margin-top: 0.175rem;
                 margin-right: 0.2rem;

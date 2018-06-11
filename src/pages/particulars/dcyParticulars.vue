@@ -166,14 +166,14 @@
                 <p>已投资6笔，投资总额66,700元</p>
             </div>
         </div>
-        <div class="bottom_input">
-            <div class="input_text">
+        <div class="bottom_input bottom_inputOn">
+            <div class="input_text" :style="{display:'none'}">
                 <input type="number" placeholder="投资金额">
                 <span>元</span>
             </div>
-            <div class="input_submit">
-                <!-- <router-link to="">立即投资</router-link> -->
-                <router-link to="" class="end">已售罄</router-link>
+            <div class="input_submit":style="{margin:'auto'},{width:'7.5rem'}">
+                <router-link to="" v-show="false">立即投资</router-link>
+                <router-link to="" v-show="true" class="end" :style="{width:'7.5rem'}">已售罄</router-link>
             </div>
         </div>
     </div>
@@ -215,13 +215,6 @@ export default {
             left: 0.2rem;
             top: 0.25rem;
             height: 0.5rem;
-        }
-        a:hover{
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            -webkit-user-select: none;
-            -moz-user-focus: none;
-            -moz-user-select: none;  
-            text-decoration: none;
         }
     }
     span:first-child{
@@ -384,13 +377,6 @@ export default {
             }
             a{
                 display: block
-            }
-            a:hover{
-                -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-                -webkit-user-select: none;
-                -moz-user-focus: none;
-                -moz-user-select: none;  
-                text-decoration: none;
             }
         }
     }
@@ -622,13 +608,6 @@ export default {
             font-size: 0.32rem;
             text-align: center;
             background-color: #ffae00;
-        }
-        a:hover{
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            -webkit-user-select: none;
-            -moz-user-focus: none;
-            -moz-user-select: none;  
-            text-decoration: none;
         }
         .end{
             background-color: #bbbbbb;

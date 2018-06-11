@@ -75,5 +75,16 @@ body{
   float: right;
 }
 
+/* 清除IOS默认input样式 */
+input{
+  -webkit-appearance:none;
+}
 
-
+/* 清除a标签点击样式 */
+a:hover{
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-user-select: none;
+  -moz-user-focus: none;
+  -moz-user-select: none;  
+  text-decoration: none;
+}
