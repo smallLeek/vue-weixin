@@ -154,16 +154,46 @@
         margin-right: 0.3rem;
       }
     }
+    a:hover {
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      -webkit-user-select: none;
+      -moz-user-focus: none;
+      -moz-user-select: none;
+      text-decoration: none
+    }
   }
-.tty_area
-{
-  background-color: #fff;
-  ul{
-        li:first-child{
-            font-size: 0.28rem;
-            color: #333333;
-            margin-top: 0.2rem;
-            line-height: 1;
+
+  .tty_area {
+    background-color: #fff;
+    a:hover {
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      -webkit-user-select: none;
+      -moz-user-focus: none;
+      -moz-user-select: none;
+      text-decoration: none
+    }
+    ul {
+      li:first-child {
+        font-size: 0.28rem;
+        color: #333333;
+        margin-top: 0.2rem;
+        line-height: 1;
+      }
+      li:nth-child(2) {
+        display: flex;
+        line-height: 1;
+        span {
+          flex: 1;
+          text-align: center;
+          font-size: 0.28rem;
+          margin-top: 0.6rem;
+          color: #666666;
+          b {
+            font-family: 黑体;
+            font-weight: 500;
+            font-size: 0.4rem;
+            color: #333333
+          }
         }
         span:first-child {
           color: #fb4747;
@@ -189,25 +219,31 @@
           font-size: 0.24rem;
           line-height: 0.35rem;
         }
-        li:nth-child(5){
-            clear: both;
-            padding-top: 0.3rem;
-            padding-bottom: 0.3rem;
-            a{
-                display: block;
-                color: #fff;
-                font-size: 0.3rem;
-                width: 5.4rem;
-                height: .7rem;
-                line-height: .7rem;
-                border-radius: 1rem;
-                background-color: #fb4747;
-                text-align: center;
-                margin: auto;
-            }
-            a:active{
-                background-color: #de2626;
-            }
+      }
+      li:nth-child(4) {
+        margin-top: 0.24rem;
+        position: relative;
+        span:first-child {
+          float: left;
+          margin-top: 0.16rem;
+          width: 6rem;
+          height: 0.05rem;
+          background-color: #e8e8e8;
+          border-radius: 10px;
+          s {
+            float: left;
+            width: 50%;
+            height: 100%;
+            border-radius: 10px;
+            background-color: #fb4747;
+          }
+        }
+        span:last-child {
+          position: absolute;
+          color: #999999;
+          font-size: 0.24rem;
+          line-height: 0.4rem;
+          right: 0;
         }
       }
       li:nth-child(5) {
@@ -232,18 +268,9 @@
         }
       }
     }
-  
-  ul.noProject{
-      text-align: center;
-      height: 2.4rem;
-      line-height: 2.4rem;
-      img{
-          width: 3rem;
-          vertical-align: middle
-      }
   }
 
-.tty_area ul{
+  .tty_area ul {
     padding-left: 0.3rem;
     padding-right: 0.4rem;
     border-bottom: 1px solid #e5e5e5;
