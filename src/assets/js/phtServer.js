@@ -116,8 +116,8 @@ phtServer.submitData =function (params) {
   let submitData ={};
   submitData.header ={
     "clientid": "",
-    "device": "pc",
-    "platform": "web",
+    "device": "weixin",
+    "platform": "WEIXIN",
     "projectid": "project_platform",
     "version": "1.0"
   }

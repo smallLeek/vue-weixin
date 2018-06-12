@@ -3,7 +3,7 @@ import {phtServer} from '../../assets/js/phtServer'
 
 const state = {
   // 用户登录状态
-  loginStatus: JSON.parse(phtServer.getStore('loginStatus')) || false,
+  loginStatus: phtServer.getStore('loginStatus')|| false,
   // 用户登录信息
   userInfo: JSON.parse(phtServer.getStore('userInfo')) || {},
   // 用户数据信息
@@ -14,6 +14,8 @@ const state = {
   isRealName: null,
   //实名的url
   isRealNameUrl:null,
+  //判断是否需要登陆是否需要实名然后然后去哪
+  accessAuth:JSON.parse(phtServer.getStore('accessAuth')) || {},
 
 }
 
@@ -25,7 +27,7 @@ const actions = {
    *
    */
   setUserInfo({commit}, res) {
-    phtServer.setStore('userInfo', JSON.stringify(res))
+    phtServer.setStore('userInfo', res)
     phtServer.setStore('loginStatus', true)
     //要唤醒一个 mutation handler，你需要以相应的 type 调用 store.commit 方法：
     commit(types.SET_USER_INFO, res)
@@ -66,6 +68,15 @@ const actions = {
    */
   setIsRealNameUrl({commit},res){
     commit (types.SET_XW_URL,res)
+  },
+  /**
+   * 判断用户状态
+   * @param commit
+   * @param res
+   */
+  setAccessAuth({commit},res){
+    phtServer.setStore('accessAuth', res)
+    commit (types.SET_ACCESSAUTH,res)
   }
 
 
@@ -76,7 +87,8 @@ const getters = {
   userInfo: state => state.userInfo,
   tokenCode: state => state.tokenCode,
   isRealName: state => state.isRealName,
-  isRealNameUrl:state =>state.isRealNameUrl
+  isRealNameUrl:state =>state.isRealNameUrl,
+  accessAuth:state =>state.accessAuth
 }
 
 const mutations = {
@@ -125,6 +137,14 @@ const mutations = {
    */
   [types.SET_XW_URL](state, status) {
     state.isRealNameUrl = status
+  },
+  /**
+   * 判断用户的登陆实名状态
+   * @param state
+   * @param status
+   */
+  [types.SET_ACCESSAUTH](state, status) {
+    state.accessAuth = status
   },
 
 

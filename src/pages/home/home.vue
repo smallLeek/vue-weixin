@@ -96,7 +96,7 @@
   import '../../assets/js/filter'
   import * as apis from '../../assets/js/jwt.apis'
   import store from '../../vuex/store'
-import { setTimeout } from 'timers';
+  import { setTimeout } from 'timers';
 export default {
    data () {
     return {
@@ -122,10 +122,11 @@ export default {
   computed:{
 
     ...mapGetters([
-      'showLoading',
+      'showLoading','accessAuth'
     ]),
   },
   methods:{
+    ...mapActions({setAccessAuth: 'setAccessAuth'}),
     // 获取首页公告
     announcementList(){
         let that =this;
@@ -143,9 +144,15 @@ export default {
         });
     },
     getUserInfo() {
+    this.setAccessAuth({'isNeedLogin':true,'isNeedRealName':true,'whereToGo':'/home'});
     console.log(store.state.user.userInfo.STATE);
-    console.log(this.accessAuth.getAccessAuthInstance())
-    }
+    },
+
+    //判断用户是否使用微信登陆过
+
+
+
+
   },
 
   components: {
