@@ -129,7 +129,7 @@ export default {
             li{
                 width: 100%;
                 height: 0.9rem;
-                line-height: 0.9rem;
+                line-height: 0.7rem;
                 background-color: #fff;
                 span{
                     height: 0.9rem;

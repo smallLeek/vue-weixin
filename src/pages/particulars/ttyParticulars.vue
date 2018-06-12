@@ -34,16 +34,12 @@
                     <span>所有债权以平台当日年化收益率为准</span>
                 </li>
                 <li>
-                    <router-link to="">
-                        <span>保障方式</span>
-                        <span>资金安全保障<img src="../../../static/images/more.png"></span>
-                    </router-link>
+                    <span>保障方式</span>
+                    <span>资金安全保障<img src="../../../static/images/more.png"></span>
                 </li>
                 <li>
-                    <router-link to="/ttyInvestmentList">
-                        <span>投资列表</span>
-                        <span>71笔<img src="../../../static/images/more.png"></span>
-                    </router-link>
+                    <span>投资列表</span>
+                    <span>71笔<img src="../../../static/images/more.png"></span>
                 </li>
             </ul>
         </div>

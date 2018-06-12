@@ -23,3 +23,5 @@ document.addEventListener('DOMContentLoaded', function(){
   doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
 
+// IOS激活:active事件
+document.body.addEventListener('touchstart', function () { });

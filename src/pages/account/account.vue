@@ -57,10 +57,10 @@
                 </router-link>
                     </li>
                     <li>
-                <router-link to="">
+                <a @click="shareInvitationShow()">
                         <img src="../../../static/images/user/user_share_icon.png">
                         <span>分享邀请</span>
-                </router-link>
+                </a>
                     </li>
                     <li>
                 <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do" target="_blank">
@@ -78,10 +78,16 @@
         </div>
         <!-- 底部 -->
         <pht-bottomnav></pht-bottomnav>
+        <!-- 分享邀请 -->
+        <shareInvitation class="shareInvitation"></shareInvitation>
+        <!-- 下载提醒 -->
+        <downloadRemind class="downloadRemind"></downloadRemind>
     </div>
 </template>
 <script>
   import phtBottomnav from '../../components/bottom/bottomnav.vue';
+  import shareInvitation from '../../components/shareInvitation/shareInvitation.vue';
+  import downloadRemind from '../../components/downloadRemind/downloadRemind.vue';
   import * as apis from '../../assets/js/jwt.apis'
   import '../../assets/js/filter'
   import {mapGetters, mapActions,mapState} from 'vuex'
@@ -102,7 +108,7 @@
     this.newAccountDataForApp()
     $('.bottom li:last-child img').attr('src',require('../../../static/images/userOn.png'))
     $('.bottom li:last-child').addClass('on')
-
+    
   },
   methods:{
      //我的-资产总计(元)/可用余额(元)/累计收益
@@ -115,10 +121,15 @@
         this.available_balance   =AccountData.AVAILABLE_BALANCE;
         this.lj_amount_count =AccountData.LJ_AMOUNT_COUNT;
       })
+    },
+    shareInvitationShow(){
+        $('.shareInvitation').show()
     }
   },
   components: {
-    phtBottomnav
+    phtBottomnav,
+    shareInvitation,
+    downloadRemind
   }
   }
 </script>

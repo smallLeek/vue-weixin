@@ -26,7 +26,7 @@
             <h2>起投金额100元</h2>
         </div>
         <div class="bth">
-            <a class="input_btn">收益计算</a>
+            <a class="input_btn">收益试算</a>
             <ul>
                 <li>
                     <span>预计收益</span>

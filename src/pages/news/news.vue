@@ -1,6 +1,6 @@
 <template>
     <div class="news">
-        <div class="news_title">
+        <div class="title">
             <a>
                 <img src="../../../static/images/goBack.png">
             </a>
@@ -28,7 +28,7 @@ export default {
     this.getNoticeInfo()
     let _this=this;
     // 返回上一路由
-    $('.news_title a').click(function(){
+    $('.title a').click(function(){
       if(_this.$route.query.url.indexOf('newsList')>-1){
         _this.$router.push({ path: "/newsList" })
       }else if(_this.$route.query.url.indexOf('announcementList')>-1){

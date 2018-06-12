@@ -17,7 +17,8 @@ const setting = resolve => require(['../pages/account/setting/setting.vue'], res
 const datum = resolve => require(['../pages/account/setting/datum.vue'], resolve);
 const about = resolve => require(['../pages/account/setting/about.vue'], resolve);
 const security = resolve => require(['../pages/account/setting/security.vue'], resolve);
-const shareInvitation = resolve => require(['../pages/account/shareInvitation/shareInvitation.vue'], resolve);
+const shareList = resolve => require(['../pages/account/shareList/shareList.vue'], resolve);
+const paymentOrder = resolve => require(['../pages/account/paymentOrder.vue'], resolve);
 
 // 登录注册
 const loginRegister = resolve => require(['../pages/home/loginRegister/loginRegister.vue'], resolve);
@@ -30,7 +31,10 @@ const ttyAccount = resolve => require(['../pages/account/ttyAccount/ttyAccount.v
 const ttyRecord = resolve => require(['../pages/account/ttyAccount/ttyRecord.vue'], resolve);
 
 // 定投盈账户
-const dty = resolve => require(['../pages/account/dty/dty.vue'], resolve);
+const dtyAccount = resolve => require(['../pages/account/dtyAccount/dtyAccount.vue'], resolve);
+const benefitPlan = resolve => require(['../pages/account/dtyAccount/benefitPlan.vue'], resolve);
+const gainRecording = resolve => require(['../pages/account/dtyAccount/gainRecording.vue'], resolve);
+const projectProgress = resolve => require(['../pages/account/dtyAccount/projectProgress.vue'], resolve);
 
 // 新闻
 const announcementList = resolve => require(['../pages/news/announcementList.vue'], resolve);
@@ -148,8 +152,8 @@ const router = new VueRouter({
       component: about,
     },
     {
-      path: '/dty',
-      component: dty,
+      path: '/dtyAccount',
+      component: dtyAccount,
     },
     {
       path: '/loginRegister',
@@ -164,8 +168,24 @@ const router = new VueRouter({
       component: security,
     },
     {
-      path: '/shareInvitation',
-      component: shareInvitation,
+      path: '/shareList',
+      component: shareList,
+    },
+    {
+      path: '/paymentOrder',
+      component: paymentOrder,
+    },
+    {
+      path: '/benefitPlan',
+      component: benefitPlan,
+    },
+    {
+      path: '/gainRecording',
+      component: gainRecording,
+    },
+    {
+      path: '/projectProgress',
+      component: projectProgress,
     },
     {
 

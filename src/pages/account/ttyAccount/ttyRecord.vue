@@ -117,6 +117,7 @@ export default {
     z-index: 100;
     img{
         height: 0.5rem;
+        vertical-align: middle;
     }
     a{
         position: absolute;
@@ -138,6 +139,7 @@ export default {
             border-bottom: 1px solid #f8f8f8;
             box-sizing: border-box;
             p{
+                line-height: 1;
                 clear: both;
                 span:first-child{
                     float: left;
@@ -149,7 +151,7 @@ export default {
             p:first-child{
                 color: #333333;
                 font-size: 0.3rem;
-                padding-top: 0.2rem;
+                padding-top: 0.3rem;
                 span:last-child{
                     color: #ff8400;
                     font-size: 0.32rem;
@@ -162,7 +164,7 @@ export default {
             p:last-child{
                 color: #666666;
                 font-size: 0.26rem;
-                padding-top: 0.05rem;
+                padding-top: 0.16rem;
             }
         }
     }
