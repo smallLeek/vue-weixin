@@ -34,6 +34,9 @@
           <button v-on:click="ttyInvest" v-text="investText">立即投资</button>
         </li>
       </ul>
+      <ul class="noProject" v-show="false">
+          <img src="../../../../static/images/home/noProject.png">
+      </ul>
     </div>
   </div>
 </template>
@@ -151,6 +154,7 @@
         margin-right: 0.3rem;
       }
     }
+<<<<<<< HEAD
     a:hover {
       -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
       -webkit-user-select: none;
@@ -191,6 +195,18 @@
             font-size: 0.4rem;
             color: #333333
           }
+=======
+  }
+.tty_area
+{
+  background-color: #fff;
+  ul{
+        li:first-child{
+            font-size: 0.28rem;
+            color: #333333;
+            margin-top: 0.2rem;
+            line-height: 1;
+>>>>>>> 569bf8dd93da0e26cbb50399c32ed57fc6ccad84
         }
         span:first-child {
           color: #fb4747;
@@ -216,6 +232,7 @@
           font-size: 0.24rem;
           line-height: 0.35rem;
         }
+<<<<<<< HEAD
       }
       li:nth-child(4) {
         margin-top: 0.24rem;
@@ -241,6 +258,27 @@
           font-size: 0.24rem;
           line-height: 0.4rem;
           right: 0;
+=======
+        li:nth-child(5){
+            clear: both;
+            padding-top: 0.3rem;
+            padding-bottom: 0.3rem;
+            a{
+                display: block;
+                color: #fff;
+                font-size: 0.3rem;
+                width: 5.4rem;
+                height: .7rem;
+                line-height: .7rem;
+                border-radius: 1rem;
+                background-color: #fb4747;
+                text-align: center;
+                margin: auto;
+            }
+            a:active{
+                background-color: #de2626;
+            }
+>>>>>>> 569bf8dd93da0e26cbb50399c32ed57fc6ccad84
         }
       }
       li:nth-child(5) {
@@ -266,8 +304,22 @@
       }
     }
   }
+<<<<<<< HEAD
 
   .tty_area ul {
+=======
+  ul.noProject{
+      text-align: center;
+      height: 2.4rem;
+      line-height: 2.4rem;
+      img{
+          width: 3rem;
+          vertical-align: middle
+      }
+  }
+}
+.tty_area ul{
+>>>>>>> 569bf8dd93da0e26cbb50399c32ed57fc6ccad84
     padding-left: 0.3rem;
     padding-right: 0.4rem;
     border-bottom: 1px solid #e5e5e5;

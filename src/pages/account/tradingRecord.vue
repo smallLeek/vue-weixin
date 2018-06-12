@@ -243,13 +243,6 @@ $(document).mouseup(function(e){
     display: flex;
     span{
         flex: 1;
-        a:hover{
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            -webkit-user-select: none;
-            -moz-user-focus: none;
-            -moz-user-select: none;  
-            text-decoration: none;
-        }
     }
     span:first-child{
         img{

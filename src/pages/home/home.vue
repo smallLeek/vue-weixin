@@ -92,6 +92,7 @@
   import { Swiper,SwiperItem } from 'vux'
   import '../../assets/js/filter'
   import * as apis from '../../assets/js/jwt.apis'
+  import store from '../../vuex/store'
 import { setTimeout } from 'timers';
 export default {
    data () {
@@ -138,11 +139,9 @@ export default {
           this.dataStatisticss_INVEST_SUM =data.result.main_data.data[0].INVEST_SUM;
         });
     },
-
     getUserInfo() {
-      //console.log($('.xwUrl').append('<h1>11111</h1>'))
-
-
+    console.log(store.state.user.userInfo.STATE);
+    console.log(this.accessAuth.getAccessAuthInstance())
     }
   },
 

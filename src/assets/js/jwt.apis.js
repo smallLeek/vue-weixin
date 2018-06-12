@@ -285,7 +285,6 @@ export  {
   getBanner,
   queryMainPageTotalData,
   queryNewAddPersonAsync,
-  getNotice,
   getDataStatistics,
   recommendedProject,
   getNoticeInfo,
@@ -296,6 +295,6 @@ export  {
   deposit,
   selectXwBank,
   DdProj,
-  selectMoneyManagementZTYD
+  selectMoneyManagementZTYD,
 }
 

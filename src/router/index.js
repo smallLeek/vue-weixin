@@ -16,6 +16,8 @@ const recharge = resolve => require(['../pages/account/recharge.vue'], resolve);
 const setting = resolve => require(['../pages/account/setting/setting.vue'], resolve);
 const datum = resolve => require(['../pages/account/setting/datum.vue'], resolve);
 const about = resolve => require(['../pages/account/setting/about.vue'], resolve);
+const security = resolve => require(['../pages/account/setting/security.vue'], resolve);
+const shareInvitation = resolve => require(['../pages/account/shareInvitation/shareInvitation.vue'], resolve);
 
 // 登录注册
 const loginRegister = resolve => require(['../pages/home/loginRegister/loginRegister.vue'], resolve);
@@ -42,16 +44,10 @@ const yyyParticulars = resolve => require(['../pages/particulars/yyyParticulars.
 const earnings = resolve => require(['../pages/particulars/earnings.vue'], resolve);
 const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmentList.vue'], resolve);
 
-// 签到
-const signIn = resolve => require(['../pages/signIn/signIn.vue'], resolve);
-
-
 //分享页面
 
 const share =resolve => require (['../pages/share/share.vue'], resolve);
 
-//自定义键盘
-// const keycode = resolve => require(['../pages/keycode/kbdblg'], resolve);
 
 //打开空白页面
  const blank = resolve => require(['../pages/blank/blank'], resolve);
@@ -122,10 +118,6 @@ const router = new VueRouter({
       component: recharge,
     },
     {
-      path: '/signIn',
-      component: signIn,
-    },
-    {
       path: '/ttyMore',
       name: 'ttyMore',
       component: ttyMore,
@@ -173,6 +165,14 @@ const router = new VueRouter({
     {
       path: '/login',
       component: login,
+    },
+    {
+      path: '/security',
+      component: security,
+    },
+    {
+      path: '/shareInvitation',
+      component: shareInvitation,
     },
     {
 

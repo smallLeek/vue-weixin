@@ -73,13 +73,6 @@ export default {
         left: 0;
         top: -0.02rem
     }
-    a:hover{
-        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-        -webkit-user-select: none;
-        -moz-user-focus: none;
-        -moz-user-select: none;  
-        text-decoration: none;
-    }
 }
 .content{
     margin-top: 1rem;
@@ -207,13 +200,6 @@ export default {
     }
     .input_btn:active{
         background-color: #de2626;
-    }
-    a:hover{
-        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-        -webkit-user-select: none;
-        -moz-user-focus: none;
-        -moz-user-select: none;  
-        text-decoration: none;
     }
     li{
         height: 1rem;
