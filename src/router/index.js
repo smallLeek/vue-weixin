@@ -53,6 +53,9 @@ const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmen
 const share =resolve => require (['../pages/share/share.vue'], resolve);
 
 
+//打开空白页面
+ const blank = resolve => require(['../pages/blank/blank'], resolve);
+
 const router = new VueRouter({
   base: 'wx',
   mode: 'history',
@@ -65,6 +68,10 @@ const router = new VueRouter({
     {
       path: '/home',
       component: home,
+    },
+    {
+      path: '/blank',
+      component: blank,
     },
     {
       path: '/account',

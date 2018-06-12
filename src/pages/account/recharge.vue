@@ -36,12 +36,12 @@
           <li>
             <span>￥</span>
             <span>
-              <input type="text" placeholder="请输入充值金额" v-model="rechargeMoney" v-on:input="clearNoNum()">
+              <input type="text" placeholder="请输入充值金额" v-model="rechargeMoney">
             </span>
             <span id="close"><img src="../../../static/images/recharge/recharge_close.png"></span>
           </li>
           <li>
-            <span>充值后余额(元)：<b v-text="rechargeLast">6326.33</b></span>
+            <span>充值后余额(元)：<b v-text="rechargeLast"></b></span>
           </li>
           <li>
             <span>本次最大充值金额(元)：<b>{{ single_limit}}</b></span>
@@ -50,7 +50,7 @@
           <li>
             <span>卡支付额度：<b v-text="total_limit"></b></span>
           </li>
-          <li class="on" id="paybtn">立即充值</li>
+          <li class="on" v-on:click="goRecharge()">立即充值</li>
         </ul>
       </div>
       <div class="hint">
@@ -90,6 +90,7 @@
         bankcodeLast:'',//银行尾号
         total_limit:'',//银行卡支付额度
         rechargeLast:0,//充值后余额
+        bankData:null,//限额说明   银行卡信息
       }
     },
     computed: {
@@ -99,10 +100,12 @@
     },
     mounted () {
       this.getBankInfo();
+      this.getLimitInfo();
     },
     watch: {
       rechargeMoney: function (value) {
        this.getrechargeLast();
+       this.clearNoNum(value);
       }
     },
     methods: {
@@ -113,7 +116,6 @@
         let userType = this.userInfo.USER_TYPE;
         apis.userBaseData(userId,userType).then( (data) => {
           let userData = data.result.main_data;
-          console.log(userData)
           this.picture_url = userData.PICTURE_URL;
           this.day_limit = userData.DAY_LIMIT;
           this.single_limit = userData.SINGLE_LIMIT;
@@ -130,22 +132,51 @@
           this.rechargeLast = this.available_balance;
         })
       },
+      //充值后余额
       getrechargeLast() {
         this.rechargeLast = (this.rechargeMoney-0)+ (this.available_balance-0);
       },
+//      立即充值
+      goRecharge() {
+        //判断输入的金额是否大于等于可用金额
+        if(this.rechargeMoney<this.available_balance){
+          let userId = this.userInfo.ID;
+          let userType = this.userInfo.USER_TYPE;
+          let rechargeway = "SWIFT";
+          let bankcode = '';
+          let paytype  = '';
+          let redirectUrl = '';
+          apis.deposit(userId, userType, this.rechargeMoney, rechargeway, bankcode,paytype).then( (data) => {
+            let userData = data.result.main_data.url;
+            $('.xwUrl').append(userData)
+          })
+        }else{
+          this.bs.$emit('e:alert', "充值金额超出可用余额!");
+        }
+      },
       //限额说明
       getLimitInfo() {
+        let bind_type = "0";
+        let pay_flag = "1";
+        apis.selectXwBank(bind_type, pay_flag).then( (data) => {
+           this.bankData = data.result.main_data.data;
 
+        })
       },
       //输入充值金额正则
       clearNoNum (obj){
-        obj.value = obj.value.replace(/[^\d.]/g,"");
-        obj.value = obj.value.replace(/\.{2,}/g,".");
-        obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
-        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');
-        if(obj.value.indexOf(".")< 0 && obj.value !=""){
-          obj.value= parseFloat(obj.value);
+        if(typeof obj == "number"){
+          obj = obj + '';
         }
+        obj = obj.replace(/[^\d.]/g,"");
+        obj = obj.replace(/^\./g,"");
+        obj = obj.replace(/\.{2,}/g,".");
+        obj = obj.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+        obj = obj.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');
+        if(obj.indexOf(".")< 0 && obj !=""){
+          obj= parseFloat(obj);
+        }
+        this.rechargeMoney = obj
       }
     }
   }

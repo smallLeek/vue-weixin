@@ -1,5 +1,5 @@
 <template>
-  <div class="register">
+  <div class="register" v-title="'注册'">
     <div class="head">
       <div class="tab">
         <span>手机登录</span>
@@ -35,12 +35,12 @@
           <span><input type="text" placeholder="如您有推荐人，请输入手机号（选填）" v-model="registerRefmobile"></span>
         </p>
         <h1>
-                  <span v-if="agree" @click="agreement">
-                    <img class="on" src="../../../../static/images/login/login_selectOn.png">阅读并同意
-                  </span>
+          <span v-if="agree" @click="agreement">
+            <img class="on" src="../../../../static/images/login/login_selectOn.png">阅读并同意
+          </span>
           <span v-if="!agree" @click="agreement">
-                    <img class="on" src="../../../../static/images/login/login_select.png">阅读并同意
-                  </span>
+            <img class="on" src="../../../../static/images/login/login_select.png">阅读并同意
+          </span>
           <a href="javascript:;">《注册协议》</a>
         </h1>
         <input class="submit" type="button" value="提交" @click="register()">
@@ -89,7 +89,6 @@
           return;
         }
         apis.sendMessageMobileValidCode(registerMobile, '1', '0').then((data) => {
-          console.log(data)
           if (data.status == "00000000") {
             self.bs.$emit('e:alert', "验证码已发送");
             self.isPhone = true
@@ -152,9 +151,11 @@
         //注册接口
         apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile,'http://www.phtfdata.com/m/finance/register/isHand').then((data) => {
           if (data.message == "成功!") {
-            // $('.xwUrl').append(data.result.main_data.url)
+            $('.xwUrl').append(data.result.main_data.url)
 
              console.log(data.result.main_data.url)
+            // let url =data.result.main_data.url
+            // $('.xwUrl').append(url)
 
 
           } else if(data.status =="6015") {
