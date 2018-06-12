@@ -34,14 +34,13 @@
       </div>
       <b class="shuxian"></b>
       <div class="news_content">
-        <swiper auto height="20px" direction="vertical" :interval=2500 class="text-scroll newsSwiper" :show-dots="false">
-          <swiper-item class="newsSwipers" v-for="(item,index) in announcement" :key="index">
-            <router-link :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}">
+        <div id="rollText">
+            <router-link  v-for="(item,index) in announcement" :key="index" :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}">
               <img src="../../../static/images/home/home_announcement_sign.png">
               <span v-text="item.NOTICE_TITLE"></span>
             </router-link>
-          </swiper-item>
-        </swiper>
+          <br />
+        </div>
       </div>
     </div>
     <!-- 天天盈专区 -->
@@ -93,7 +92,7 @@
   import '../../assets/js/filter'
   import * as apis from '../../assets/js/jwt.apis'
   import store from '../../vuex/store'
-  import { setTimeout } from 'timers';
+  import { setTimeout, setInterval } from 'timers';
 export default {
    data () {
     return {
@@ -107,9 +106,6 @@ export default {
 
   mounted:function () {
 
-    setTimeout(function(){
-      $('.vux-swiper').css('height',parseInt($('.vux-swiper').css('height'))*2+'px')
-    },10)
     $('.bottom li:first-child img').attr('src',require('../../../static/images/homeOn.png'))
     $('.bottom li:first-child').addClass('on')
     this.announcementList();
@@ -129,6 +125,29 @@ export default {
         let that =this;
         apis.indexNotice().then((data)=> {
           this.announcement =data.result.main_data.data;
+
+setTimeout(function(){
+  var positionTop=0;
+  var textDiv = document.getElementById("rollText");
+  var newslist = textDiv.getElementsByTagName("a").length;
+  var hang=Math.ceil(newslist/2)
+  const hangnum=hang;
+  setInterval(function(){
+    hang--;
+    if(hang<=0){
+      hang=hangnum;
+      positionTop=0
+    }else{
+      positionTop-=0.75
+    }
+    $('#rollText').css('top',positionTop+'rem')
+  },5000)
+},100)
+
+
+
+
+
         });
     },
     // 获取数据统计

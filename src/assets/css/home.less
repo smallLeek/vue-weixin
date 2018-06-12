@@ -69,33 +69,33 @@
         width: 6rem;
         margin-left: 0.2rem;
         margin-top: 0.05rem;
-        .newsSwiper{
-            height: 0.7rem;
-            margin-top: 0.17rem;
-            .newsSwipers{
-                line-height: 0.3rem;
-                font-size: 0.24rem;
-                a{
-                    color: #333333;
-                }
-                img{
-                    width: 0.1rem;
-                    float: left;
-                    margin-top: 0.1rem;
-                }
-                span{
-                    width: 5.7rem;
-                    margin-left: 0.1rem;
-                    display: inline-block;
-                    overflow: hidden;
-                    text-overflow:ellipsis;
-                    white-space: nowrap;
-                }
-            }
-            li:nth-child(2n){
-                margin-bottom: 0.28rem;
-            }
+        position: relative;
+        overflow: hidden;
+        height: 0.7rem;
+        margin-top: 0.18rem;
+        font-size: 0.24rem;
+        a{
+            color: #333333;
         }
+        img{
+            width: 0.1rem;
+            vertical-align: middle;
+            margin-top: -0.15rem;
+        }
+        span{
+            width: 5.7rem;
+            margin-left: 0.1rem;
+            display: inline-block;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }
+        #rollText{
+            position: absolute;
+            top: 0;
+            transition: 0.5s linear;
+        }
+
     }
 }
 

@@ -12,21 +12,55 @@
             </span>
         </div>
         <div class="progressBar">
-          <div class="projectStatus1">
+          <div class="projectStatus1" v-show="true">
             <ul>
               <li>
-                <!-- <img src="../../../../static/images/projectProgress/projectProgress_start.png"> -->
                 <span>60%</span>
               </li>
-              <li>
-                <!-- <img src="../../../../static/images/projectProgress/projectProgress_center.png"> -->
-              </li>
-              <li>
-                <!-- <img src="../../../../static/images/projectProgress/projectProgress_end.png"> -->
-              </li>
+              <li></li>
+              <li></li>
             </ul>
             <ul>
               <li>投资进度</li>
+              <li>项目成立</li>
+              <li>项目还款</li>
+            </ul>
+          </div>
+          <div class="projectStatus2" v-show="false">
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+            <ul>
+              <li>项目满标</li>
+              <li>项目成立</li>
+              <li>项目还款</li>
+            </ul>
+          </div>
+          <div class="projectStatus3" v-show="false">
+            <ul>
+              <li></li>
+              <li>
+                <span>距还款日</span>
+                <span>3天</span>
+              </li>
+              <li></li>
+            </ul>
+            <ul>
+              <li>项目满标</li>
+              <li>项目成立</li>
+              <li>项目还款</li>
+            </ul>
+          </div>
+          <div class="projectStatus4" v-show="false">
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+            <ul>
+              <li>项目满标</li>
               <li>项目成立</li>
               <li>项目还款</li>
             </ul>
@@ -125,13 +159,12 @@ export default {
   background-color: #fff;
   line-height: 0;
   ul{
-    width: 6rem;
+    width: 6.5rem;
     display: flex;
     margin: auto;
     padding-top: 0.4rem;
     li{
-      flex: 1;
-      text-align: center;
+      height: 1.35rem;
       font-size: 0.28rem;
       color: #333333;
     }
@@ -139,20 +172,34 @@ export default {
       text-align: left;
     }
     li:nth-child(2){
-      flex: 1.5;
+      text-align: center;
     }
     li:last-child{
-      flex: 0.9;
       text-align: right;
     }
   }
+  ul:last-child{
+    padding: 0;
+    margin-top: 0.25rem;
+  }
   .projectStatus1{
+    ul{
+      li:first-child{
+        flex: 1;
+        text-indent: 0.1rem;
+      }
+      li:nth-child(2){
+        flex: 1.5;
+      }
+      li:last-child{
+        flex: 0.9;
+      }
+    }
     ul:first-child{
       li:first-child{
-        height: 1.2rem;
         background-image: url(../../../../static/images/projectProgress/projectProgress_start.png);
         background-size: 100% 100%;
-        line-height: 1.2rem;
+        line-height: 1.35rem;
         text-align: left;
         text-indent: 0.35rem;
         span{
@@ -161,13 +208,105 @@ export default {
         }
       }
       li:nth-child(2){
-        height: 1.2rem;
         background-image: url(../../../../static/images/projectProgress/projectProgress_center.png);
         background-size: 100% 100%;
       }
       li:last-child{
-        height: 1.2rem;
         background-image: url(../../../../static/images/projectProgress/projectProgress_end.png);
+        background-size: 100% 100%;
+      }    
+    }
+  }
+  .projectStatus2{
+    ul{
+      li:first-child{
+        flex: 0.9;
+      }
+      li:nth-child(2){
+        flex: 1.5;
+      }
+      li:last-child{
+        flex: 0.9;
+      }
+    }
+    ul:first-child{
+      li:first-child{
+        background-image: url(../../../../static/images/projectProgress/projectProgress_startOn.png);
+        background-size: 100% 100%;
+      }
+      li:nth-child(2){
+        background-image: url(../../../../static/images/projectProgress/projectProgress_center.png);
+        background-size: 100% 100%;
+      }
+      li:last-child{
+        background-image: url(../../../../static/images/projectProgress/projectProgress_end.png);
+        background-size: 100% 100%;
+      }    
+    }
+  }
+  .projectStatus3{
+    ul{
+      li:first-child{
+        flex: 0.9;
+      }
+      li:nth-child(2){
+        flex: 1.5;
+      }
+      li:last-child{
+        flex: 0.9;
+      }
+    }
+    ul:first-child{
+      li:first-child{
+        background-image: url(../../../../static/images/projectProgress/projectProgress_startOn.png);
+        background-size: 100% 100%;
+      }
+      li:nth-child(2){
+        background-image: url(../../../../static/images/projectProgress/projectProgress_time.png);
+        background-size: 100% 100%;
+        span{
+          display: block;
+          line-height: 1;
+          color: #ff9900;
+        }
+        span:first-child{
+          font-size: 0.26rem;
+          margin-top: 0.35rem;
+        }
+        span:last-child{
+          font-size: 0.4rem;
+          margin-top: 0.1rem;
+        }
+      }
+      li:last-child{
+        background-image: url(../../../../static/images/projectProgress/projectProgress_end.png);
+        background-size: 100% 100%;
+      }    
+    }
+  }
+  .projectStatus4{
+    ul{
+      li:first-child{
+        flex: 0.9;
+      }
+      li:nth-child(2){
+        flex: 1.5;
+      }
+      li:last-child{
+        flex: 0.9;
+      }
+    }
+    ul:first-child{
+      li:first-child{
+        background-image: url(../../../../static/images/projectProgress/projectProgress_startOn.png);
+        background-size: 100% 100%;
+      }
+      li:nth-child(2){
+        background-image: url(../../../../static/images/projectProgress/projectProgress_centerOn.png);
+        background-size: 100% 100%;
+      }
+      li:last-child{
+        background-image: url(../../../../static/images/projectProgress/projectProgress_endOn.png);
         background-size: 100% 100%;
       }    
     }
