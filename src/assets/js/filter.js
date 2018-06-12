@@ -76,6 +76,7 @@ Vue.filter('farmatAmount', function(amount) {
   }
   return result;
 })
+//字符串后四位
 Vue.filter('farmatBankcode', function (str) {
   if(( typeof str ) != "string"){
     return

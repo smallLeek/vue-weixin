@@ -61,7 +61,7 @@
             <!-- 进度条 -->
             <li>
               <span><b><s :style="{width:list.INVEST_PROGRESS+'%'}"></s></b></span>
-              <span v-text="list.INVEST_PROGRESS"></span>
+              <span v-text="(parseFloat(list.INVEST_PROGRESS)).toFixed(0)+'%'"></span>
             </li>
           </ul>
         </div>
