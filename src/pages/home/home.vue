@@ -45,11 +45,9 @@
       </div>
     </div>
     <!-- 天天盈专区 -->
-    <pht-ttyList></pht-ttyList>
-    <!-- 月月盈专区 -->
-    <pht-yyyList></pht-yyyList>
-    <!-- 定存盈专区 -->
-    <pht-dcyList></pht-dcyList>
+    <tty-list></tty-list>
+    <!-- 月月盈专区和定投盈 -->
+    <invest-list></invest-list>
     <!-- 安全保障 -->
     <div class="insurance ">
       <h1><img src="../../../static/images/home/home_insurance _title.png"></h1>
@@ -67,7 +65,7 @@
         </a>
           </li>
           <li>
-        <a href="https://www.phtfdata.com/web6/hander/Mabout.do?index=0" target="_blank">
+        <a href="https://www.phtfdata.com/web6/notice/infoShow.do?infoType=basic" target="_blank">
             <img src="../../../static/images/home/home_information_disclosure.png">
             <span>信息披露</span>
         </a>
@@ -85,9 +83,8 @@
   import phtModal from '../../components/modal/modal.vue';
   import loop from '../../components/loop/loop.vue';
   import phtLoading from '../../components/loading/loading.vue';
-  import phtTtyList from './tty/ttyList.vue';
-  import phtYyyList from './yyyDcy/yyyList.vue';
-  import phtDcyList from './yyyDcy/dcyList.vue';
+  import ttyList from './tty/ttyList.vue';
+  import investList from './yyyDcy/investList.vue';
   import phtBottomnav from '../../components/bottom/bottomnav.vue';
   import {mapGetters, mapActions,mapState} from 'vuex'
   import {getUserInfo} from '../../assets/js/getUserInfo'
@@ -154,9 +151,8 @@ export default {
     phtLoading,
     loop,
     phtBottomnav,
-    phtTtyList,
-    phtYyyList,
-    phtDcyList,
+    ttyList,
+    investList,
     Swiper,
     SwiperItem
   }

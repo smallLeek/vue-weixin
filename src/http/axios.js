@@ -24,7 +24,6 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(data => {
 
   //加载成功之前显示加载中
-  console.log(data)
 
   if( data.data.response.status== "88888888" ){
 
@@ -51,7 +50,6 @@ axios.interceptors.response.use(data => {
   }
 
 }, error => {
-    console.log(error)
     $.showphtModal({
       withOneButton:0,
       errorMsg: error.message,

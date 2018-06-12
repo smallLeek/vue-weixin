@@ -10,6 +10,30 @@ function indexNotice(){
 }
 
 /**
+ *  2.90.天天盈再投
+ * @param USER_ID 用户ID
+ * @param USER_TYPE 用户类型
+ * @returns {*}
+ * @constructor
+ */
+function DdProj(USER_ID, USER_TYPE) {
+  return phtServer.globalPostData(urls.api_url_DdProj, phtServer.submitData({
+    "USER_ID": USER_ID,
+    "USER_TYPE": USER_TYPE
+  }))
+}
+
+/**
+ * 理财项目-在投-列表接口	(月月盈-定存盈)
+ * @param USER_ID   用户ID
+ * @returns {*}
+ */
+function selectMoneyManagementZTYD(USER_ID) {
+  return phtServer.globalPostData(urls.api_url_selectMoneyManagementZTYD, phtServer.submitData({
+    "USER_ID": USER_ID
+  }))
+}
+/**
  * 获取用户信息
  * @param CUST_ID  用户Id
  * @param USER_TYPE   用户类型
@@ -42,6 +66,40 @@ function newAccountDataForApp(CUST_ID, CUST_TYPE) {
  * @returns {*}
  */
 function selectXwBank(BIND_TYPE, PAY_FLAG) {
+  return phtServer.globalPostData(urls.api_url_selectXwBank, phtServer.submitData({
+    "BIND_TYPE": BIND_TYPE,
+    "PAY_FLAG": PAY_FLAG
+  }))
+}
+
+/**
+ *  充值
+ * @param USER_ID 用户ID
+ * @param USER_TYPE 用户类型
+ * @param AMOUNT 充值金额
+ * @param RECHARGEWAY 支付方式 支付方式 网银（WEB）、快捷支付（SWIFT
+ * @param BANKCODE 银行卡编码
+ * @param PAYTYPE 网银类型  B2C个人  B2B企业
+ * @param redirectUrl  异步返回url
+ */
+function deposit(USER_ID, USER_TYPE, AMOUNT, RECHARGEWAY, BANKCODE, PAYTYPE, redirectUrl) {
+  return phtServer.globalPostData(urls.api_url_deposit, phtServer.submitData({
+    "USER_ID": USER_ID,
+    "USER_TYPE": USER_TYPE,
+    "AMOUNT": AMOUNT,
+    "RECHARGEWAY": RECHARGEWAY,
+    "BANKCODE": BANKCODE,
+    "PAYTYPE": PAYTYPE,
+    "redirectUrl": redirectUrl
+  }))
+}
+
+/**
+ * 新网银行卡信息查询   限额说明
+ * @param BIND_TYPE 绑卡类型 0:个人 1:企业
+ * @param PAY_FLAG 支付标识 0:网银 1:银行卡
+ */
+function selectXwBank(BIND_TYPE, PAY_FLAG){
   return phtServer.globalPostData(urls.api_url_selectXwBank, phtServer.submitData({
     "BIND_TYPE": BIND_TYPE,
     "PAY_FLAG": PAY_FLAG
@@ -234,6 +292,10 @@ export  {
   newLogin,
   indexNotice,
   userBaseData,
-  newAccountDataForApp
+  newAccountDataForApp,
+  deposit,
+  selectXwBank,
+  DdProj,
+  selectMoneyManagementZTYD
 }
 
