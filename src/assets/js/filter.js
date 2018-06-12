@@ -7,7 +7,11 @@ Vue.filter('farmatDataYi',function (value) {
 //把数字格式化为万元
 Vue.filter('farmatDataWan',function (value) {
   if(!value) return ''
-  return (value/10000).toFixed(2)
+  if(value%10000 == 0){
+    return (value/10000)
+  }else{
+    return (value/10000).toFixed(2)
+  }
 })
 /**
  * 时间格式化  yyyy-MM-dd HH:mm:ss

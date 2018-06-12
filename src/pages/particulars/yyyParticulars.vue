@@ -176,16 +176,26 @@
                 <!-- <router-link to="" class="end">已售罄</router-link> -->
             </div>
         </div>
+        <!-- 信息披露弹窗 -->
+        <informationDisclosure class="informationDisclosure"></informationDisclosure>
+        <!-- 余额不足弹窗 -->
+        <notSufficientFunds class="notSufficientFunds"></notSufficientFunds>
     </div>
 </template>
 <script>
+import informationDisclosure from '../../components/informationDisclosure/informationDisclosure.vue';
+import notSufficientFunds from '../../components/notSufficientFunds/notSufficientFunds.vue';
 export default {
     mounted(){
-        // tab
+        // tab切换
         $('.tab ul li').click(function(){
             $(this).addClass('on').siblings('li').removeClass('on')
             $('.tab_content>div').eq($(this).index()).show().siblings('div').hide()
         })
+    },
+    components:{
+        informationDisclosure,
+        notSufficientFunds
     }
 }
 </script>
@@ -612,5 +622,9 @@ export default {
             background-color: #bbbbbb;
         }
     }
+}
+.informationDisclosure,
+.notSufficientFunds{
+    display: none;
 }
 </style>

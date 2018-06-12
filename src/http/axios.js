@@ -50,7 +50,6 @@ axios.interceptors.response.use(data => {
   }
 
 }, error => {
-    console.log(error)
     $.showphtModal({
       withOneButton:0,
       errorMsg: error.message,

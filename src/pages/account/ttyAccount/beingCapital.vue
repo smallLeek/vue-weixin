@@ -117,6 +117,7 @@ export default {
     z-index: 100;
     img{
         height: 0.5rem;
+        vertical-align: middle
     }
     a{
         position: absolute;
@@ -143,6 +144,7 @@ export default {
         margin-right: 0.14rem;
         height: 0.35rem;
         margin-top: -0.1rem;
+        vertical-align: middle
     }
 }
 .list{
@@ -156,21 +158,23 @@ export default {
         li:first-child{
             float: left;
             span{
-                display: block
+                display: block;
+                line-height: 1;
             }
             span:first-child{
                 font-size: 0.3rem;
                 color: #333333;
-                margin-top: 0.2rem;
+                margin-top: 0.3rem;
             }
             span:last-child{
                 font-size: 0.26rem;
                 color: #666666;
-                margin-top: 0.08rem;
+                margin-top: 0.16rem;
             }
         }
         li:last-child{
             float: right;
+            height: 1rem;
             line-height: 1.3rem;
             font-size: 0.32rem;
             color: #fb4747;

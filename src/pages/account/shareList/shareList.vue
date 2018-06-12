@@ -1,5 +1,5 @@
 <template>
-  <div class="shareInvitation">
+  <div class="shareList">
     <div class="title">
         <router-link to="/setting">
             <img src="../../../../static/images/goBack.png">
@@ -7,25 +7,25 @@
         <span>分享</span>
     </div>
     <div class="content">
-      <img src="../../../../static/images/shareInvitation/shareInvitation_bg.jpg">
-      <img src="../../../../static/images/shareInvitation/shareInvitation_bg.jpg">
+      <img src="../../../../static/images/shareList/shareList_bg.jpg">
+      <img src="../../../../static/images/shareList/shareList_bg.jpg">
     </div>
-    <div class="shareInvitationBtn">
-      <h1 class="shareInvitationTitle">
+    <div class="shareListBtn">
+      <h1 class="shareListTitle">
         <span></span>
         <span>分享到</span>
         <span></span>
       </h1>
-      <div class="shareInvitationContent">
+      <div class="shareListContent">
         <ul>
           <li>
-            <span><img src="../../../../static/images/shareInvitation/friends.png"></span>
-            <span><img src="../../../../static/images/shareInvitation/wechat.png"></span>
-            <span><img src="../../../../static/images/shareInvitation/microblog.png"></span>
-            <span><img src="../../../../static/images/shareInvitation/note.png"></span>
-            <span><img src="../../../../static/images/shareInvitation/twoDdimensionalCode.png.png"></span>
-            <span><img src="../../../../static/images/shareInvitation/qq.png"></span>
-            <span><img src="../../../../static/images/shareInvitation/qzone.png"></span>
+            <span><img src="../../../../static/images/shareList/friends.png"></span>
+            <span><img src="../../../../static/images/shareList/wechat.png"></span>
+            <span><img src="../../../../static/images/shareList/microblog.png"></span>
+            <span><img src="../../../../static/images/shareList/note.png"></span>
+            <span><img src="../../../../static/images/shareList/twoDdimensionalCode.png.png"></span>
+            <span><img src="../../../../static/images/shareList/qq.png"></span>
+            <span><img src="../../../../static/images/shareList/qzone.png"></span>
           </li>
           <li>
             <span>朋友圈</span>
@@ -80,14 +80,14 @@ export default {
     width: 100%;
   }
 }
-.shareInvitationBtn{
+.shareListBtn{
   position: fixed;
   width: 7.5rem;
   height: 3rem;
   bottom: 0;
   margin: auto;
   background-color: rgba(255, 255, 255, 0.95);
-  .shareInvitationTitle{
+  .shareListTitle{
     width: 6rem;
     margin: auto;
     margin-top: 0.36rem;
@@ -115,7 +115,7 @@ export default {
     }
   }
 }
-.shareInvitationContent{
+.shareListContent{
   width: 100%;
   overflow: scroll;
   ul{

@@ -164,13 +164,14 @@ export default {
 }
 .fund{
     height: 3.96rem;
-    padding-top: 1rem;
+    margin-top: 1rem;
     background:linear-gradient(to bottom,#fb4747 0%,#fb6547 100%);
     position: relative;
     h1{
         text-align: center;
         font-size: 1.4rem;
-        margin-top: 0.2rem;
+        margin-top: 0.3rem;
+        line-height: 1;
         font-weight: 500;
         color: #fff;
         font-family: 黑体;
@@ -182,7 +183,8 @@ export default {
         font-weight: 500;
         text-align: center;
         font-size: 0.26rem;
-        padding-top: 0.2rem;
+        padding-top: 0.26rem;
+        line-height: 1;
         color: #ffc2c4;
         img{
             height: 0.3rem;
@@ -205,15 +207,16 @@ export default {
             border-right: 1px solid #ffc2c4;
             box-sizing: border-box;
             span{
+                line-height: 1;
                 display: block;
             }
             span:first-child{
                 font-size: 0.26rem;
-                margin-top: -0.05rem;
+                margin-top: 0;
                 color: #ffc2c4;
             }
             span:last-child{
-                margin-top: 0.03rem;
+                margin-top: 0.1rem;
                 font-size: 0.34rem;
                 color: #fff;
                 font-family: 黑体;
@@ -230,7 +233,7 @@ export default {
     padding: 0 0.2rem;
     a{
         width: 3.44rem;
-        height: 1.3rem;
+        height: 1.5rem;
         background-color: #fff;
         border-radius: 0.1rem;
         border: 1px solid #e2e2e2;
@@ -238,22 +241,25 @@ export default {
             float: left;
             text-align: center;
             margin-top: 0.3rem;
+            line-height: 1;
         }
         span:first-child{
             margin-left: 0.3rem;
             margin-right: 0.52rem;
             img{
                 width: 0.7rem;
+                vertical-align: middle;
+                margin-top: -0.3rem;
             }
         }
         span:last-child{
             h1{
                 font-size: 0.3rem;
-                margin-top: -0.1rem;
+                margin-top: 0.15rem;
                 color: #fb4747
             }
             h2{
-                margin-top: 0.1rem;
+                margin-top: 0.14rem;
                 font-size: 0.24rem;
                 font-weight: 500;
                 color: #666666
@@ -271,7 +277,7 @@ export default {
     }
 }
 .operation{
-    margin-top: 0.1rem;
+    margin-top: 0.2rem;
     a{
         height: 1.78rem;
         margin-top: 0.1rem;
@@ -285,14 +291,15 @@ export default {
             padding-top: 0.35rem;
             margin-left: 0.2rem;
             span{
-                display: block
+                display: block;
+                line-height: 1;
             }
             span:first-child{
                 font-size: 0.28rem;
                 color: #333333
             }
             span:last-child{
-                margin-top: 0.15rem;
+                margin-top: 0.3rem;
                 font-size: 0.6rem;
                 font-weight: 700;
                 color: #fb4747;
@@ -312,7 +319,7 @@ export default {
     }
 }
 .btn{
-    margin-top: 0.3rem;
+    margin-top: 0.6rem;
     padding: 0 0.29rem;
     a{
         width: 3.3rem;
@@ -346,22 +353,24 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 1000;
-    background-color: rgba(0, 0, 0,0.7);
+    background-color: rgba(0, 0, 0,0.8);
     color: #fff;
     h1{
+        font-weight: 500;
         width: 6.8rem;
         font-size: 0.36rem;
         margin: auto;
-        margin-top: 0.4rem;
+        margin-top: 0.6rem;
         padding-bottom: 0.28rem;
         text-align: center;
         border-bottom: 1px solid #fff;
     }
     ul{
         padding: 0 0.35rem;
-        margin-top: 0.3rem;
+        padding-top: 0.1rem;
         li{
-            margin-top: 0.2rem;
+            margin-top: 0.3rem;
+            line-height: 1;
             h2{
                 font-size: 0.3rem;
                 font-weight: 500;
@@ -369,13 +378,14 @@ export default {
             p{
                 font-size: 0.3rem;
                 margin-top: 0.1rem;
+                line-height: 1.5;
             }
         }
     }
     .closeBtn{
         display: block;
         margin: auto;
-        margin-top: 0.3rem;
+        margin-top: 0.5rem;
         width: 1rem;
     }
 }

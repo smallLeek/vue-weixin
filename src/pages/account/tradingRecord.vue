@@ -283,9 +283,9 @@ $(document).mouseup(function(e){
         display: flex;
         height: 1.2rem;
         background-color: #fff;
-        border-bottom: 1px solid #e0e0e0;
         li{
             flex: 1;
+            line-height: 1;
             text-align: center;
             span{
                 display: block;
@@ -297,7 +297,7 @@ $(document).mouseup(function(e){
             }
             span:last-child{
                 font-size: 0.24rem;
-                margin-top: 0.05rem;
+                margin-top: 0.1rem;
             }
         }
         li.on{
@@ -314,12 +314,11 @@ $(document).mouseup(function(e){
         top: 2.2rem;
         width: 7.5rem;
         height: 0.6rem;
-        line-height: 0.6rem;
+        line-height: 0.7rem;
         font-size: 0.26rem;
+        font-weight: 500;
         color: #999999;
         background-color: #F8F8F8;
-        border-top: 1px solid #e0e0e0;
-        border-bottom: 1px solid #e0e0e0;
         span:first-child{
             float: left;
             margin-left: 0.2rem;
@@ -333,9 +332,11 @@ $(document).mouseup(function(e){
         margin-top: 2.8rem;
         padding: 0 0.2rem;
         background-color: #fff;
+        border-top: 1px solid #e0e0e0;
         border-bottom: 1px solid #e0e0e0;
         li{
             height: 1.3rem;
+            line-height: 1;
             border-bottom: 1px solid #e0e0e0;
             p{
                 height: 1.3rem;
@@ -349,7 +350,7 @@ $(document).mouseup(function(e){
                 span:last-child{
                     font-size: 0.3rem;
                     color: #999999;
-                    margin-top: 0.1rem;
+                    margin-top: 0.18rem;
                 }
             }
             p:first-child{

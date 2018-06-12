@@ -242,6 +242,10 @@ export const api_url_RepayPlanList  = origin_ProxyPath_dds + "/query/" + version
 export const api_url_preIrepayCapital  = origin_ProxyPath_dds + "/query/" + version + "/preIrepayCapital/" + version;
 //天天盈项目利息扣除
 export const api_url_repayInterest  = origin_ProxyPath_dds + "/query/" + version + "/repayInterest/" + version;
+//天天盈再投
+export const api_url_DdProj  = origin_ProxyPath_dds + "/query/" + version + "/DdProj/" + version;
+
+
 /**
  * 天天盈文档有误，后台正在更新
  */
