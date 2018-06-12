@@ -1,116 +1,46 @@
-
 //获取用户状态
 import store from '../../vuex/store'
 import * as apis from './jwt.apis'
-import { phtServer } from '../../assets/js/phtServer'
-
 
 /**
- * 判断登陆
- * @param whereToGo
- * @param isNeedLogin
- * @param isNeedRealName
- * @constructor
+ * 处理登陆实名逻辑
  */
-export  class AccessAuth{
-  constructor(whereToGo,isNeedLogin,isNeedRealName) {
-    this.isLogin = store.state.user.loginStatus;
-    this.isRealNameAuth = store.state.user.isRealName;
-    this.whereToGo = whereToGo;
-    this.isNeedLogin = isNeedLogin;
-    this.isNeedRealName = isNeedRealName;
+let userState = store.state.user
+dealLogin = function () {
+  if (userState.accessAuth.isNeedLogin == true && userState.loginStatus == false) {
+    location.href = location.origin + "/wx/loginRegister"
+
+  }else if(userState.accessAuth.isNeedLogin == true && userState.loginStatus == true){
+    location.href = location.origin + userState.accessAuth.whereToGo
+  }
+
+  if (userState.isRealName==3) {
+    location.href = location.origin + userState.accessAuth.whereToGo
+
+  } else if(userState.isRealName!=3 && userState.accessAuth.isNeedRealName == false){
+
+    location.href = location.origin + userState.accessAuth.whereToGo
+  }
+  else if(userState.isRealName!=3 && userState.accessAuth.isNeedRealName == true) {
+
+    dealRealName();
 
   }
 
-  accessAuthWithNoDeal = function () {
-    let result = true;
+};
+/**
+ * 处理实名
+ */
+function dealRealName () {
 
-    if(!(this.isNeedLogin && this.isLogin)){
-      result = false;
-      return result;
-    }
-    if(!(this.isNeedRealName && this.isRealNameAuth())){
-      result = false;
-      return result;
-    }
-    return result;
+  let userInfoList = userState.userInfo
+  apis.xwbankWebNotify(userInfoList.YJF_ID, userInfoList.USER_TYPE, userInfoList.USER_ROLE, userInfoList.ID, userInfoList.USER_TYPE).then((data) => {
+    //$('.xwUrl').append(data.result.main_data.url)
 
-  };
-  isRealNameAuth =function(){
-    return true;
-  }
-  accessAuth = function () {
-    let result = true;
-    if(!(this.isNeedLogin && this.isLogin())){
-      this.dealLogin();
-      return result;
-    }
-    if(!(isNeedRealName && this.isRealNameAuth())){
-      return result;
-    }
-    return result;
-
-  };
-
-  /**
-   * 处理登陆实名逻辑
-   */
-  dealLogin = function () {
-    if(!(this.isNeedLogin && this.isLogin)){
-      location.href = location.origin + "/wx/loginRegister"
-    }
-
-    if(this.isRealNameAuth && this.isNeedRealName){
-      location.href = location.origin + this.whereToGo
-
-    }else{
-      this.dealRealName();
-
-    }
-
-
-  };
-  /**
-   * 处理实名
-   */
-  dealRealName =function (){
-    let userInfoList = store.state.user.userInfo
-    console.log(userInfoList)
-    apis.xwbankWebNotify(userInfoList.YJF_ID,userInfoList.USER_TYPE,userInfoList.USER_ROLE,userInfoList.ID,userInfoList.USER_TYPE).then((data) => {
-      //$('.xwUrl').append(data.result.main_data.url)
-
-    })
-
-  }
-
-
-
+  })
 
 }
 
 
-/**
- * 创建类
- */
-export class AccessAuthInstanceUtil{
 
-  constructor() {
-    this.accessAuthInstance = null;
-  }
-
-  getAccessAuthInstance(){
-    if(this.accessAuthInstance === null){
-      this.accessAuthInstance = new AccessAuth('/home',false,false);
-    }
-    return this.accessAuthInstance;
-  }
-
-  setAccessAuthInstance(whereToGo,isNeedLogin,isNeedAuth){
-    this.accessAuthInstance = new AccessAuth(whereToGo,isNeedLogin,isNeedAuth);
-    return this.accessAuthInstance;
-  }
-
-
-
-}
 

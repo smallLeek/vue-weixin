@@ -32,7 +32,7 @@
         </ul>
         <p>
           <span><img src="../../../../static/images/login/login_recommend.png"></span>
-          <span><input type="text" placeholder="如您有推荐人，请输入手机号（选填）" v-model="registerRefmobile"></span>
+          <span><input type="text" placeholder="如您有推荐人，请输入手机号（选填）" v-model="registerRefmobile" maxlength="11"></span>
         </p>
         <h1>
           <span v-if="agree" @click="agreement">
@@ -54,6 +54,7 @@
   import {phtServer} from '../../../assets/js/phtServer'
   import {mapGetters, mapActions, mapState} from 'vuex'
   import {setInterval, setTimeout} from 'timers';
+
 
   export default {
     data() {
@@ -81,16 +82,16 @@
         let self = this;
         let registerMobile = this.registerMobile;
         if (this.registerMobile == '') {
-          this.bs.$emit('e:alert', "手机号不能为空！");
+          regexfun.handleFailMsg(self, "手机号不能为空！");
           return;
         }
         if (!phtServer.reg_mobile(this.registerMobile)) {
-          this.bs.$emit('e:alert', "请输入正确的手机号！");
+          regexfun.handleFailMsg(self, "请输入正确的手机号！");
           return;
         }
         apis.sendMessageMobileValidCode(registerMobile, '1', '0').then((data) => {
           if (data.status == "00000000") {
-            self.bs.$emit('e:alert', "验证码已发送");
+            regexfun.handleFailMsg(self, "验证码已发送");
             self.isPhone = true
             if (!self.timer) {
 
@@ -107,11 +108,11 @@
               }, 1000)
             }
           } else if (data.status == "6005") {
-            self.bs.$emit('e:alert', "手机号已存在");
+            regexfun.handleFailMsg(self, "手机号已存在");
             self.isPhone = false;
 
           } else if (data.status == "99999999") {
-            self.bs.$emit('e:alert', "验证码发送失败请稍后重试");
+            regexfun.handleFailMsg(self, "验证码发送失败请稍后重试");
           }
 
         });
@@ -121,47 +122,56 @@
 
         //输入框不能为空
         if (!this.registerMobile || !this.registerCode || !this.registerPwd || !this.registerRepwd) {
-          this.bs.$emit('e:alert', "请完善您的信息");
+          regexfun.handleFailMsg(self, "请完善您的信息");
           return;
         }
         //判断手机号是否存在
         if (!self.isPhone) {
-          this.bs.$emit('e:alert', "纳尼！用户账号或手机已存在！");
+          regexfun.handleFailMsg(self, "纳尼！用户账号或手机已存在！");
           return;
 
         }
 
         //判断密码
         if (!phtServer.reg_password(this.registerPwd)) {
-          this.bs.$emit('e:alert', "密码不符合规则");
+          regexfun.handleFailMsg(self, "密码不符合规则");
           return;
 
         }
-
         //判断两次密码是否一致
         if (this.registerPwd !== this.registerRepwd) {
-          this.bs.$emit('e:alert', "两次密码不一致");
+          regexfun.handleFailMsg(self, "两次密码不一致");
           return;
         }
         //判断是否阅读金梧桐注册协议
         if (!this.agree) {
-          this.bs.$emit('e:alert', "请同意注册协议");
+          regexfun.handleFailMsg(self, "请先阅读并同意注册协议");
           return;
+        }
+        //判断推荐人手机号
+        if(self.registerRefmobile!=''){
+          if(!phtServer.reg_mobile(self.registerRefmobile)){
+            regexfun.handleFailMsg(self, "推荐人手机号不正确");
+            return;
+          }else if(self.registerRefmobile==self.registerMobile){
+            regexfun.handleFailMsg(self, "推荐人手机号不能和注册手机号一致");
+            return;
+          }
+
         }
         //注册接口
         apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile,'http://www.phtfdata.com/m/finance/register/isHand').then((data) => {
+          console.log(data)
           if (data.message == "成功!") {
             $('.xwUrl').append(data.result.main_data.url)
 
              console.log(data.result.main_data.url)
             // let url =data.result.main_data.url
             // $('.xwUrl').append(url)
-
-
           } else if(data.status =="6015") {
-            self.bs.$emit('e:alert', "验证码输入有误!");
+            regexfun.handleFailMsg(self, "验证码输入有误!");
           }else {
-            self.bs.$emit('e:alert', "注册失败请稍后重试!");
+            regexfun.handleFailMsg(self, data.message);
           }
 
 

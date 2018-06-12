@@ -12,12 +12,10 @@ import echarts from 'echarts';
 import wx from 'weixin-js-sdk'
 import VueScroller from 'vue-scroller'
 import './assets/css/swiper.css'
-import {AccessAuthInstanceUtil} from './assets/js/jwt.accessAuth'
 Vue.use(VueScroller)
 Vue.prototype.$echarts = echarts
 Vue.prototype.http =axios;
 Vue.prototype.bs =new Vue();
-Vue.prototype.accessAuth = new AccessAuthInstanceUtil();
 Vue.config.productionTip = false;
 new Vue({
   el: '#app',

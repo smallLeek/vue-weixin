@@ -16,7 +16,7 @@
             <ul>
               <li>
                 <!-- <img src="../../../../static/images/projectProgress/projectProgress_start.png"> -->
-                <!-- <span>60%</span> -->
+                <span>60%</span>
               </li>
               <li>
                 <!-- <img src="../../../../static/images/projectProgress/projectProgress_center.png"> -->
@@ -26,9 +26,9 @@
               </li>
             </ul>
             <ul>
-              <!-- <li>投资进度</li> -->
-              <!-- <li>项目成立</li> -->
-              <!-- <li>项目还款</li> -->
+              <li>投资进度</li>
+              <li>项目成立</li>
+              <li>项目还款</li>
             </ul>
           </div>
         </div>
@@ -132,20 +132,18 @@ export default {
     li{
       flex: 1;
       text-align: center;
-      span{
-        display: block;
-        font-size: 0.28rem;
-        color: #333333;
-      }
-      span:first-child{
-        height: 1.2rem;
-      }
+      font-size: 0.28rem;
+      color: #333333;
+    }
+    li:first-child{
+      text-align: left;
     }
     li:nth-child(2){
       flex: 1.5;
     }
     li:last-child{
-      flex: 0.9
+      flex: 0.9;
+      text-align: right;
     }
   }
   .projectStatus1{
@@ -154,6 +152,13 @@ export default {
         height: 1.2rem;
         background-image: url(../../../../static/images/projectProgress/projectProgress_start.png);
         background-size: 100% 100%;
+        line-height: 1.2rem;
+        text-align: left;
+        text-indent: 0.35rem;
+        span{
+          font-size: 0.34rem;
+          color: #ff9900;
+        }
       }
       li:nth-child(2){
         height: 1.2rem;

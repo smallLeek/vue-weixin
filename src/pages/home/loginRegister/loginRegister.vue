@@ -49,11 +49,14 @@ export default {
   computed: {
       //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
     ...mapGetters([
-      'loginStatus','userInfo','tokenCode','isRealName'
+      'loginStatus','userInfo','tokenCode','isRealName','accessAuth'
     ])
   },
     methods: {
-      ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode'}),
+      ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut'}),
+      // logins(){
+      //   this.setSignOut({});
+      // },
       submit() {
            let flag=false;
            flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
@@ -71,11 +74,15 @@ export default {
             regexfun.handleFailMsg(this,data.message)
           }else if (data.status=='6026'){
             regexfun.handleFailMsg(this,data.message)
+          }else if(data.status =='00000000'){
+            let userInfoList = data.result.main_data.data[0]
+            console.log(userInfoList)
+            this.setUserInfo(userInfoList);
+            this.setIsRealName(userInfoList.STATE)
+            this.getTokenCode(userInfoList.token);
+            this.getTokenCode(userInfoList)
           }else {
-            this.setUserInfo(data.result.main_data.data[0]);
-            this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token);
-            console.log(this.accessAuth.setAccessAuthInstance("/home",true,true))
-            console.log(this.accessAuth.getAccessAuthInstance())
+            regexfun.handleFailMsg(this,data.message)
           }
 
         })

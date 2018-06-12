@@ -51,6 +51,7 @@ const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmen
 //分享页面
 
 const share =resolve => require (['../pages/share/share.vue'], resolve);
+const async =resolve => require (['../pages/async/async.vue'], resolve);
 
 
 //打开空白页面
@@ -198,9 +199,13 @@ const router = new VueRouter({
 
       path: '/share',
       component: share,
-
-      path: '/register',
+    },
+    {  path: '/register',
       component: register,
+
+    },
+    {  path: '/async',
+      component: async,
 
     }
   ]
