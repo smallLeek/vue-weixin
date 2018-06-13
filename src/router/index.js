@@ -48,9 +48,9 @@ const yyyParticulars = resolve => require(['../pages/particulars/yyyParticulars.
 const earnings = resolve => require(['../pages/particulars/earnings.vue'], resolve);
 const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmentList.vue'], resolve);
 
-//分享页面
+//异步返回页面
 
-const share =resolve => require (['../pages/share/share.vue'], resolve);
+const asyncReturn =resolve => require (['../pages/async/asyncReturn.vue'], resolve);
 const async =resolve => require (['../pages/async/async.vue'], resolve);
 
 
@@ -195,17 +195,16 @@ const router = new VueRouter({
       path: '/projectProgress',
       component: projectProgress,
     },
-    {
-
-      path: '/share',
-      component: share,
-    },
     {  path: '/register',
       component: register,
 
     },
     {  path: '/async',
       component: async,
+
+    },
+    {  path: '/asyncReturn',
+      component: asyncReturn,
 
     }
   ]

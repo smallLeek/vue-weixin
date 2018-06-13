@@ -1,5 +1,5 @@
 <template>
-    <div class="async">
+    <div class="async" v-title="'审核中'">
       <div class="icon"></div>
       <div class="registerCon">
         <p class="bank"><span>银行存管系统处理中请稍后</span><span class="time">{{count}}s</span></p>
@@ -11,8 +11,6 @@
   import store from '../../vuex/store'
   import * as apis from '../../assets/js/jwt.apis'
   import {mapGetters, mapActions,mapState} from 'vuex'
-
-
     export default {
         data(){
           return{
@@ -56,7 +54,7 @@
               self.timer = null;
               self.timer1 = null
               store.dispatch('USER_XW_BANK', '银行存管系统审核中...')
-              self.$router.push({path: '/finance/register/accountSuccess'})
+
 
             }
           }, 1000)

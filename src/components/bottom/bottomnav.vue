@@ -10,7 +10,7 @@
         <span><img src="../../../static/images/user.png"></span><span>我的</span>
         </router-link>
       </li>
-    </div>    
+    </div>
 </template>
 <script>
 export default {
@@ -26,7 +26,7 @@ export default {
     bottom: 0;
     margin: auto;
     width: 7.5rem;
-    height: 1rem;
+    height: 1.18rem;
     max-height: 80px;
     background-color: #fff;
     border-top: 1px solid #e5e5e5;

@@ -90,7 +90,6 @@
   import store from '../../vuex/store'
   import { setTimeout } from 'timers';
   import * as regexfun from '../../../src/assets/js/jwt.regex';
-  import { setTimeout, setInterval } from 'timers';
 export default {
    data () {
     return {
@@ -134,20 +133,19 @@ export default {
           }else {
             regexfun.handleFailMsg(this,data.message)
           }
-
-setTimeout(function(){
-  var positionTop=0;
-  var textDiv = document.getElementById("rollText");
-  var newslist = textDiv.getElementsByTagName("a").length;
-  var hang=Math.ceil(newslist/2)
-  const hangnum=hang;
-  setInterval(function(){
-    hang--;
-    if(hang<=0){
-      hang=hangnum;
-      positionTop=0
-    }else{
-      positionTop-=0.75
+    setTimeout(function(){
+        var positionTop=0;
+        var textDiv = document.getElementById("rollText");
+        var newslist = textDiv.getElementsByTagName("a").length;
+        var hang=Math.ceil(newslist/2)
+        const hangnum=hang;
+          setInterval(function(){
+             hang--;
+             if(hang<=0){
+             hang=hangnum;
+             positionTop=0
+               }else{
+             positionTop-=0.75
     }
     $('#rollText').css('top',positionTop+'rem')
   },5000)
@@ -191,9 +189,6 @@ setTimeout(function(){
       })
 
     }
-
-
-
   },
 
   components: {
