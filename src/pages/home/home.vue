@@ -34,14 +34,13 @@
       </div>
       <b class="shuxian"></b>
       <div class="news_content">
-        <swiper auto height="20px" direction="vertical" :interval=2500 class="text-scroll newsSwiper" :show-dots="false">
-          <swiper-item class="newsSwipers" v-for="(item,index) in announcement" :key="index">
-            <router-link :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}">
+        <div id="rollText">
+            <router-link  v-for="(item,index) in announcement" :key="index" :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}">
               <img src="../../../static/images/home/home_announcement_sign.png">
               <span v-text="item.NOTICE_TITLE"></span>
             </router-link>
-          </swiper-item>
-        </swiper>
+          <br />
+        </div>
       </div>
     </div>
     <!-- 天天盈专区 -->
@@ -75,8 +74,6 @@
     <!-- 底部 -->
     <pht-bottomnav></pht-bottomnav>
   </div>
-
-
 </template>
 
 <script>
@@ -93,7 +90,8 @@
   import store from '../../vuex/store'
   import { setTimeout } from 'timers';
   import * as regexfun from '../../../src/assets/js/jwt.regex';
-  export default {
+  import { setTimeout, setInterval } from 'timers';
+export default {
    data () {
     return {
       show:false,
@@ -136,6 +134,24 @@
           }else {
             regexfun.handleFailMsg(this,data.message)
           }
+
+setTimeout(function(){
+  var positionTop=0;
+  var textDiv = document.getElementById("rollText");
+  var newslist = textDiv.getElementsByTagName("a").length;
+  var hang=Math.ceil(newslist/2)
+  const hangnum=hang;
+  setInterval(function(){
+    hang--;
+    if(hang<=0){
+      hang=hangnum;
+      positionTop=0
+    }else{
+      positionTop-=0.75
+    }
+    $('#rollText').css('top',positionTop+'rem')
+  },5000)
+},100)
 
         });
     },
