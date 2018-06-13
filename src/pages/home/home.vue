@@ -34,14 +34,13 @@
       </div>
       <b class="shuxian"></b>
       <div class="news_content">
-        <swiper auto height="20px" direction="vertical" :interval=2500 class="text-scroll newsSwiper" :show-dots="false">
-          <swiper-item class="newsSwipers" v-for="(item,index) in announcement" :key="index">
-            <router-link :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}">
+        <div id="rollText">
+            <router-link  v-for="(item,index) in announcement" :key="index" :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}">
               <img src="../../../static/images/home/home_announcement_sign.png">
               <span v-text="item.NOTICE_TITLE"></span>
             </router-link>
-          </swiper-item>
-        </swiper>
+          <br />
+        </div>
       </div>
     </div>
     <!-- 天天盈专区 -->
@@ -75,8 +74,6 @@
     <!-- 底部 -->
     <pht-bottomnav></pht-bottomnav>
   </div>
-
-
 </template>
 
 <script>
@@ -87,13 +84,12 @@
   import investList from './yyyDcy/investList.vue';
   import phtBottomnav from '../../components/bottom/bottomnav.vue';
   import {mapGetters, mapActions,mapState} from 'vuex'
-  import {getUserInfo} from '../../assets/js/getUserInfo'
-  import { phtServer } from '../../assets/js/phtServer'
   import { Swiper,SwiperItem } from 'vux'
   import '../../assets/js/filter'
   import * as apis from '../../assets/js/jwt.apis'
   import store from '../../vuex/store'
   import { setTimeout } from 'timers';
+  import * as regexfun from '../../../src/assets/js/jwt.regex';
 export default {
    data () {
     return {
@@ -102,11 +98,12 @@ export default {
       dataStatisticss_CUST_SUM:null,
       dataStatisticss_INCOME_SUM:null,
       dataStatisticss_INVEST_SUM:null,
+      code:null
     }
 },
 
   mounted:function () {
-
+    this.isLoginWeiXIn()
     setTimeout(function(){
       $('.vux-swiper').css('height',parseInt($('.vux-swiper').css('height'))*2+'px')
     },10)
@@ -116,40 +113,82 @@ export default {
     this.dataStatistics();
     this.getUserInfo();
   },
+  created(){
+     this.code = this.$route.query.code
+  },
   computed:{
 
     ...mapGetters([
-      'showLoading','accessAuth'
+      'showLoading','accessAuth','wxCode'
     ]),
   },
   methods:{
-    ...mapActions({setAccessAuth: 'setAccessAuth'}),
+    ...mapActions({setAccessAuth: 'setAccessAuth',setUserInfo : 'setUserInfo',setwxCode:'setwxCode'}),
     // 获取首页公告
     announcementList(){
         let that =this;
         apis.indexNotice().then((data)=> {
-          this.announcement =data.result.main_data.data;
+          if(data.status =='00000000'){
+            this.announcement =data.result.main_data.data;
+          }else {
+            regexfun.handleFailMsg(this,data.message)
+          }
+    setTimeout(function(){
+        var positionTop=0;
+        var textDiv = document.getElementById("rollText");
+        var newslist = textDiv.getElementsByTagName("a").length;
+        var hang=Math.ceil(newslist/2)
+        const hangnum=hang;
+          setInterval(function(){
+             hang--;
+             if(hang<=0){
+             hang=hangnum;
+             positionTop=0
+               }else{
+             positionTop-=0.75
+    }
+    $('#rollText').css('top',positionTop+'rem')
+  },5000)
+},100)
+
         });
     },
     // 获取数据统计
     dataStatistics(){
         let that =this;
         apis.getDataStatistics().then((data)=> {
-          this.dataStatisticss_CUST_SUM =data.result.main_data.data[0].CUST_SUM;
-          this.dataStatisticss_INCOME_SUM =data.result.main_data.data[0].INCOME_SUM;
-          this.dataStatisticss_INVEST_SUM =data.result.main_data.data[0].INVEST_SUM;
+          if(data.status =='00000000'){
+            this.dataStatisticss_CUST_SUM =data.result.main_data.data[0].CUST_SUM;
+            this.dataStatisticss_INCOME_SUM =data.result.main_data.data[0].INCOME_SUM;
+            this.dataStatisticss_INVEST_SUM =data.result.main_data.data[0].INVEST_SUM;
+          }else {
+            regexfun.handleFailMsg(this,data.message)
+          }
+
         });
     },
     getUserInfo() {
     this.setAccessAuth({'isNeedLogin':true,'isNeedRealName':true,'whereToGo':'/home'});
     console.log(store.state.user.userInfo.STATE);
     },
-
     //判断用户是否使用微信登陆过
+    isLoginWeiXIn (){
+      apis.WeiXinnewLogin(this.code,"1").then((data)=>{
+        if(data.status == '00000000'){
+          let userInfoList = data.result.main_data.data[0];
+          //用户登陆过并且已授权刷新用户信息
+          this.setUserInfo(userInfoList);
+          this.setIsRealName(userInfoList.STATE);
+          this.getTokenCode(userInfoList.token);
+        }else if(data.status== '77777777'){
+          regexfun.handleFailMsg(this,'您还没有授权登陆')
+        }else{
+          regexfun.handleFailMsg(this,data.message)
+        }
 
+      })
 
-
-
+    }
   },
 
   components: {

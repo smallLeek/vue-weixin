@@ -1,5 +1,6 @@
 <template>
     <div class="login">
+      {{userInfo}}
         <div class="head">
             <div class="tab">
                 <span>手机登录</span>
@@ -35,6 +36,15 @@ import * as apis from '../../../assets/js/jwt.apis'
 import { phtServer } from '../../../assets/js/phtServer'
 import {mapGetters, mapActions,mapState} from 'vuex'
 export default {
+     data(){
+       return{
+         code:null
+       }
+     },
+  created(){
+     this.logins()
+    this.code = this.$route.query.code
+  },
     mounted(){
         $('#eye').click(function(){
             if($('#password').attr('type')=='password'){
@@ -54,13 +64,13 @@ export default {
   },
     methods: {
       ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut'}),
-      // logins(){
-      //   this.setSignOut({});
-      // },
+      logins(){
+        this.setSignOut();
+      },
       submit() {
            let flag=false;
            flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
-           if(flag==true){
+           if(flag == true){
                this.login()
            }
       },
@@ -69,7 +79,8 @@ export default {
         let phonenum = $('#phonenum').val();
         let password = phtServer.CalcuMD5lower($('#password').val());
         let pwd =phtServer.CalcuMD5lower($('#password').val());
-        apis.newLogin(phonenum, password, user_type).then((data) => {
+        apis.newLogin(phonenum, password, user_type,this.code).then((data) => {
+          console.log(data)
           if(data.status =='6027'){
             regexfun.handleFailMsg(this,data.message)
           }else if (data.status=='6026'){
@@ -80,7 +91,6 @@ export default {
             this.setUserInfo(userInfoList);
             this.setIsRealName(userInfoList.STATE)
             this.getTokenCode(userInfoList.token);
-            this.getTokenCode(userInfoList)
           }else {
             regexfun.handleFailMsg(this,data.message)
           }

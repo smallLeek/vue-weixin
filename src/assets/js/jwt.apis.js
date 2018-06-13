@@ -112,11 +112,25 @@ function selectXwBank(BIND_TYPE, PAY_FLAG){
  * @param USER_TYPE
  */
 
-function newLogin(LOGIN_CODE,PASSWORD,USER_TYPE){
+function newLogin(LOGIN_CODE,PASSWORD,USER_TYPE,CODE){
   return phtServer.globalPostData(urls.api_url_newLogin, phtServer.submitData({
     "LOGIN_CODE": LOGIN_CODE,
     "PASSWORD": PASSWORD,
     "USER_TYPE": USER_TYPE,
+    "CODE":CODE
+  }))
+}
+
+/**
+ * 微信授权登陆
+ * @param CODE
+ * @returns {*}
+ * @constructor
+ */
+function WeiXinnewLogin(CODE,USER_TYPE){
+  return phtServer.globalPostData(urls.api_url_newLogin, phtServer.submitData({
+    "CODE": CODE,
+    "USER_TYPE":USER_TYPE
   }))
 }
 
@@ -251,11 +265,19 @@ function queryMainPageTotalData() {
  * 新网异步是否返回
  * @param REQUEST_NO
  * @param METHOD_NAME
+ * @param METHOD_TYPE
+ * @param USER_ID
+ * @param USER_TYPE
+ * @returns {*}
  */
-function queryNewAddPersonAsync(REQUEST_NO,METHOD_NAME) {
+function queryNewAddPersonAsync(REQUEST_NO,METHOD_NAME,METHOD_TYPE,USER_ID,USER_TYPE) {
   return phtServer.globalPostData(urls.api_url_queryNewAddPersonAsync, phtServer.submitData({
     "REQUEST_NO": REQUEST_NO,
     "METHOD_NAME": METHOD_NAME,
+    "METHOD_TYPE": METHOD_TYPE,
+    "USER_ID": USER_ID,
+    "USER_TYPE": USER_TYPE
+
   }))
 
 }
@@ -296,5 +318,6 @@ export  {
   selectXwBank,
   DdProj,
   selectMoneyManagementZTYD,
+  WeiXinnewLogin
 }
 

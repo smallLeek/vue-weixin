@@ -7,4 +7,5 @@ export const SET_TOKEN_CODE     = 'SET_TOKEN_CODE';     //获取用户的token
 export const SET_IS_REAL_NAME   = 'SET_IS_REAL_NAME';  //获取用户实名状态
 export const SET_XW_URL         = 'SET_XW_URL';       //新网实名的URl
 export const SET_ACCESSAUTH     = 'SET_ACCESSAUTH';  //判断用户登陆状态
+export const SET_WXCODE         = 'SET_WXCODE';     //微信登陆code
 
