@@ -26,7 +26,7 @@
                 </li>
             </ul>
         </div>
-        <div class="exit">
+        <div class="exit" @click="loginOut()">
             <input type="button" value="退出当前账号">
         </div>
         <div class="bottom">
@@ -50,6 +50,7 @@ export default {
     ])
   },
   methods:{
+    ...mapActions({setSignOut:'setSignOut'}),
     //去风险承受能力评估
     goRisk() {
       let userId = this.userInfo.ID;
@@ -66,6 +67,10 @@ export default {
           window.location.href = url;
         }
       })
+    },
+    loginOut(){
+      this.setSignOut()
+      this.$router.push({path: '/home'})
     }
   }
 }

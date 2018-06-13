@@ -290,13 +290,14 @@ function queryNewAddPersonAsync(REQUEST_NO,METHOD_NAME,METHOD_TYPE,USER_ID,USER_
  * @param USER_ID
  * @param USER_TYPE
  */
-function xwbankWebNotify (platformUserNo, cust_type, userRole, USER_ID, USER_TYPE) {
+function xwbankWebNotify (platformUserNo, cust_type, userRole, USER_ID, USER_TYPE,redirectUrl) {
   return phtServer.globalPostData(urls.api_url_activateStockedUser, phtServer.submitData({
     "platformUserNo": platformUserNo,
     "cust_type": cust_type,
     "userRole":userRole,
     "USER_ID":USER_ID,
-    "USER_TYPE":USER_TYPE
+    "USER_TYPE":USER_TYPE,
+    "redirectUrl":redirectUrl
   }))
 }
 
@@ -318,6 +319,7 @@ export  {
   selectXwBank,
   DdProj,
   selectMoneyManagementZTYD,
-  WeiXinnewLogin
+  WeiXinnewLogin,
+  xwbankWebNotify
 }
 

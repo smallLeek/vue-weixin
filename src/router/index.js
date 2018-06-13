@@ -205,6 +205,7 @@ const router = new VueRouter({
     },
     {  path: '/asyncReturn',
       component: asyncReturn,
+      meta: {allowBack: false}
 
     }
   ]

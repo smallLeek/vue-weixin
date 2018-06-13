@@ -3,7 +3,7 @@ import {phtServer} from '../../assets/js/phtServer'
 
 const state = {
   // 用户登录状态
-  loginStatus: phtServer.getStore('loginStatus')|| false,
+  loginStatus: JSON.parse(phtServer.getStore('loginStatus'))|| false,
   // 用户登录信息
   userInfo: JSON.parse(phtServer.getStore('userInfo')) || {},
   // 用户数据信息
@@ -17,7 +17,8 @@ const state = {
   //判断是否需要登陆是否需要实名然后然后去哪
   accessAuth:JSON.parse(phtServer.getStore('accessAuth')) || {},
   //微信授权登陆code
-  wxCode : phtServer.getStore('wxCode') || null
+  wxCode : phtServer.getStore('wxCode') || null,
+  xwBank:null
 
 }
 
@@ -88,7 +89,17 @@ const actions = {
   setwxCode({commit},res){
     phtServer.setStore('wxCode', res)
     commit (types.SET_WXCODE,res)
-  }
+  },
+  /**
+   * 新网提示信息
+   * @param commit
+   * @param xwBank
+   * @constructor
+   */
+  USER_XW_BANK( { commit }, xwBank ){
+    commit(types.USER_XW_BANK, xwBank)
+
+  },
 
 
 }
@@ -100,7 +111,9 @@ const getters = {
   isRealName: state => state.isRealName,
   isRealNameUrl:state =>state.isRealNameUrl,
   accessAuth:state =>state.accessAuth,
-  wxCode:state => state.wxCode
+  wxCode:state => state.wxCode,
+  //新网提示信息
+  xwBank:state =>state.xwBank,
 }
 
 const mutations = {
@@ -166,6 +179,11 @@ const mutations = {
   [types.SET_WXCODE](state, status) {
     state.wxCode = status
   },
+  //xwBank
+  [types.USER_XW_BANK] ( state, xwBank){
+    state.xwBank = xwBank
+
+  }
 
 
 }

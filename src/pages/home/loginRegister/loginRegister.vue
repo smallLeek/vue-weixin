@@ -1,6 +1,5 @@
 <template>
     <div class="login">
-      {{userInfo}}
         <div class="head">
             <div class="tab">
                 <span>手机登录</span>
@@ -31,10 +30,12 @@
     </div>
 </template>
 <script>
+import store from '../../../vuex/store'
 import * as regexfun from '../../../../src/assets/js/jwt.regex';
 import * as apis from '../../../assets/js/jwt.apis'
 import { phtServer } from '../../../assets/js/phtServer'
 import {mapGetters, mapActions,mapState} from 'vuex'
+import * as dealLogin from '../../../assets/js/jwt.accessAuth'
 export default {
      data(){
        return{
@@ -42,7 +43,7 @@ export default {
        }
      },
   created(){
-     this.logins()
+     // this.logins()
     this.code = this.$route.query.code
   },
     mounted(){
@@ -64,9 +65,9 @@ export default {
   },
     methods: {
       ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut'}),
-      logins(){
-        this.setSignOut();
-      },
+      // logins(){
+      //   this.setSignOut();
+      // },
       submit() {
            let flag=false;
            flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
@@ -75,6 +76,7 @@ export default {
            }
       },
       login() {
+        let userState = store.state.user
         let user_type="1";
         let phonenum = $('#phonenum').val();
         let password = phtServer.CalcuMD5lower($('#password').val());
@@ -87,10 +89,10 @@ export default {
             regexfun.handleFailMsg(this,data.message)
           }else if(data.status =='00000000'){
             let userInfoList = data.result.main_data.data[0]
-            console.log(userInfoList)
             this.setUserInfo(userInfoList);
             this.setIsRealName(userInfoList.STATE)
             this.getTokenCode(userInfoList.token);
+            location.href = location.origin +  userState.accessAuth.whereToGo
           }else {
             regexfun.handleFailMsg(this,data.message)
           }

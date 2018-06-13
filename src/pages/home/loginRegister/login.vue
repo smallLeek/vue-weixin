@@ -1,7 +1,6 @@
 <template>
     <div class="login">
         <div class="head">
-          {{loginStatus}}
             <div class="tab">
                 <span>手机登录</span>
                 <span>免费注册</span>

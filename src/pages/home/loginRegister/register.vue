@@ -160,7 +160,7 @@
 
         }
         //注册接口
-        apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile,'http://www.phtfdata.com/m/finance/register/isHand').then((data) => {
+        apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile,'http://www.phtfdata.com/wx/async').then((data) => {
           console.log(data)
           if (data.message == "成功!") {
             $('.xwUrl').append(data.result.main_data.url)

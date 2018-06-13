@@ -11,6 +11,7 @@
   import store from '../../vuex/store'
   import * as apis from '../../assets/js/jwt.apis'
   import {mapGetters, mapActions,mapState} from 'vuex'
+  import * as regexfun from '../../../src/assets/js/jwt.regex';
     export default {
         data(){
           return{
@@ -34,8 +35,6 @@
         ])
       },
       mounted(){
-
-          this.updateUserInfo()
       },
       methods:{
         ...mapActions({setUserInfo: 'setUserInfo'}),
@@ -43,7 +42,7 @@
         load() {
           let userState = store.state.user
           let self = this
-          this.count = 60
+          this.count = 20
           self.timer = setInterval(() => {
             if (self.count > 0 && self.count <= self.count) {
               self.count--;
@@ -52,10 +51,10 @@
               clearInterval(self.timer);
               clearInterval(self.timer1);
               self.timer = null;
-              self.timer1 = null
+              self.timer1 = null;
+              self.updateUserInfo();
               store.dispatch('USER_XW_BANK', '银行存管系统审核中...')
-
-
+              self.$router.push({path: '/asyncReturn'})
             }
           }, 1000)
           self.timer1 = setInterval(() => {
@@ -66,12 +65,12 @@
                 clearInterval(self.timer1);
                 self.timer = null;
                 self.timer1 = null;
-                //异步返回成功刷新用户信息
-
-
+                self.updateUserInfo();
+                store.dispatch('USER_XW_BANK', '操作成功')
+                this.$router.push({path: '/asyncReturn'})
               } else if (userData.XW_IS_ASYNC == '1' && userData.XW_ASYNC_STATE == '0') {
-                store.dispatch('USER_XW_BANK', '开通银行存管账户失败')
-                self.$router.push({path: '/finance/register/accountSuccess'})
+                store.dispatch('USER_XW_BANK', '银行存管失败')
+                self.$router.push({path:'/asyncReturn'})
 
               }
 
@@ -80,21 +79,22 @@
 
           }, 5000)
         },
-
-       //异步回来刷新用户信息
+        //异步回来刷新用户信息
         updateUserInfo(){
-         let  userId = store.state.user.userInfo.ID;
-         let  userType = store.state.user.userInfo.USER_TYPE;
+          let  userId = store.state.user.userInfo.ID;
+          let  userType = store.state.user.userInfo.USER_TYPE;
           apis.userBaseData(userId,userType).then((data) => {
-            let res = data.result.main_data
             if(data.status == '00000000'){
-              this.setUserInfo(res)
+              let res = data.result.main_data
+              this.setUserInfo(res);
+            }else {
+              regexfun.handleFailMsg(this,data.message)
             }
 
 
           })
 
-        }
+        },
       }
     }
 </script>

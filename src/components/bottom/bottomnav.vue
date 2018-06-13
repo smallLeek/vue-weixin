@@ -5,16 +5,32 @@
         <span><img src="../../../static/images/home.png"></span><span>首页</span>
         </router-link>
       </li>
-      <li>
-        <router-link to="/account">
+      <li @click="goAccount()">
         <span><img src="../../../static/images/user.png"></span><span>我的</span>
-        </router-link>
       </li>
     </div>
 </template>
 <script>
+  import * as dealLogin from '../../assets/js/jwt.accessAuth'
+  import {mapGetters, mapActions,mapState} from 'vuex'
 export default {
+     data(){
+       return{
 
+       }
+     },
+  computed: {
+    //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
+    ...mapGetters([
+      'accessAuth'
+    ])},
+  methods:{
+    ...mapActions({setAccessAuth: 'setAccessAuth'}),
+    goAccount(){
+    this.setAccessAuth({isNeedLogin:true,loginStatus:true,whereToGo:"/wx/account"});
+      dealLogin.dealLogin()
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
