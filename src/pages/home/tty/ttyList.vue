@@ -4,7 +4,7 @@
     <div class="tty_area">
       <div class="area_title">
         <img src="../../../../static/images/home/home_tty_title.png" class="area_title_img">
-        <!-- <router-link to="/ttyMore"><span>更多<img src="../../../static/images/home/more.png"></span></router-link> -->
+        <span v-on:click="goMore()">更多<img src="../../../../static/images/more.png"></span>
       </div>
       <!--天天盈项目-->
       <ul v-if="tty">
@@ -34,7 +34,7 @@
           <button v-on:click="ttyInvest" v-text="investText">立即投资</button>
         </li>
       </ul>
-      <ul class="noProject" v-show="false">
+      <ul class="noProject" v-if="!tty">
         <img src="../../../../static/images/home/noProject.png">
       </ul>
     </div>
@@ -68,6 +68,11 @@
           this.userData = data.result.main_data;
         })
       },
+      //查看更多
+      goMore() {
+        this.$router.push('/ttyMore')
+      },
+      //投资按钮
       getTty() {
         let userId = '';
         let userType = '1';
@@ -146,6 +151,8 @@
       float: right;
       font-size: 0.24rem;
       color: #999999;
+      line-height: 1rem;
+      display: inline-block;
       img {
         width: 0.15rem;
         height: auto;
@@ -274,5 +281,15 @@
     padding-left: 0.3rem;
     padding-right: 0.4rem;
     border-bottom: 1px solid #e5e5e5;
+  }
+  ul.noProject{
+    width: 3.41rem;
+    margin: 0.4rem auto;
+    border-bottom:none;
+    padding:0;
+    img{
+      width: 3.41rem;
+      height: 1.58rem;
+    }
   }
 </style>

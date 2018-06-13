@@ -6,7 +6,7 @@
           <img src="../../../../static/images/home/home_yyy_title.png" class="area_title_img">
         </div>
         <div>
-          <ul v-for="list in yyyData">
+          <ul v-for="list in yyyData" v-if="yyyData">
             <li v-text="list.PROJ_NAME"></li>
             <li>
                 <span>
@@ -30,6 +30,9 @@
               <span v-text="list.INVEST_PROGRESS+'%'"></span>
             </li>
           </ul>
+          <ul class="noProject" v-if="!yyyData">
+            <img src="../../../../static/images/home/noProject.png">
+          </ul>
         </div>
       </div>
     </div>
@@ -40,7 +43,7 @@
           <img src="../../../../static/images/home/home_dcy_title.png" class="area_title_img">
         </div>
         <div>
-          <ul v-for="list in dcyData">
+          <ul v-for="list in dcyData" v-if="dcyData">
             <li v-text="list.PROJ_NAME"></li>
             <li>
                 <span>
@@ -63,6 +66,9 @@
               <span><b><s :style="{width:list.INVEST_PROGRESS+'%'}"></s></b></span>
               <span v-text="(parseFloat(list.INVEST_PROGRESS)).toFixed(0)+'%'"></span>
             </li>
+          </ul>
+          <ul class="noProject" v-if="!dcyData">
+            <img src="../../../../static/images/home/noProject.png">
           </ul>
         </div>
       </div>
@@ -219,5 +225,15 @@
     padding-right: 0.4rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #e5e5e5;
+  }
+  ul.noProject{
+    width: 3.41rem;
+    margin: 0.4rem auto;
+    border-bottom:none;
+    padding:0;
+    img{
+      width: 3.41rem;
+      height: 1.58rem;
+    }
   }
 </style>
