@@ -16,6 +16,8 @@ const state = {
   isRealNameUrl:null,
   //判断是否需要登陆是否需要实名然后然后去哪
   accessAuth:JSON.parse(phtServer.getStore('accessAuth')) || {},
+  //微信授权登陆code
+  wxCode : phtServer.getStore('wxCode') || null
 
 }
 
@@ -77,6 +79,15 @@ const actions = {
   setAccessAuth({commit},res){
     phtServer.setStore('accessAuth', res)
     commit (types.SET_ACCESSAUTH,res)
+  },
+  /**
+   * 用于微信登陆的code
+   * @param commit
+   * @param res
+   */
+  setwxCode({commit},res){
+    phtServer.setStore('wxCode', res)
+    commit (types.SET_WXCODE,res)
   }
 
 
@@ -88,7 +99,8 @@ const getters = {
   tokenCode: state => state.tokenCode,
   isRealName: state => state.isRealName,
   isRealNameUrl:state =>state.isRealNameUrl,
-  accessAuth:state =>state.accessAuth
+  accessAuth:state =>state.accessAuth,
+  wxCode:state => state.wxCode
 }
 
 const mutations = {
@@ -145,6 +157,14 @@ const mutations = {
    */
   [types.SET_ACCESSAUTH](state, status) {
     state.accessAuth = status
+  },
+  /**
+   * 微信code
+   * @param state
+   * @param status
+   */
+  [types.SET_WXCODE](state, status) {
+    state.wxCode = status
   },
 
 

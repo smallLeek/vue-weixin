@@ -119,7 +119,7 @@ phtServer.submitData =function (params) {
     "device": "weixin",
     "platform": "WEIXIN",
     "projectid": "project_platform",
-    "version": "1.0"
+    "version": "2.0"
   }
   submitData.request={}
   params.TIMESTAMPS = phtServer.farmatDate();
