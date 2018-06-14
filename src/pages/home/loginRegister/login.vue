@@ -1,14 +1,6 @@
 <template>
-    <div class="login">
-        <div class="head">
-            <div class="tab">
-                <span>手机登录</span>
-                <span>免费注册</span>
-            </div>
-        </div>
         <div class="content">
             <div class="login_login">
-                <s></s>
                 <ul>
                     <li>
                         <span><img src="../../../../static/images/login/login_num.png"></span>
@@ -23,51 +15,75 @@
                 <p><router-link to="">找回密码？</router-link></p>
                 <input class="submit" @click="submit()"  type="button" value="提交">
             </div>
+            <div class="login_register">
+                register
+            </div>
         </div>
-    </div>
 </template>
 <script>
+import store from '../../../vuex/store'
 import * as regexfun from '../../../../src/assets/js/jwt.regex';
 import * as apis from '../../../assets/js/jwt.apis'
 import { phtServer } from '../../../assets/js/phtServer'
 import {mapGetters, mapActions,mapState} from 'vuex'
+import * as dealLogin from '../../../assets/js/jwt.accessAuth'
 export default {
+     data(){
+       return{
+         code:null
+       }
+     },
+  created(){
+    this.code = this.$route.query.code
+  },
     mounted(){
         $('#eye').click(function(){
             if($('#password').attr('type')=='password'){
                 $('#password').attr('type','text');
-                $(this).attr('src','../../../../static/images/login/login_eye_z.png')
+                $(this).attr('src',require('../../../../static/images/login/login_eye_z.png'))
             }else{
                 $('#password').attr('type','password');
-                $(this).attr('src','../../../../static/images/login/login_eye_b.png')
+                $(this).attr('src',require('../../../../static/images/login/login_eye_b.png'))
             }
         })
     },
   computed: {
       //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
     ...mapGetters([
-      'loginStatus','userInfo','tokenCode','isRealName'
+      'loginStatus','userInfo','tokenCode','isRealName','accessAuth'
     ])
   },
     methods: {
-      ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode'}),
+      ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut'}),
       submit() {
-          let flag=false;
-          flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
-          if(flag==true){
-              this.login()
-          }
+           let flag=false;
+           flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
+           if(flag == true){
+               this.login()
+           }
       },
       login() {
+        let userState = store.state.user
         let user_type="1";
         let phonenum = $('#phonenum').val();
         let password = phtServer.CalcuMD5lower($('#password').val());
         let pwd =phtServer.CalcuMD5lower($('#password').val());
-        apis.newLogin(phonenum, password, user_type).then((data) => {
+        apis.newLogin(phonenum, password, user_type,this.code).then((data) => {
           console.log(data)
-          this.setUserInfo(data.result.main_data.data[0]);
-          this.getTokenCode(JSON.parse(phtServer.getStore('userInfo')).token);
-          this.$router.push({ path: "/home" })
+          if(data.status =='6027'){
+            regexfun.handleFailMsg(this,data.message)
+          }else if (data.status=='6026'){
+            regexfun.handleFailMsg(this,data.message)
+          }else if(data.status =='00000000'){
+            let userInfoList = data.result.main_data.data[0]
+            this.setUserInfo(userInfoList);
+            this.setIsRealName(userInfoList.STATE)
+            this.getTokenCode(userInfoList.token);
+            location.href = location.origin +  userState.accessAuth.whereToGo
+          }else {
+            regexfun.handleFailMsg(this,data.message)
+          }
+
         })
       }
     }
@@ -76,25 +92,6 @@ export default {
 <style lang="less" scoped>
 .login{
     background-color: #f8f8f8;
-}
-.head{
-    height: 4.1rem;
-    background: url(../../../../static/images/login/login_bg.png);
-    background-size: 100% 100%;
-    position: relative;
-    .tab{
-        position: absolute;
-        left: 0;
-        bottom: 0.4rem;
-        width: 100%;
-        display: flex;
-        span{
-            flex: 1;
-            text-align: center;
-            font-size: 0.3rem;
-            color: #fff;
-        }
-    }
 }
 .content{
     padding: 0 0.3rem;
@@ -107,15 +104,6 @@ export default {
         position: relative;
         width: 6.9rem;
         margin: auto;
-        s{
-            position: absolute;
-            left: 1.45rem;
-            top: -0.44rem;
-            width: 0.2rem;
-            height: 0.2rem;
-            background-color: #f8f8f8;
-            transform: rotate(45deg)
-        }
         p{
             text-align: right;
             font-size: 0.27rem;
@@ -127,7 +115,7 @@ export default {
             li{
                 width: 100%;
                 height: 0.9rem;
-                line-height: 0.7rem;
+                line-height: 0.9rem;
                 background-color: #fff;
                 span{
                     height: 0.9rem;
@@ -178,13 +166,16 @@ export default {
             margin: auto;
             border-radius: 0.06rem;
             font-size: 0.35rem;
-            background-color: #fc7f7f;
+            background-color: #fb4747;
             border: none;
             color: #fff;
         }
         input.on{
             background-color: #fb4747;
         }
+    }
+    .login_register{
+
     }
 }
 </style>

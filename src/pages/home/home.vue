@@ -111,7 +111,7 @@ export default {
     $('.bottom li:first-child').addClass('on')
     this.announcementList();
     this.dataStatistics();
-    this.getUserInfo();
+    // this.getUserInfo();
   },
   created(){
      this.code = this.$route.query.code
@@ -169,7 +169,6 @@ export default {
     },
     getUserInfo() {
     this.setAccessAuth({'isNeedLogin':true,'isNeedRealName':true,'whereToGo':'/home'});
-    console.log(store.state.user.userInfo.STATE);
     },
     //判断用户是否使用微信登陆过
     isLoginWeiXIn (){

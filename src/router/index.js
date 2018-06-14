@@ -165,11 +165,15 @@ const router = new VueRouter({
     },
     {
       path: '/loginRegister',
-      component: loginRegister,
+      redirect: '/loginRegister/login'
     },
     {
-      path: '/login',
-      component: login,
+      path: '/loginRegister',
+      component: loginRegister,
+      children: [
+        { path: "/loginRegister/register", component: register },
+        { path: "/loginRegister/login", component: login }
+      ]
     },
     {
       path: '/security',
@@ -197,10 +201,6 @@ const router = new VueRouter({
     },
     {  path: '/register',
       component: register,
-
-    },
-    {  path: '/async',
-      component: async,
 
     },
     {  path: '/asyncReturn',
