@@ -91,6 +91,7 @@
   import * as apis from '../../assets/js/jwt.apis'
   import '../../assets/js/filter'
   import {mapGetters, mapActions,mapState} from 'vuex'
+  import * as regexfun from '../../../src/assets/js/jwt.regex';
   export default {
      data () {
       return {
@@ -108,7 +109,7 @@
     this.newAccountDataForApp()
     $('.bottom li:last-child img').attr('src',require('../../../static/images/userOn.png'))
     $('.bottom li:last-child').addClass('on')
-    
+
   },
   methods:{
      //我的-资产总计(元)/可用余额(元)/累计收益
@@ -116,10 +117,15 @@
       let userId = this.userInfo.ID;
       let userType = this.userInfo.USER_TYPE;
       apis.newAccountDataForApp(userId,userType).then( (data) => {
-        let AccountData = data.result.main_data.data[0];
-        this.amount_count =AccountData.AMOUNT_COUNT;
-        this.available_balance   =AccountData.AVAILABLE_BALANCE;
-        this.lj_amount_count =AccountData.LJ_AMOUNT_COUNT;
+        if(data.status == '00000000'){
+          let AccountData = data.result.main_data.data[0];
+          this.amount_count =AccountData.AMOUNT_COUNT;
+          this.available_balance   =AccountData.AVAILABLE_BALANCE;
+          this.lj_amount_count =AccountData.LJ_AMOUNT_COUNT;
+        }else {
+          regexfun.handleFailMsg(this,data.message)
+        }
+
       })
     },
     shareInvitationShow(){
