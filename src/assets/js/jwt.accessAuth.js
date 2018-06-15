@@ -31,7 +31,7 @@ import * as apis from './jwt.apis'
  */
 function dealRealName () {
   let userInfoList = userState.userInfo
-  apis.xwbankWebNotify(userInfoList.YJF_ID, userInfoList.USER_TYPE, userInfoList.USER_ROLE, userInfoList.ID, userInfoList.USER_TYPE,'http://www.phtfdata.com/wx/async').then((data) => {
+  apis.xwbankWebNotify(userInfoList.YJF_ID, "1", userInfoList.USER_ROLE, userInfoList.ID, "1",'http://localhost:8080/wx/async').then((data) => {
     $('.xwUrl').append(data.result.main_data.url)
 
   })
