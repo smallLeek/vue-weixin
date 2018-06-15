@@ -33,15 +33,18 @@
         </a>
       </div>
       <b class="shuxian"></b>
-      <div class="news_content">
-        <div id="rollText">
-            <router-link  v-for="(item,index) in announcement" :key="index" :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}">
-              <img src="../../../static/images/home/home_announcement_sign.png">
-              <span v-text="item.NOTICE_TITLE"></span>
+
+        <marquee class="news_content" style="background: #007aff; height: 0.7rem;">
+          <marquee-item v-for="(item,index) in announcement" :key="index">
+
+            <router-link :to="{path: 'news', query: {  id: item.ID ,url: '/wx/home'}}">
+            <img src="../../../static/images/home/home_announcement_sign.png">
+            {{item.NOTICE_TITLE}}
             </router-link>
-          <br />
-        </div>
-      </div>
+          </marquee-item>
+
+        </marquee>
+
     </div>
     <!-- 天天盈专区 -->
     <tty-list></tty-list>
@@ -77,6 +80,7 @@
 </template>
 
 <script>
+  import { Marquee, MarqueeItem } from 'vux'
   import phtModal from '../../components/modal/modal.vue';
   import loop from '../../components/loop/loop.vue';
   import phtLoading from '../../components/loading/loading.vue';
@@ -128,28 +132,15 @@ export default {
     announcementList(){
         let that =this;
         apis.indexNotice().then((data)=> {
+          debugger
           if(data.status =='00000000'){
             this.announcement =data.result.main_data.data;
+            console.log(announcement)
           }else {
+            debugger
             regexfun.handleFailMsg(this,data.message)
           }
-    setTimeout(function(){
-        var positionTop=0;
-        var textDiv = document.getElementById("rollText");
-        var newslist = textDiv.getElementsByTagName("a").length;
-        var hang=Math.ceil(newslist/2)
-        const hangnum=hang;
-          setInterval(function(){
-             hang--;
-             if(hang<=0){
-             hang=hangnum;
-             positionTop=0
-               }else{
-             positionTop-=0.75
-    }
-    $('#rollText').css('top',positionTop+'rem')
-  },5000)
-},100)
+
 
         });
     },
@@ -198,7 +189,9 @@ export default {
     ttyList,
     investList,
     Swiper,
-    SwiperItem
+    SwiperItem,
+    Marquee,
+    MarqueeItem
   }
 
 }
