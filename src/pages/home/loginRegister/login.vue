@@ -12,7 +12,7 @@
                         <span><img id="eye" src="../../../../static/images/login/login_eye_b.png"></span>
                     </li>
                 </ul>
-                <p><router-link to="">找回密码？</router-link></p>
+                <p><router-link to="/getBackPassword">找回密码？</router-link></p>
                 <input class="submit" @click="submit()"  type="button" value="提交">
             </div>
             <div class="login_register">
