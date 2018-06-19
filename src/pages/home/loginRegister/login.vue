@@ -1,5 +1,5 @@
 <template>
-        <div class="content">
+        <div class="content" v-title="'登陆'">
             <div class="login_login">
                 <ul>
                     <li>
@@ -69,7 +69,6 @@ export default {
         let password = phtServer.CalcuMD5lower($('#password').val());
         let pwd =phtServer.CalcuMD5lower($('#password').val());
         apis.newLogin(phonenum, password, user_type,this.code).then((data) => {
-          console.log(data)
           if(data.status =='6027'){
             regexfun.handleFailMsg(this,data.message)
           }else if (data.status=='6026'){
@@ -169,6 +168,7 @@ export default {
             background-color: #fb4747;
             border: none;
             color: #fff;
+            outline:none;
         }
         input.on{
             background-color: #fb4747;

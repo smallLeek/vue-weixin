@@ -18,7 +18,8 @@ const state = {
   accessAuth:JSON.parse(phtServer.getStore('accessAuth')) || {},
   //微信授权登陆code
   wxCode : phtServer.getStore('wxCode') || null,
-  xwBank:null
+  xwBank:null,
+  xwInfo:false
 
 }
 

@@ -72,6 +72,7 @@
   import { phtServer } from '../../assets/js/phtServer'
   import * as apis from '../../assets/js/jwt.apis'
   import '../../assets/js/filter'
+  import * as regexfun from '../../../src/assets/js/jwt.regex';
   export default {
     data() {
       return {
@@ -115,21 +116,26 @@
         let userId = this.userInfo.ID;
         let userType = this.userInfo.USER_TYPE;
         apis.userBaseData(userId,userType).then( (data) => {
-          let userData = data.result.main_data;
-          this.picture_url = userData.PICTURE_URL;
-          this.day_limit = userData.DAY_LIMIT;
-          this.single_limit = userData.SINGLE_LIMIT;
-          this.month_limit = userData.MONTH_LIMIT;
-          this.user_role = userData.USER_ROLE;
-          this.bank_code = userData.BANK_CODE;
-          this.bank_no = userData.BANK_NO;
-          this.balance = userData.BALANCE;
-          this.dj_balance = userData.DJ_BALANCE;
-          this.available_balance = userData.AVAILABLE_BALANCE;
-          this.bank_name = userData.BANK_NAME;
-          this.total_limit = userData.TOTAL_LIMIT;
-          this.bankcodeLast =this.bank_name  + "尾号:"+phtServer.farmatBankcode(this.bank_no);
-          this.rechargeLast = this.available_balance;
+          if(data.status == '00000000'){
+            let userData = data.result.main_data;
+            this.picture_url = userData.PICTURE_URL;
+            this.day_limit = userData.DAY_LIMIT;
+            this.single_limit = userData.SINGLE_LIMIT;
+            this.month_limit = userData.MONTH_LIMIT;
+            this.user_role = userData.USER_ROLE;
+            this.bank_code = userData.BANK_CODE;
+            this.bank_no = userData.BANK_NO;
+            this.balance = userData.BALANCE;
+            this.dj_balance = userData.DJ_BALANCE;
+            this.available_balance = userData.AVAILABLE_BALANCE;
+            this.bank_name = userData.BANK_NAME;
+            this.total_limit = userData.TOTAL_LIMIT;
+            this.bankcodeLast =this.bank_name  + "尾号:"+phtServer.farmatBankcode(this.bank_no);
+            this.rechargeLast = this.available_balance;
+          }else {
+            regexfun.handleFailMsg(this,data.message)
+          }
+
         })
       },
       //充值后余额
