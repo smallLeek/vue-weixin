@@ -24,6 +24,7 @@ const paymentOrder = resolve => require(['../pages/account/paymentOrder.vue'], r
 const loginRegister = resolve => require(['../pages/home/loginRegister/loginRegister.vue'], resolve);
 const login = resolve => require(['../pages/home/loginRegister/login.vue'], resolve);
 const register = resolve => require(['../pages/home/loginRegister/register.vue'], resolve);
+const getBackPassword = resolve => require(['../pages/home/loginRegister/getBackPassword.vue'], resolve);
 
 // 天天盈账户
 const beingCapital = resolve => require(['../pages/account/ttyAccount/beingCapital.vue'], resolve);
@@ -176,6 +177,10 @@ const router = new VueRouter({
         { path: "/loginRegister/register", component: register },
         { path: "/loginRegister/login", component: login }
       ]
+    },
+    {
+      path: '/getBackPassword',
+      component: getBackPassword,
     },
     {
       path: '/security',
