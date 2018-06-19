@@ -1,6 +1,5 @@
 <template>
     <div class="setting">
-      {{tokenCode}}
         <div class="title">
             <router-link to="/account">
                 <img src="../../../../static/images/goBack.png">

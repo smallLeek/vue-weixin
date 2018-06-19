@@ -101,8 +101,13 @@ phtServer.addSign = function (params) {
   sig.init(prvKey);
   let paramsInfo =objKeySort(params.params)
   let paramsData ={}
-  paramsData.params =paramsInfo
-  paramsData.tokenCode = params.tokenCode;
+
+  if(params.tokenCode== null){
+    paramsData.params =paramsInfo
+  }else {
+    paramsData.params =paramsInfo
+    paramsData.tokenCode = params.tokenCode;
+  }
   sig.updateString(JSON.stringify(objKeySort(paramsData)));
   let signs = Jsrsasign.hex2b64(sig.sign())
   let sign = encodeURIComponent(signs ,"UTF-8")
