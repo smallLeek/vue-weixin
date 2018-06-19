@@ -77,9 +77,8 @@
         <input type="text" placeholder="投资金额">
         <span>元</span>
       </div>
-      <div class="input_submit">
-        <router-link to="">立即投资</router-link>
-        <!-- <router-link to="" class="end">已售罄</router-link> -->
+      <div class="input_submit" @click="investUp">
+        <a>立即投资</a>
       </div>
     </div>
   </div>
@@ -96,6 +95,9 @@
       //去安全保障
       goMoneySafe() {
        window.location.href = "https://www.phtfdata.com/web6/hander/bxprotectedNew.do"
+      },
+      investUp(){
+
       }
     }
   }

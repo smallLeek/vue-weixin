@@ -110,6 +110,7 @@ function selectXwBank(BIND_TYPE, PAY_FLAG){
  * @param LOGIN_CODE
  * @param PASSWORD
  * @param USER_TYPE
+ * @param CODE
  */
 
 function newLogin(LOGIN_CODE,PASSWORD,USER_TYPE,CODE){
@@ -222,13 +223,14 @@ function newAddPersonXW(MOBILE,LOGIN_CODE,PASSWORD,MOBILE_VER_CODE,RECO_TEL,CHAN
 }
 
 /**
- * 新用户注册
+ *  新用户注册
  * @param MOBILE
  * @param LOGIN_CODE
  * @param PASSWORD
- * @param NEWPASSWORD
  * @param MOBILE_VER_CODE
  * @param RECO_TEL
+ * @param redirectUrl
+ * @returns {*}
  * @constructor
  */
 function XWnewAddPerson(MOBILE,LOGIN_CODE,PASSWORD,MOBILE_VER_CODE,RECO_TEL,redirectUrl) {

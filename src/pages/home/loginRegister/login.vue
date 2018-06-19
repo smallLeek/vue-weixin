@@ -68,7 +68,7 @@ export default {
         let phonenum = $('#phonenum').val();
         let password = phtServer.CalcuMD5lower($('#password').val());
         let pwd =phtServer.CalcuMD5lower($('#password').val());
-        apis.newLogin(phonenum, password, user_type,this.code).then((data) => {
+        apis.newLogin(phonenum, pwd, "1",this.code).then((data) => {
           if(data.status =='6027'){
             regexfun.handleFailMsg(this,data.message)
           }else if (data.status=='6026'){
