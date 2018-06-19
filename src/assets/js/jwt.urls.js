@@ -2,13 +2,13 @@
 import {env} from './config/api.config'
 
 
-const version = '1.0';
+ const version = '1.0';
  //const version = '2.0';
 /**
  * 2。0是2.0 1。0的时候是''
  * @type {string}
  */
- const XinWangversion = '';
+const XinWangversion = '';
 //const XinWangversion = '/2.0';
 
 

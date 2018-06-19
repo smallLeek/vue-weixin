@@ -43,6 +43,7 @@
 <script>
   import * as apis from '../../../assets/js/jwt.apis'
   import {mapGetters, mapActions, mapState} from 'vuex'
+  import * as dealLogin from '../../../assets/js/jwt.accessAuth'
 
   export default {
     data() {
@@ -54,13 +55,14 @@
     },
     computed: {
       ...mapGetters(
-        ['loginStatus', 'userInfo', 'tokenCode']
+        ['loginStatus', 'userInfo', 'tokenCode','accessAuth']
       )
     },
     mounted() {
       this.getTty();
     },
     methods: {
+      ...mapActions({setAccessAuth: 'setAccessAuth'}),
       getBaseData() {
         let userId = this.userInfo.ID;
         let userType = this.userInfo.USER_TYPE;
@@ -100,6 +102,8 @@
          * INVEST_END_DATETIME 委托授权  0:否 1：是
          * IS_Expired 1：未过期  0：过期
          */
+        this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/ttyParticulars"});
+        dealLogin.dealLogin();
         if (this.loginStatus == true) {
           this.getBaseData();
           let proj_status = this.tty.PROJ_STATUS;

@@ -34,7 +34,7 @@
       </div>
       <b class="shuxian"></b>
 
-        <marquee class="news_content" style="background: #007aff; height: 0.7rem;">
+        <marquee class="news_content" style=" height: 0.7rem;">
           <marquee-item v-for="(item,index) in announcement" :key="index">
 
             <router-link :to="{path: 'news', query: {  id: item.ID ,url: '/wx/home'}}">
@@ -132,12 +132,10 @@ export default {
     announcementList(){
         let that =this;
         apis.indexNotice().then((data)=> {
-          debugger
           if(data.status =='00000000'){
             this.announcement =data.result.main_data.data;
             console.log(announcement)
           }else {
-            debugger
             regexfun.handleFailMsg(this,data.message)
           }
 

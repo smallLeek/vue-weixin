@@ -6,31 +6,34 @@ import * as apis from './jwt.apis'
  */
  export function dealLogin () {
   let userState = store.state.user
-  if (userState.accessAuth.isNeedLogin == true && userState.loginStatus == false) {
+  let userStates = userState.userInfo.STATE;
+if(userState.accessAuth.isNeedLogin == true){
+
+  if (userState.loginStatus == false) {
     location.href = location.origin + "/wx/loginRegister"
-  }else if(userState.accessAuth.isNeedLogin == true && userState.loginStatus == true){
+  }else if(userState.isNeedRealName == false){
+
     location.href = location.origin +  userState.accessAuth.whereToGo
   }
-
-  if (userState.isRealName==3) {
-    location.href = location.origin + userState.accessAuth.whereToGo
-
-  } else if(userState.isRealName!=3 && userState.accessAuth.isNeedRealName == false){
-
-    location.href = location.origin + userState.accessAuth.whereToGo
   }
-  else if(userState.isRealName!=3 && userState.accessAuth.isNeedRealName == true) {
-
+  if ( userStates== "3") {
+    location.href = location.origin + userState.accessAuth.whereToGo
+  } else {
+   if(userState.accessAuth.isNeedRealName == false){
+    location.href = location.origin + userState.accessAuth.whereToGo
+  } else {
     dealRealName();
 
   }
+  }
 
-};
+}
 /**
  * 处理实名
  */
 function dealRealName () {
-  let userInfoList = userState.userInfo
+  let userState = store.state.user;
+  let userInfoList = userState.userInfo;
   apis.xwbankWebNotify(userInfoList.YJF_ID, "1", userInfoList.USER_ROLE, userInfoList.ID, "1",'http://localhost:8080/wx/async').then((data) => {
     $('.xwUrl').append(data.result.main_data.url)
 
