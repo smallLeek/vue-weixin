@@ -8,8 +8,6 @@ const state = {
   userInfo: JSON.parse(phtServer.getStore('userInfo')) || {},
   // 用户数据信息
   userData: [],
-  //用户的token
-  tokenCode: null,
   //用户实名状态
   isRealName: null,
   //实名的url
@@ -18,6 +16,8 @@ const state = {
   accessAuth:JSON.parse(phtServer.getStore('accessAuth')) || {},
   //微信授权登陆code
   wxCode : phtServer.getStore('wxCode') || null,
+  //token
+  tokenCode:phtServer.getStore('tokenCode') || null,
   xwBank:null,
   xwInfo:false
 
@@ -45,8 +45,10 @@ const actions = {
   setSignOut({commit}) {
     phtServer.removeStore('loginStatus')
     phtServer.removeStore('userInfo')
+    phtServer.removeStore('tokenCode');
+    phtServer.removeStore('accessAuth');
     commit(types.SET_LOGIN_STATUS, false)
-    commit(types.SET_USER_INFO, {})
+    commit(types.SET_USER_INFO, {});
   },
   /**
    * 获取tokenCode
@@ -54,6 +56,7 @@ const actions = {
    * @param res
    */
   getTokenCode({commit}, res) {
+    phtServer.setStore('tokenCode',res)
     commit(types.SET_TOKEN_CODE, res)
   },
   /**
@@ -83,15 +86,6 @@ const actions = {
     commit (types.SET_ACCESSAUTH,res)
   },
   /**
-   * 用于微信登陆的code
-   * @param commit
-   * @param res
-   */
-  setwxCode({commit},res){
-    phtServer.setStore('wxCode', res)
-    commit (types.SET_WXCODE,res)
-  },
-  /**
    * 新网提示信息
    * @param commit
    * @param xwBank
@@ -112,7 +106,6 @@ const getters = {
   isRealName: state => state.isRealName,
   isRealNameUrl:state =>state.isRealNameUrl,
   accessAuth:state =>state.accessAuth,
-  wxCode:state => state.wxCode,
   //新网提示信息
   xwBank:state =>state.xwBank,
 }
@@ -171,14 +164,6 @@ const mutations = {
    */
   [types.SET_ACCESSAUTH](state, status) {
     state.accessAuth = status
-  },
-  /**
-   * 微信code
-   * @param state
-   * @param status
-   */
-  [types.SET_WXCODE](state, status) {
-    state.wxCode = status
   },
   //xwBank
   [types.USER_XW_BANK] ( state, xwBank){
