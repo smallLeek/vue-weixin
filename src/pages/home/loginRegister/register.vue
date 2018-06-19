@@ -152,7 +152,7 @@
         apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile,'http://localhost:8080/wx/async').then((data) => {
           if (data.message == "成功!") {
             this.setAccessAuth({isNeedLogin:true,loginStatus:true,whereToGo:"/wx/home"});
-            $('.xwUrl').append(data.result.main_data.url)
+           // $('.xwUrl').append(data.result.main_data.url)
 
           } else if(data.status =="6015") {
             regexfun.handleFailMsg(self, "验证码输入有误!");

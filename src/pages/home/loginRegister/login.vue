@@ -76,9 +76,9 @@ export default {
           }else if(data.status =='00000000'){
             let userInfoList = data.result.main_data.data[0]
             this.setUserInfo(userInfoList);
-            this.setIsRealName(userInfoList.STATE)
+            this.setIsRealName(userInfoList.STATE);
             this.getTokenCode(userInfoList.token);
-            location.href = location.origin +  userState.accessAuth.whereToGo
+            dealLogin.dealLogin();
           }else {
             regexfun.handleFailMsg(this,data.message)
           }

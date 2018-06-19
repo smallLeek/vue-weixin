@@ -102,6 +102,7 @@ phtServer.addSign = function (params) {
   let paramsInfo =objKeySort(params.params)
   let paramsData ={}
   paramsData.params =paramsInfo
+  paramsData.tokenCode = params.tokenCode;
   sig.updateString(JSON.stringify(objKeySort(paramsData)));
   let signs = Jsrsasign.hex2b64(sig.sign())
   let sign = encodeURIComponent(signs ,"UTF-8")
@@ -114,7 +115,7 @@ phtServer.addSign = function (params) {
  */
 phtServer.submitData =function (params) {
   let submitData ={};
-  submitData.header ={
+ submitData.header ={
     "clientid": "",
     "device": "weixin",
     "platform": "WEIXIN",
@@ -123,10 +124,10 @@ phtServer.submitData =function (params) {
   }
   submitData.request={}
   params.TIMESTAMPS = phtServer.farmatDate();
-  submitData.request = {"params":params}
+  submitData.request.params = params
   submitData.saveOperTokenCode =''
-  submitData.tokenCode =store.state.user.userInfo.token
-  submitData.sign = phtServer.addSign( submitData.request)
+  submitData.request.tokenCode =store.state.user.tokenCode;
+  submitData.sign = phtServer.addSign(submitData.request);
   return submitData
 };
 /**
