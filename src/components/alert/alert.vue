@@ -32,9 +32,15 @@
 <style>
   .alert{
     position: fixed;
-    top: 50%;
-    left: 25%;
-    width: 4rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width:fit-content;
+    width:-webkit-fit-content;
+    width:-moz-fit-content;
+    padding: 0 .3rem 0 0.3rem;
     height: 0.8rem;
     line-height: 0.8rem;
     border: 0.01rem solid #CCC;

@@ -71,7 +71,7 @@ export default{
     isMust:true,
     rules:[
       {
-        rule:/^\\d{6}$/,
+        rule:/^\d{6}$/,
         description:'短信验证码由6位数字组成'
       }
     ]
@@ -82,7 +82,7 @@ export default{
     isMust:true,
     rules:[
       {
-        rule:/^\\d{6}$/,
+        rule:/^\d{6}$/,
         description:'交易密码由6位数字组成'
       }
     ]

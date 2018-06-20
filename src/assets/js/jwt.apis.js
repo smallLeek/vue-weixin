@@ -110,6 +110,7 @@ function selectXwBank(BIND_TYPE, PAY_FLAG){
  * @param LOGIN_CODE
  * @param PASSWORD
  * @param USER_TYPE
+ * @param CODE
  */
 
 function newLogin(LOGIN_CODE,PASSWORD,USER_TYPE,CODE){
@@ -191,6 +192,21 @@ function sendMessageMobileValidCode(MOBILE,USER_TYPE,VALID_TYPE) {
 }
 
 /**
+ * 找回密码时 发送的验证码
+ * @param MOBILE
+ * @param USER_TYPE
+ * @param VALID_TYPE
+ * @returns {*}
+ */
+function sendMessageValidCode(MOBILE,USER_TYPE,VALID_TYPE) {
+  return phtServer.globalPostData(urls.api_url_sendMessageValidCode,phtServer.submitData({
+    "MOBILE": MOBILE,
+    "USER_TYPE": USER_TYPE,
+    "VALID_TYPE": VALID_TYPE,
+  }))
+}
+
+/**
  * 融资端注册
  * @param MOBILE
  * @param LOGIN_CODE
@@ -222,13 +238,14 @@ function newAddPersonXW(MOBILE,LOGIN_CODE,PASSWORD,MOBILE_VER_CODE,RECO_TEL,CHAN
 }
 
 /**
- * 新用户注册
+ *  新用户注册
  * @param MOBILE
  * @param LOGIN_CODE
  * @param PASSWORD
- * @param NEWPASSWORD
  * @param MOBILE_VER_CODE
  * @param RECO_TEL
+ * @param redirectUrl
+ * @returns {*}
  * @constructor
  */
 function XWnewAddPerson(MOBILE,LOGIN_CODE,PASSWORD,MOBILE_VER_CODE,RECO_TEL,redirectUrl) {
@@ -300,9 +317,20 @@ function xwbankWebNotify (platformUserNo, cust_type, userRole, USER_ID, USER_TYP
     "redirectUrl":redirectUrl
   }))
 }
+function passwordRetrieval(bindPhoneNum,msgCode,newPwd) {
+  return phtServer.globalPostData(urls.api_url_passwordRetrieval,phtServer.submitData({
+    "MOBILE":bindPhoneNum,
+    "MOBILE_VER_CODE":msgCode,
+    "PASSWORD":newPwd,
+    "USER_TYPE":"1",
+  }))
+
+}
 
 export  {
+  passwordRetrieval,
   sendMessageMobileValidCode,
+  sendMessageValidCode,
   newAddPersonXW,
   XWnewAddPerson,
   getBanner,

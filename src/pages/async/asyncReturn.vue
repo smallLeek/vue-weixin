@@ -1,8 +1,9 @@
 <template>
-    <div class="asyncReturn" v-title="'异步返回'">
-      <div class="herd_box"><img src="../../../static/images/asnyc/banner@2x.png" alt=""></div>
+    <div class="asyncReturn" v-title="'操作成功'">
+      <div class="herd_box"><img src="../../../static/images/async/banner@2x.png" alt=""></div>
       <div class="registerCon">
-        <img src="../../../static/images/asnyc/success.png" alt="">
+        <img src="../../../static/images/async/success.png" alt="">
+        <p class="bank">恭喜！</p>
         <p class="bank"><span>{{xwBank}}</span></p>
         <p class="sure" @click="sure">确定</p>
       </div>
@@ -12,7 +13,6 @@
 <script>
   import store from '../../vuex/store'
   import { mapGetters } from 'vuex';
-  import * as apis from '../../assets/js/jwt.apis'
     export default {
        data(){
          return{
@@ -22,14 +22,15 @@
       computed:{
 
         ...mapGetters([
-          'xwBank',
+          'xwBank'
         ]),
       },
       mounted(){
-         this.updateUserInfo()
       },
       methods:{
         sure(){
+          let userState = store.state.user
+          location.href = location.origin +  userState.accessAuth.whereToGo
 
         }
       }
@@ -47,6 +48,11 @@
   font-size: .3rem;
   line-height: .48rem;
   text-align: center;
+
+}
+.registerCon img{
+  height: .65rem;
+  width: .65rem;
 }
 .registerCon  p{
   margin-top: .3rem;

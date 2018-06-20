@@ -15,6 +15,7 @@
   import Swiper from '../../../static/idangerous.swiper'
   import * as apis from '../../assets/js/jwt.apis'
   import {mapGetters, mapActions,mapState} from 'vuex'
+  import * as userAge from '../../assets/js/jwt.userUrl'
   export default {
     data() {
       return {
@@ -28,12 +29,32 @@
       ])
     },
     mounted () {
-      this.loopBanner()
+      this.loopBanner();
+      let that = this;
+      that.swiper = new Swiper('.swiper-container', {
+        loop: true,
+        autoplay: 5000,
+        paginationClickable: true,
+        preventClicks: false,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        noSwiping: true,
+        effect: false,
+        autoplayDisableOnInteraction: false,
+        observer: true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents:true,
+        onSlideChangeEnd: function (swiper) {
+          swiper.update()
+        }
+      });
+
     },
     methods:{
       loopBanner () {
         let that =this;
         apis.getBanner("huoqiapp_banner").then((data)=> {
+          that.swiper.startAutoplay()
+          that.swiper.reLoop()
           this.bannerList =data.result.main_data.data;
           //加风险评估页面
           let addBanner = {
@@ -50,8 +71,7 @@
           }
           if(this.loginStatus == true){
             let userId = this.userInfo.ID;
-            let userType = this.userInfo.USER_TYPE;
-            apis.userBaseData(userId,userType).then( (data) => {
+            apis.userBaseData(userId,'1').then( (data) => {
               this.userData = data.result.main_data;
               let investscore  = this.userData.INVESTSCORE;
               let invest_score = this.userData.INVEST_SCORE;
@@ -69,26 +89,6 @@
             this.bannerList.push(addBanner)
           }
         });
-        setTimeout(function () {
-          let swiper = new Swiper('.swiper-container', {
-            loop: true,
-            autoplay: 5000,
-            paginationClickable: true,
-            preventClicks: false,
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            noSwiping: true,
-            effect: false,
-            autoplayDisableOnInteraction: false,
-            observer: true,//修改swiper自己或子元素时，自动初始化swiper
-            observeParents:true,
-            onSlideChangeEnd: function (swiper) {
-              swiper.update();
-              swiper.startAutoplay();
-              swiper.reLoop();
-            }
-          });
-        },500);
 
       },
       changeBanner (list) {
@@ -99,7 +99,7 @@
           if(this.loginStatus == true){
             window.open(list.LINK_COMMENT)
           }else{
-            window.open(window.location. origin + '/wx/loginRegister','_self');
+            location.href =  userAge.loginUrl()
           }
         }else{
           window.open(list.LINK_COMMENT)

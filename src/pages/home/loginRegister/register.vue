@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content" v-title="'注册'">
       <div class="register_content">
         <ul>
           <li>
@@ -45,6 +45,7 @@
   import {phtServer} from '../../../assets/js/phtServer'
   import {mapGetters, mapActions, mapState} from 'vuex'
   import {setInterval, setTimeout} from 'timers';
+  import * as dealLogin from '../../../assets/js/jwt.accessAuth'
   export default {
     data() {
       return {
@@ -64,6 +65,7 @@
 
     },
     methods: {
+      ...mapActions({setAccessAuth: 'setAccessAuth'}),
       //获取验证码
       getCode() {
         const TIME_COUNT = 60;
@@ -147,14 +149,11 @@
 
         }
         //注册接口
-        apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile,'http://www.phtfdata.com/wx/async').then((data) => {
-          console.log(data)
+        apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile,'http://localhost:8080/wx/async').then((data) => {
           if (data.message == "成功!") {
-            $('.xwUrl').append(data.result.main_data.url)
+            this.setAccessAuth({isNeedLogin:true,loginStatus:true,whereToGo:"/wx/home"});
+            //$('.xwUrl').append(data.result.main_data.url)
 
-             console.log(data.result.main_data.url)
-            // let url =data.result.main_data.url
-            // $('.xwUrl').append(url)
           } else if(data.status =="6015") {
             regexfun.handleFailMsg(self, "验证码输入有误!");
           }else {
@@ -357,6 +356,7 @@
         background-color: #fb4747;
         border: none;
         color: #fff;
+        outline:none;
       }
       input.on {
         background-color: #fb4747;

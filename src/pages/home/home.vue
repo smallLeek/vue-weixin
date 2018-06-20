@@ -33,15 +33,18 @@
         </a>
       </div>
       <b class="shuxian"></b>
-      <div class="news_content">
-        <div id="rollText">
-            <router-link  v-for="(item,index) in announcement" :key="index" :to="{path: 'news', query: {  id: item.ID ,url: 'home'}}">
-              <img src="../../../static/images/home/home_announcement_sign.png">
-              <span v-text="item.NOTICE_TITLE"></span>
+
+        <marquee class="news_content" style=" height: 0.7rem;">
+          <marquee-item v-for="(item,index) in announcement" :key="index">
+
+            <router-link :to="{path: 'news', query: {  id: item.ID ,url: '/wx/home'}}">
+            <img src="../../../static/images/home/home_announcement_sign.png">
+            {{item.NOTICE_TITLE}}
             </router-link>
-          <br />
-        </div>
-      </div>
+          </marquee-item>
+
+        </marquee>
+
     </div>
     <!-- 天天盈专区 -->
     <tty-list></tty-list>
@@ -77,6 +80,7 @@
 </template>
 
 <script>
+  import { Marquee, MarqueeItem } from 'vux'
   import phtModal from '../../components/modal/modal.vue';
   import loop from '../../components/loop/loop.vue';
   import phtLoading from '../../components/loading/loading.vue';
@@ -87,9 +91,9 @@
   import { Swiper,SwiperItem } from 'vux'
   import '../../assets/js/filter'
   import * as apis from '../../assets/js/jwt.apis'
-  import store from '../../vuex/store'
   import { setTimeout } from 'timers';
   import * as regexfun from '../../../src/assets/js/jwt.regex';
+  import * as urlReturn from '../../assets/js/jwt.userAgent'
 export default {
    data () {
     return {
@@ -103,13 +107,15 @@ export default {
 },
 
   mounted:function () {
-    this.isLoginWeiXIn()
     setTimeout(function(){
       $('.vux-swiper').css('height',parseInt($('.vux-swiper').css('height'))*2+'px')
     },10)
     $('.bottom li:first-child img').attr('src',require('../../../static/images/homeOn.png'))
     $('.bottom li:first-child').addClass('on')
     this.announcementList();
+    if(urlReturn.JwtUserAgentIsWeiXin()){
+      this.isLoginWeiXIn()
+    }
     this.dataStatistics();
     // this.getUserInfo();
   },
@@ -133,23 +139,7 @@ export default {
           }else {
             regexfun.handleFailMsg(this,data.message)
           }
-    setTimeout(function(){
-        var positionTop=0;
-        var textDiv = document.getElementById("rollText");
-        var newslist = textDiv.getElementsByTagName("a").length;
-        var hang=Math.ceil(newslist/2)
-        const hangnum=hang;
-          setInterval(function(){
-             hang--;
-             if(hang<=0){
-             hang=hangnum;
-             positionTop=0
-               }else{
-             positionTop-=0.75
-    }
-    $('#rollText').css('top',positionTop+'rem')
-  },5000)
-},100)
+
 
         });
     },
@@ -198,7 +188,9 @@ export default {
     ttyList,
     investList,
     Swiper,
-    SwiperItem
+    SwiperItem,
+    Marquee,
+    MarqueeItem
   }
 
 }

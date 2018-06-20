@@ -10,7 +10,7 @@
             <ul>
                 <li>
                     <span>登录手机号</span>
-                    <span>132****9371</span>
+                    <span></span>
                 </li>
             </ul>
             <h1>金梧桐账号信息</h1>
@@ -52,7 +52,17 @@
 </template>
 <script>
 export default {
-    
+    data(){
+      return {
+
+      }
+
+    },
+  computed:{
+    // ...mapGetters([
+    //   'loginStatus','userInfo','tokenCode'
+    // ])
+  },
 }
 </script>
 <style lang="less" scoped>

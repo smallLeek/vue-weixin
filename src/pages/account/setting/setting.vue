@@ -54,8 +54,7 @@ export default {
     //去风险承受能力评估
     goRisk() {
       let userId = this.userInfo.ID;
-      let userType = this.userInfo.USER_TYPE;
-      apis.userBaseData(userId,userType).then( (data) => {
+      apis.userBaseData(userId,'1').then( (data) => {
         this.userData = data.result.main_data;
         let investscore = this.userData.INVESTSCORE;
         let invest_score = this.userData.INVEST_SCORE;

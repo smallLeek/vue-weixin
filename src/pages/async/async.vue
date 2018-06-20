@@ -12,6 +12,7 @@
   import * as apis from '../../assets/js/jwt.apis'
   import {mapGetters, mapActions,mapState} from 'vuex'
   import * as regexfun from '../../../src/assets/js/jwt.regex';
+  import * as infoName from '../../assets/js/jwt.asyncInfo'
     export default {
         data(){
           return{
@@ -21,11 +22,13 @@
             status: null,
             request_no:null,
             method_name:null,
+            infoTitle:null
           }
         },
       created(){
         this.request_no= this.$route.query.REQUEST_NO;
         this.method_name= this.$route.query.METHOD_NAME;
+        this.infoTitle = this.request_no.substring(0, 3);
         this.load();
       },
       computed: {
@@ -59,20 +62,27 @@
           }, 1000)
           self.timer1 = setInterval(() => {
             apis.queryNewAddPersonAsync( self.request_no,self.method_name,'1',userState.ID,userState.USER_TYPE).then((data) => {
-              let userData = data.result.main_data;
-              if (userData.XW_IS_ASYNC == '1' && userData.XW_ASYNC_STATE == '1') {
-                clearInterval(self.timer);
-                clearInterval(self.timer1);
-                self.timer = null;
-                self.timer1 = null;
-                self.updateUserInfo();
-                store.dispatch('USER_XW_BANK', '操作成功')
-                this.$router.push({path: '/asyncReturn'})
-              } else if (userData.XW_IS_ASYNC == '1' && userData.XW_ASYNC_STATE == '0') {
-                store.dispatch('USER_XW_BANK', '银行存管失败')
-                self.$router.push({path:'/asyncReturn'})
+              if(data.status =='00000000'){
+                let userData = data.result.main_data;
+                if(userData.XW_IS_ASYNC == '1') {
+                  if (userData.XW_ASYNC_STATE == '1') {
+                    clearInterval(self.timer);
+                    clearInterval(self.timer1);
+                    self.timer = null;
+                    self.timer1 = null;
+                    self.updateUserInfo();
+                    store.dispatch('USER_XW_BANK',userData.XW_MESSAGE )
+                    this.$router.push({path: '/asyncReturn'})
+                  } else if (userData.XW_ASYNC_STATE == '0') {
+                    regexfun.handleFailMsg(self, userData.XW_MESSAGE);
+                    location.href = location.origin +  userState.accessAuth.whereBack
 
+                  }
+                }
+              } else {
+                regexfun.handleFailMsg(self, data.message);
               }
+
 
             })
 
@@ -81,11 +91,15 @@
         //异步回来刷新用户信息
         updateUserInfo(){
           let  userId = store.state.user.userInfo.ID;
-          let  userType = store.state.user.userInfo.USER_TYPE;
-          apis.userBaseData(userId,userType).then((data) => {
+          console.log(userId)
+          apis.userBaseData(userId,'1').then((data) => {
+            console.log(data)
             if(data.status == '00000000'){
+              console.log(data.result.main_data)
               let res = data.result.main_data
               this.setUserInfo(res);
+              this.setIsRealName(res.STATE);
+              this.getTokenCode(res.token);
             }else {
               regexfun.handleFailMsg(this,data.message)
             }

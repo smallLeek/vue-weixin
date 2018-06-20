@@ -4,7 +4,7 @@
     <div class="tty_area">
       <div class="area_title">
         <img src="../../../../static/images/home/home_tty_title.png" class="area_title_img">
-        <span v-on:click="goMore()">更多<img src="../../../../static/images/more.png"></span>
+        <!--<span v-on:click="goMore()">更多<img src="../../../../static/images/more.png"></span>-->
       </div>
       <!--天天盈项目-->
       <ul v-if="tty">
@@ -43,6 +43,7 @@
 <script>
   import * as apis from '../../../assets/js/jwt.apis'
   import {mapGetters, mapActions, mapState} from 'vuex'
+  import * as dealLogin from '../../../assets/js/jwt.accessAuth'
 
   export default {
     data() {
@@ -54,13 +55,14 @@
     },
     computed: {
       ...mapGetters(
-        ['loginStatus', 'userInfo', 'tokenCode']
+        ['loginStatus', 'userInfo', 'tokenCode','accessAuth']
       )
     },
     mounted() {
       this.getTty();
     },
     methods: {
+      ...mapActions({setAccessAuth: 'setAccessAuth'}),
       getBaseData() {
         let userId = this.userInfo.ID;
         let userType = this.userInfo.USER_TYPE;
@@ -100,12 +102,18 @@
          * INVEST_END_DATETIME 委托授权  0:否 1：是
          * IS_Expired 1：未过期  0：过期
          */
+        this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/ttyParticulars"});
+        dealLogin.dealLogin();
         if (this.loginStatus == true) {
           this.getBaseData();
           let proj_status = this.tty.PROJ_STATUS;
+          console.log(proj_status);
           let user_role = this.userInfo.USER_ROLE;
+          console.log(user_role);
           let is_check_tra_pwd = this.userInfo.IS_CHECK_TRA_PWD;
+          console.log(is_check_tra_pwd);
           let is_expired = this.userInfo.IS_Expired;
+          console.log(is_expired);
           if (proj_status == "6003") {
             //判断用户类型
             if (user_role == "INVESTOR") {

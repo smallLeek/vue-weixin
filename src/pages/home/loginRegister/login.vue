@@ -1,5 +1,5 @@
 <template>
-        <div class="content">
+        <div class="content" v-title="'登陆'">
             <div class="login_login">
                 <ul>
                     <li>
@@ -12,7 +12,7 @@
                         <span><img id="eye" src="../../../../static/images/login/login_eye_b.png"></span>
                     </li>
                 </ul>
-                <p><router-link to="">找回密码？</router-link></p>
+                <p><router-link to="/getBackPassword">找回密码？</router-link></p>
                 <input class="submit" @click="submit()"  type="button" value="提交">
             </div>
             <div class="login_register">
@@ -68,8 +68,7 @@ export default {
         let phonenum = $('#phonenum').val();
         let password = phtServer.CalcuMD5lower($('#password').val());
         let pwd =phtServer.CalcuMD5lower($('#password').val());
-        apis.newLogin(phonenum, password, user_type,this.code).then((data) => {
-          console.log(data)
+        apis.newLogin(phonenum, pwd, "1",this.code).then((data) => {
           if(data.status =='6027'){
             regexfun.handleFailMsg(this,data.message)
           }else if (data.status=='6026'){
@@ -77,9 +76,9 @@ export default {
           }else if(data.status =='00000000'){
             let userInfoList = data.result.main_data.data[0]
             this.setUserInfo(userInfoList);
-            this.setIsRealName(userInfoList.STATE)
+            this.setIsRealName(userInfoList.STATE);
             this.getTokenCode(userInfoList.token);
-            location.href = location.origin +  userState.accessAuth.whereToGo
+            dealLogin.dealLogin();
           }else {
             regexfun.handleFailMsg(this,data.message)
           }
@@ -169,6 +168,7 @@ export default {
             background-color: #fb4747;
             border: none;
             color: #fff;
+            outline:none;
         }
         input.on{
             background-color: #fb4747;

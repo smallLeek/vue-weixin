@@ -27,7 +27,7 @@ export default {
   methods:{
     ...mapActions({setAccessAuth: 'setAccessAuth'}),
     goAccount(){
-    this.setAccessAuth({isNeedLogin:true,loginStatus:true,whereToGo:"/wx/account"});
+    this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/account"});
       dealLogin.dealLogin()
     }
   }

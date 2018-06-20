@@ -8,13 +8,13 @@ import VueBus from 'vue-bus';
 import {} from './directive/directive';
 import './assets/css/common.css';
 import'./assets/js/common.js';
-import FastClick from 'fastclick'
+// import FastClick from 'fastclick'
 import echarts from 'echarts';
 import wx from 'weixin-js-sdk'
 import VueScroller from 'vue-scroller'
 import './assets/css/swiper.css'
 
-FastClick.attach(document.body)
+// FastClick.attach(document.body)
 
 Vue.use(VueScroller)
 Vue.prototype.$echarts = echarts
