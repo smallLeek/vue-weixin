@@ -22,7 +22,41 @@ function DdProj(USER_ID, USER_TYPE) {
     "USER_TYPE": USER_TYPE
   }))
 }
+/**
+ *天天盈项目详情
+ * @param USER_ID   用户ID
+ * @param USER_TYPE   用户类型
+ * @param PROJ_CODE  项目编号
+ * @returns {*}
+ * @constructor
+ */
+function DdProjDetail(USER_ID, USER_TYPE,PROJ_CODE) {
+  return phtServer.globalPostData(urls.api_url_DdProjDetail, phtServer.submitData({
+    "USER_ID": USER_ID,
+    "USER_TYPE": USER_TYPE,
+    "PROJ_CODE": PROJ_CODE
+  }))
+}
 
+/**
+ * 天天盈项目用户转让列表
+ * @param CUST_ID 用户ID
+ * @param CUST_TYPE  用户类型
+ * @param PROJ_CODE  项目编号
+ * @param CURR_PAGE_NUM 从第几页开始
+ * @param PER_PAGE_SIZE  每页几个
+ * @returns {*}
+ * @constructor
+ */
+function DdProjRedeemCustList(CUST_ID, CUST_TYPE,PROJ_CODE,CURR_PAGE_NUM,PER_PAGE_SIZE) {
+  return phtServer.globalPostData(urls.api_url_DdProjRedeemCustList, phtServer.submitData({
+    "CUST_ID": CUST_ID,
+    "CUST_TYPE": CUST_TYPE,
+    "PROJ_CODE": PROJ_CODE,
+    "CURR_PAGE_NUM": CURR_PAGE_NUM,
+    "PER_PAGE_SIZE": PER_PAGE_SIZE
+  }))
+}
 /**
  * 理财项目-在投-列表接口	(月月盈-定存盈)
  * @param USER_ID   用户ID
@@ -348,6 +382,8 @@ export  {
   DdProj,
   selectMoneyManagementZTYD,
   WeiXinnewLogin,
-  xwbankWebNotify
+  xwbankWebNotify,
+  DdProjDetail,
+  DdProjRedeemCustList
 }
 
