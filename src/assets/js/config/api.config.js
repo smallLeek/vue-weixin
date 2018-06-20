@@ -1,11 +1,44 @@
 const api_env_keys = {
   product:"product",
   dev:"dev",
+  dev_onLine:'dev_onLine',//本地直连线上
 };
-//生产环境
-const api_env = api_env_keys.dev;
+
 
 const config = {
+  dev_onLine:{
+    origin_baseUrl:"",
+    origin_ProxyPath:"/apis",
+    //3102 地址和线上地址不一样做区分(8093端口线上)
+    inline_path :"/xwuser",
+    //消息服务
+    origin_ProxyPath_datas:'/apis',
+    origin_ProxyPath_msgcenter:'/msgcenter',
+
+    //用户服务
+    origin_ProxyPath_texts:'/apis',
+    origin_ProxyPath_user:'/xwuser',
+
+    //红包服务
+    origin_ProxyPath_redpackets:'/apis',
+    origin_ProxyPath_redpacket:'/redpacket',
+
+    //定投盈
+    origin_ProxyPath_xwpdss:'/apis',
+    origin_ProxyPath_pds:'/xwpds',
+
+    //天天盈服务
+    origin_ProxyPath_xwddss:'/apis',
+    origin_ProxyPath_dds:'/xwdds',
+
+    //优惠券服务
+    origin_ProxyPath_coupons:'/apis',
+    origin_ProxyPath_coupon:'/coupon',
+
+    //新网银行注册绑卡
+    origin_ProxyPath_apts:'/apis',
+    origin_ProxyPath_xwbankWebNotify:'/xwbankWebNotify',
+  },
   dev:{
     //需要重定向 不要配置这个origin_baseUrl
     origin_baseUrl:"",
@@ -79,7 +112,10 @@ const config = {
   }
 }
 
-const env = (api_env === api_env_keys.product)?config.build:config.dev
+
+// const env = config.product;
+// const env = config.dev;
+const env = config.dev_onLine;
 
 
 

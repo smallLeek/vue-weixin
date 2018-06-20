@@ -53,6 +53,8 @@ const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmen
 const asyncReturn =resolve => require (['../pages/async/asyncReturn.vue'], resolve);
 const async =resolve => require (['../pages/async/async.vue'], resolve);
 
+//分享
+const share =resolve => require (['../pages/share/share.vue'], resolve);
 
 //打开空白页面
  const blank = resolve => require(['../pages/blank/blank'], resolve);
@@ -165,11 +167,15 @@ const router = new VueRouter({
     },
     {
       path: '/loginRegister',
-      component: loginRegister,
+      redirect: '/loginRegister/login'
     },
     {
-      path: '/login',
-      component: login,
+      path: '/loginRegister',
+      component: loginRegister,
+      children: [
+        { path: "/loginRegister/register", component: register },
+        { path: "/loginRegister/login", component: login }
+      ]
     },
     {
       path: '/security',
@@ -199,13 +205,18 @@ const router = new VueRouter({
       component: register,
 
     },
-    {  path: '/async',
-      component: async,
-
-    },
     {  path: '/asyncReturn',
       component: asyncReturn,
       meta: {allowBack: false}
+
+    },
+
+    {  path: '/share',
+      component: share,
+
+    },
+    {  path: '/async',
+      component: async,
 
     }
   ]

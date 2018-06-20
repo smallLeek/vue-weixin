@@ -1,19 +1,11 @@
 <template>
-  <div class="register" v-title="'注册'">
-    <div class="head">
-      <div class="tab">
-        <span>手机登录</span>
-        <span>免费注册</span>
-      </div>
-    </div>
     <div class="content">
       <div class="register_content">
-        <s></s>
         <ul>
           <li>
             <span><img src="../../../../static/images/login/login_num.png"></span>
             <span><input type="text" placeholder="请输入您的手机号" maxlength="11" v-model="registerMobile"></span>
-            <span><img src="../../../../static/images/login/login_close.png" id="pic" v-if="!registerShow"><input
+            <span><img src="../../../../static/images/login/login_close.png" id="pic" v-if="!registerShow" @click="cleanPhone()"><input
               id="verificationBtn" @click="getCode()" type="button" value="获取验证码" v-if="registerShow"></span>
             <span id="countDown" v-if="!registerShow">{{registerCount}}后重新获取</span>
           </li>
@@ -46,7 +38,6 @@
         <input class="submit" type="button" value="提交" @click="register()">
       </div>
     </div>
-  </div>
 </template>
 <script>
   import * as regexfun from '../../../../src/assets/js/jwt.regex';
@@ -54,8 +45,6 @@
   import {phtServer} from '../../../assets/js/phtServer'
   import {mapGetters, mapActions, mapState} from 'vuex'
   import {setInterval, setTimeout} from 'timers';
-
-
   export default {
     data() {
       return {
@@ -74,7 +63,6 @@
     mounted() {
 
     },
-
     methods: {
       //获取验证码
       getCode() {
@@ -94,7 +82,6 @@
             regexfun.handleFailMsg(self, "验证码已发送");
             self.isPhone = true
             if (!self.timer) {
-
               self.registerCount = TIME_COUNT;
               self.registerShow = false;
               self.timer = setInterval(() => {
@@ -181,32 +168,15 @@
       agreement() {
         (this.agree == false) ? this.agree = true : this.agree = false;
       },
+      cleanPhone(){
+        this.registerMobile = '';
+      }
     }
   }
 </script>
 <style lang="less" scoped>
   .register {
     background-color: #f8f8f8;
-  }
-
-  .head {
-    height: 4.1rem;
-    background: url(../../../../static/images/login/login_bg.png);
-    background-size: 100% 100%;
-    position: relative;
-    .tab {
-      position: absolute;
-      left: 0;
-      bottom: 0.4rem;
-      width: 100%;
-      display: flex;
-      span {
-        flex: 1;
-        text-align: center;
-        font-size: 0.3rem;
-        color: #fff;
-      }
-    }
   }
 
   .content {
@@ -217,7 +187,7 @@
     }
     #pic {
       vertical-align: middle;
-      width: 0.25rem;
+      width: 0.23rem;
       margin-left: .3rem;
       margin-top: -0.15rem;
     }
@@ -239,15 +209,6 @@
         color: #666;
         line-height: .54rem;
         text-decoration: none;
-      }
-      s {
-        position: absolute;
-        right: 1.45rem;
-        top: -0.44rem;
-        width: 0.2rem;
-        height: 0.2rem;
-        background-color: #f8f8f8;
-        transform: rotate(45deg)
       }
       h1 {
         font-size: 0.28rem;
@@ -393,7 +354,7 @@
         margin: auto;
         border-radius: 0.06rem;
         font-size: 0.35rem;
-        background-color: #fc7f7f;
+        background-color: #fb4747;
         border: none;
         color: #fff;
       }
