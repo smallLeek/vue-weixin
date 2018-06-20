@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import * as apis from '../../assets/js/jwt.apis'
+  //import * as apis from '../../assets/js/jwt.apis'
     export default {
        data(){
          return{
@@ -50,15 +50,17 @@
     .XwBox{
       background: url("../../../static/images/xwBank.png") no-repeat;
       background-size: contain;
-      margin: 2rem auto;
+      position: relative;
       width: 90%;
-      height: 90%;
+      top: 50%;
+      margin: -5rem auto 0 auto;
+      height: 10rem;
       .XwBank-close{
         position: absolute;
         height: 1.2rem;
         width: 2rem;
-        top: 1rem;
-        right: .4rem;
+        top: -1rem;
+        right: 0;
         z-index: 99999999;
         .pic{
           width: .9rem;
@@ -74,6 +76,7 @@
         width: 100%;
         top: 2rem;
         right: 0;
+        background: cyan;
         opacity: 0;
         z-index: 99999999;
       }
@@ -84,6 +87,7 @@
         opacity: 0;
         top: 5rem;
         right: 0;
+        background: orange;
         z-index: 99999999;
       }
 
