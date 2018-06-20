@@ -33,7 +33,7 @@
           <span v-if="!agree" @click="agreement">
             <img class="on" src="../../../../static/images/login/login_select.png">阅读并同意
           </span>
-          <a href="javascript:;">《注册协议》</a>
+          <a href="https://www.phtfdata.com/web6/hander/enrolled.do" target="_blank">《注册协议》</a>
         </h1>
         <input class="submit" type="button" value="提交" @click="register()">
       </div>
@@ -149,10 +149,10 @@
 
         }
         //注册接口
-        apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile,'http://localhost:8080/wx/async').then((data) => {
+        apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile).then((data) => {
           if (data.message == "成功!") {
             this.setAccessAuth({isNeedLogin:true,loginStatus:true,whereToGo:"/wx/home"});
-            //$('.xwUrl').append(data.result.main_data.url)
+
 
           } else if(data.status =="6015") {
             regexfun.handleFailMsg(self, "验证码输入有误!");
