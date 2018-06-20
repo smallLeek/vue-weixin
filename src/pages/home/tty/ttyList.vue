@@ -124,7 +124,7 @@
                   //可以进入投资
                   this.$router.push('/ttyParticulars')
                 } else {
-                  this.bs.$emit('e:alert', "您的用户未委托授权，无法进行投资操作!");
+                  this.bs.$emit('e:alert', "您的用户授权已过期，无法进行投资操作!");
                 }
               } else {
                 //弹框 未写

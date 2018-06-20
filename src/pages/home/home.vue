@@ -91,9 +91,9 @@
   import { Swiper,SwiperItem } from 'vux'
   import '../../assets/js/filter'
   import * as apis from '../../assets/js/jwt.apis'
-  import store from '../../vuex/store'
   import { setTimeout } from 'timers';
   import * as regexfun from '../../../src/assets/js/jwt.regex';
+  import * as urlReturn from '../../assets/js/jwt.userAgent'
 export default {
    data () {
     return {
@@ -107,13 +107,15 @@ export default {
 },
 
   mounted:function () {
-    this.isLoginWeiXIn()
     setTimeout(function(){
       $('.vux-swiper').css('height',parseInt($('.vux-swiper').css('height'))*2+'px')
     },10)
     $('.bottom li:first-child img').attr('src',require('../../../static/images/homeOn.png'))
     $('.bottom li:first-child').addClass('on')
     this.announcementList();
+    // if(urlReturn.JwtUserAgentIsWeiXin()){
+    //   this.isLoginWeiXIn()
+    // }
     this.dataStatistics();
     // this.getUserInfo();
   },
@@ -123,7 +125,7 @@ export default {
   computed:{
 
     ...mapGetters([
-      'showLoading','accessAuth','wxCode'
+      'showLoading','accessAuth','wxCode','tokenCode'
     ]),
   },
   methods:{
@@ -134,7 +136,6 @@ export default {
         apis.indexNotice().then((data)=> {
           if(data.status =='00000000'){
             this.announcement =data.result.main_data.data;
-            console.log(announcement)
           }else {
             regexfun.handleFailMsg(this,data.message)
           }

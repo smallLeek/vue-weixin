@@ -49,7 +49,7 @@ function userBaseData(CUST_ID, USER_TYPE) {
 /**
  * 我的-资产总计(元)/可用余额(元)/累计收益
  * @param CUST_ID  用户id
- * @param USER_TYPE  用户类型  1 个人  2 企业
+ * @param CUST_TYPE  用户类型  1 个人  2 企业
  * @returns {*}
  */
 function newAccountDataForApp(CUST_ID, CUST_TYPE) {
@@ -108,13 +108,16 @@ function selectXwBank(BIND_TYPE, PAY_FLAG){
 /**
  * 登录
  * @param LOGIN_CODE
+ * @param NEWPASSWORD
  * @param PASSWORD
  * @param USER_TYPE
+ * @param CODE
  */
 
-function newLogin(LOGIN_CODE,PASSWORD,USER_TYPE,CODE){
+function newLogin(LOGIN_CODE,NEWPASSWORD,PASSWORD,USER_TYPE,CODE){
   return phtServer.globalPostData(urls.api_url_newLogin, phtServer.submitData({
     "LOGIN_CODE": LOGIN_CODE,
+    "NEWPASSWORD": NEWPASSWORD,
     "PASSWORD": PASSWORD,
     "USER_TYPE": USER_TYPE,
     "CODE":CODE
@@ -124,6 +127,7 @@ function newLogin(LOGIN_CODE,PASSWORD,USER_TYPE,CODE){
 /**
  * 微信授权登陆
  * @param CODE
+ * @param USER_TYPE
  * @returns {*}
  * @constructor
  */
@@ -191,6 +195,21 @@ function sendMessageMobileValidCode(MOBILE,USER_TYPE,VALID_TYPE) {
 }
 
 /**
+ * 找回密码时 发送的验证码
+ * @param MOBILE
+ * @param USER_TYPE
+ * @param VALID_TYPE
+ * @returns {*}
+ */
+function sendMessageValidCode(MOBILE,USER_TYPE,VALID_TYPE) {
+  return phtServer.globalPostData(urls.api_url_sendMessageValidCode,phtServer.submitData({
+    "MOBILE": MOBILE,
+    "USER_TYPE": USER_TYPE,
+    "VALID_TYPE": VALID_TYPE,
+  }))
+}
+
+/**
  * 融资端注册
  * @param MOBILE
  * @param LOGIN_CODE
@@ -222,20 +241,23 @@ function newAddPersonXW(MOBILE,LOGIN_CODE,PASSWORD,MOBILE_VER_CODE,RECO_TEL,CHAN
 }
 
 /**
- * 新用户注册
+ *  新用户注册
  * @param MOBILE
  * @param LOGIN_CODE
  * @param PASSWORD
  * @param NEWPASSWORD
  * @param MOBILE_VER_CODE
  * @param RECO_TEL
+ * @param redirectUrl
+ * @returns {*}
  * @constructor
  */
-function XWnewAddPerson(MOBILE,LOGIN_CODE,PASSWORD,MOBILE_VER_CODE,RECO_TEL,redirectUrl) {
-  return phtServer.globalPostData(urls.api_url_newAddPersonXW, phtServer.submitData({
+function XWnewAddPerson(MOBILE,LOGIN_CODE,PASSWORD,NEWPASSWORD,MOBILE_VER_CODE,RECO_TEL,redirectUrl) {
+  return phtServer.globalPostData(urls.api_url_newAddPerson, phtServer.submitData({
     "MOBILE": MOBILE,
     "LOGIN_CODE": LOGIN_CODE,
     "PASSWORD": PASSWORD,
+    "NEWPASSWORD": NEWPASSWORD,
     "MOBILE_VER_CODE": MOBILE_VER_CODE,
     "RECO_TEL": RECO_TEL,
     "redirectUrl": redirectUrl
@@ -300,9 +322,20 @@ function xwbankWebNotify (platformUserNo, cust_type, userRole, USER_ID, USER_TYP
     "redirectUrl":redirectUrl
   }))
 }
+function passwordRetrieval(bindPhoneNum,msgCode,newPwd) {
+  return phtServer.globalPostData(urls.api_url_passwordRetrieval,phtServer.submitData({
+    "MOBILE":bindPhoneNum,
+    "MOBILE_VER_CODE":msgCode,
+    "PASSWORD":newPwd,
+    "USER_TYPE":"1",
+  }))
+
+}
 
 export  {
+  passwordRetrieval,
   sendMessageMobileValidCode,
+  sendMessageValidCode,
   newAddPersonXW,
   XWnewAddPerson,
   getBanner,
