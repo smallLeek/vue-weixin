@@ -36,4 +36,4 @@ export function asyncInfo(infoName) {
   }else {
     return '操作成功'
   }
-  }
+}

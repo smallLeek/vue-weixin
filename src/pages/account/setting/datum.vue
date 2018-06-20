@@ -1,76 +1,95 @@
 <template>
-    <div class="datum">
-        <div class="title">
-            <router-link to="/setting">
-                <img src="../../../../static/images/goBack.png">
-            </router-link>
-            <span>我的资料</span>
-        </div>
-        <div class="content">
-            <ul>
-                <li>
-                    <span>登录手机号</span>
-                    <span></span>
-                </li>
-            </ul>
-            <h1>金梧桐账号信息</h1>
-            <ul>
-                <li>
-                    <span>姓名</span>
-                    <span>钟娜</span>
-                </li>
-                <li>
-                    <span>性别</span>
-                    <span>女</span>
-                </li>
-                <li>
-                    <span>证件类型</span>
-                    <span>身份证</span>
-                </li>
-                <li>
-                    <span>证件号码</span>
-                    <span>**************0026</span>
-                </li>
-            </ul>
-            <h1>新网银行账号信息</h1>
-            <ul>
-                <li>
-                    <span>绑卡信息</span>
-                    <span>工商银行</span>
-                </li>
-                <li>
-                    <span>银行账号</span>
-                    <span>**************7362</span>
-                </li>
-                <li>
-                    <span>银行预留手机号码</span>
-                    <span>132****6271</span>
-                </li>
-            </ul>
-        </div>
+  <div class="datum">
+    <div class="title">
+      <router-link to="/setting">
+        <img src="../../../../static/images/goBack.png">
+      </router-link>
+      <span>我的资料</span>
     </div>
+    <div class="content">
+      <ul>
+        <li>
+          <span>登录手机号</span>
+          <span>{{userInfo["MOBILE"]}}</span>
+        </li>
+      </ul>
+      <h1>金梧桐账号信息</h1>
+      <ul>
+        <li>
+          <span>姓名</span>
+          <span>{{userInfo["REAL_NAME"]}}</span>
+        </li>
+        <li>
+          <span>性别</span>
+          <span>{{getRealSex()}}</span>
+        </li>
+        <li>
+          <span>证件类型</span>
+          <span>身份证</span>
+        </li>
+        <li>
+          <span>证件号码</span>
+          <span>{{userInfo["CARD_NUM"]}}</span>
+        </li>
+      </ul>
+      <h1>新网银行账号信息</h1>
+      <ul>
+        <li>
+          <span>绑卡信息</span>
+          <span>{{getRealBankName()}}</span>
+        </li>
+        <li>
+          <span>银行账号</span>
+          <span>{{userInfo["BANK_NO"]}}</span>
+        </li>
+        <li>
+          <span>银行预留手机号码</span>
+          <span>{{userInfo["PHONE_NO"]}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 <script>
-export default {
-    data(){
+  import {mapGetters} from  "vuex"
+  import {getBankName,getSex} from  "../../../assets/js/util/lib.XWDataEnumUtil"
+  export default {
+    data () {
       return {
 
       }
-
     },
-  computed:{
-    // ...mapGetters([
-    //   'loginStatus','userInfo','tokenCode'
-    // ])
-  },
-}
+    methods:{
+      getRealSex(){
+        let sexCode = this.userInfo["SEX"];
+        return getSex(sexCode);
+      },
+      getRealBankName(){
+        let bankName =  this.userInfo["BANK_NAME"]
+        let bankNameIsNull = bankName === null || bankName === undefined || bankName === '';
+        if (bankNameIsNull) {
+          let bankCode  = this.userInfo["BANK_CODE"]
+          bankName = getBankName(bankCode)
+        }
+        return bankName;
+      }
+    },
+    mounted(){
+      // console.log(getBankName("ABOC"))
+    },
+    computed:{
+      ...mapGetters([
+        'loginStatus','userInfo','tokenCode'
+      ])
+    },
+  }
 </script>
 <style lang="less" scoped>
-.datum{
+  .datum{
     padding-bottom: 1rem;
-}
-/* title */
-.title{
+  }
+  /* title */
+  .title{
     margin: auto;
     width: 7.5rem;
     height: 1rem;
@@ -83,52 +102,52 @@ export default {
     top: 0;
     z-index: 100;
     img{
-        height: 0.5rem;
-        vertical-align: middle;
+      height: 0.5rem;
+      vertical-align: middle;
     }
     a{
-        position: absolute;
-        width: 1rem;
-        height: 1rem;
-        left: 0;
-        top: -0.02rem
+      position: absolute;
+      width: 1rem;
+      height: 1rem;
+      left: 0;
+      top: -0.02rem
     }
-}
-.content{
-    margin-top: 1.2rem;
+  }
+  .content{
+    margin-top: 0.45rem;
     ul{
-        background-color: #fff;
-        padding-left: 0.2rem;
-        border-top: 1px solid #e0e0e0;
+      background-color: #fff;
+      padding-left: 0.2rem;
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
+      li{
+        height: 1rem;
+        line-height: 1rem;
+        padding-right: 0.2rem;
         border-bottom: 1px solid #e0e0e0;
-        li{
-            height: 1rem;
-            line-height: 1rem;
-            padding-right: 0.2rem;
-            border-bottom: 1px solid #e0e0e0;
-            span:first-child{
-                float: left;
-                font-size: 0.32rem;
-                color: #333333;
-            }
-            span:last-child{
-                float: right;
-                font-size: 0.32rem;
-                color: #999999;
-            }
+        span:first-child{
+          float: left;
+          font-size: 0.32rem;
+          color: #333333;
         }
-        li:last-child{
-            border: none
+        span:last-child{
+          float: right;
+          font-size: 0.32rem;
+          color: #999999;
         }
+      }
+      li:last-child{
+        border: none
+      }
     }
     h1{
-        font-weight: 500;
-        padding-top: 0.4rem;
-        padding-bottom: 0.1rem;
-        padding-left: 0.2rem;
-        font-size: 0.28rem;
-        color: #666666;
-        background-color: #f8f8f8;
+      font-weight: 500;
+      padding-top: 0.4rem;
+      padding-bottom: 0.1rem;
+      padding-left: 0.2rem;
+      font-size: 0.28rem;
+      color: #666666;
+      background-color: #f8f8f8;
     }
-}
+  }
 </style>
