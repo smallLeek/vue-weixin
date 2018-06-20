@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import * as apis from '../../assets/js/jwt.apis'
+  import * as apis from '../../assets/js/jwt.apis.js'
     export default {
        data(){
          return{
@@ -24,6 +24,7 @@
        },
       methods:{
         close(){
+          test.testFunction();
           this.openXW =false
         },
         detail(){
