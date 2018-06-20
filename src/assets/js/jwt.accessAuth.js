@@ -31,13 +31,12 @@ if(userState.accessAuth.isNeedLogin == true){
 
 }
 /**
- * 处理实名
+ * 新网注册
  */
 function dealRealName () {
   let userState = store.state.user;
   let userInfoList = userState.userInfo;
-  apis.xwbankWebNotify(userInfoList.YJF_ID, "1", userInfoList.USER_ROLE, userInfoList.ID, "1",'http://localhost:8080/wx/async').then((data) => {
-    console.log(data)
+  apis.personalRegister(userInfoList.YJF_ID,userInfoList.ID,"1",userInfoList.USER_ROLE, 'http://localhost:8080/wx/async').then((data) => {
     $('.xwUrl').append(data.result.main_data.url)
 
   })

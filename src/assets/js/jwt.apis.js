@@ -332,6 +332,25 @@ function passwordRetrieval(bindPhoneNum,msgCode,newPwd) {
 
 }
 
+/**
+ * 个人绑卡注册
+ * @param platformUserNo
+ * @param USER_ID
+ * @param USER_TYPE
+ * @param userRole
+ * @param redirectUrl
+ * @returns {*}
+ */
+function personalRegister(platformUserNo,USER_ID,USER_TYPE,userRole,redirectUrl) {
+  return phtServer.globalPostData(urls.api_url_personalRegister,phtServer.submitData({
+    "platformUserNo":platformUserNo,
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE,
+    "userRole":userRole,
+    "redirectUrl":redirectUrl,
+  }))
+}
+
 export  {
   passwordRetrieval,
   sendMessageMobileValidCode,
@@ -353,6 +372,7 @@ export  {
   DdProj,
   selectMoneyManagementZTYD,
   WeiXinnewLogin,
-  xwbankWebNotify
+  xwbankWebNotify,
+  personalRegister
 }
 

@@ -69,7 +69,6 @@ export default {
         let newPassword = phtServer.CalcuMD5(this.loginPwd);
         let password = phtServer.CalcuMD5lower(this.loginPwd);
         apis.newLogin(phonenum,password, newPassword, "1",this.code).then((data) => {
-          console.log(data)
           if(data.status =='6027'){
             regexfun.handleFailMsg(this,data.message)
           }else if (data.status=='6026'){

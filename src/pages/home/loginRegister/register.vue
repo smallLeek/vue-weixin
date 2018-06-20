@@ -153,7 +153,6 @@
           if (data.message == "成功!") {
             this.setAccessAuth({isNeedLogin:true,loginStatus:true,whereToGo:"/wx/home"});
 
-
           } else if(data.status =="6015") {
             regexfun.handleFailMsg(self, "验证码输入有误!");
           }else {
