@@ -1,11 +1,11 @@
 import * as types from '../types'
-import {phtServer} from '../../assets/js/phtServer'
+import {storeUtil} from '../../assets/js/util/lib.store'
 
 const state = {
   // 用户登录状态
-  loginStatus: JSON.parse(phtServer.getStore('loginStatus'))|| false,
+  loginStatus: JSON.parse(storeUtil.getStore('loginStatus'))|| false,
   // 用户登录信息
-  userInfo: JSON.parse(phtServer.getStore('userInfo')) || {},
+  userInfo: JSON.parse(storeUtil.getStore('userInfo')) || {},
   // 用户数据信息
   userData: [],
   //用户实名状态
@@ -13,11 +13,11 @@ const state = {
   //实名的url
   isRealNameUrl:null,
   //判断是否需要登陆是否需要实名然后然后去哪
-  accessAuth:JSON.parse(phtServer.getStore('accessAuth')) || {},
+  accessAuth:JSON.parse(storeUtil.getStore('accessAuth')) || {},
   //微信授权登陆code
-  wxCode : phtServer.getStore('wxCode') || null,
+  wxCode : storeUtil.getStore('wxCode') || null,
   //token
-  tokenCode:phtServer.getStore('tokenCode') || null,
+  tokenCode:storeUtil.getStore('tokenCode') || null,
   xwBank:null,
   xwInfo:false
 
@@ -31,8 +31,8 @@ const actions = {
    *
    */
   setUserInfo({commit}, res) {
-    phtServer.setStore('userInfo', res)
-    phtServer.setStore('loginStatus', true)
+    storeUtil.setStore('userInfo', res)
+    storeUtil.setStore('loginStatus', true)
     //要唤醒一个 mutation handler，你需要以相应的 type 调用 store.commit 方法：
     commit(types.SET_USER_INFO, res)
     commit(types.SET_LOGIN_STATUS, true)
@@ -43,10 +43,10 @@ const actions = {
    * @param commit
    */
   setSignOut({commit}) {
-    phtServer.removeStore('loginStatus')
-    phtServer.removeStore('userInfo')
-    phtServer.removeStore('tokenCode');
-    phtServer.removeStore('accessAuth');
+    storeUtil.removeStore('loginStatus')
+    storeUtil.removeStore('userInfo')
+    storeUtil.removeStore('tokenCode');
+    storeUtil.removeStore('accessAuth');
     commit(types.SET_LOGIN_STATUS, false)
     commit(types.SET_USER_INFO, {});
   },
@@ -56,7 +56,7 @@ const actions = {
    * @param res
    */
   getTokenCode({commit}, res) {
-    phtServer.setStore('tokenCode',res)
+    storeUtil.setStore('tokenCode',res)
     commit(types.SET_TOKEN_CODE, res)
   },
   /**
@@ -82,7 +82,7 @@ const actions = {
    * @param res
    */
   setAccessAuth({commit},res){
-    phtServer.setStore('accessAuth', res)
+    storeUtil.setStore('accessAuth', res)
     commit (types.SET_ACCESSAUTH,res)
   },
   /**
