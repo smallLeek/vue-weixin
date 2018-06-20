@@ -33,7 +33,7 @@
           <span v-if="!agree" @click="agreement">
             <img class="on" src="../../../../static/images/login/login_select.png">阅读并同意
           </span>
-          <a href="javascript:;">《注册协议》</a>
+          <a href="https://www.phtfdata.com/web6/hander/enrolled.do" target="_blank">《注册协议》</a>
         </h1>
         <input class="submit" type="button" value="提交" @click="register()">
       </div>
