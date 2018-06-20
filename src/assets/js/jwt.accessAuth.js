@@ -37,6 +37,7 @@ function dealRealName () {
   let userState = store.state.user;
   let userInfoList = userState.userInfo;
   apis.xwbankWebNotify(userInfoList.YJF_ID, "1", userInfoList.USER_ROLE, userInfoList.ID, "1",'http://localhost:8080/wx/async').then((data) => {
+    console.log(data)
     $('.xwUrl').append(data.result.main_data.url)
 
   })

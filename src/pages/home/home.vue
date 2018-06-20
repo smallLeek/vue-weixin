@@ -113,9 +113,9 @@ export default {
     $('.bottom li:first-child img').attr('src',require('../../../static/images/homeOn.png'))
     $('.bottom li:first-child').addClass('on')
     this.announcementList();
-    if(urlReturn.JwtUserAgentIsWeiXin()){
-      this.isLoginWeiXIn()
-    }
+    // if(urlReturn.JwtUserAgentIsWeiXin()){
+    //   this.isLoginWeiXIn()
+    // }
     this.dataStatistics();
     // this.getUserInfo();
   },
@@ -125,7 +125,7 @@ export default {
   computed:{
 
     ...mapGetters([
-      'showLoading','accessAuth','wxCode'
+      'showLoading','accessAuth','wxCode','tokenCode'
     ]),
   },
   methods:{

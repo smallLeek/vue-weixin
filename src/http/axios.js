@@ -26,7 +26,6 @@ axios.interceptors.response.use(data => {
   //加载成功之前显示加载中
 
   if( data.data.response.status== "88888888" ){
-
     $.showphtModal({
       withOneButton:0,
       errorMsg: '由于您长时间未操作！请重新登录！',
