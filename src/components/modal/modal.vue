@@ -261,7 +261,7 @@
                 showNoticeHeader();
                 //token过期之后的操作
                 $(modal_confirm_btn).bind('touchend',function () {
-                  self.$router.push({ path: "/ttyMore"})
+                  self.$router.push({ path: "/loginRegister/login"})
                 })
               }else if(opts.type==0){
                 showFailHeader();
@@ -369,7 +369,7 @@
     -webkit-justify-content: center;
     -moz-justify-content: center;
     -ms-justify-content: center;
-    z-index: 999;
+    z-index: 9999999999999;
   }
   .pht-dialog-window{
     padding: .1rem 0;

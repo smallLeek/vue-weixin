@@ -4,11 +4,11 @@
                 <ul>
                     <li>
                         <span><img src="../../../../static/images/login/login_num.png"></span>
-                        <span><input id="phonenum" type="text" placeholder="请输入手机号"></span>
+                        <span><input v-model="loginPhone" id="phonenum" type="text" placeholder="请输入手机号"></span>
                     </li>
                     <li>
                         <span><img src="../../../../static/images/login/login_password.png"></span>
-                        <span><input id="password" type="password" placeholder="请输入登录密码"></span>
+                        <span><input id="password" v-model="loginPwd" type="password" placeholder="请输入登录密码"></span>
                         <span><img id="eye" src="../../../../static/images/login/login_eye_b.png"></span>
                     </li>
                 </ul>
@@ -30,7 +30,9 @@ import * as dealLogin from '../../../assets/js/jwt.accessAuth'
 export default {
      data(){
        return{
-         code:null
+         code:null,
+         loginPwd:null,
+         loginPhone:null
        }
      },
   created(){
@@ -63,12 +65,11 @@ export default {
            }
       },
       login() {
-        let userState = store.state.user
-        let user_type="1";
-        let phonenum = $('#phonenum').val();
-        let password = phtServer.CalcuMD5lower($('#password').val());
-        let pwd =phtServer.CalcuMD5lower($('#password').val());
-        apis.newLogin(phonenum, password, user_type,this.code).then((data) => {
+        let phonenum = this.loginPhone;
+        let newPassword = phtServer.CalcuMD5(this.loginPwd);
+        let password = phtServer.CalcuMD5lower(this.loginPwd);
+        apis.newLogin(phonenum,password, newPassword, "1",this.code).then((data) => {
+          console.log(data)
           if(data.status =='6027'){
             regexfun.handleFailMsg(this,data.message)
           }else if (data.status=='6026'){

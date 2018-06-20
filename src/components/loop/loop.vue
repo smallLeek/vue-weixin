@@ -15,6 +15,7 @@
   import Swiper from '../../../static/idangerous.swiper'
   import * as apis from '../../assets/js/jwt.apis'
   import {mapGetters, mapActions,mapState} from 'vuex'
+  import * as userAge from '../../assets/js/jwt.userUrl'
   export default {
     data() {
       return {
@@ -98,7 +99,7 @@
           if(this.loginStatus == true){
             window.open(list.LINK_COMMENT)
           }else{
-            window.open(window.location. origin + '/wx/loginRegister','_self');
+            location.href =  userAge.loginUrl()
           }
         }else{
           window.open(list.LINK_COMMENT)
