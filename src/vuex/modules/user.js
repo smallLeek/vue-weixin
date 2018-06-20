@@ -19,11 +19,21 @@ const state = {
   //token
   tokenCode:storeUtil.getStore('tokenCode') || null,
   xwBank:null,
-  xwInfo:false
+  xwInfo:false,
+  //弹框
+  showXwBank:false,
 
 }
 
 const actions = {
+  /**
+   * 弹框显示
+   */
+  setXwBank( { commit }, showXwBank ){
+    commit(types.USER_XWBANK_STATE, showXwBank)
+
+  },
+
   /**
    * 用户登录
    * @param commit
@@ -108,6 +118,8 @@ const getters = {
   accessAuth:state =>state.accessAuth,
   //新网提示信息
   xwBank:state =>state.xwBank,
+
+  showXwBank:state =>state.showXwBank,
 }
 
 const mutations = {
@@ -169,7 +181,12 @@ const mutations = {
   [types.USER_XW_BANK] ( state, xwBank){
     state.xwBank = xwBank
 
-  }
+  },
+  //弹框
+  [types.USER_XWBANK_STATE] ( state, showXwBank){
+    state.showXwBank = showXwBank
+
+  },
 
 
 }

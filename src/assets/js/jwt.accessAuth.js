@@ -1,6 +1,5 @@
 //获取用户状态
 import store from '../../vuex/store'
-import * as apis from './jwt.apis'
 import * as userAge from './jwt.userUrl'
 
 /**
@@ -12,7 +11,8 @@ import * as userAge from './jwt.userUrl'
 if(userState.accessAuth.isNeedLogin == true){
 
   if (userState.loginStatus == false) {
-    location.href =  userAge.loginUrl()
+    //location.href =  userAge.loginUrl()
+    location.href =  location.origin +'/wx/loginRegister'
   }else if(userState.isNeedRealName == false){
 
     location.href = location.origin +  userState.accessAuth.whereToGo
@@ -24,24 +24,14 @@ if(userState.accessAuth.isNeedLogin == true){
    if(userState.accessAuth.isNeedRealName == false){
     location.href = location.origin + userState.accessAuth.whereToGo
   } else {
-    dealRealName();
+     store.dispatch('setXwBank', true);
+     $('.XwBank').show();
 
   }
   }
 
 }
-/**
- * 新网注册
- */
-function dealRealName () {
-  let userState = store.state.user;
-  let userInfoList = userState.userInfo;
-  apis.personalRegister(userInfoList.YJF_ID,userInfoList.ID,"1",userInfoList.USER_ROLE, 'http://localhost:8080/wx/async').then((data) => {
-    $('.xwUrl').append(data.result.main_data.url)
 
-  })
-
-}
 
 
 

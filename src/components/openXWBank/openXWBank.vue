@@ -1,5 +1,5 @@
 <template>
-    <div class="XwBank" v-if="openXW">
+    <div class="XwBank">
       <div class="XwContent">
         <div class="XwBox">
           <div class="XwBank-close" @click="close()">
@@ -16,20 +16,33 @@
 
 <script>
   import * as apis from '../../assets/js/jwt.apis.js'
+  import store from '../../vuex/store'
     export default {
        data(){
          return{
            openXW:true
          }
        },
+      mounted(){
+         $('.XwBank').hide()
+      },
       methods:{
         close(){
-          this.openXW =false
+          $('.XwBank').hide()
         },
         detail(){
           location.href = "https://www.phtfdata.com/web6/hander/newBankHerd.do"
         },
         userActivate(){
+          /**
+           * 新网注册
+           */
+            let userState = store.state.user;
+            let userInfoList = userState.userInfo;
+            apis.personalRegister(userInfoList.YJF_ID,userInfoList.ID,"1",userInfoList.USER_ROLE, 'http://localhost:8080/wx/async').then((data) => {
+              $('.xwUrl').append(data.result.main_data.url)
+
+            })
 
         }
       }

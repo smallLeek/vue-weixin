@@ -37,6 +37,7 @@
 <script>
   import { phtServer } from '../../../assets/js/phtServer'
   import * as apis from '../../../assets/js/jwt.apis'
+  import * as regexfun from '../../../../src/assets/js/jwt.regex';
   import {mapGetters, mapActions,mapState} from 'vuex'
 export default {
   data() {
@@ -71,8 +72,18 @@ export default {
       })
     },
     loginOut(){
-      this.setSignOut()
-      this.$router.push({path: '/home'})
+      let userId = this.userInfo.ID;
+      apis.exitLogin(userId,'1').then((data) =>{
+        if(data.status = '00000000'){
+          this.setSignOut();
+          this.$router.push({path: '/home'})
+        }else {
+          regexfun.handleFailMsg(this,data.message)
+        }
+
+
+      })
+
     }
   }
 }

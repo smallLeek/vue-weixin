@@ -9,4 +9,5 @@ export const SET_XW_URL         = 'SET_XW_URL';       //新网实名的URl
 export const SET_ACCESSAUTH     = 'SET_ACCESSAUTH';  //判断用户登陆状态
 export const SET_WXCODE         = 'SET_WXCODE';     //微信登陆code
 export const USER_XW_BANK         = 'USER_XW_BANK';//新网的提示信息
+export const USER_XWBANK_STATE         = 'USER_XWBANK_STATE';//弹框
 

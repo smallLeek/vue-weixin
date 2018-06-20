@@ -385,6 +385,13 @@ export function personalRegister(platformUserNo,USER_ID,USER_TYPE,userRole,redir
     "redirectUrl":redirectUrl,
   }))
 }
+function exitLogin(CUST_ID,CUST_TYPE) {
+  return phtServer.globalPostData(urls.api_url_exitLogin,phtServer.submitData({
+    "CUST_ID":CUST_ID,
+    "CUST_TYPE":CUST_TYPE,
+  }))
+
+}
 
 export  {
   passwordRetrieval,
@@ -409,6 +416,7 @@ export  {
   WeiXinnewLogin,
   xwbankWebNotify,
   DdProjDetail,
-  DdProjRedeemCustList
+  DdProjRedeemCustList,
+  exitLogin
 }
 

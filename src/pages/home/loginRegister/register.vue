@@ -151,7 +151,9 @@
         //注册接口
         apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile).then((data) => {
           if (data.message == "成功!") {
-            this.setAccessAuth({isNeedLogin:true,loginStatus:true,whereToGo:"/wx/home"});
+            regexfun.handleFailMsg(self, "注册成功，请输入账号密码登陆");
+            //this.setAccessAuth({isNeedLogin:true,loginStatus:true,whereToGo:"/wx/home"});
+            this.$router.push({path: '/loginRegister'})
 
           } else if(data.status =="6015") {
             regexfun.handleFailMsg(self, "验证码输入有误!");

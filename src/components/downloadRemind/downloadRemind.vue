@@ -12,7 +12,7 @@
             <a id="downloadBtn" href="javascript:;">立即下载</a>
         </div>
     </div>
-  </div>  
+  </div>
 </template>
 <script>
 export default {
@@ -27,7 +27,7 @@ export default {
 <style lang="less" scoped>
 .popup{
     position: fixed;
-    z-index: 1000;
+    z-index: 9999999;
     width: 100%;
     height: 100%;
     left: 0;
