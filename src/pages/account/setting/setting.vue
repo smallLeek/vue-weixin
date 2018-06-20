@@ -8,7 +8,7 @@
         </div>
         <div class="nav">
             <ul>
-                <li>
+                <li v-on:click="goDatum()">
                     <span><img src="../../../../static/images/setting/setting_datum.png"></span>
                     <span>我的资料</span>
                 </li>
@@ -51,6 +51,9 @@ export default {
   },
   methods:{
     ...mapActions({setSignOut:'setSignOut'}),
+    goDatum(){
+      this.$router.push({path: '/datum'})
+    },
     //去风险承受能力评估
     goRisk() {
       let userId = this.userInfo.ID;

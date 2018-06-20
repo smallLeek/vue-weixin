@@ -1,10 +1,10 @@
 <template>
-  <div class="tty" v-title="'天天盈'">
+  <div class="tty" v-title="'天天盈'" v-if="TtyDetail">
     <div class="title">
       <router-link to="/home">
         <img src="../../../static/images/goBack.png">
       </router-link>
-      <span>天天盈20170300(8%)</span>
+      <span v-text="ttyTitle"></span>
     </div>
     <div class="fund">
       <h2>
@@ -12,7 +12,7 @@
         <span>年化收益率</span>
         <span></span>
       </h2>
-      <h1>8<span>%</span></h1>
+      <h1><b v-text="(rate-0)"></b><span>%</span></h1>
       <ul>
         <li>转投随心</li>
         <li>100元起投</li>
@@ -23,7 +23,7 @@
       <ul>
         <li>
           <span>起投金额</span>
-          <span>100.00元</span>
+          <span>{{TtyDetail.MIN_AMOUNT}}元</span>
         </li>
         <li>
           <span>收益时间</span>
@@ -31,7 +31,7 @@
         </li>
         <li>
           <span>计息方式</span>
-          <span>所有债权以平台当日年化收益率为准</span>
+          <span v-text="TtyDetail.JCODE">所有债权以平台当日年化收益率为准</span>
         </li>
         <li v-on:click="goMoneySafe()">
           <span>保障方式</span>
@@ -39,36 +39,16 @@
         </li>
         <li>
           <span>投资列表</span>
-          <span>71笔<img src="../../../static/images/more.png"></span>
+          <span>{{TtyDetail.INVESTCOUNT}}笔<img src="../../../static/images/more.png"></span>
         </li>
       </ul>
     </div>
-    <div class="creditor_list">
+    <div class="creditor_list" v-if="CustList">
       <h1>债权列表</h1>
       <ul>
-        <li>
-          <span>JWT1180521926102</span>
-          <span>1,000.28元</span>
-        </li>
-        <li>
-          <span>JWT1180521926102</span>
-          <span>1,000.28元</span>
-        </li>
-        <li>
-          <span>JWT1180521926102</span>
-          <span>1,000.28元</span>
-        </li>
-        <li>
-          <span>JWT1180521926102</span>
-          <span>1,000.28元</span>
-        </li>
-        <li>
-          <span>JWT1180521926102</span>
-          <span>1,000.28元</span>
-        </li>
-        <li>
-          <span>JWT1180521926102</span>
-          <span>1,000.28元</span>
+        <li v-for="item in CustList">
+          <span v-text="item.PROJ_CODE"></span>
+          <span v-text="item.PRINCIPAL_AMOUNT"></span>
         </li>
       </ul>
     </div>
@@ -77,27 +57,73 @@
         <input type="text" placeholder="投资金额">
         <span>元</span>
       </div>
-      <div class="input_submit" @click="investUp">
+      <div class="input_submit">
         <a>立即投资</a>
       </div>
     </div>
   </div>
 </template>
 <script>
+  import * as apis from '../../assets/js/jwt.apis'
+  import {mapGetters, mapActions, mapState} from 'vuex'
+  import * as dealLogin from '../../assets/js/jwt.accessAuth'
   export default {
     data() {
-      return {}
+      return {
+        userId:'',
+        userType:'',
+        proj_code:'',
+        TtyDetail:null,
+        rate:'',
+        proj_name:'',
+        CustList:''
+      }
+    },
+    computed: {
+      ...mapGetters(
+        ['loginStatus', 'userInfo', 'tokenCode','accessAuth']
+      ),
+      //title
+      ttyTitle() {
+        return this.proj_name+ "("+ this.rate + "%)";
+      }
     },
     mounted() {
-
+      this.getTty();
     },
     methods:{
       //去安全保障
       goMoneySafe() {
        window.location.href = "https://www.phtfdata.com/web6/hander/bxprotectedNew.do"
       },
-      investUp(){
-
+      //获取天天盈基本信息
+      getTty() {
+        this.userId = this.userInfo.ID;
+        this.userType = this.userInfo.USER_TYPE;
+        let userId = this.userInfo.ID;
+        let userType = this.userInfo.USER_TYPE;
+        apis.DdProj(userId, userType).then((data) => {
+          this.proj_code = data.result.main_data.PROJ_CODE;
+          this.getTtyDetail();
+          this.getDdProjRedeemCustList();
+        })
+      },
+      //天天盈项目详情
+      getTtyDetail() {
+        let userId = this.userInfo.ID;
+        let userType = this.userInfo.USER_TYPE;
+        let proj_code = this.proj_code;
+        apis.DdProjDetail(userId, userType,proj_code).then((data) => {
+          this.TtyDetail = data.result.main_data;
+          this.rate = this.TtyDetail.RATE;
+          this.proj_name = this.TtyDetail.PROJ_NAME
+        })
+      },
+      getDdProjRedeemCustList(){
+        let proj_code = this.proj_code;
+        apis.DdProjRedeemCustList(this.userId, this.userType,proj_code,1,10).then((data) => {
+          this.CustList = data.result.main_data.data;
+        })
       }
     }
   }
@@ -137,6 +163,7 @@
     background:linear-gradient(to bottom,#fb4747 0%,#fb6547 100%);
     text-align: center;
     color: #fff;
+    margin-top: 1rem;
     h2{
       font-size: 0.26rem;
       font-weight: 500;
@@ -157,6 +184,9 @@
       padding-bottom: .1rem;
       font-weight: 500;
       font-size: 1.3rem;
+      b{
+        font-weight: normal;
+      }
       span{
         font-size: 0.46rem;
       }
