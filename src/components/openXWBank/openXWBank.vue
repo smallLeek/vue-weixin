@@ -24,7 +24,6 @@
        },
       methods:{
         close(){
-          test.testFunction();
           this.openXW =false
         },
         detail(){
