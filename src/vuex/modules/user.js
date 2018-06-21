@@ -1,6 +1,5 @@
 import * as types from '../types'
 import {phtServer} from '../../assets/js/phtServer'
-
 const state = {
   // 用户登录状态
   loginStatus: JSON.parse(phtServer.getStore('loginStatus'))|| false,

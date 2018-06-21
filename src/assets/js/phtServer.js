@@ -157,7 +157,6 @@ phtServer.getStore = name => {
   if (!name) return;
   return window.localStorage.getItem(name);
 };
-
 /**
  * 删除localStorage
  * @param name
