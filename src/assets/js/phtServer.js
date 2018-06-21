@@ -7,15 +7,6 @@ import wx from 'weixin-js-sdk'
 
 let phtServer = {}
 
-phtServer.idCard = function(){
-  let isLogin = store.state.user.userInfo.loginStatus;
-  let state = store.state.user.userInfo.STATE;
-  if(isLogin == false){
-    this.$router.push('/loginRegister')
-  }else if(state == '6'){
-
-  }
-}
 /**
  * 时间格式化  yyyy-MM-dd HH:mm:ss
  */
@@ -101,13 +92,7 @@ phtServer.addSign = function (params) {
   sig.init(prvKey);
   let paramsInfo =objKeySort(params.params)
   let paramsData ={}
-
-  if(params.tokenCode== null){
-    paramsData.params =paramsInfo
-  }else {
-    paramsData.params =paramsInfo
-    paramsData.tokenCode = params.tokenCode;
-  }
+  paramsData.params =paramsInfo
   sig.updateString(JSON.stringify(objKeySort(paramsData)));
   let signs = Jsrsasign.hex2b64(sig.sign())
   let sign = encodeURIComponent(signs ,"UTF-8")
@@ -120,7 +105,7 @@ phtServer.addSign = function (params) {
  */
 phtServer.submitData =function (params) {
   let submitData ={};
- submitData.header ={
+  submitData.header ={
     "clientid": "",
     "device": "weixin",
     "platform": "WEIXIN",
@@ -129,41 +114,11 @@ phtServer.submitData =function (params) {
   }
   submitData.request={}
   params.TIMESTAMPS = phtServer.farmatDate();
-  submitData.request.params = params
+  submitData.request = {"params":params}
   submitData.saveOperTokenCode =''
-  submitData.tokenCode = store.state.user.tokenCode;
-  submitData.request.tokenCode =store.state.user.tokenCode;
-  submitData.sign = phtServer.addSign(submitData.request);
+  submitData.tokenCode =store.state.user.userInfo.token
+  submitData.sign = phtServer.addSign( submitData.request)
   return submitData
-};
-/**
- * 获取localStorage
- * @param name
- * @param content
- */
-phtServer.setStore = (name, content) => {
-  if (!name) return;
-  if (typeof content !== 'string') {
-    content = JSON.stringify(content);
-  }
-  window.localStorage.setItem(name, content);
-};
-
-/**
- * 获取localStorage
- * @param name
- */
-phtServer.getStore = name => {
-  if (!name) return;
-  return window.localStorage.getItem(name);
-};
-/**
- * 删除localStorage
- * @param name
- */
-phtServer.removeStore = name => {
-  if (!name) return;
-  window.localStorage.removeItem(name);
 };
 /**
  * 判断手机号

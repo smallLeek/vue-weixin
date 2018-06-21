@@ -1,5 +1,5 @@
 <template>
-    <div class="XwBank" v-if="openXW">
+    <div class="XwBank">
       <div class="XwContent">
         <div class="XwBox">
           <div class="XwBank-close" @click="close()">
@@ -15,21 +15,34 @@
 </template>
 
 <script>
-    // import * as apis from '../../assets/js/jwt.apis'
+  import * as apis from '../../assets/js/jwt.apis.js'
+  import store from '../../vuex/store'
     export default {
        data(){
          return{
            openXW:true
          }
        },
+      mounted(){
+         $('.XwBank').hide()
+      },
       methods:{
         close(){
-          this.openXW =false
+          $('.XwBank').hide()
         },
         detail(){
           location.href = "https://www.phtfdata.com/web6/hander/newBankHerd.do"
         },
         userActivate(){
+          /**
+           * 新网注册
+           */
+            let userState = store.state.user;
+            let userInfoList = userState.userInfo;
+            apis.personalRegister(userInfoList.YJF_ID,userInfoList.ID,"1",userInfoList.USER_ROLE, 'http://localhost:8080/wx/async').then((data) => {
+              $('.xwUrl').append(data.result.main_data.url)
+
+            })
 
         }
       }
@@ -50,15 +63,17 @@
     .XwBox{
       background: url("../../../static/images/xwBank.png") no-repeat;
       background-size: contain;
-      margin: 2rem auto;
+      position: relative;
       width: 90%;
-      height: 90%;
+      top: 50%;
+      margin: -5rem auto 0 auto;
+      height: 10rem;
       .XwBank-close{
         position: absolute;
         height: 1.2rem;
         width: 2rem;
-        top: 1rem;
-        right: .4rem;
+        top: -1rem;
+        right: 0;
         z-index: 99999999;
         .pic{
           width: .9rem;
@@ -74,6 +89,7 @@
         width: 100%;
         top: 2rem;
         right: 0;
+        background: cyan;
         opacity: 0;
         z-index: 99999999;
       }
@@ -84,6 +100,7 @@
         opacity: 0;
         top: 5rem;
         right: 0;
+        background: orange;
         z-index: 99999999;
       }
 

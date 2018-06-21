@@ -91,11 +91,9 @@
         //异步回来刷新用户信息
         updateUserInfo(){
           let  userId = store.state.user.userInfo.ID;
-          console.log(userId)
           apis.userBaseData(userId,'1').then((data) => {
             console.log(data)
             if(data.status == '00000000'){
-              console.log(data.result.main_data)
               let res = data.result.main_data
               this.setUserInfo(res);
               this.setIsRealName(res.STATE);

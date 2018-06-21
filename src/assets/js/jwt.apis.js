@@ -2,6 +2,7 @@
 import * as urls from './jwt.urls'
 import {phtServer} from './phtServer'
 
+
 /**
  * 获取首页公告
  */
@@ -375,7 +376,7 @@ function passwordRetrieval(bindPhoneNum,msgCode,newPwd) {
  * @param redirectUrl
  * @returns {*}
  */
-function personalRegister(platformUserNo,USER_ID,USER_TYPE,userRole,redirectUrl) {
+export function personalRegister(platformUserNo,USER_ID,USER_TYPE,userRole,redirectUrl) {
   return phtServer.globalPostData(urls.api_url_personalRegister,phtServer.submitData({
     "platformUserNo":platformUserNo,
     "USER_ID":USER_ID,
@@ -383,6 +384,13 @@ function personalRegister(platformUserNo,USER_ID,USER_TYPE,userRole,redirectUrl)
     "userRole":userRole,
     "redirectUrl":redirectUrl,
   }))
+}
+function exitLogin(CUST_ID,CUST_TYPE) {
+  return phtServer.globalPostData(urls.api_url_exitLogin,phtServer.submitData({
+    "CUST_ID":CUST_ID,
+    "CUST_TYPE":CUST_TYPE,
+  }))
+
 }
 
 /**
@@ -439,10 +447,10 @@ export  {
   selectMoneyManagementZTYD,
   WeiXinnewLogin,
   xwbankWebNotify,
-  personalRegister,
   DdProjDetail,
   DdProjRedeemCustList,
   queryProjDetail,
-  ueryInvestedListApp
+  ueryInvestedListApp,
+  exitLogin
 }
 

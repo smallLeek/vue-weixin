@@ -114,8 +114,8 @@
       getBankInfo() {
         //首先获取当前用户信息
         let userId = this.userInfo.ID;
-        let userType = this.userInfo.USER_TYPE;
-        apis.userBaseData(userId,userType).then( (data) => {
+        //let userType = this.userInfo.USER_TYPE;
+        apis.userBaseData(userId,'1').then( (data) => {
           if(data.status == '00000000'){
             let userData = data.result.main_data;
             this.picture_url = userData.PICTURE_URL;

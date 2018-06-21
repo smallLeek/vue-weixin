@@ -79,9 +79,9 @@
         <!-- 底部 -->
         <pht-bottomnav></pht-bottomnav>
         <!-- 分享邀请 -->
-        <shareInvitation class="shareInvitation"></shareInvitation>
+        <!--<share-invitation></share-invitation>-->
         <!-- 下载提醒 -->
-        <downloadRemind class="downloadRemind"></downloadRemind>
+        <download-remind ></download-remind>
     </div>
 </template>
 <script>
@@ -115,8 +115,7 @@
      //我的-资产总计(元)/可用余额(元)/累计收益
     newAccountDataForApp() {
       let userId = this.userInfo.ID;
-      let userType = this.userInfo.USER_TYPE;
-      apis.newAccountDataForApp(userId,userType).then( (data) => {
+      apis.newAccountDataForApp(userId,"1").then( (data) => {
         if(data.status == '00000000'){
           let AccountData = data.result.main_data.data[0];
           this.amount_count =AccountData.AMOUNT_COUNT;
