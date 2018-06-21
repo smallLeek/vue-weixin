@@ -84,4 +84,18 @@ Vue.filter('farmatBankcode', function (str) {
   let len = str.length;
   return str.substring(len-4);
 })
+//百分比取整
+Vue.filter('farmatRate',function (rate) {
+  if((typeof rate)!= 'string' && (typeof rate)!= 'number' ){
+    return
+  }
+  if((typeof rate) == 'number'){
+    rate = rate+"";
+  }
+  if(rate.match('%') == null){
+    return ((rate-0).toFixed(0)) + '%'
+  }else{
+    return ((rate.split('%'))[0]-0).toFixed(0) + "%"
+  }
+})
 

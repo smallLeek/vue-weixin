@@ -1,18 +1,14 @@
 <template>
-    <div class="dcy"  v-title="'定存盈'">
-        <div class="title">
-            <span>
-                <router-link to="/home">
-                    <img src="../../../static/images/goBack.png">
-                </router-link>
-            </span>
-            <span>定存盈20170300</span>
-            <span>
-                <router-link class="explainBtn" to="/earnings">收益试算</router-link>
-            </span>
-        </div>
+  <!--暂时不用  月月盈和定投盈是一个页面-->
+    <div class="dcy">
+      <div class="title">
+        <router-link to="/home">
+          <img src="../../../static/images/goBack.png">
+        </router-link>
+        <span v-text=""></span>
+      </div>
         <div class="fund">
-            <h2> 
+            <h2>
                 <span></span>
                 <span>年化收益率</span>
                 <span></span>
@@ -54,10 +50,8 @@
                     <span>2017-03-19 20:30:00</span>
                 </li>
                 <li>
-                    <router-link to="">
-                        <span>借款及担保合同服务范文</span>
-                        <span><img src="../../../static/images/more.png"></span>
-                    </router-link>
+                  <span>借款及担保合同服务范文</span>
+                  <span><img src="../../../static/images/more.png"></span>
                 </li>
             </ul>
         </div>
@@ -80,50 +74,10 @@
                         <span>审核情况</span>
                         <span>通过日期</span>
                     </li>
-                    <li>
-                        <span>法定代表人身份审查</span>
-                        <span>已完成</span>
-                        <span>2018-5-15</span>
-                    </li>
-                    <li>
-                        <span>法定代表人征信报告</span>
-                        <span>已完成</span>
-                        <span>2018-5-15</span>
-                    </li>
-                    <li>
-                        <span>项目实地考察</span>
-                        <span>已完成</span>
-                        <span>2018-5-15</span>
-                    </li>
-                    <li>
-                        <span>企业银行征信报告</span>
-                        <span>已完成</span>
-                        <span>2018-5-15</span>
-                    </li>
-                    <li>
-                        <span>企业、实际控制人资产证明</span>
-                        <span>已完成</span>
-                        <span>2018-5-15</span>
-                    </li>
-                    <li>
-                        <span>实际控制人、股东银行征信及流水</span>
-                        <span>已完成</span>
-                        <span>2018-5-15</span>
-                    </li>
-                    <li>
-                        <span>近2年公司财务报表及近1月报表</span>
-                        <span>已完成</span>
-                        <span>2018-5-15</span>
-                    </li>
                 </ul>
             </div>
             <div class="content2">
                 <h1>一: 项目介绍</h1>
-                <p>重庆***科技有限公司，成立于2012年5月，专业从事软装设计、软装工程服务与软装产品销售、建筑材料及建筑装饰材料的销售。重庆***科技有限公司品牌崇尚自然与关爱的幸福理念。倡导环保与优雅的生活品质，追求艺术与技术的和谐统一，立足创新，专业质量，诚信服务，真诚合作，共同发展是公司始终如一的追求，为客户提供优质，安全，可靠的技术和产品是公司用户的方针。公司自创立以来，已成功的为很多星级酒店、知名房地产会所、样板房、别墅宅邸、高尚住宅、商业空间等项目提供了全新理念的整体软装饰解决方案和一站式整体软装工程服务，赢得广大消费者和业内同行的认可与赞誉。</p>
-                <h1>二: 借款用途</h1>
-                <p>增加企业流动资金</p>
-                <h1>三: 还款来源</h1>
-                <p>公司与多家星级酒店、知名房地产商具有长久合作关系，具备稳定经营收入和一定的品牌实力，还款来源有保障。</p>
             </div>
             <div class="content3">
                 <h1>
@@ -132,31 +86,6 @@
                     <span>时间</span>
                 </h1>
                 <ul>
-                    <li>
-                        <span>15*******86</span>
-                        <span>3,000</span>
-                        <span>2018-05-30 11:14:41</span>
-                    </li>
-                    <li>
-                        <span>15*******86</span>
-                        <span>3,000</span>
-                        <span>2018-05-30 11:14:41</span>
-                    </li>
-                    <li>
-                        <span>15*******86</span>
-                        <span>3,000</span>
-                        <span>2018-05-30 11:14:41</span>
-                    </li>
-                    <li>
-                        <span>15*******86</span>
-                        <span>3,000</span>
-                        <span>2018-05-30 11:14:41</span>
-                    </li>
-                    <li>
-                        <span>15*******86</span>
-                        <span>3,000</span>
-                        <span>2018-05-30 11:14:41</span>
-                    </li>
                     <li>
                         <span>15*******86</span>
                         <span>3,000</span>
@@ -180,13 +109,20 @@
 </template>
 <script>
 export default {
-    mounted(){
-        // tab
-        $('.tab ul li').click(function(){
-            $(this).addClass('on').siblings('li').removeClass('on')
-            $('.tab_content>div').eq($(this).index()).show().siblings('div').hide()
-        })
+  data(){
+    return {
+
     }
+  },
+  mounted(){
+
+  },
+  methods:{
+    //去模版合同
+    goLoan() {
+      window.location.href= "https://www.phtfdata.com/web6/page/loanNo.do";
+    },
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -539,7 +475,7 @@ export default {
             color: #C0504D;
             height: 0.5rem;
             line-height: 0.5rem;
-            padding-right: 0.2rem; 
+            padding-right: 0.2rem;
             font-size: 0.3rem;
         }
     }
