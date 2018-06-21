@@ -12,7 +12,6 @@
   import * as apis from '../../assets/js/jwt.apis'
   import {mapGetters, mapActions,mapState} from 'vuex'
   import * as regexfun from '../../../src/assets/js/jwt.regex';
-  import * as infoName from '../../assets/js/jwt.asyncInfo'
     export default {
         data(){
           return{
