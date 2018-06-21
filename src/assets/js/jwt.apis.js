@@ -393,6 +393,38 @@ function exitLogin(CUST_ID,CUST_TYPE) {
 
 }
 
+/**
+ *
+ * @param CUST_ID   用户id
+ * @param CUST_TYPE 用户类型
+ * @param PROJ_CODE 项目id
+ * @returns {*}
+ */
+function queryProjDetail(CUST_ID,CUST_TYPE,PROJ_CODE){
+  return phtServer.globalPostData(urls.api_url_queryProjDetail,phtServer.submitData({
+    "CUST_ID":CUST_ID,
+    "CUST_TYPE":CUST_TYPE,
+    "PROJ_CODE":PROJ_CODE
+  }))
+}
+/**
+ * 定期详情页投资记录
+ *@param CUST_ID 用户id
+ * @param CUST_TYPE 用户类型
+ * @param PROJ_CODE 项目id
+ * @param CURR_PAGE_NUM   页数
+ * @param PER_PAGE_SIZE   每页几个
+ * @returns {*}
+ */
+function ueryInvestedListApp(CUST_ID,CUST_TYPE,PROJ_CODE,CURR_PAGE_NUM,PER_PAGE_SIZE) {
+  return phtServer.globalPostData(urls.api_url_queryInvestedListApp,phtServer.submitData({
+    "CUST_ID":CUST_ID,
+    "CUST_TYPE":CUST_TYPE,
+    "PROJ_CODE":PROJ_CODE,
+    "CURR_PAGE_NUM":CURR_PAGE_NUM,
+    "PER_PAGE_SIZE":PER_PAGE_SIZE
+  }))
+}
 export  {
   passwordRetrieval,
   sendMessageMobileValidCode,
@@ -417,6 +449,8 @@ export  {
   xwbankWebNotify,
   DdProjDetail,
   DdProjRedeemCustList,
+  queryProjDetail,
+  ueryInvestedListApp,
   exitLogin
 }
 

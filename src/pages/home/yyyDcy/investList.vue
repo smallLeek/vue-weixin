@@ -1,4 +1,5 @@
 <template>
+  <!--投资-月月盈列表-->
   <div class="investList">
     <div class="yyyList">
       <div class="yyy_area">
@@ -6,7 +7,7 @@
           <img src="../../../../static/images/home/home_yyy_title.png" class="area_title_img">
         </div>
         <div>
-          <ul v-for="list in yyyData" v-if="yyyData">
+          <ul v-for="list in yyyData" v-if="yyyData" v-on:click="goYyy(list.PROJ_CODE)">
             <li v-text="list.PROJ_NAME"></li>
             <li>
                 <span>
@@ -113,6 +114,10 @@
           this.yyyData = data.result.main_data.yyy_data;//数组
           this.dcyData = data.result.main_data.dcy_data;//数组
         })
+      },
+      // 去月月盈投资详情
+      goYyy(proj_code){
+        this.$router.push({path:'yyyParticulars',query:{"proj_code":proj_code}})
       }
     }
   }

@@ -1,6 +1,5 @@
 import * as types from '../types'
 import {storeUtil} from '../../assets/js/util/lib.store'
-
 const state = {
   // 用户登录状态
   loginStatus: JSON.parse(storeUtil.getStore('loginStatus'))|| false,

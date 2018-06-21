@@ -120,7 +120,6 @@ phtServer.submitData =function (params) {
   submitData.sign = phtServer.addSign( submitData.request)
   return submitData
 };
-
 /**
  * 判断手机号
  * @param mobile
