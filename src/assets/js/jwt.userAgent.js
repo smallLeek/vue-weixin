@@ -1,5 +1,4 @@
 
-
 //判断用户是否为微信用户
 export function JwtUserAgentIsWeiXin() {
   let ua = window.navigator.userAgent.toLowerCase();
