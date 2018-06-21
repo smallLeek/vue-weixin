@@ -425,6 +425,24 @@ function ueryInvestedListApp(CUST_ID,CUST_TYPE,PROJ_CODE,CURR_PAGE_NUM,PER_PAGE_
     "PER_PAGE_SIZE":PER_PAGE_SIZE
   }))
 }
+/**
+ * 定投盈投资
+ *@param CUST_ID 用户id
+ * @param CUST_TYPE 用户类型
+ * @param PROJ_CODE 项目id
+ * @param INVEST_AMOUNT  投资金额
+ * @param IS_CHECK_TRA_PWD   是否开通免密支付   0 未开通 1开通
+ * @returns {*}
+ */
+function pdsInvestProj(CUST_ID,CUST_TYPE,PROJ_CODE,INVEST_AMOUNT,IS_CHECK_TRA_PWD) {
+  return phtServer.globalPostData(urls.api_url_pdsInvestProj,phtServer.submitData({
+    "CUST_ID":CUST_ID,
+    "CUST_TYPE":CUST_TYPE,
+    "PROJ_CODE":PROJ_CODE,
+    "INVEST_AMOUNT":INVEST_AMOUNT,
+    "IS_CHECK_TRA_PWD":IS_CHECK_TRA_PWD
+  }))
+}
 export  {
   passwordRetrieval,
   sendMessageMobileValidCode,
@@ -451,6 +469,7 @@ export  {
   DdProjRedeemCustList,
   queryProjDetail,
   ueryInvestedListApp,
-  exitLogin
+  exitLogin,
+  pdsInvestProj
 }
 

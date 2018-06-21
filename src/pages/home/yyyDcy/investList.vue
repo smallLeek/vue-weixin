@@ -44,7 +44,7 @@
           <img src="../../../../static/images/home/home_dcy_title.png" class="area_title_img">
         </div>
         <div>
-          <ul v-for="list in dcyData" v-if="dcyData">
+          <ul v-for="list in dcyData" v-if="dcyData" v-on:click="goDty(list.PROJ_CODE)">
             <li v-text="list.PROJ_NAME"></li>
             <li>
                 <span>
@@ -117,6 +117,10 @@
       },
       // 去月月盈投资详情
       goYyy(proj_code){
+        this.$router.push({path:'yyyParticulars',query:{"proj_code":proj_code}})
+      },
+      //去定投盈
+      goDty(proj_code) {
         this.$router.push({path:'yyyParticulars',query:{"proj_code":proj_code}})
       }
     }

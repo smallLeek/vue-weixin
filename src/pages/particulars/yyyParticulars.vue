@@ -1,4 +1,5 @@
 <template>
+  <!--月月盈和定投盈是一个页面-->
   <div class="yyy" v-if="yyyDetail">
     <div class="title">
       <router-link to="/home">
@@ -37,8 +38,8 @@
       <ul>
         <li>
           <span>投资进度</span>
-          <span><s></s></span>
-          <span>{{yyyDetail.INVEST_PROGRESS}}</span>
+          <span><s :style="{width:(yyyDetail.INVEST_PROGRESS)}"></s></span>
+          <span>{{yyyDetail.INVEST_PROGRESS | farmatRate}}</span>
         </li>
         <li>
           <span>起投时间</span>
@@ -56,21 +57,21 @@
     </div>
     <div class="tab">
       <ul>
-        <li v-for="(item, index) in tabList" v-text="item.tabName" :class="{tabOn:index==num}"></li>
+        <li v-for="(item, index) in tabList" v-text="item.tabName" :class="{tabOn:index==num}" @click="tab(index)"></li>
       </ul>
     </div>
     <div class="tab_content">
-      <div class="content1">
+      <div class="content1" v-show="num ==0">
         <div class="content1_title">
           <span>项目名称</span>
           <span>天天盈2015924</span>
         </div>
         <img :src="yyyDetail.BACKWARD_URL" alt="">
       </div>
-      <div class="content2">
+      <div class="content2"v-show="num ==1">
         <p v-text="yyyDetail.GUAR_INTRO"></p>
       </div>
-      <div class="content3">
+      <div class="content3" v-show="num ==2">
         <h1>
           <span>用户</span>
           <span>投资金额(元)</span>
@@ -83,17 +84,58 @@
             <span v-text="item.CREATE_DATE">2018-05-30 11:14:41</span>
           </li>
         </ul>
-        <p>已投资6笔，投资总额66,700元</p>
+        <p>已投资{{yyyDetail.CUST}}笔，投资总额{{yyyDetail.INVESTED_AMOUNT | farmatAmount}}元</p>
       </div>
     </div>
     <div class="bottom_input">
-      <div class="input_text">
-        <input type="number" placeholder="投资金额">
-        <span>元</span>
+      <div class="bottom_invest" v-if="type == 0">
+        <!--遮罩层-->
+        <div :class="{popup:isActive}">
+          <div class="box">
+            <div class="focusDiv" v-if="isActive" @click="hideBox()">
+              <ul class="boxline">
+                <li>起投金额</li>
+                <li>可投金额</li>
+                <li>最大单笔金额</li>
+              </ul>
+              <ul class="boxline boxColor">
+                <li>{{yyyDetail.MIN_BID_AMOUNT}}元</li>
+                <li>{{yyyDetail.SURPLUS_PART | farmatAmount}}元</li>
+                <li>{{yyyDetail.MAX_BID_AMOUNT}}元</li>
+              </ul>
+              <ul class="boxline boxBlance">
+                <li>账户余额</li>
+                <li></li>
+              </ul>
+              <ul class="boxline boxColor boxSafe">
+                <li>{{available_balance}}元</li>
+                <li>
+                  <h1>
+                  <span v-if="agree" @click="agreement">
+                    <img class="on" src="../../../static/images/login/login_selectOn.png">阅读并同意
+                  </span>
+                    <span v-if="!agree" @click="agreement">
+                    <img class="on" src="../../../static/images/login/login_select.png">阅读并同意
+                  </span>
+                    <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
+                  </h1>
+                </li>
+              </ul>
+            </div>
+            <div class="input_box">
+              <div class="input_text">
+                <input type="number" placeholder="投资金额" v-on:focus="showBox()" v-model="investMoney">
+                <span>元</span>
+              </div>
+              <div class="input_submit">
+                <button @click="investSubmit()">立即投资</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="input_submit">
-        <router-link to="">立即投资</router-link>
-      </div>
+     <div class="invest_no" v-if="type == 1">{{typeName}}</div>
     </div>
     <!-- 信息披露弹窗 -->
     <informationDisclosure class="informationDisclosure"></informationDisclosure>
@@ -104,6 +146,7 @@
 <script>
   import informationDisclosure from '../../components/informationDisclosure/informationDisclosure.vue';
   import notSufficientFunds from '../../components/notSufficientFunds/notSufficientFunds.vue';
+  import * as regexfun from '../../../src/assets/js/jwt.regex';
   import * as apis from '../../assets/js/jwt.apis'
   import {mapGetters, mapActions, mapState} from 'vuex'
   import * as dealLogin from '../../assets/js/jwt.accessAuth'
@@ -123,6 +166,16 @@
           {tabName:'投资记录'}
         ],
         num:0,
+        type:'',
+        typeName:'',
+        user_role:'',
+        investscore:'',
+        agree:false,
+        available_balance:0,
+        isActive:false,
+        investMoney:'',
+        is_check_tra_pwd:0,
+        userData:null
       }
     },
     computed: {
@@ -131,11 +184,6 @@
       )
     },
     mounted() {
-      // tab切换
-      $('.tab ul li').click(function () {
-        $(this).addClass('on').siblings('li').removeClass('on')
-        $('.tab_content>div').eq($(this).index()).show().siblings('div').hide()
-      })
       this.getYyyDetail();
       this.getInvestList();
     },
@@ -145,8 +193,47 @@
         this.userId = this.userInfo.ID;
         this.userType = '1';
         this.proj_code = this.$route.query.proj_code;
+        let user_role = this.userInfo.USER_ROLE;
+        let userId = this.userInfo.ID;
+        let is_check_tra_pwd = this.userInfo.IS_CHECK_TRA_PWD;
+        let is_expired = this.userInfo.IS_Expired;
+        apis.userBaseData(userId,'1').then( (data) => {
+          let userData = data.result.main_data;
+          this.investscore = userData.INVESTSCORE;
+          this.available_balance = userData.AVAILABLE_BALANCE;
+          this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
+        })
         apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
           this.yyyDetail = data.result.main_data.data[0];
+          //判断用户类型
+          if(user_role == "INVESTOR" ){
+            //判断用户是否授权
+            if (is_check_tra_pwd == "1") {
+              //判断授权是否过期 IS_Expired  1：未过期  0：过期
+              if (is_expired == '1') {
+                //判断是否售罄
+                if(this.yyyDetail.SURPLUS_PART != 0){
+
+                }else{
+                  this.type ='1';
+                  this.typeName = "已售罄"
+                }
+
+              }else {
+                this.bs.$emit('e:alert', "您的用户授权已过期，无法进行投资操作!");
+                this.type ='1';
+                this.typeName = "您的用户授权已过期，无法进行投资操作"
+              }
+            }else{
+              this.bs.$emit('e:alert', "您的用户未委托授权，无法进行投资操作!");
+              this.type ='1';
+              this.typeName = "您的用户未委托授权，无法进行投资操作"
+            }
+          }else{
+            this.bs.$emit('e:alert', "您的账户类型不支持投资!");
+            this.type ='1';
+            this.typeName = "您的账户类型不支持投资"
+          }
         })
       },
       getInvestList(){
@@ -157,6 +244,68 @@
       //去月月盈的模版合同
       goLoan() {
         window.location.href= "https://www.phtfdata.com/web6/page/loanNo.do";
+      },
+      //tab页切换
+      tab(index){
+        this.num = index;
+      },
+      //是否选中风险揭示书
+      agreement() {
+        (this.agree == false) ? this.agree = true : this.agree = false;
+      },
+      //获取焦点 显示投资
+      showBox(){
+        this.isActive = true
+      },
+      //获取焦点 显示投资
+      hideBox(){
+        this.isActive = true
+      },
+      //点击投资
+      investSubmit(){
+        let self = this
+        if(!self.agree){
+          this.bs.$emit('e:alert', "请阅读并同意《风险揭示书》!");
+          return;
+        }
+        if(self.investMoney == ""){
+          this.bs.$emit('e:alert', "投资金额不能为空!");
+          return;
+        }
+        // if (!regexfun.regex(self, 'reg_finc_account', self.investMoney)) {
+        //   this.bs.$emit('e:alert', "请输入有效投资金额!");
+        //   return;
+        // }
+        if((self.investMoney-0)%(this.yyyDetail.MIN_BID_AMOUNT-0) != 0){
+          this.bs.$emit('e:alert', "投资金额应为最低投资额的整数倍!");
+          return;
+        }
+        if((self.investMoney-0)>(this.available_balance -0)){
+          this.bs.$emit('e:alert', "投资金额应在投标剩余金额范围之内!");
+          return;
+        }
+        if((self.investMoney-0)>(this.yyyDetail.MAX_BID_AMOUNT-0)){
+          this.bs.$emit('e:alert', "投资额应在单笔最大限额范围以内!");
+          return;
+        }
+        if((self.investMoney-0)>(this.yyyDetail.SURPLUS_PART -0)){
+          this.bs.$emit('e:alert', "启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试!");
+          return;
+        }
+        //0 为未开通免密支付   1 为开通
+        console.log(this.is_check_tra_pwd)
+        if(this.is_check_tra_pwd == "0"){
+          apis.pdsInvestProj(this.userId,'1',this.proj_code,this.investMoney).then( (data) => {
+            this.userData = data.result;
+            $('.xwUrl').append(this.userData.url)
+          })
+        }else{
+          apis.pdsInvestProj(this.userId,'1',this.proj_code,this.investMoney).then( (data) => {
+            this.userData = data.result.main_data;
+            $('.xwUrl').append(this.userData.url)
+          })
+        }
+
       }
     },
     components: {
@@ -166,6 +315,9 @@
   }
 </script>
 <style lang="less" scoped>
+  .none{
+    display: none;
+  }
   .yyy {
     background-color: #f8f8f8;
     padding-bottom: 0.94rem;
@@ -199,10 +351,10 @@
 
   .fund {
     margin-top: 1rem;
-    height: 2.7rem;
     background: linear-gradient(to bottom, #fb4747 0%, #fb6547 100%);
     text-align: center;
     color: #fff;
+    padding-bottom:0.3rem;
     h2 {
       font-size: 0.26rem;
       font-weight: 500;
@@ -321,7 +473,6 @@
           s {
             float: left;
             height: 0.07rem;
-            width: 12%;
             border-radius: 1rem;
             background-color: #fb4747;
           }
@@ -409,7 +560,6 @@
       }
     }
     .content2 {
-      display: none;
       padding: 0 0.2rem;
       padding-bottom: 1rem;
       background-color: #fff;
@@ -425,7 +575,6 @@
       }
     }
     .content3 {
-      display: none;
       background-color: #fff;
       padding-bottom: 0.5rem;
       h1 {
@@ -481,66 +630,72 @@
     width: 7.5rem;
     margin: auto;
     background-color: #fff;
-    border-top: 1px solid #e0e0e0;
-    .input_text {
-      float: left;
-      margin-top: 0.2rem;
-      margin-left: 0.2rem;
-      width: 4.7rem;
-      height: 0.6rem;
-      line-height: 0.55rem;
-      border: 1px solid #e0e0e0;
-      border-radius: 1rem;
-      input {
+
+    .input_box{
+      width: 100%;
+      border-top: 0.8px solid #e0e0e0;
+      .input_text {
         float: left;
-        width: 3.5rem;
+        margin-top: 0.2rem;
         margin-left: 0.2rem;
-        margin-top: 0.1rem;
-        font-size: 0.3rem;
-        border: none;
-        outline: medium;
-        color: #333333;
+        width: 4.7rem;
+        height: 0.6rem;
+        line-height: 0.55rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 1rem;
+        input {
+          float: left;
+          width: 3.5rem;
+          margin-left: 0.2rem;
+          margin-top: 0.1rem;
+          font-size: 0.3rem;
+          border: none;
+          outline: medium;
+          color: #333333;
+        }
+        ::-moz-placeholder {
+          color: #999999;
+          line-height: 0.35rem;
+        }
+        :-ms-input-placeholder {
+          color: #999999;
+          line-height: 0.35rem;
+        }
+        ::-webkit-input-placeholder {
+          color: #999999;
+          line-height: 0.35rem;
+        }
+        span {
+          float: right;
+          margin-right: 0.2rem;
+          line-height: 0.6rem;
+          font-size: 0.3rem;
+          color: #333333;
+        }
       }
-      ::-moz-placeholder {
-        color: #999999;
-        line-height: 0.35rem;
-      }
-      :-ms-input-placeholder {
-        color: #999999;
-        line-height: 0.35rem;
-      }
-      ::-webkit-input-placeholder {
-        color: #999999;
-        line-height: 0.35rem;
-      }
-      span {
+      .input_submit {
         float: right;
-        margin-right: 0.2rem;
-        line-height: 0.6rem;
-        font-size: 0.3rem;
-        color: #333333;
-      }
-    }
-    .input_submit {
-      float: right;
-      width: 2.3rem;
-      height: 0.94rem;
-      line-height: 0.94rem;
-      color: #fff;
-      font-size: 0.32rem;
-      text-align: center;
-      a {
-        display: block;
         width: 2.3rem;
         height: 0.94rem;
         line-height: 0.94rem;
         color: #fff;
         font-size: 0.32rem;
         text-align: center;
-        background-color: #ffae00;
-      }
-      .end {
-        background-color: #bbbbbb;
+        border-top:1px solid #e0e0e0;
+        button {
+          display: block;
+          width: 2.3rem;
+          height: 0.94rem;
+          border: none;
+          line-height: 0.94rem;
+          color: #fff;
+          font-size: 0.32rem;
+          text-align: center;
+          background-color: #ffae00;
+        }
+        .end {
+          background-color: #bbbbbb;
+        }
       }
     }
   }
@@ -548,5 +703,71 @@
   .informationDisclosure,
   .notSufficientFunds {
     display: none;
+  }
+  .invest_no{
+    width:100%;
+    height: 0.95rem;
+    line-height: 0.95rem;
+    background-color: #bbb;
+    font-size: 0.32rem;
+    text-align: center;
+    color: #fff;
+  }
+  .popup {
+    position: fixed;
+    z-index: 9999999;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    .box {
+      width: 100%;
+      background-color: #fff;
+      position: fixed;
+      bottom: 0;
+      .boxline{
+        font-size: 0.24rem;
+        color: #999;
+        li{
+          display: inline-block;
+          width: 30%;
+          padding-left:0.2rem;
+          margin-top: 0.29rem;
+        }
+      }
+      .boxColor{
+        font-size: 0.28rem;
+        color: #333;
+        li{
+          margin-top: 0.1rem;
+        }
+      }
+      .boxSafe{
+
+        li{
+          margin-bottom:0.28rem;
+        }
+        li:last-child{
+          width: 55%;
+          margin-left:1rem;
+          h1{
+            a{
+              font-size: 0.28rem;
+              color: #fb4747;
+            }
+            span{
+              font-size: 0.28rem;
+              color: #333;
+              img{
+                width: 0.26rem;
+                height: 0.26rem;
+                margin-right: 0.1rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 </style>
