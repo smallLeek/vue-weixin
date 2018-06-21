@@ -9,18 +9,24 @@
                 <span>其他功能以及更多信息</span>
                 <span>请下载app后使用</span>
             </h1>
-            <a id="downloadBtn" href="javascript:;">立即下载</a>
+            <a id="downloadBtn" @click="downLoad()">立即下载</a>
         </div>
     </div>
   </div>
 </template>
 <script>
+  import openApp from "../../assets/js/jwt.userAgent";
 export default {
   mounted(){
     // 弹窗关闭
     $('.close').click(function(){
         $('.downloadRemind').hide()
     })
+  },
+  methods:{
+    downLoad(){
+      openApp()
+    }
   }
 }
 </script>

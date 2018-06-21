@@ -54,10 +54,10 @@
     </div>
     <div class="bottom_input">
       <div class="input_text">
-        <input type="text" placeholder="投资金额">
+        <input type="text" placeholder="投资金额" v-model="widthDrawMoney">
         <span>元</span>
       </div>
-      <div class="input_submit">
+      <div class="input_submit" @click="submitWithdraw()">
         <a>立即投资</a>
       </div>
     </div>
@@ -77,7 +77,8 @@
         TtyDetail: null,
         rate: '',
         proj_name: '',
-        CustList: ''
+        CustList: '',
+        widthDrawMoney:null
       }
     },
     computed: {
@@ -93,6 +94,7 @@
       this.getTty();
     },
     methods: {
+      ...mapActions({setPayDetail: 'setPayDetail'}),
       //去安全保障
       goMoneySafe() {
         window.location.href = "https://www.phtfdata.com/web6/hander/bxprotectedNew.do"
@@ -102,8 +104,7 @@
         this.userId = this.userInfo.ID;
         this.userType = this.userInfo.USER_TYPE;
         let userId = this.userInfo.ID;
-        let userType = this.userInfo.USER_TYPE;
-        apis.DdProj(userId, userType).then((data) => {
+        apis.DdProj(userId, "1").then((data) => {
           this.proj_code = data.result.main_data.PROJ_CODE;
           this.getTtyDetail();
           this.getDdProjRedeemCustList();
@@ -112,9 +113,8 @@
       //天天盈项目详情
       getTtyDetail() {
         let userId = this.userInfo.ID;
-        let userType = this.userInfo.USER_TYPE;
         let proj_code = this.proj_code;
-        apis.DdProjDetail(userId, userType, proj_code).then((data) => {
+        apis.DdProjDetail(userId, '1', proj_code).then((data) => {
           this.TtyDetail = data.result.main_data;
           this.rate = this.TtyDetail.RATE;
           this.proj_name = this.TtyDetail.PROJ_NAME
@@ -125,6 +125,21 @@
         apis.DdProjRedeemCustList(this.userId, this.userType, proj_code, 1, 10).then((data) => {
           this.CustList = data.result.main_data.data;
         })
+      },
+      submitWithdraw(){
+        let self =this
+        this.setPayDetail({
+          //项目名称
+          proName:self.proj_name,
+          //可用余额
+          balance:self.userInfo.AVAILABLE_BALANCE,
+          //投资金额
+          withDraw:this.widthDrawMoney,
+          //投资期限
+          proTime:null
+        })
+        self.$router.push({path:'paymentOrder'})
+
       }
     }
   }

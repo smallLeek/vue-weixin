@@ -8,25 +8,25 @@
     </div>
     <div class="countDown">
       <img src="../../../static/images/time_icon.png">
-      <span>剩余支付时间：<b>9:56</b></span>
+      <span>剩余支付时间：<b>{{'0'+timeM}}:{{timeS}}</b></span>
     </div>
     <div class="content">
       <ul>
         <li>
           <span>产品名称</span>
-          <span>月月盈2015925</span>
+          <span>{{payDetail.proName}}</span>
         </li>
-        <li>
+        <li v-if="payDetail.proTime">
           <span>投资期限</span>
-          <span>3个月</span>
+          <span>{{payDetail.proTime}}</span>
         </li>
         <li>
           <span>可用余额</span>
-          <span>5000.32元</span>
+          <span>{{payDetail.balance}}</span>
         </li>
         <li>
           <span>投资金额</span>
-          <span>1000元</span>
+          <span>{{payDetail.withDraw}}</span>
         </li>
       </ul>
     </div>
@@ -38,8 +38,50 @@
   </div>
 </template>
 <script>
+  import {mapGetters} from 'vuex'
+  import * as regexfun from '../../../src/assets/js/jwt.regex';
 export default {
-  
+  data(){
+    return{
+      timeM:null,
+      timeS:null
+
+    }
+  },
+  mounted(){
+    this.timeLoad()
+  },
+  computed: {
+    ...mapGetters(
+      ['payDetail']
+    )
+  },
+  methods:{
+    timeLoad(){
+      let self =this;
+      self.timeM = 0;  //分
+      self.timeS = 10;  //秒
+      getCountdown();
+      let timer =setInterval(function(){ getCountdown() },1000);
+      function getCountdown (){
+        if(  self.timeM == 0 &&  self.timeS == 0 ){
+          regexfun.handleFailMsg(self,"支付超时！！！！");
+          clearInterval(timer);
+        }else if(  self.timeM >= 0 ){
+          if(self.timeS > 0 ){
+            self.timeS--;
+            if(self.timeS<10){
+              self.timeS= '0'+ self.timeS
+            }
+          }else if(self.timeS == 0 ){
+            self.timeM--;
+            self.timeS = 59;
+          }
+        }
+      }
+    }
+  },
+
 }
 </script>
 <style lang="less" scoped>

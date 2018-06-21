@@ -24,7 +24,6 @@
          }
        },
       mounted(){
-         $('.XwBank').hide()
       },
       methods:{
         close(){

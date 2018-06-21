@@ -24,8 +24,8 @@ if(userState.accessAuth.isNeedLogin == true){
    if(userState.accessAuth.isNeedRealName == false){
     location.href = location.origin + userState.accessAuth.whereToGo
   } else {
-     store.dispatch('setXwBank', true);
      $('.XwBank').show();
+     store.dispatch('setXwBank', true);
 
   }
   }

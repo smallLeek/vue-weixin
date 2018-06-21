@@ -20,19 +20,19 @@
         <!-- 菜单 -->
         <div class="menu">
             <ul>
-                    <li>
+                    <li @click="withDraw()">
                 <router-link to="">
                         <img src="../../../static/images/user/user_tty_icon.png">
                         <span>天天盈</span>
                 </router-link>
                     </li>
-                    <li>
+                    <li @click="withDraw()">
                 <router-link to="">
                         <img src="../../../static/images/user/user_dty_icon.png">
                         <span>定投盈</span>
                 </router-link>
                     </li>
-                    <li>
+                    <li @click="withDraw()">
                 <router-link to="">
                         <img src="../../../static/images/user/user_Transaction_icon.png">
                         <span>交易记录</span>
@@ -44,26 +44,26 @@
                         <span>账户充值</span>
                 </router-link>
                     </li>
-                    <li>
+                    <li @click="withDraw()">
                 <router-link to="">
                         <img src="../../../static/images/user/user_withdraw_deposit_icon.png">
                         <span>账户提现</span>
                 </router-link>
                     </li>
-                    <li>
+                    <li @click="withDraw()">
                 <router-link to="">
                         <img src="../../../static/images/user/user_help_icon.png">
                         <span>新手帮助</span>
                 </router-link>
                     </li>
-                    <li>
+                    <li @click="withDraw()">
                 <a @click="shareInvitationShow()">
                         <img src="../../../static/images/user/user_share_icon.png">
                         <span>分享邀请</span>
                 </a>
                     </li>
                     <li>
-                <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do" target="_blank">
+                <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do">
                         <img src="../../../static/images/user/user_security_center_icon.png">
                         <span>安全中心</span>
                 </a>
@@ -129,6 +129,9 @@
     },
     shareInvitationShow(){
         $('.shareInvitation').show()
+    },
+    withDraw(){
+      $('.downloadRemind').show()
     }
   },
   components: {

@@ -114,7 +114,7 @@
     }
   }
   .content{
-    margin-top: 0.45rem;
+    margin-top: 1rem;
     ul{
       background-color: #fff;
       padding-left: 0.2rem;

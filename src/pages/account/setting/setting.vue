@@ -16,11 +16,11 @@
                     <span><img src="../../../../static/images/setting/setting_risk.png"></span>
                     <span>风险承受能力评估</span>
                 </li>
-                <li>
+                <li @click="securitys()">
                     <span><img src="../../../../static/images/setting/setting_security.png"></span>
                     <span>安全保障</span>
                 </li>
-                <li>
+                <li @click="aboutUs()">
                     <span><img src="../../../../static/images/setting/setting_about.png"></span>
                     <span>关于我们</span>
                 </li>
@@ -35,7 +35,6 @@
     </div>
 </template>
 <script>
-  import { phtServer } from '../../../assets/js/phtServer'
   import * as apis from '../../../assets/js/jwt.apis'
   import * as regexfun from '../../../../src/assets/js/jwt.regex';
   import {mapGetters, mapActions,mapState} from 'vuex'
@@ -70,6 +69,12 @@ export default {
           window.location.href = url;
         }
       })
+    },
+    securitys(){
+      location.href ="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do"
+    },
+    aboutUs(){
+      location.href ="https://www.phtfdata.com/web6/hander/Mabout.do"
     },
     loginOut(){
       let userId = this.userInfo.ID;

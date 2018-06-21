@@ -21,6 +21,8 @@ const state = {
   xwInfo:false,
   //弹框
   showXwBank:false,
+  //支付订单详情
+  payDetail:JSON.parse(storeUtil.getStore('payDetail')) || {}
 
 }
 
@@ -104,6 +106,17 @@ const actions = {
     commit(types.USER_XW_BANK, xwBank)
 
   },
+  /**
+   * 新网提示信息
+   * @param commit
+   * @param xwBank
+   * @constructor
+   */
+  setPayDetail( { commit }, res ){
+    storeUtil.setStore('payDetail', res)
+    commit(types.PAY_DETAIL, res)
+
+  },
 
 
 }
@@ -117,8 +130,8 @@ const getters = {
   accessAuth:state =>state.accessAuth,
   //新网提示信息
   xwBank:state =>state.xwBank,
-
   showXwBank:state =>state.showXwBank,
+  payDetail:state =>state.payDetail
 }
 
 const mutations = {
@@ -186,6 +199,12 @@ const mutations = {
     state.showXwBank = showXwBank
 
   },
+  //支付订单详情
+  [types.PAY_DETAIL] ( state, payDetail){
+    state.payDetail = payDetail
+
+  },
+
 
 
 }

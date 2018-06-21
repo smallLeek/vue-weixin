@@ -8,8 +8,8 @@
       </div>
       <!--天天盈项目-->
       <ul v-if="tty">
-        <li v-text="tty.PROJ_NAME"></li>
-        <li>
+        <li v-text="tty.PROJ_NAME" @click="gottyPar()"></li>
+        <li @click="gottyPar()">
           <span>
             <b v-text="(tty.RATE).toFixed(0)"></b>%
           </span>
@@ -20,18 +20,19 @@
             <b>{{tty.MAX_AMOUNT | farmatAmount}}</b>元
           </span>
         </li>
-        <li>
+        <li @click="gottyPar()">
           <span>年化收益</span>
           <span>需求金额</span>
           <span>剩余可投</span>
         </li>
         <!-- 进度条 -->
-        <li>
+        <li @click="gottyPar()">
           <span><s :style="{width:((tty.MAX_AMOUNT-tty.REDEEM_MAX_AMOUNT)/tty.REDEEM_MAX_AMOUNT)+'%'}"></s></span>
           <span v-text="((tty.MAX_AMOUNT-tty.REDEEM_MAX_AMOUNT)/tty.REDEEM_MAX_AMOUNT)+'%'"></span>
         </li>
         <li>
-          <button v-on:click="ttyInvest" v-text="investText">立即投资</button>
+          <button v-on:click="ttyInvest" v-if="investText">立即投资</button>
+          <button v-if="investText1">已售罄</button>
         </li>
       </ul>
       <ul class="noProject" v-if="!tty">
@@ -43,6 +44,7 @@
 <script>
   import * as apis from '../../../assets/js/jwt.apis'
   import {mapGetters, mapActions, mapState} from 'vuex'
+  import * as regexfun from '../../../../src/assets/js/jwt.regex';
   import * as dealLogin from '../../../assets/js/jwt.accessAuth'
 
   export default {
@@ -50,7 +52,8 @@
       return {
         userData: null,
         tty: null,
-        investText: '立即投资'
+        investText:null,
+        investText1:null,
       }
     },
     computed: {
@@ -79,19 +82,27 @@
         let userId = '';
         let userType = '1';
         apis.DdProj(userId, userType).then((data) => {
+          console.log(data)
           this.tty = data.result.main_data;
+          console.log(this.tty.INVEST_STATUS)
           let proj_status = this.tty.PROJ_STATUS;
           if (proj_status == "6003") {
-            this.investText = "立即投资";
+            this.investText = true;
+            this.investText1 =false
           } else {
-            this.investText = "已售罄";
+            this.investText = false;
+            this.investText1 =true
           }
         })
+      },
+      gottyPar(){
+        this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/ttyParticulars"});
+        dealLogin.dealLogin();
+        this.$router.push({path:'/ttyParticulars'})
       },
       //请求债权列表接口
       //点击投资按钮是否到投资页面
       ttyInvest() {
-
         /**
          * 投资按钮显示状态 三种：售罄 停售 投资
          * 停售:详情接口:proj_state 不是6003
@@ -102,43 +113,32 @@
          * INVEST_END_DATETIME 委托授权  0:否 1：是
          * IS_Expired 1：未过期  0：过期
          */
-        this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/ttyParticulars"});
-        dealLogin.dealLogin();
-        if (this.loginStatus == true) {
-          this.getBaseData();
-          let proj_status = this.tty.PROJ_STATUS;
-          console.log(proj_status);
+         this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/home"});
+         dealLogin.dealLogin();
           let user_role = this.userInfo.USER_ROLE;
-          console.log(user_role);
           let is_check_tra_pwd = this.userInfo.IS_CHECK_TRA_PWD;
-          console.log(is_check_tra_pwd);
           let is_expired = this.userInfo.IS_Expired;
-          console.log(is_expired);
-          if (proj_status == "6003") {
-            //判断用户类型
-            if (user_role == "INVESTOR") {
-              //判断用户是否授权
-              if (is_check_tra_pwd == "1") {
-                //判断授权是否过期 IS_Expired  1：未过期  0：过期
-                if (is_expired == '1') {
-                  //可以进入投资
-                  this.$router.push('/ttyParticulars')
-                } else {
-                  this.bs.$emit('e:alert', "您的用户授权已过期，无法进行投资操作!");
-                }
-              } else {
-                //弹框 未写
-                this.bs.$emit('e:alert', "您的用户未委托授权，无法进行投资操作!");
-              }
-            } else {
-              this.bs.$emit('e:alert', "您的账户类型不支持投资!");
-            }
-          } else {
-
+          let flag = true;
+          if(user_role == 'INVESTOR'){
+            flag = false
+            regexfun.handleFailMsg(this, "您的账户类型不支持投资!");
           }
-        } else {
-          this.$router.push('/loginRegister')
+          if (is_check_tra_pwd=='0') {
+            flag = false
+            regexfun.handleFailMsg(this,"您的用户未委托授权，无法进行投资操作!");
+          }
+          if(is_expired == '0'){
+            regexfun.handleFailMsg(this, "您的用户授权已过期，无法进行投资操作!");
+          }
+          if( this.tty.INVEST_STATUS == "1" ){
+            flag = false;
+            regexfun.handleFailMsg(this,"未到投资时间，如有需要请联系客服!");
+
         }
+        if(flag){
+            this.$router.push({path:'/ttyParticulars'})
+        }
+
       }
     }
   }
@@ -277,6 +277,7 @@
           text-align: center;
           margin: auto;
           border: none;
+          outline: none;
         }
         button:active {
           background-color: #de2626;

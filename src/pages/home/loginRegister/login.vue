@@ -59,7 +59,7 @@ export default {
       ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut'}),
       submit() {
            let flag=false;
-           flag=regexfun.regex(this, 'mobile', $('#phonenum').val());
+           flag=regexfun.regex(this, 'mobile', this.loginPhone);
            if(flag == true){
                this.login()
            }
@@ -78,6 +78,7 @@ export default {
             this.setUserInfo(userInfoList);
             this.setIsRealName(userInfoList.STATE);
             this.getTokenCode(userInfoList.token);
+            this.$router.push({path: '/home'})
             dealLogin.dealLogin();
           }else {
             regexfun.handleFailMsg(this,data.message)

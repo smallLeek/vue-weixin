@@ -1,5 +1,5 @@
 <template>
-<div class="getBackPwd">
+<div class="getBackPwd" v-title="'密码找回'">
   <div>
   <x-header style="background-color: #fb4747" :left-options="{backText: ''}">密码找回</x-header>
   </div>
@@ -79,7 +79,6 @@
       },
       submit(){
         let self = this;
-        console.log(self.msgCode)
         if(regexfun.regexList(this,[{key:'mobile',content:self.bindPhoneNum},
                                       {key:'reg_smscode',content:self.msgCode},
                                       {key:'password',content:self.newPwd},
@@ -91,6 +90,7 @@
               apis.passwordRetrieval(self.bindPhoneNum,self.msgCode,pwd).then(data=>{
                 if(data.status==="00000000"){
                  regexfun.handleFailMsg(this,"密码重置成功，请输入新密码进行登录");
+                 this.$router.push({path:'loginRegister'})
                 }
               })
              }
@@ -179,6 +179,7 @@
        background-color: #fb4747;
        border: none;
        color: #fff;
+       outline: none;
        font-size: .32rem;
      }
    }
