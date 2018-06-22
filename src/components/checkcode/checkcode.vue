@@ -129,10 +129,12 @@
           height: 0.8rem;
           line-height: 0.8rem;
           width: 3rem;
+          outline: none;
         }
         input:last-child{
           background-color: #fff;
           width: 1.5rem;
+          outline: none;
         }
       }
       p{
@@ -162,6 +164,7 @@
         float: left;
         background-color: #fff;
         font-size: 0.34rem;
+        outline: none;
       }
       button:first-child{
         border-right: 0.8px solid #ccc;

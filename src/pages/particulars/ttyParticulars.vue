@@ -60,8 +60,8 @@
     <div class="bottom"  @click ='onIsFocus'>
 
       <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
-        <span class="title-list" v-if="investscore1" @click="openInvest()">您尚未完成<span class="openInvest">《出借人风险承受能力评估》</span>，请知悉。</span>
-        <span class="title-list" v-if="investscore2">该项目的风险程度超过您的风险承受能力，请知悉</span>
+        <span class="title-list" v-if="investscoreNo" @click="openInvest()">您尚未完成<span class="openInvest">《出借人风险承受能力评估》</span>，请知悉。</span>
+        <span class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</span>
       <ul class="boxline">
         <li>起投金额</li>
         <li>最大单笔金额</li>
@@ -122,8 +122,8 @@
         headShow:false,
         agree:false,
         investscore:null,
-        investscore2:false,
-        investscore1:false,
+        investscoreNo:false,
+        investscoreYes:false,
 
       }
     },
@@ -253,12 +253,12 @@
         }
         if(this.investscore=='0'){
           flag = false;
-          this.investscore2 =true
+          this.investscoreNo =true
           regexfun.handleFailMsg(this,"请进行风险能力评估");
         }
         if(this.investscore=='1'){
           flag = false;
-          this.investscore1 =true
+          this.investscoreYes =true
           regexfun.handleFailMsg(this,"该项目的风险程度超过您的风险承受能力，请知悉。");
         }
         if(flag){

@@ -98,7 +98,6 @@
           let userData = data.result.main_data;
           this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
         })
-        alert(this.userInfo.is_check_tra_pwd);
         if(this.is_check_tra_pwd == "0"){
           apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime,'https://www.phtfdata.com/wx/async').then( (data) => {
             this.userData = data.result;
@@ -110,7 +109,6 @@
           apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime).then( (data) => {
             this.userData = data.result.main_data;
             console.log(this.userData);
-            alert(this.checkFlag)
             // $('.xwUrl').append(this.userData.url)
           })
         }
