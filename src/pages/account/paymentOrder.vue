@@ -64,10 +64,10 @@
     },
     methods:{
       getDatas:function (getData) {
-        this.checkFlag = getData
+        this.showCode = getData
       },
       checknewCode (data) {
-        this.checkFlag = data
+        this.showCode = data
       },
       timeLoad(){
         let self =this;
@@ -97,23 +97,21 @@
         apis.userBaseData(self.userInfo.ID,'1').then( (data) => {
           let userData = data.result.main_data;
           this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
+          if(this.is_check_tra_pwd == "0"){
+            apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime,'https://www.phtfdata.com/wx/async').then( (data) => {
+              this.userData = data.result;
+              //跳转到新网
+              $('.xwUrl').append(this.userData.url)
+            })
+          }else{
+            this.showCode = true;
+            apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime).then( (data) => {
+              this.userData = data.result.main_data;
+              console.log(this.userData );
+            })
+          }
         })
-        alert(this.userInfo.is_check_tra_pwd);
-        if(this.is_check_tra_pwd == "0"){
-          apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime,'https://www.phtfdata.com/wx/async').then( (data) => {
-            this.userData = data.result;
-            //跳转到新网
-            $('.xwUrl').append(this.userData.url)
-          })
-        }else{
-          this.showCode = true;
-          apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime).then( (data) => {
-            this.userData = data.result.main_data;
-            console.log(this.userData);
-            alert(this.checkFlag)
-            // $('.xwUrl').append(this.userData.url)
-          })
-        }
+
       }
      },
     components: {

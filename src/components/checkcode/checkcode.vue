@@ -26,11 +26,12 @@
         publicCode: '',
         checkCode: '',
         flag: '',
-        isShow:true
+        isShow:true,
+        showCode:true
       }
     },
     props:[
-      'withDraw'
+      'withDraw',
     ],
     computed: {
       ...mapGetters(
@@ -58,7 +59,9 @@
       },
       //取消输入验证码
       cancleBox() {
-        this.isShow = false
+        this.isShow = false;
+        this.showCode = false;
+        this.$emit("checkNewCode",this.showCode)
       },
       //确定按钮
       okBox() {
@@ -79,7 +82,6 @@
         }else{
 
         }
-        this.$emit("checkNewCode",this.flag)
 
 
       }
