@@ -30,59 +30,96 @@
         </li>
       </ul>
     </div>
-    <div class="btn">确认支付</div>
+    <div class="btn" @click="goPay()">确认支付</div>
     <div class="remind">
       <h1>交易小贴士：</h1>
       <p>如您在“我的-安全中心-免支付密码投标”中已开通<b>免支付密码投标</b>，可免输入交易密码<b>快速投资</b>，未开通免支付密码投标需跳转到<b>新网银行存管页面</b>，输入交易密码进行投资确认。</p>
     </div>
+    <checkcode v-if="showCode" v-bind:withDraw="payDetail.withDraw"  v-on:checkNewCode="getDatas"></checkcode>
   </div>
 </template>
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions, mapState} from 'vuex'
   import * as regexfun from '../../../src/assets/js/jwt.regex';
-export default {
-  data(){
-    return{
-      timeM:null,
-      timeS:null
-
-    }
-  },
-  mounted(){
-    this.timeLoad()
-  },
-  computed: {
-    ...mapGetters(
-      ['payDetail']
-    )
-  },
-  methods:{
-    timeLoad(){
-      let self =this;
-      self.timeM = 9;  //分
-      self.timeS = 59;  //秒
-      getCountdown();
-      let timer =setInterval(function(){ getCountdown() },1000);
-      function getCountdown (){
-        if(  self.timeM == 0 &&  self.timeS == 0 ){
-          regexfun.handleFailMsg(self,"支付超时！！！！");
-          clearInterval(timer);
-        }else if(  self.timeM >= 0 ){
-          if(self.timeS > 0 ){
-            self.timeS--;
-            if(self.timeS<10){
-              self.timeS= '0'+ self.timeS
+  import * as apis from '../../assets/js/jwt.apis'
+  import checkcode from '../../components/checkcode/checkcode'
+  export default {
+    data(){
+      return{
+        timeM:null,
+        timeS:null,
+        is_check_tra_pwd:'',
+        flag:0,
+        showCode:false,
+        checkFlag:''
+      }
+    },
+    computed: {
+      ...mapGetters(
+        ['loginStatus', 'userInfo', 'tokenCode','accessAuth','payDetail']
+      ),
+    },
+    mounted(){
+      this.timeLoad()
+    },
+    methods:{
+      getDatas:function (getData) {
+        this.checkFlag = getData
+      },
+      checknewCode (data) {
+        this.checkFlag = data
+      },
+      timeLoad(){
+        let self =this;
+        self.timeM = 9;  //分
+        self.timeS = 59;  //秒
+        getCountdown();
+        let timer =setInterval(function(){ getCountdown() },1000);
+        function getCountdown (){
+          if(  self.timeM == 0 &&  self.timeS == 0 ){
+            regexfun.handleFailMsg(self,"支付超时！！！！");
+            clearInterval(timer);
+          }else if(  self.timeM >= 0 ){
+            if(self.timeS > 0 ){
+              self.timeS--;
+              if(self.timeS<10){
+                self.timeS= '0'+ self.timeS
+              }
+            }else if(self.timeS == 0 ){
+              self.timeM--;
+              self.timeS = 59;
             }
-          }else if(self.timeS == 0 ){
-            self.timeM--;
-            self.timeS = 59;
           }
         }
+      },
+      goPay(){
+        let self =this;
+        apis.userBaseData(self.userInfo.ID,'1').then( (data) => {
+          let userData = data.result.main_data;
+          this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
+        })
+        alert(this.userInfo.is_check_tra_pwd);
+        if(this.userInfo.is_check_tra_pwd == "0"){
+          apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.userInfo.is_check_tra_pwd,this.payDetail.proTime,'https://www.phtfdata.com/wx/async').then( (data) => {
+            this.userData = data.result;
+            //跳转到新网
+            $('.xwUrl').append(this.userData.url)
+          })
+        }else{
+          apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.userInfo.is_check_tra_pwd,this.payDetail.proTime).then( (data) => {
+            this.userData = data.result.main_data;
+            console.log(this.userData);
+            this.showCode = true;
+            alert(this.checkFlag)
+            // $('.xwUrl').append(this.userData.url)
+          })
+        }
       }
+     },
+    components: {
+      checkcode
     }
-  },
-
-}
+  }
 </script>
 <style lang="less" scoped>
 /* title */

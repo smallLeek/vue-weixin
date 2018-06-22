@@ -320,11 +320,11 @@ function queryMainPageTotalData() {
 
 /**
  * 新网异步是否返回
- * @param REQUEST_NO
- * @param METHOD_NAME
- * @param METHOD_TYPE
- * @param USER_ID
- * @param USER_TYPE
+ * @param REQUEST_NO 请求流水号 新网返回的时候在地址拼了一个流水号
+ * @param METHOD_NAME 方法名  操作名称
+ * @param METHOD_TYPE   传1
+ * @param USER_ID  用户ID
+ * @param USER_TYPE 用户类型
  * @returns {*}
  */
 function queryNewAddPersonAsync(REQUEST_NO,METHOD_NAME,METHOD_TYPE,USER_ID,USER_TYPE) {
@@ -434,13 +434,14 @@ function ueryInvestedListApp(CUST_ID,CUST_TYPE,PROJ_CODE,CURR_PAGE_NUM,PER_PAGE_
  * @param IS_CHECK_TRA_PWD   是否开通免密支付   0 未开通 1开通
  * @returns {*}
  */
-function pdsInvestProj(CUST_ID,CUST_TYPE,PROJ_CODE,INVEST_AMOUNT,IS_CHECK_TRA_PWD) {
+function pdsInvestProj(CUST_ID,CUST_TYPE,PROJ_CODE,INVEST_AMOUNT,IS_CHECK_TRA_PWD,redirectUrl) {
   return phtServer.globalPostData(urls.api_url_pdsInvestProj,phtServer.submitData({
     "CUST_ID":CUST_ID,
     "CUST_TYPE":CUST_TYPE,
     "PROJ_CODE":PROJ_CODE,
     "INVEST_AMOUNT":INVEST_AMOUNT,
-    "IS_CHECK_TRA_PWD":IS_CHECK_TRA_PWD
+    "IS_CHECK_TRA_PWD":IS_CHECK_TRA_PWD,
+    "redirectUrl":redirectUrl,
   }))
 }
 export  {
