@@ -18,7 +18,7 @@
         </li>
         <li v-if="payDetail.proTime">
           <span>投资期限</span>
-          <span>{{payDetail.proTime}}</span>
+          <span>{{payDetail.proTime}}个月</span>
         </li>
         <li>
           <span>可用余额</span>
