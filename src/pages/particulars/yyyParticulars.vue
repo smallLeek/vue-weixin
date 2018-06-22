@@ -293,7 +293,7 @@
           return;
         }
         //0 为未开通免密支付   1 为开通
-        console.log(this.is_check_tra_pwd)
+
         if(this.is_check_tra_pwd == "0"){
           apis.pdsInvestProj(this.userId,'1',this.proj_code,this.investMoney).then( (data) => {
             this.userData = data.result;
