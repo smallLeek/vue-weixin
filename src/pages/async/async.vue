@@ -63,7 +63,9 @@
             apis.queryNewAddPersonAsync( self.request_no,self.method_name,'1',userState.ID,'1').then((data) => {
               if(data.status =='00000000'){
                 let userData = data.result.main_data;
+                //XW_IS_ASYNC  新网异步是否返回  1:返回   0 否
                 if(userData.XW_IS_ASYNC == '1') {
+                  //XW_ASYNC_STATE  新网异步返回状态  0 失败   1 成功
                   if (userData.XW_ASYNC_STATE == '1') {
                     clearInterval(self.timer);
                     clearInterval(self.timer1);

@@ -124,7 +124,7 @@
             </div>
             <div class="input_box">
               <div class="input_text">
-                <input type="number" placeholder="投资金额" v-on:focus="showBox()" v-model="investMoney">
+                <input type="text" placeholder="投资金额" v-on:focus="showBox()" v-model="investMoney">
                 <span>元</span>
               </div>
               <div class="input_submit">
@@ -141,6 +141,8 @@
     <informationDisclosure class="informationDisclosure"></informationDisclosure>
     <!-- 余额不足弹窗 -->
     <notSufficientFunds class="notSufficientFunds"></notSufficientFunds>
+    <!--请输入验证码-->
+
   </div>
 </template>
 <script>
@@ -181,13 +183,14 @@
     computed: {
       ...mapGetters(
         ['loginStatus', 'userInfo', 'tokenCode','accessAuth']
-      )
+      ),
     },
     mounted() {
       this.getYyyDetail();
       this.getInvestList();
     },
     methods:{
+      ...mapActions({setPayDetail: 'setPayDetail'}),
       //月月盈列表
       getYyyDetail(){
         this.userId = this.userInfo.ID;
@@ -213,6 +216,7 @@
               if (is_expired == '1') {
                 //判断是否售罄
                 if(this.yyyDetail.SURPLUS_PART != 0){
+                  //投资人分级判断
 
                 }else{
                   this.type ='1';
@@ -272,10 +276,9 @@
           this.bs.$emit('e:alert', "投资金额不能为空!");
           return;
         }
-        // if (!regexfun.regex(self, 'reg_finc_account', self.investMoney)) {
-        //   this.bs.$emit('e:alert', "请输入有效投资金额!");
-        //   return;
-        // }
+        if(!(regexfun.regex(this, 'reg_finc_account', this.investMoney))){
+          return regexfun.handleFailMsg(this,"请输入有效投资金额");
+        }
         if((self.investMoney-0)%(this.yyyDetail.MIN_BID_AMOUNT-0) != 0){
           this.bs.$emit('e:alert', "投资金额应为最低投资额的整数倍!");
           return;
@@ -292,25 +295,27 @@
           this.bs.$emit('e:alert', "启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试!");
           return;
         }
-        //0 为未开通免密支付   1 为开通
+        this.setPayDetail({
+          userId:self.userId,
+          //项目名称
+          proName:self.proj_code,
+          //可用余额
+          balance:self.userInfo.AVAILABLE_BALANCE,
+          //投资金额
+          withDraw:self.investMoney,
+          //投资期限
+          proTime:self.yyyDetail.LOAN_LIMITTIME
+        });
 
-        if(this.is_check_tra_pwd == "0"){
-          apis.pdsInvestProj(this.userId,'1',this.proj_code,this.investMoney).then( (data) => {
-            this.userData = data.result;
-            $('.xwUrl').append(this.userData.url)
-          })
-        }else{
-          apis.pdsInvestProj(this.userId,'1',this.proj_code,this.investMoney).then( (data) => {
-            this.userData = data.result.main_data;
-            $('.xwUrl').append(this.userData.url)
-          })
-        }
+        self.$router.push({path:'paymentOrder'})
+
+
 
       }
     },
     components: {
       informationDisclosure,
-      notSufficientFunds
+      notSufficientFunds,
     }
   }
 </script>
