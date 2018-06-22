@@ -32,7 +32,7 @@
         </li>
         <li>
           <button v-on:click="ttyInvest" v-if="investText">立即投资</button>
-          <button v-if="investText1">已售罄</button>
+          <button v-if="investText1" id="over">已售罄</button>
         </li>
       </ul>
       <ul class="noProject" v-if="!tty">
@@ -258,5 +258,8 @@
       width: 3.41rem;
       height: 1.58rem;
     }
+  }
+   #over{
+    background: #bbb;
   }
 </style>
