@@ -52,11 +52,11 @@
         </li>
       </ul>
     </div>
-      <div class="modal-box" v-show="headShow">
-        <div class="close" @click="HShow()">
+    <div class="modal-box" v-show="headShow">
+      <div class="close" @click="HShow()">
 
-        </div>
       </div>
+    </div>
     <div class="bottom"  @click ='onIsFocus'>
 
       <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
