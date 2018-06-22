@@ -67,7 +67,7 @@
   import * as apis from '../../assets/js/jwt.apis'
   import {mapGetters, mapActions, mapState} from 'vuex'
   import * as dealLogin from '../../assets/js/jwt.accessAuth'
-
+  import * as regexfun from '../../../src/assets/js/jwt.regex';
   export default {
     data() {
       return {
@@ -78,7 +78,8 @@
         rate: '',
         proj_name: '',
         CustList: '',
-        widthDrawMoney:null
+        tty:null,
+        widthDrawMoney:null,
       }
     },
     computed: {
@@ -106,6 +107,7 @@
         let userId = this.userInfo.ID;
         apis.DdProj(userId, "1").then((data) => {
           this.proj_code = data.result.main_data.PROJ_CODE;
+          this.tty = data.result.main_data;
           this.getTtyDetail();
           this.getDdProjRedeemCustList();
         })
@@ -116,6 +118,7 @@
         let proj_code = this.proj_code;
         apis.DdProjDetail(userId, '1', proj_code).then((data) => {
           this.TtyDetail = data.result.main_data;
+          console.log(this.TtyDetail)
           this.rate = this.TtyDetail.RATE;
           this.proj_name = this.TtyDetail.PROJ_NAME
         })
@@ -127,18 +130,75 @@
         })
       },
       submitWithdraw(){
-        let self =this
-        this.setPayDetail({
-          //项目名称
-          proName:self.proj_name,
-          //可用余额
-          balance:self.userInfo.AVAILABLE_BALANCE,
-          //投资金额
-          withDraw:this.widthDrawMoney,
-          //投资期限
-          proTime:null
-        })
-        self.$router.push({path:'paymentOrder'})
+        let flag = true;
+        let user_role = this.userInfo.USER_ROLE;
+        let is_check_tra_pwd = this.userInfo.IS_CHECK_TRA_PWD;
+        let is_expired = this.userInfo.IS_Expired;
+        let min_money = this.TtyDetail.MIN_AMOUNT
+        let max_money = this.TtyDetail.MAX_AMOUNT
+        let money= this.widthDrawMoney
+        let accountBalance =this.userInfo.AVAILABLE_BALANCE
+        if(user_role != 'INVESTOR'){
+          flag = false
+          regexfun.handleFailMsg(this, "您的账户类型不支持投资!");
+        }
+        if (is_check_tra_pwd=='0') {
+          flag = false
+          regexfun.handleFailMsg(this,"您的用户未委托授权，无法进行投资操作!");
+        }
+        if(is_expired == '0'){
+          flag = false
+          regexfun.handleFailMsg(this, "您的用户授权已过期，无法进行投资操作!");
+        }
+        if( this.tty.INVEST_STATUS == "1" ){
+          flag = false;
+          regexfun.handleFailMsg(this,"未到投资时间，如有需要请联系客服!");
+        }
+        //投资不能为空
+        if(flag && (this.widthDrawMoney == "" || this.widthDrawMoney == '0')){
+          flag = false;
+          regexfun.handleFailMsg(this,"请输入大于0的投资金额");
+        }
+        if(!(regexfun.regex(this, 'reg_finc_account', this.widthDrawMoney))){
+          flag = false;
+          regexfun.handleFailMsg(this,"请输入正确格式的投资金额");
+        }
+        //起投金额
+        if(money<min_money){
+          flag = false;
+          regexfun.handleFailMsg(this,"投资金额必须大于起投金额");
+        }
+        //最大金额
+        if(money>max_money){
+          flag = false;
+          regexfun.handleFailMsg(this,"投资额应在单笔最大限额范围以内");
+        }
+        //账户余额
+        if(money>accountBalance){
+          flag = false;
+          regexfun.handleFailMsg(this,"投资额必须小于账户余额");
+        }
+        //项目投资完
+        if(this.tty.PROJ_STATUS!='6003'){
+          flag = false;
+          regexfun.handleFailMsg(this,"当前项目已被抢光，敬请期待下一期!");
+        }
+        if(flag){
+          let self =this
+          this.setPayDetail({
+            //项目名称
+            proName:self.proj_name,
+            //可用余额
+            balance:self.userInfo.AVAILABLE_BALANCE,
+            //投资金额
+            withDraw:this.widthDrawMoney,
+            //投资期限
+            proTime:null
+          });
+          self.$router.push({path:'paymentOrder'})
+
+
+        }
 
       }
     }
