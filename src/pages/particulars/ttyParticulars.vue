@@ -52,13 +52,51 @@
         </li>
       </ul>
     </div>
-    <div class="bottom_input">
-      <div class="input_text">
-        <input type="text" placeholder="投资金额" v-model="widthDrawMoney">
-        <span>元</span>
+      <div class="modal-box" v-show="headShow">
+        <div class="close" @click="HShow()">
+
+        </div>
       </div>
-      <div class="input_submit" @click="submitWithdraw()">
-        <a>立即投资</a>
+    <div class="bottom"  @click ='onIsFocus'>
+
+      <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
+        <span class="title-list" v-if="investscore1" @click="openInvest()">您尚未完成<span class="openInvest">《出借人风险承受能力评估》</span>，请知悉。</span>
+        <span class="title-list" v-if="investscore2">该项目的风险程度超过您的风险承受能力，请知悉</span>
+      <ul class="boxline">
+        <li>起投金额</li>
+        <li>最大单笔金额</li>
+      </ul>
+      <ul class="boxline boxColor">
+        <li>{{TtyDetail.MIN_AMOUNT}}元</li>
+        <li>{{TtyDetail.MAX_AMOUNT}}元</li>
+      </ul>
+      <ul class="boxline boxBlance">
+        <li>账户余额</li>
+        <li></li>
+      </ul>
+      <ul class="boxline boxColor boxSafe" style="margin-top: -.2rem">
+        <li>{{userInfo.AVAILABLE_BALANCE}}元</li>
+        <li class="doAgree">
+          <h1>
+                  <span v-if="agree" @click="agreement">
+                    <img class="on" src="../../../static/images/login/login_selectOn.png">阅读并同意
+                  </span>
+            <span v-if="!agree" @click="agreement">
+                    <img class="on" src="../../../static/images/login/login_select.png">阅读并同意
+                  </span>
+            <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
+          </h1>
+        </li>
+      </ul>
+      </div>
+      <div class="bottom_input">
+        <div class="input_text">
+          <input type="text" placeholder="投资金额" v-model="widthDrawMoney" @focus="showBox()" ref="content">
+          <span>元</span>
+        </div>
+        <div class="input_submit" @click="submitWithdraw()">
+          <a>立即投资</a>
+        </div>
       </div>
     </div>
   </div>
@@ -68,6 +106,7 @@
   import {mapGetters, mapActions, mapState} from 'vuex'
   import * as dealLogin from '../../assets/js/jwt.accessAuth'
   import * as regexfun from '../../../src/assets/js/jwt.regex';
+  import '../../assets/js/filter'
   export default {
     data() {
       return {
@@ -80,6 +119,12 @@
         CustList: '',
         tty:null,
         widthDrawMoney:null,
+        headShow:false,
+        agree:false,
+        investscore:null,
+        investscore2:false,
+        investscore1:false,
+
       }
     },
     computed: {
@@ -111,6 +156,20 @@
           this.getTtyDetail();
           this.getDdProjRedeemCustList();
         })
+        apis.userBaseData(userId,'1').then( (data) => {
+          this.userData = data.result.main_data;
+          this.investscore  = this.userData.INVESTSCORE;
+
+        })
+      },
+      onIsFocus(){
+        this.$refs.content.focus()
+      },
+      agreement(){
+        (this.agree == false) ? this.agree = true : this.agree = false;
+      },
+      openInvest(){
+        location.href ='http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID='+this.userInfo.ID
       },
       //天天盈项目详情
       getTtyDetail() {
@@ -118,7 +177,6 @@
         let proj_code = this.proj_code;
         apis.DdProjDetail(userId, '1', proj_code).then((data) => {
           this.TtyDetail = data.result.main_data;
-          console.log(this.TtyDetail)
           this.rate = this.TtyDetail.RATE;
           this.proj_name = this.TtyDetail.PROJ_NAME
         })
@@ -128,6 +186,12 @@
         apis.DdProjRedeemCustList(this.userId, this.userType, proj_code, 1, 10).then((data) => {
           this.CustList = data.result.main_data.data;
         })
+      },
+      HShow(){
+        this.headShow =false
+      },
+      showBox(){
+        this.headShow =true
       },
       submitWithdraw(){
         let flag = true;
@@ -182,6 +246,20 @@
         if(this.tty.PROJ_STATUS!='6003'){
           flag = false;
           regexfun.handleFailMsg(this,"当前项目已被抢光，敬请期待下一期!");
+        }
+        if(this.agree == false){
+          flag = false;
+          regexfun.handleFailMsg(this,"请阅读并同意《风险揭示书》!");
+        }
+        if(this.investscore=='0'){
+          flag = false;
+          this.investscore2 =true
+          regexfun.handleFailMsg(this,"请进行风险能力评估");
+        }
+        if(this.investscore=='1'){
+          flag = false;
+          this.investscore1 =true
+          regexfun.handleFailMsg(this,"该项目的风险程度超过您的风险承受能力，请知悉。");
         }
         if(flag){
           let self =this
@@ -363,74 +441,166 @@
       }
     }
   }
+  .modal-box{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    .close{
+      background: rgba(0,0,0,.5);
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .bottom{
+    .bottomList{
+      position: fixed;
+      bottom: 0.93rem;
+      height: 2.4rem;
+      z-index: 99999999;
+      width: 7.5rem;
+      margin: auto;
+      background-color: #fff;
+      border-bottom: none;
+      border-top: 1px solid #e0e0e0;
+    }
 
-  .bottom_input {
-    position: fixed;
-    bottom: 0;
-    height: 0.94rem;
-    width: 7.5rem;
-    margin: auto;
-    background-color: #fff;
-    border-top: 1px solid #e0e0e0;
-    .input_text {
-      float: left;
-      margin-top: 0.2rem;
-      margin-left: 0.2rem;
-      width: 4.7rem;
-      height: 0.6rem;
-      border: 1px solid #e0e0e0;
-      border-radius: 1rem;
-      input {
-        float: left;
-        width: 3.5rem;
-        margin-left: 0.2rem;
-        margin-top: 0.1rem;
-        font-size: 0.3rem;
-        border: none;
-        outline: medium;
-        color: #333333;
-      }
-      ::-moz-placeholder {
-        color: #999999;
-        line-height: 0.35rem;
-      }
-      :-ms-input-placeholder {
-        color: #999999;
-        line-height: 0.35rem;
-      }
-      ::-webkit-input-placeholder {
-        color: #999999;
-        line-height: 0.35rem;
-      }
-      span {
-        float: right;
-        margin-right: 0.2rem;
-        line-height: 0.6rem;
-        font-size: 0.3rem;
-        color: #333333;
+    .boxline{
+      font-size: 0.24rem;
+      margin: 0 0 0 .2rem;
+      color: #999;
+      li{
+        display: inline-block;
+        width: 46%;
+        padding-left:0.2rem;
+        margin-top: 0.29rem;
       }
     }
-    .input_submit {
-      float: right;
-      width: 2.3rem;
+    .boxColor{
+      font-size: 0.28rem;
+      color: #333;
+      li{
+        margin-top: 0.1rem;
+      }
+    }
+    .boxSafe{
+
+      li{
+        margin-bottom:0.28rem;
+      }
+      li:last-child{
+        width: 55%;
+        margin-left:1rem;
+        h1{
+          a{
+            font-size: 0.28rem;
+            color: #fb4747;
+          }
+          span{
+            font-size: 0.28rem;
+            color: #333;
+            img{
+              width: 0.26rem;
+              height: 0.26rem;
+              margin-right: 0.1rem;
+              margin-bottom: -.03rem;
+            }
+          }
+        }
+      }
+    }
+    .bottom_input {
+      position: fixed;
+      bottom: 0;
       height: 0.94rem;
-      line-height: 0.94rem;
-      color: #fff;
-      font-size: 0.32rem;
-      text-align: center;
-      a {
-        display: block;
+      z-index: 9999999999999;
+      width: 7.5rem;
+      margin: auto;
+      background-color: #fff;
+      border-top: 1px solid #e0e0e0;
+      .input_text {
+        float: left;
+        margin-top: 0.2rem;
+        margin-left: 0.2rem;
+        width: 4.7rem;
+        height: 0.6rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 1rem;
+        input {
+          float: left;
+          width: 3.5rem;
+          margin-left: 0.2rem;
+          margin-top: 0.1rem;
+          font-size: 0.3rem;
+          border: none;
+          outline: medium;
+          color: #333333;
+        }
+        ::-moz-placeholder {
+          color: #999999;
+          line-height: 0.35rem;
+        }
+        :-ms-input-placeholder {
+          color: #999999;
+          line-height: 0.35rem;
+        }
+        ::-webkit-input-placeholder {
+          color: #999999;
+          line-height: 0.35rem;
+        }
+        span {
+          float: right;
+          margin-right: 0.2rem;
+          line-height: 0.6rem;
+          font-size: 0.3rem;
+          color: #333333;
+        }
+      }
+      .input_submit {
+        float: right;
         width: 2.3rem;
         height: 0.94rem;
         line-height: 0.94rem;
         color: #fff;
         font-size: 0.32rem;
         text-align: center;
-        background-color: #ffae00;
-      }
-      .end {
-        background-color: #bbbbbb;
+        a {
+          display: block;
+          width: 2.3rem;
+          height: 0.94rem;
+          line-height: 0.94rem;
+          color: #fff;
+          font-size: 0.32rem;
+          text-align: center;
+          background-color: #ffae00;
+        }
+        .end {
+          background-color: #bbbbbb;
+        }
       }
     }
   }
+  .doAgree{
+    position: absolute;
+    right: 0;
+    bottom: -.2rem;
+    z-index: 9999;
+  }
+  .title-list{
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: .3rem;
+    border-bottom: .01rem solid #e0e0e0;
+    font-size: .12rem;
+    color: #ccc;
+    padding-left: .2rem;
+  }
+  .openInvest{
+    color: #0000f4;
+  }
+
+
 </style>

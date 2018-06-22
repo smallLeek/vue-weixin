@@ -60,7 +60,7 @@
             }
           }, 1000)
           self.timer1 = setInterval(() => {
-            apis.queryNewAddPersonAsync( self.request_no,self.method_name,'1',userState.ID,userState.USER_TYPE).then((data) => {
+            apis.queryNewAddPersonAsync( self.request_no,self.method_name,'1',userState.ID,'1').then((data) => {
               if(data.status =='00000000'){
                 let userData = data.result.main_data;
                 if(userData.XW_IS_ASYNC == '1') {
