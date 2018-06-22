@@ -59,8 +59,8 @@ export default {
   methods:{
     timeLoad(){
       let self =this;
-      self.timeM = 0;  //分
-      self.timeS = 10;  //秒
+      self.timeM = 9;  //分
+      self.timeS = 59;  //秒
       getCountdown();
       let timer =setInterval(function(){ getCountdown() },1000);
       function getCountdown (){
