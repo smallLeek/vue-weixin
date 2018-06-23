@@ -19,6 +19,7 @@ const about = resolve => require(['../pages/account/setting/about.vue'], resolve
 const security = resolve => require(['../pages/account/setting/security.vue'], resolve);
 const shareList = resolve => require(['../pages/account/shareList/shareList.vue'], resolve);
 const paymentOrder = resolve => require(['../pages/account/paymentOrder.vue'], resolve);
+const limitRecharge = resolve => require(['../pages/account/limitRecharge.vue'], resolve);
 
 // 登录注册
 const loginRegister = resolve => require(['../pages/home/loginRegister/loginRegister.vue'], resolve);
@@ -171,6 +172,10 @@ const router = new VueRouter({
     {
       path: '/dtyAccount',
       component: dtyAccount,
+    },
+    {
+      path: '/limitRecharge',
+      component: limitRecharge,
     },
     {
       path: '/loginRegister',

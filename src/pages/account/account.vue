@@ -62,8 +62,8 @@
                         <span>分享邀请</span>
                 </a>
                     </li>
-                    <li>
-                <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do">
+                    <li @click="withDraw()">
+                <a>
                         <img src="../../../static/images/user/user_security_center_icon.png">
                         <span>安全中心</span>
                 </a>

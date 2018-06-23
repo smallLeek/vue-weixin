@@ -164,6 +164,7 @@
         apis.userBaseData(userId,'1').then( (data) => {
           this.userData = data.result.main_data;
           this.investscore  = this.userData.INVESTSCORE;
+          console.log(this.investscore)
 
         })
       },
@@ -174,7 +175,7 @@
         (this.agree == false) ? this.agree = true : this.agree = false;
       },
       openInvest(){
-        location.href ='https://www.phtfdata.com/web6/hander/investor.do?CUST_ID='+this.userInfo.ID
+        location.href ='http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID='+this.userInfo.ID
       },
       //天天盈项目详情
       getTtyDetail() {

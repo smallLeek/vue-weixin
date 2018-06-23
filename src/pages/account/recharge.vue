@@ -38,14 +38,14 @@
             <span>
               <input type="text" placeholder="请输入充值金额" v-model="rechargeMoney">
             </span>
-            <span id="close"><img src="../../../static/images/recharge/recharge_close.png"></span>
+            <span id="close" @click="close()"><img src="../../../static/images/recharge/recharge_close.png"></span>
           </li>
           <li>
             <span>充值后余额(元)：<b v-text="rechargeLast"></b></span>
           </li>
           <li>
             <span>本次最大充值金额(元)：<b>{{ single_limit}}</b></span>
-            <span><router-link to="">限额说明</router-link></span>
+            <span><router-link to="/limitRecharge">限额说明</router-link></span>
           </li>
           <li>
             <span>卡支付额度：<b v-text="total_limit"></b></span>
@@ -59,7 +59,9 @@
           <li>1.您的账户资金将由新网银行托管；</li>
           <li>2.目前充值手续费由平台垫付，快捷充值具体限额以银行为准，大额充值您可通过网页使用网银充值；</li>
           <li>3.充值到账时间为实时到账。查看
-            <router-link to="">更多帮助</router-link>
+            <span @click="novice()">
+               <router-link to="">更多帮助</router-link>
+            </span>
           </li>
         </ul>
       </div>
@@ -101,7 +103,6 @@
     },
     mounted () {
       this.getBankInfo();
-      this.getLimitInfo();
     },
     watch: {
       rechargeMoney: function (value) {
@@ -138,14 +139,21 @@
 
         })
       },
+      //更多问题
+      novice(){
+        location.href = "https://www.phtfdata.com/m/novice"
+      },
       //充值后余额
       getrechargeLast() {
         this.rechargeLast = (this.rechargeMoney-0)+ (this.available_balance-0);
       },
+      close(){
+        this.rechargeMoney =''
+      },
 //      立即充值
       goRecharge() {
         //判断输入的金额是否大于等于可用金额
-        if(this.rechargeMoney<this.available_balance){
+        if(this.rechargeMoney< parseFloat(this.single_limit.replace(/,/g,""))){
           let userId = this.userInfo.ID;
           let userType = this.userInfo.USER_TYPE;
           let rechargeway = "SWIFT";
@@ -153,22 +161,12 @@
           let paytype  = '';
           let redirectUrl = '';
           apis.deposit(userId, "1", this.rechargeMoney, rechargeway, bankcode,paytype,'http://www.phtfdata.com/wx/async').then( (data) => {
-            console.log(data)
             let userData = data.result.main_data.url;
             $('.xwUrl').append(userData)
           })
         }else{
-          this.bs.$emit('e:alert', "充值金额超出可用余额!");
+          this.bs.$emit('e:alert', "充值金额超出单笔限额!");
         }
-      },
-      //限额说明
-      getLimitInfo() {
-        let bind_type = "0";
-        let pay_flag = "1";
-        apis.selectXwBank(bind_type, pay_flag).then( (data) => {
-           this.bankData = data.result.main_data.data;
-
-        })
       },
       //输入充值金额正则
       clearNoNum (obj){

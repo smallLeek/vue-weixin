@@ -76,10 +76,10 @@
               let investscore  = this.userData.INVESTSCORE;
               let invest_score = this.userData.INVEST_SCORE;
               if(investscore == "0"){
-                addBanner.LINK_COMMENT = 'https://www.phtfdata.com/web6/hander/investor.do?CUST_ID='+userId;
+                addBanner.LINK_COMMENT = 'http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID='+userId;
                 this.bannerList.push(addBanner)
               }else if(investscore == "1"){
-                addBanner.LINK_COMMENT = 'https://www.phtfdata.com/web6/hander/investorResult.do?CUST_ID='+userId+'&INVEST_SCORE='+invest_score;
+                addBanner.LINK_COMMENT = 'http://139.129.12.93:3102/web2/hander/investorResult.do?CUST_ID='+userId+'&INVEST_SCORE='+invest_score;
                 this.bannerList.push(addBanner)
               }else{
 
