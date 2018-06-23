@@ -38,7 +38,7 @@
            */
             let userState = store.state.user;
             let userInfoList = userState.userInfo;
-            apis.personalRegister(userInfoList.YJF_ID,userInfoList.ID,"1",userInfoList.USER_ROLE, 'http://localhost:8080/wx/async').then((data) => {
+            apis.personalRegister(userInfoList.YJF_ID,userInfoList.ID,"1",userInfoList.USER_ROLE, 'https://www.phtfdata.com/wx/async').then((data) => {
               $('.xwUrl').append(data.result.main_data.url)
 
             })

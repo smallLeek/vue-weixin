@@ -117,6 +117,7 @@
               this.showCode = true;
               apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code).then((data) => {
                 this.userData = data.result.main_data;
+
                 //回到哪
                 this.setAccessAuth({whereToGo:"/wx/home"});
 

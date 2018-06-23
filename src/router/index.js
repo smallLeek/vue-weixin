@@ -117,6 +117,7 @@ const router = new VueRouter({
     {
       path: '/investSuccess',
       component: investSuccess,
+      meta: {allowBack: false}
     },
     {
       path: '/tradingRecord',

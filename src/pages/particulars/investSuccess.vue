@@ -1,6 +1,6 @@
 <template>
   <!--月月盈和定投盈是一个页面-->
-  <div class="investSuccess">
+  <div class="investSuccess" v-title="'投资成功'">
     <div class="title">
       <b v-on:click="goBackOne()">
         <img src="../../../static/images/goBack.png">
@@ -41,6 +41,9 @@
 <script>
   import store from '../../vuex/store'
   import '../../assets/js/filter'
+  import * as apis from '../../assets/js/jwt.apis'
+  import * as regexfun from '../../../src/assets/js/jwt.regex';
+  import {mapGetters, mapActions,mapState} from 'vuex'
   export default {
     data() {
       return {
@@ -51,12 +54,16 @@
       }
     },
     computed: {
-
+      //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
+      ...mapGetters([
+        'loginStatus','userInfo','tokenCode','isRealName'
+      ])
     },
     mounted() {
       this.getData();
     },
     methods:{
+      ...mapActions({setUserInfo: 'setUserInfo',setIsRealName:'setIsRealName',getTokenCode:'getTokenCode'}),
       getData(){
         console.log(this.$route.query);
         this.withDraw = this.$route.query.withDraw;
@@ -64,8 +71,21 @@
         this.proTime = this.$route.query.proTime;
       },
       goBack(){
-        let userState = store.state.user
-        location.href = location.origin +  userState.accessAuth.whereToGo;
+          let userState = store.state.user
+          let  userId = store.state.user.userInfo.ID;
+          apis.userBaseData(userId,'1').then((data) => {
+            if(data.status == '00000000'){
+              location.href = location.origin +  userState.accessAuth.whereToGo;
+              let res = data.result.main_data
+              this.setUserInfo(res);
+              this.setIsRealName(res.STATE);
+              this.getTokenCode(res.token);
+            }else {
+              regexfun.handleFailMsg(this,data.message)
+            }
+
+
+          })
       },
       goBackOne(){
         this.$router.go(-1);
@@ -170,5 +190,8 @@
         }
       }
     }
+  }
+  .br10{
+    outline: none;
   }
 </style>
