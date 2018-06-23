@@ -46,6 +46,7 @@ const news = resolve => require(['../pages/news/news.vue'], resolve);
 const dcyParticulars = resolve => require(['../pages/particulars/dcyParticulars.vue'], resolve);
 const ttyParticulars = resolve => require(['../pages/particulars/ttyParticulars.vue'], resolve);
 const yyyParticulars = resolve => require(['../pages/particulars/yyyParticulars.vue'], resolve);
+const investSuccess = resolve => require(['../pages/particulars/investSuccess.vue'], resolve);
 const earnings = resolve => require(['../pages/particulars/earnings.vue'], resolve);
 const ttyInvestmentList = resolve => require(['../pages/particulars/ttyInvestmentList.vue'], resolve);
 
@@ -112,6 +113,10 @@ const router = new VueRouter({
     {
       path: '/yyyParticulars',
       component: yyyParticulars,
+    },
+    {
+      path: '/investSuccess',
+      component: investSuccess,
     },
     {
       path: '/tradingRecord',

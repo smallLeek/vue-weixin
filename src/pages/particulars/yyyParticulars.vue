@@ -267,6 +267,7 @@
           this.is_authorized = userData.IS_AUTHORIZED;
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
+            console.log(this.yyyDetail);
             //判断用户类型
             if(user_role == "INVESTOR" ){
               //判断用户是否授权
@@ -377,6 +378,7 @@
           userId:self.userId,
           //项目名称
           proName:self.proj_code,
+          proCode:self.yyyDetail.PROJ_NAME,
           //可用余额
           balance:self.userInfo.AVAILABLE_BALANCE,
           //投资金额

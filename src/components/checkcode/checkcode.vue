@@ -32,7 +32,8 @@
     },
     props:[
       'withDraw',
-      'url'
+      'url',
+      'investInfo'
     ],
     computed: {
       ...mapGetters(
@@ -82,7 +83,7 @@
           this.flag = 2;
           console.log(this.url)
           if((URL in this.url) == false){
-            this.$router.push("/home")
+            this.$router.push({path:'/investSuccess',parmas:this.investInfo})
           }
         }else{
 
