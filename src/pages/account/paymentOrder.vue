@@ -1,7 +1,7 @@
 <template>
   <div class="paymentOrder" v-title="'支付订单'">
     <div class="title">
-        <b click="goBackOne()">
+        <b @click="goBackOne()">
             <img src="../../../static/images/goBack.png">
         </b>
         <span>支付订单</span>

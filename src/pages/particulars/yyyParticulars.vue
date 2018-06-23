@@ -106,16 +106,16 @@
             <li>最大单笔金额</li>
           </ul>
           <ul class="boxline boxColor">
-            <li>{{yyyDetail.MIN_BID_AMOUNT}}元</li>
+            <li>{{yyyDetail.MIN_BID_AMOUNT |farmatAmount}}元</li>
             <li>{{yyyDetail.SURPLUS_PART | farmatAmount}}元</li>
-            <li>{{yyyDetail.MAX_BID_AMOUNT}}元</li>
+            <li>{{yyyDetail.MAX_BID_AMOUNT | farmatAmount}}元</li>
           </ul>
           <ul class="boxline boxBlance">
             <li>账户余额</li>
             <li></li>
           </ul>
           <ul class="boxline boxColor boxSafe" style="margin-top: -.2rem">
-            <li>{{userInfo.AVAILABLE_BALANCE}}元</li>
+            <li>{{(userInfo.AVAILABLE_BALANCE) | farmatAmount}}元</li>
             <li class="doAgree">
               <h1>
                   <span v-if="agree" @click="agreement">
@@ -267,7 +267,7 @@
       },
       //去投资人测评
       openInvest(){
-        location.href ='http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID='+this.userInfo.ID
+        location.href ='https://www.phtfdata.com/web6/hander/investor.do?CUST_ID='+this.userInfo.ID
       },
       //遮罩层
       HShow(){
@@ -322,6 +322,16 @@
         if((self.investMoney-0)>(this.yyyDetail.SURPLUS_PART -0)){
           this.bs.$emit('e:alert', "启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试!");
           return;
+        }
+        if(this.investscore=='0'){
+          this.investscoreNo =true
+          this.risk =true
+          return regexfun.handleFailMsg(this,"请进行风险能力评估");
+        }
+        if(this.investscore=='1'){
+          this.risk =true
+          this.investscoreYes =true
+          return regexfun.handleFailMsg(this,"该项目的风险程度超过您的风险承受能力，请知悉。");
         }
         this.setPayDetail({
           userId:self.userId,

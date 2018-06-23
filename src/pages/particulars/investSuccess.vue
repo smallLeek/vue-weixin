@@ -2,9 +2,6 @@
   <!--月月盈和定投盈是一个页面-->
   <div class="investSuccess" v-title="'投资成功'">
     <div class="title">
-      <b v-on:click="goBackOne()">
-        <img src="../../../static/images/goBack.png">
-      </b>
       <span>投资</span>
     </div>
     <div class="invest">
@@ -87,9 +84,6 @@
 
           })
       },
-      goBackOne(){
-        this.$router.go(-1);
-      }
     },
     components: {
 
