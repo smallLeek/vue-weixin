@@ -82,7 +82,8 @@
           this.isShow = false
           this.flag = 2;
           if((URL in this.url) == false){
-            this.$router.push({path:'/investSuccess',parmas:this.investInfo})
+            console.log(this.investInfo);
+            this.$router.push({path:'/investSuccess',query:this.investInfo})
           }
         }else{
 

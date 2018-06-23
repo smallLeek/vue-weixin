@@ -35,7 +35,7 @@
       <h1>交易小贴士：</h1>
       <p>如您在“我的-安全中心-免支付密码投标”中已开通<b>免支付密码投标</b>，可免输入交易密码<b>快速投资</b>，未开通免支付密码投标需跳转到<b>新网银行存管页面</b>，输入交易密码进行投资确认。</p>
     </div>
-    <checkcode v-if="showCode" v-bind:withDraw="payDetail.withDraw" v-bind:url="userData" v-bind:investInfo="{withDraw:this.payDetail.withDraw, proj_name:this.payDetail.proj_name, proTime:this.payDetail.proTime}"  v-on:checkNewCode="getDatas"></checkcode>
+    <checkcode v-if="showCode" v-bind:withDraw="payDetail.withDraw" v-bind:url="userData" v-bind:investInfo="{withDraw:this.payDetail.withDraw, proj_name:this.payDetail.pro_name, proTime:this.payDetail.proTime}"  v-on:checkNewCode="getDatas"></checkcode>
   </div>
 </template>
 <script>
@@ -162,7 +162,7 @@
         height: 0.5rem;
         vertical-align: middle;
     }
-    a{
+    b{
         position: absolute;
         width: 1rem;
         height: 1rem;

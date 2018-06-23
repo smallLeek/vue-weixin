@@ -21,15 +21,15 @@
       <ul class="investMiddle">
         <li class="clearfix">
           <span>投资金额</span>
-          <span>1</span>
+          <span>{{withDraw | farmatAmount }}</span>
         </li>
         <li>
           <span>项目名称</span>
-          <span>1</span>
+          <span v-text="proj_name"></span>
         </li>
-        <li v-show="isDq == true">
+        <li v-if="proTime">
           <span>投资期限</span>
-          <span>1</span>
+          <span >{{proTime}}个月</span>
         </li>
       </ul>
       <div class="investBottom">
@@ -40,10 +40,14 @@
 </template>
 <script>
   import store from '../../vuex/store'
+  import '../../assets/js/filter'
   export default {
     data() {
       return {
-        isDq:true
+        isDq:true,
+        withDraw:'',
+        proj_name:'',
+        proTime:''
       }
     },
     computed: {
@@ -54,7 +58,10 @@
     },
     methods:{
       getData(){
-        console.log(this.$router.parmas);
+        console.log(this.$route.query);
+        this.withDraw = this.$route.query.withDraw;
+        this.proj_name = this.$route.query.proj_name;
+        this.proTime = this.$route.query.proTime;
       },
       goBack(){
         let userState = store.state.user
