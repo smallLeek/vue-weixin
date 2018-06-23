@@ -1,106 +1,66 @@
 <template>
-    <div class="investment">
-        <div class="title">
-            <router-link to="/ttyParticulars">
-                <img src="../../../static/images/goBack.png">
-            </router-link>
-            <span>投资记录</span>
-        </div>
-        <h1>
-            <span>投资人/投资时间</span>
-            <span>投资金额(元)</span>
-        </h1>
-        <div class="list">
-            <ul>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-                <li>
-                    <span>
-                        <b>132****5832</b>
-                        <b>2018-05-31 10:56:15</b>
-                    </span>
-                    <span>249.00</span>
-                </li>
-            </ul>
-        </div>
+  <div class="investment">
+    <div class="title">
+      <b @click="goBackOne()">
+        <img src="../../../static/images/goBack.png">
+      </b>
+      <span>投资记录</span>
     </div>
+    <h1>
+      <span>投资人/投资时间</span>
+      <span>投资金额(元)</span>
+    </h1>
+    <div class="list">
+      <ul v-if="userData">
+        <li v-for="item in userData">
+          <span>
+              <b>{{item.MOBILE}}</b>
+              <b>{{item.ACCOUNT_DATETIME}}</b>
+          </span>
+          <span>{{item.AMOUNT | farmatAmount}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 <script>
-export default {
-    
-}
+  import * as apis from '../../assets/js/jwt.apis'
+  import '../../assets/js/filter'
+  import {mapGetters} from 'vuex'
+  export default {
+    data(){
+      return {
+        userData:null
+      }
+    },
+    mounted(){
+      this.getInvestData()
+    },
+    computed: {
+      ...mapGetters(
+        ['loginStatus', 'userInfo', 'tokenCode']
+      )
+    },
+    methods:{
+      //导航返回按钮
+      goBackOne(){
+        this.$router.go(-1);
+      },
+      //获取投资列表信息
+      getInvestData(){
+        //获取proj_code
+        let proj_code = this.$route.query.proj_code;
+        console.log(proj_code)
+        apis.DdProjInvestCustList(this.userInfo.ID,"1",proj_code,'15','1').then((data) => {
+          this.userData = data.result.main_data.data;
+        })
+      }
+    }
+  }
 </script>
 <style lang="less" scoped>
-/* title */
-.title{
+  /* title */
+  .title{
     margin: auto;
     width: 7.5rem;
     height: 1rem;
@@ -113,18 +73,18 @@ export default {
     top: 0;
     z-index: 100;
     img{
-        height: 0.5rem;
-        vertical-align: middle;
+      height: 0.5rem;
+      vertical-align: middle;
     }
-    a{
-        position: absolute;
-        width: 1rem;
-        height: 1rem;
-        left: 0;
-        top: -0.02rem
+    b{
+      position: absolute;
+      width: 1rem;
+      height: 1rem;
+      left: 0;
+      top: -0.02rem
     }
-}
-h1{
+  }
+  h1{
     position: fixed;
     top: 1rem;
     font-weight: 500;
@@ -137,48 +97,62 @@ h1{
     color: #387eff;
     background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
+    span{
+      float: left;
+      display: inline-block;
+      width: 60%;
+      text-align: left;
+    }
     span:first-child{
-        float: left;
-        margin-left: 0.2rem;
+      padding-left: 0.2rem;
     }
     span:last-child{
-        float: right;
-        margin-right: 0.2rem;
+      text-align: right;
+      width: 40%;
+
+      padding-right: 0.2rem;
     }
-}
-.list{
+  }
+  .list{
     margin-top: 1.8rem;
     ul{
-        background-color: #fff;
-        li{
-            font-family: 黑体;
-            height: 1.2rem;
-            padding: 0 0.2rem;
-            border-bottom: 1px solid #e0e0e0;
-            span:first-child{
-                float: left;
-                b{
-                    display: block;
-                    font-weight: 500;
-                }
-                b:first-child{
-                    margin-top: 0.2rem;
-                    font-size: 0.34rem;
-                    color: #333333;
-                }
-                b:last-child{
-                    margin-top: 0.1rem;
-                    font-size: 0.26rem;
-                    color: #999999;
-                }
-            }
-            span:last-child{
-                float: right;
-                line-height: 1.2rem;
-                font-size: 0.36rem;
-                color: #ff8400;
-            }
+      background-color: #fff;
+      li{
+        font-family: 黑体;
+        height: 1.2rem;
+        border-bottom: 1px solid #e0e0e0;
+        span{
+          float: left;
+          display: inline-block;
+          width: 60%;
         }
+        span:first-child{
+          padding:0.1rem 0;
+          padding-left: 0.2rem;
+          b{
+            display: block;
+            font-weight: 500;
+            height: 0.5rem;
+            line-height: 0.5rem;
+          }
+          b:first-child{
+            font-size: 0.34rem;
+            color: #333333;
+          }
+          b:last-child{
+            font-size: 0.26rem;
+            color: #999999;
+          }
+        }
+        span:last-child{
+          text-align: right;
+          padding-right: 0.2rem;
+          width: 40%;
+          line-height: 1.2rem;
+          font-size: 0.36rem;
+          color: #ff8400;
+        }
+      }
     }
-}
+  }
 </style>

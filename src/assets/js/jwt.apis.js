@@ -179,7 +179,7 @@ function WeiXinnewLogin(CODE,USER_TYPE){
  * 获取首页数据统计
  */
 
-function getDataStatistics(){
+function queryMainPageTotalData(){
   return phtServer.globalPostData(urls.api_url_queryMainPageTotalData, phtServer.submitData({
   }))
 }
@@ -464,6 +464,25 @@ function borrow (CUST_ID,CUST_TYPE,AMOUNT,PROJ_CODE,redirectUrl) {
   }))
 }
 
+/**
+ *
+ *@param USER_ID 用户id
+ * @param USER_TYPE 用户类型
+ * @param PROJ_CODE 项目id
+ * @param CURR_PAGE_NUM   页数
+ * @param PER_PAGE_SIZE   每页几个
+ * @returns {*}
+ */
+function DdProjInvestCustList (USER_ID,USER_TYPE,PROJ_CODE,PER_PAGE_SIZE,CURR_PAGE_NUM) {
+  return phtServer.globalPostData(urls.api_url_DdProjInvestCustList,phtServer.submitData({
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE,
+    "PROJ_CODE":PROJ_CODE,
+    "PER_PAGE_SIZE":PER_PAGE_SIZE,
+    "CURR_PAGE_NUM":CURR_PAGE_NUM
+  }))
+}
+
 
 export  {
   passwordRetrieval,
@@ -472,9 +491,8 @@ export  {
   newAddPersonXW,
   XWnewAddPerson,
   getBanner,
-  queryMainPageTotalData,
   queryNewAddPersonAsync,
-  getDataStatistics,
+  queryMainPageTotalData,
   recommendedProject,
   getNoticeInfo,
   newLogin,
@@ -493,6 +511,7 @@ export  {
   ueryInvestedListApp,
   exitLogin,
   pdsInvestProj,
-  borrow
+  borrow,
+  DdProjInvestCustList
 }
 
