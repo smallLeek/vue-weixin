@@ -168,7 +168,6 @@
         apis.userBaseData(userId,'1').then( (data) => {
           this.userData = data.result.main_data;
           this.investscore  = this.userData.INVESTSCORE;
-          console.log(this.investscore)
 
         })
       },
