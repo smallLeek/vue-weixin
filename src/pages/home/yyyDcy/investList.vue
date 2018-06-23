@@ -80,6 +80,7 @@
 <script>
   import * as apis from '../../../assets/js/jwt.apis'
   import {mapGetters, mapActions, mapState} from 'vuex'
+  import * as dealLogin from '../../../assets/js/jwt.accessAuth'
 
   export default {
     data() {
@@ -99,6 +100,7 @@
       this.getInvestList();
     },
     methods: {
+      ...mapActions({setAccessAuth: 'setAccessAuth'}),
       //获取用户信息
       getBaseData() {
         let userId = this.userInfo.ID;
@@ -117,11 +119,15 @@
       },
       // 去月月盈投资详情
       goYyy(proj_code){
-        this.$router.push({path:'yyyParticulars',query:{"proj_code":proj_code}})
+        this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/yyyParticulars?proj_code="+proj_code});
+        dealLogin.dealLogin();
+        //this.$router.push({path:'yyyParticulars',query:{"proj_code":proj_code}})
       },
       //去定投盈
       goDty(proj_code) {
-        this.$router.push({path:'yyyParticulars',query:{"proj_code":proj_code}})
+        this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/yyyParticulars?proj_code="+proj_code});
+        dealLogin.dealLogin();
+        //this.$router.push({path:'yyyParticulars',query:{"proj_code":proj_code}})
       }
     }
   }

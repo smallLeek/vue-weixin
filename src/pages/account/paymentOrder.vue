@@ -68,6 +68,7 @@
       this.timeLoad()
     },
     methods:{
+      ...mapActions({setAccessAuth: 'setAccessAuth'}),
       getDatas:function (getData) {
         this.showCode = getData
       },
@@ -104,15 +105,19 @@
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
             if (this.is_check_tra_pwd == "0") {
-              apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code, 'https://www.phtfdata.com/wx/async').then((data) => {
-                this.userData = data.result.main_data;
+              apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code, 'http://localhost:8080/wx/async').then((data) => {
+                this.userData = data.result.main_data.data[0];
+                //回到哪
+                this.setAccessAuth({whereToGo:"/wx/home"});
                 //跳转到新网
-                $('.xwUrl').append(this.userData.url);
+                $('.xwUrl').append(this.userData.URL);
               })
             } else {
               this.showCode = true;
               apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code).then((data) => {
                 this.userData = data.result.main_data;
+                //回到哪
+                this.setAccessAuth({whereToGo:"/wx/home"});
 
               })
             }
@@ -122,8 +127,10 @@
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
             if (this.is_check_tra_pwd == "0") {
-              apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.pro_code, this.payDetail.withDraw, this.is_check_tra_pwd, 'https://www.phtfdata.com/wx/async').then((data) => {
+              apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.pro_code, this.payDetail.withDraw, this.is_check_tra_pwd, 'http://localhost:8080/wx/async').then((data) => {
                 this.userData = data.result.main_data;
+                //回到哪
+                this.setAccessAuth({whereToGo:"/wx/home"});
                 //跳转到新网
                 $('.xwUrl').append(this.userData.url);
               })
@@ -131,7 +138,9 @@
               this.showCode = true;
               apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.pro_code, this.payDetail.withDraw, this.is_check_tra_pwd).then((data) => {
                 this.userData = data.result.main_data;
-                console.log(this.userData)
+                //回到哪
+                this.setAccessAuth({whereToGo:"/wx/home"});
+
 
               })
             }

@@ -386,7 +386,6 @@
           //投资期限
           proTime:self.yyyDetail.LOAN_LIMITTIME
         });
-
         self.$router.push({path:'paymentOrder'})
 
       }

@@ -152,7 +152,8 @@
           let bankcode = '';
           let paytype  = '';
           let redirectUrl = '';
-          apis.deposit(userId, userType, this.rechargeMoney, rechargeway, bankcode,paytype,'http://www.phtfdata.com/wx/async').then( (data) => {
+          apis.deposit(userId, "1", this.rechargeMoney, rechargeway, bankcode,paytype,'http://www.phtfdata.com/wx/async').then( (data) => {
+            console.log(data)
             let userData = data.result.main_data.url;
             $('.xwUrl').append(userData)
           })

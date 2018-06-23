@@ -12,6 +12,7 @@
   import * as apis from '../../assets/js/jwt.apis'
   import {mapGetters, mapActions,mapState} from 'vuex'
   import * as regexfun from '../../../src/assets/js/jwt.regex';
+  import * as info from '../../../src/assets/js/jwt.asyncReturn';
     export default {
         data(){
           return{
@@ -39,12 +40,12 @@
       mounted(){
       },
       methods:{
-        ...mapActions({setUserInfo: 'setUserInfo'}),
+        ...mapActions({setUserInfo: 'setUserInfo',setIsRealName:'setIsRealName',getTokenCode:'getTokenCode'}),
 
         load() {
           let userState = store.state.user
           let self = this
-          this.count = 20
+          this.count = 60
           self.timer = setInterval(() => {
             if (self.count > 0 && self.count <= self.count) {
               self.count--;
@@ -72,7 +73,8 @@
                     self.timer = null;
                     self.timer1 = null;
                     self.updateUserInfo();
-                    store.dispatch('USER_XW_BANK',userData.XW_MESSAGE )
+                    store.dispatch('USER_XW_BANK',info.asyncInfo(this.infoTitle) )
+                    console.log(userData)
                     this.$router.push({path: '/asyncReturn'})
                   } else if (userData.XW_ASYNC_STATE == '0') {
                     regexfun.handleFailMsg(self, userData.XW_MESSAGE);
@@ -93,7 +95,6 @@
         updateUserInfo(){
           let  userId = store.state.user.userInfo.ID;
           apis.userBaseData(userId,'1').then((data) => {
-            console.log(data)
             if(data.status == '00000000'){
               let res = data.result.main_data
               this.setUserInfo(res);
