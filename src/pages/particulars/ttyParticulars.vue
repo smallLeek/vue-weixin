@@ -81,10 +81,10 @@
         <li class="doAgree">
           <h1>
                   <span v-if="agree" @click="agreement">
-                    <img class="on" src="../../../static/images/login/login_selectOn.png">阅读并同意
+                    <img class="on" src="../../../static/images/investOn.png">阅读并同意
                   </span>
             <span v-if="!agree" @click="agreement">
-                    <img class="on" src="../../../static/images/login/login_select.png">阅读并同意
+                    <img class="on" src="../../../static/images/investIn.png">阅读并同意
                   </span>
             <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
           </h1>
