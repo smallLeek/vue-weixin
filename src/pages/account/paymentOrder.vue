@@ -14,7 +14,7 @@
       <ul>
         <li>
           <span>产品名称</span>
-          <span>{{payDetail.proName}}</span>
+          <span>{{payDetail.proCode}}</span>
         </li>
         <li v-if="payDetail.proTime">
           <span>投资期限</span>
@@ -35,7 +35,7 @@
       <h1>交易小贴士：</h1>
       <p>如您在“我的-安全中心-免支付密码投标”中已开通<b>免支付密码投标</b>，可免输入交易密码<b>快速投资</b>，未开通免支付密码投标需跳转到<b>新网银行存管页面</b>，输入交易密码进行投资确认。</p>
     </div>
-    <checkcode v-if="showCode" v-bind:withDraw="payDetail.withDraw" v-bind:url="userData"  v-on:checkNewCode="getDatas"></checkcode>
+    <checkcode v-if="showCode" v-bind:withDraw="payDetail.withDraw" v-bind:url="userData" v-bind="investInfo"  v-on:checkNewCode="getDatas"></checkcode>
   </div>
 </template>
 <script>
@@ -53,7 +53,8 @@
         showCode:false,
         checkFlag:'',
         userData:null,
-        dds:null
+        dds:null,
+        investInfo:null
       }
     },
     computed: {
@@ -96,47 +97,46 @@
           }
         }
       },
-      goPay(){
-        let self =this;
-        if(this.dds ='dds'){
-          apis.userBaseData(self.userInfo.ID,'1').then( (data) => {
+      goPay() {
+        let self = this;
+        if (this.dds = 'dds') {
+          apis.userBaseData(self.userInfo.ID, '1').then((data) => {
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
-            if(this.is_check_tra_pwd == "0"){
-              apis.borrow(this.userInfo.ID,'1',this.payDetail.withDraw,this.payDetail.pro_code,'https://www.phtfdata.com/wx/async').then( (data) => {
+            if (this.is_check_tra_pwd == "0") {
+              apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code, 'https://www.phtfdata.com/wx/async').then((data) => {
                 this.userData = data.result.main_data;
                 //跳转到新网
                 $('.xwUrl').append(this.userData.url);
               })
-            }else{
+            } else {
               this.showCode = true;
-              apis.borrow(this.userInfo.ID,'1',this.payDetail.withDraw,this.payDetail.pro_code).then( (data) => {
+              apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code).then((data) => {
                 this.userData = data.result.main_data;
 
               })
             }
           })
-        }else {
-          apis.userBaseData(self.userInfo.ID,'1').then( (data) => {
+        } else {
+          apis.userBaseData(self.userInfo.ID, '1').then((data) => {
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
-            if(this.is_check_tra_pwd == "0"){
-              apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime,'https://www.phtfdata.com/wx/async').then( (data) => {
+            if (this.is_check_tra_pwd == "0") {
+              apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.proName, this.payDetail.withDraw, this.is_check_tra_pwd, this.payDetail.proTime, 'https://www.phtfdata.com/wx/async').then((data) => {
                 this.userData = data.result.main_data;
                 //跳转到新网
                 $('.xwUrl').append(this.userData.url);
               })
-            }else{
+            } else {
               this.showCode = true;
-              apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime).then( (data) => {
+              apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.proName, this.payDetail.withDraw, this.is_check_tra_pwd, this.payDetail.proTime).then((data) => {
                 this.userData = data.result.main_data;
-                console.log( this.userData )
+                console.log(this.userData)
 
               })
             }
           })
         }
-
       }
      },
     components: {
