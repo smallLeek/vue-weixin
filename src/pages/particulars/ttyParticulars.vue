@@ -57,11 +57,13 @@
 
         </div>
       </div>
+    <div class="risk">
+      <span class="title-list" v-if="investscoreNo" @click="openInvest()">您尚未完成<span class="openInvest">《出借人风险承受能力评估》</span>，请知悉。</span>
+      <span class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</span>
+    </div>
     <div class="bottom"  @click ='onIsFocus'>
 
       <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
-        <span class="title-list" v-if="investscoreNo" @click="openInvest()">您尚未完成<span class="openInvest">《出借人风险承受能力评估》</span>，请知悉。</span>
-        <span class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</span>
       <ul class="boxline">
         <li>起投金额</li>
         <li>最大单笔金额</li>
@@ -116,6 +118,7 @@
         TtyDetail: null,
         rate: '',
         proj_name: '',
+        userData:'',
         CustList: '',
         tty:null,
         widthDrawMoney:null,
@@ -194,89 +197,93 @@
         this.headShow =true
       },
       submitWithdraw(){
-        let flag = true;
-        let user_role = this.userInfo.USER_ROLE;
-        let is_check_tra_pwd = this.userInfo.IS_CHECK_TRA_PWD;
-        let is_expired = this.userInfo.IS_Expired;
-        let min_money = this.TtyDetail.MIN_AMOUNT
-        let max_money = this.TtyDetail.MAX_AMOUNT
-        let money= this.widthDrawMoney
-        let accountBalance =this.userInfo.AVAILABLE_BALANCE
-        if(user_role != 'INVESTOR'){
-          flag = false
-          regexfun.handleFailMsg(this, "您的账户类型不支持投资!");
-        }
-        if (is_check_tra_pwd=='0') {
-          flag = false
-          regexfun.handleFailMsg(this,"您的用户未委托授权，无法进行投资操作!");
-        }
-        if(is_expired == '0'){
-          flag = false
-          regexfun.handleFailMsg(this, "您的用户授权已过期，无法进行投资操作!");
-        }
-        if( this.tty.INVEST_STATUS == "1" ){
-          flag = false;
-          regexfun.handleFailMsg(this,"未到投资时间，如有需要请联系客服!");
-        }
-        //投资不能为空
-        if(flag && (this.widthDrawMoney == "" || this.widthDrawMoney == '0')){
-          flag = false;
-          regexfun.handleFailMsg(this,"请输入大于0的投资金额");
-        }
-        if(!(regexfun.regex(this, 'reg_finc_account', this.widthDrawMoney))){
-          flag = false;
-          regexfun.handleFailMsg(this,"请输入正确格式的投资金额");
-        }
-        //起投金额
-        if(money<min_money){
-          flag = false;
-          regexfun.handleFailMsg(this,"投资金额必须大于起投金额");
-        }
-        //最大金额
-        if(money>max_money){
-          flag = false;
-          regexfun.handleFailMsg(this,"投资额应在单笔最大限额范围以内");
-        }
-        //账户余额
-        if(money>accountBalance){
-          flag = false;
-          regexfun.handleFailMsg(this,"投资额必须小于账户余额");
-        }
-        //项目投资完
-        if(this.tty.PROJ_STATUS!='6003'){
-          flag = false;
-          regexfun.handleFailMsg(this,"当前项目已被抢光，敬请期待下一期!");
-        }
-        if(this.agree == false){
-          flag = false;
-          regexfun.handleFailMsg(this,"请阅读并同意《风险揭示书》!");
-        }
-        if(this.investscore=='0'){
-          flag = false;
-          this.investscoreNo =true
-          regexfun.handleFailMsg(this,"请进行风险能力评估");
-        }
-        if(this.investscore=='1'){
-          flag = false;
-          this.investscoreYes =true
-          regexfun.handleFailMsg(this,"该项目的风险程度超过您的风险承受能力，请知悉。");
-        }
-        if(flag){
-          let self =this
-          this.setPayDetail({
-            //项目名称
-            proName:self.proj_name,
-            //可用余额
-            balance:self.userInfo.AVAILABLE_BALANCE,
-            //投资金额
-            withDraw:this.widthDrawMoney,
-            //投资期限
-            proTime:null
-          });
-          self.$router.push({path:'paymentOrder'})
+        apis.userBaseData(this.userInfo.ID, '1').then((data) => {
+          this.userData = data.result.main_data;
+          let flag = true;
+          let user_role = this.userInfo.USER_ROLE;
+          let is_check_tra_pwd = this.userData.IS_AUTHORIZED;
+          let is_expired = this.userInfo.IS_Expired;
+          let min_money = this.TtyDetail.MIN_AMOUNT
+          let max_money = this.TtyDetail.MAX_AMOUNT
+          let money= this.widthDrawMoney
+          let accountBalance =this.userInfo.AVAILABLE_BALANCE
+          if(user_role != 'INVESTOR'){
+            flag = false
+            regexfun.handleFailMsg(this, "您的账户类型不支持投资!");
+          }
+          if (is_check_tra_pwd=='0') {
+            flag = false
+            regexfun.handleFailMsg(this,"您的用户未委托授权，无法进行投资操作!");
+          }
+          if(is_expired == '0'){
+            flag = false
+            regexfun.handleFailMsg(this, "您的用户授权已过期，无法进行投资操作!");
+          }
+          if( this.tty.INVEST_STATUS == "1" ){
+            flag = false;
+            regexfun.handleFailMsg(this,"未到投资时间，如有需要请联系客服!");
+          }
+          //投资不能为空
+          if(flag && (this.widthDrawMoney == "" || this.widthDrawMoney == '0')){
+            flag = false;
+            regexfun.handleFailMsg(this,"请输入大于0的投资金额");
+          }
+          if(!(regexfun.regex(this, 'reg_finc_account', this.widthDrawMoney))){
+            flag = false;
+            regexfun.handleFailMsg(this,"请输入正确格式的投资金额");
+          }
+          //起投金额
+          if(money<min_money){
+            flag = false;
+            regexfun.handleFailMsg(this,"投资金额必须大于起投金额");
+          }
+          //最大金额
+          if(money>max_money){
+            flag = false;
+            regexfun.handleFailMsg(this,"投资额应在单笔最大限额范围以内");
+          }
+          //账户余额
+          if(money>accountBalance){
+            flag = false;
+            regexfun.handleFailMsg(this,"投资额必须小于账户余额");
+          }
+          //项目投资完
+          if(this.tty.PROJ_STATUS!='6003'){
+            flag = false;
+            regexfun.handleFailMsg(this,"当前项目已被抢光，敬请期待下一期!");
+          }
+          if(this.agree == false){
+            flag = false;
+            regexfun.handleFailMsg(this,"请阅读并同意《风险揭示书》!");
+          }
+          if(this.investscore=='0'){
+            flag = false;
+            this.investscoreNo =true
+            regexfun.handleFailMsg(this,"请进行风险能力评估");
+          }
+          if(this.investscore=='1'){
+            flag = false;
+            this.investscoreYes =true
+            regexfun.handleFailMsg(this,"该项目的风险程度超过您的风险承受能力，请知悉。");
+          }
+          if(flag){
+            let self =this
+            this.setPayDetail({
+              //项目名称
+              proName:self.proj_name,
+              //可用余额
+              balance:self.userInfo.AVAILABLE_BALANCE,
+              //投资金额
+              withDraw:this.widthDrawMoney,
+              //投资期限
+              proTime:null
+            });
+            self.$router.push({path:'paymentOrder'})
 
 
-        }
+          }
+        })
+
 
       }
     }
@@ -587,6 +594,9 @@
     right: 0;
     bottom: -.2rem;
     z-index: 9999;
+  }
+  .risk{
+
   }
   .title-list{
     position: absolute;

@@ -80,7 +80,8 @@
         }else if(this.publicCode.toUpperCase() ==this.checkCode) {
           this.isShow = false
           this.flag = 2;
-          if(URL in this.url == false){
+          console.log(this.url)
+          if( (this.url.hasOwnProperty(URL)) == false){
             this.$router.push("/home")
           }
         }else{
