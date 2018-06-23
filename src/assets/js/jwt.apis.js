@@ -444,6 +444,27 @@ function pdsInvestProj(CUST_ID,CUST_TYPE,PROJ_CODE,INVEST_AMOUNT,IS_CHECK_TRA_PW
     "redirectUrl":redirectUrl,
   }))
 }
+
+/**
+ * 天天盈投资
+ * @param CUST_ID
+ * @param CUST_TYPE
+ * @param AMOUNT
+ * @param PROJ_CODE
+ * @param redirectUrl
+ * @returns {*}
+ */
+function borrow (CUST_ID,CUST_TYPE,AMOUNT,PROJ_CODE,redirectUrl) {
+  return phtServer.globalPostData(urls.api_url_borrow,phtServer.submitData({
+    "CUST_ID":CUST_ID,
+    "CUST_TYPE":CUST_TYPE,
+    "AMOUNT":AMOUNT,
+    "PROJ_CODE":PROJ_CODE,
+    "redirectUrl":redirectUrl,
+  }))
+}
+
+
 export  {
   passwordRetrieval,
   sendMessageMobileValidCode,
@@ -471,6 +492,7 @@ export  {
   queryProjDetail,
   ueryInvestedListApp,
   exitLogin,
-  pdsInvestProj
+  pdsInvestProj,
+  borrow
 }
 

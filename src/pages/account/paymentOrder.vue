@@ -52,7 +52,8 @@
         flag:0,
         showCode:false,
         checkFlag:'',
-        userData:null
+        userData:null,
+        dds:null
       }
     },
     computed: {
@@ -61,6 +62,8 @@
       ),
     },
     mounted(){
+      this.dds = this.$route.query.dds
+      console.log(this.dds)
       this.timeLoad()
     },
     methods:{
@@ -95,24 +98,45 @@
       },
       goPay(){
         let self =this;
-        apis.userBaseData(self.userInfo.ID,'1').then( (data) => {
-          let userData = data.result.main_data;
-          this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
-          if(this.is_check_tra_pwd == "0"){
-            apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime,'https://www.phtfdata.com/wx/async').then( (data) => {
-              this.userData = data.result.main_data;
-              //跳转到新网
-              $('.xwUrl').append(this.userData.url);
-            })
-          }else{
-            this.showCode = true;
-            apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime).then( (data) => {
-              this.userData = data.result.main_data;
-              console.log( this.userData )
+        if(this.dds ='dds'){
+          apis.userBaseData(self.userInfo.ID,'1').then( (data) => {
+            let userData = data.result.main_data;
+            this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
+            if(this.is_check_tra_pwd == "0"){
+              apis.borrow(this.userInfo.ID,'1',this.payDetail.withDraw,this.payDetail.pro_code,'https://www.phtfdata.com/wx/async').then( (data) => {
+                this.userData = data.result.main_data;
+                //跳转到新网
+                $('.xwUrl').append(this.userData.url);
+              })
+            }else{
+              this.showCode = true;
+              apis.borrow(this.userInfo.ID,'1',this.payDetail.withDraw,this.payDetail.pro_code).then( (data) => {
+                this.userData = data.result.main_data;
 
-            })
-          }
-        })
+              })
+            }
+          })
+        }else {
+          apis.userBaseData(self.userInfo.ID,'1').then( (data) => {
+            let userData = data.result.main_data;
+            this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
+            if(this.is_check_tra_pwd == "0"){
+              apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime,'https://www.phtfdata.com/wx/async').then( (data) => {
+                this.userData = data.result.main_data;
+                //跳转到新网
+                $('.xwUrl').append(this.userData.url);
+              })
+            }else{
+              this.showCode = true;
+              apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime).then( (data) => {
+                this.userData = data.result.main_data;
+                console.log( this.userData )
+
+              })
+            }
+          })
+        }
+
       }
      },
     components: {

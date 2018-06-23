@@ -244,6 +244,8 @@ export const api_url_preIrepayCapital  = origin_ProxyPath_dds + "/query/" + vers
 export const api_url_repayInterest  = origin_ProxyPath_dds + "/query/" + version + "/repayInterest/" + version;
 //天天盈再投
 export const api_url_DdProj  = origin_ProxyPath_dds + "/query/" + version + "/DdProj/" + version;
+//天天盈投资
+export const api_url_borrow = origin_ProxyPath_dds + "/query/" + version + "/borrow/" + version;
 //天天盈项目详情
 export const api_url_DdProjDetail  = origin_ProxyPath_dds + "/query/" + version + "/DdProjDetail/" + version;
 //天天盈项目详情

@@ -57,12 +57,12 @@
 
       </div>
     </div>
-    <div class="risk">
-      <span class="title-list" v-if="investscoreNo" @click="openInvest()">您尚未完成<span class="openInvest">《出借人风险承受能力评估》</span>，请知悉。</span>
-      <span class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</span>
-    </div>
-    <div class="bottom"  @click ='onIsFocus'>
 
+    <div class="bottom"  @click ='onIsFocus'>
+      <div class="risk" v-show="headShow" v-if="risk">
+        <span class="title-list" v-if="investscoreNo" @click="openInvest()">您尚未完成<span class="openInvest">《出借人风险承受能力评估》</span>，平台无法判断您是否能承受该项目的风险,请知悉。</span>
+        <span class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</span>
+      </div>
       <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
       <ul class="boxline">
         <li>起投金额</li>
@@ -127,6 +127,8 @@
         investscore:null,
         investscoreNo:false,
         investscoreYes:false,
+        risk:false
+
 
       }
     },
@@ -259,10 +261,12 @@
           if(this.investscore=='0'){
             flag = false;
             this.investscoreNo =true
+            this.risk =true
             regexfun.handleFailMsg(this,"请进行风险能力评估");
           }
           if(this.investscore=='1'){
             flag = false;
+            this.risk =true
             this.investscoreYes =true
             regexfun.handleFailMsg(this,"该项目的风险程度超过您的风险承受能力，请知悉。");
           }
@@ -276,9 +280,10 @@
               //投资金额
               withDraw:this.widthDrawMoney,
               //投资期限
-              proTime:null
+              proTime:null,
+              pro_code:this.TtyDetail.PROJ_CODE
             });
-            self.$router.push({path:'paymentOrder'})
+            self.$router.push({path:'paymentOrder', query: {dds: 'dds'}})
 
 
           }
@@ -596,14 +601,21 @@
     z-index: 9999;
   }
   .risk{
-
+   position: fixed;
+    width: 100%;
+    height: .8rem;
+    padding: .1rem;
+    bottom: 3.33rem;
+    background: #fff;
+    z-index: 9999999999;
+    border: .01rem solid #e0e0e0;
+    border-bottom: none;
   }
   .title-list{
     position: absolute;
     display: inline-block;
     width: 100%;
     height: .3rem;
-    border-bottom: .01rem solid #e0e0e0;
     font-size: .12rem;
     color: #ccc;
     padding-left: .2rem;
