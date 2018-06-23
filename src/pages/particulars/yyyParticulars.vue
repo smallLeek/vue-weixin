@@ -142,56 +142,6 @@
     </div>
 
     <div class="invest_no" v-if="type == 1">{{typeName}}</div>
-    <!--<div class="bottom_input">
-      <div class="bottom_invest" v-if="type == 0">
-        &lt;!&ndash;遮罩层&ndash;&gt;
-        <div :class="{popup:isActive}">
-          <div class="box">
-            <div class="focusDiv" v-if="isActive" @click="hideBox()">
-              <ul class="boxline">
-                <li>起投金额</li>
-                <li>可投金额</li>
-                <li>最大单笔金额</li>
-              </ul>
-              <ul class="boxline boxColor">
-                <li>{{yyyDetail.MIN_BID_AMOUNT}}元</li>
-                <li>{{yyyDetail.SURPLUS_PART | farmatAmount}}元</li>
-                <li>{{yyyDetail.MAX_BID_AMOUNT}}元</li>
-              </ul>
-              <ul class="boxline boxBlance">
-                <li>账户余额</li>
-                <li></li>
-              </ul>
-              <ul class="boxline boxColor boxSafe">
-                <li>{{available_balance}}元</li>
-                <li>
-                  <h1>
-                  <span v-if="agree" @click="agreement">
-                    <img class="on" src="../../../static/images/login/login_selectOn.png">阅读并同意
-                  </span>
-                    <span v-if="!agree" @click="agreement">
-                    <img class="on" src="../../../static/images/login/login_select.png">阅读并同意
-                  </span>
-                    <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
-                  </h1>
-                </li>
-              </ul>
-            </div>
-            <div class="input_box">
-              <div class="input_text">
-                <input type="text" placeholder="投资金额" v-on:focus="showBox()" v-model="investMoney">
-                <span>元</span>
-              </div>
-              <div class="input_submit">
-                <button @click="investSubmit()">立即投资</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-     <div class="invest_no" v-if="type == 1">{{typeName}}</div>
-    </div>-->
     <!-- 信息披露弹窗 -->
     <informationDisclosure class="informationDisclosure"></informationDisclosure>
     <!-- 余额不足弹窗 -->
@@ -267,7 +217,6 @@
           this.is_authorized = userData.IS_AUTHORIZED;
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
-            console.log(this.yyyDetail);
             //判断用户类型
             if(user_role == "INVESTOR" ){
               //判断用户是否授权
@@ -386,7 +335,9 @@
           //投资期限
           proTime:self.yyyDetail.LOAN_LIMITTIME
         });
-
+        this.headShow = false;
+        this.investMoney ='';
+        this.agree = false;
         self.$router.push({path:'paymentOrder'})
 
       }

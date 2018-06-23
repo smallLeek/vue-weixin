@@ -1,9 +1,9 @@
 <template>
   <div class="paymentOrder" v-title="'支付订单'">
     <div class="title">
-        <router-link to="/home">
+        <b click="goBackOne()">
             <img src="../../../static/images/goBack.png">
-        </router-link>
+        </b>
         <span>支付订单</span>
     </div>
     <div class="countDown">
@@ -35,7 +35,7 @@
       <h1>交易小贴士：</h1>
       <p>如您在“我的-安全中心-免支付密码投标”中已开通<b>免支付密码投标</b>，可免输入交易密码<b>快速投资</b>，未开通免支付密码投标需跳转到<b>新网银行存管页面</b>，输入交易密码进行投资确认。</p>
     </div>
-    <checkcode v-if="showCode" v-bind:withDraw="payDetail.withDraw" v-bind:url="userData" v-bind="investInfo"  v-on:checkNewCode="getDatas"></checkcode>
+    <checkcode v-if="showCode" v-bind:withDraw="payDetail.withDraw" v-bind:url="userData" v-bind:investInfo="{withDraw:this.payDetail.withDraw, proj_name:this.payDetail.proj_name, proTime:this.payDetail.proTime}"  v-on:checkNewCode="getDatas"></checkcode>
   </div>
 </template>
 <script>
@@ -54,7 +54,6 @@
         checkFlag:'',
         userData:null,
         dds:null,
-        investInfo:null
       }
     },
     computed: {
@@ -64,7 +63,6 @@
     },
     mounted(){
       this.dds = this.$route.query.dds
-      console.log(this.dds)
       this.timeLoad()
     },
     methods:{
@@ -73,6 +71,9 @@
       },
       checknewCode (data) {
         this.showCode = data
+      },
+      goBackOne(){
+        this.$router.go(-1);
       },
       timeLoad(){
         let self =this;
@@ -118,6 +119,7 @@
             }
           })
         } else {
+          let investInfo ={withDraw:this.payDetail.withDraw, proj_name:this.payDetail.proj_name, proTime:this.payDetail.proTime}
           apis.userBaseData(self.userInfo.ID, '1').then((data) => {
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
@@ -131,8 +133,6 @@
               this.showCode = true;
               apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.pro_code, this.payDetail.withDraw, this.is_check_tra_pwd).then((data) => {
                 this.userData = data.result.main_data;
-                console.log(this.userData)
-
               })
             }
           })
