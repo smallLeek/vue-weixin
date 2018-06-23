@@ -98,4 +98,8 @@ Vue.filter('farmatRate',function (rate) {
     return ((rate.split('%'))[0]-0).toFixed(0) + "%"
   }
 })
+//隐藏手机号中间四位
+Vue.filter('farmatMobile',function (mobile) {
+  return mobile.substr(0, 3) + '****' + mobile.substr(7);
+})
 

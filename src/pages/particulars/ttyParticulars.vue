@@ -23,7 +23,7 @@
       <ul>
         <li>
           <span>起投金额</span>
-          <span>{{TtyDetail.MIN_AMOUNT}}元</span>
+          <span>{{(TtyDetail.MIN_AMOUNT) | farmatAmount}}元</span>
         </li>
         <li>
           <span>收益时间</span>
@@ -37,7 +37,7 @@
           <span>保障方式</span>
           <span>资金安全保障<img src="../../../static/images/more.png"></span>
         </li>
-        <li>
+        <li v-on:click="ttyInvestmentList()">
           <span>投资列表</span>
           <span>{{TtyDetail.INVESTCOUNT}}笔<img src="../../../static/images/more.png"></span>
         </li>
@@ -48,7 +48,7 @@
       <ul>
         <li v-for="item in CustList">
           <span v-text="item.PROJ_CODE"></span>
-          <span v-text="item.PRINCIPAL_AMOUNT"></span>
+          <span>{{(item.PRINCIPAL_AMOUNT) | farmatAmount}}</span>
         </li>
       </ul>
     </div>
@@ -69,15 +69,15 @@
         <li>最大单笔金额</li>
       </ul>
       <ul class="boxline boxColor">
-        <li>{{TtyDetail.MIN_AMOUNT}}元</li>
-        <li>{{TtyDetail.MAX_AMOUNT}}元</li>
+        <li>{{TtyDetail.MIN_AMOUNT | farmatAmount}}元</li>
+        <li>{{TtyDetail.MAX_AMOUNT | farmatAmount}}元</li>
       </ul>
       <ul class="boxline boxBlance">
         <li>账户余额</li>
         <li></li>
       </ul>
       <ul class="boxline boxColor boxSafe" style="margin-top: -.2rem">
-        <li>{{userInfo.AVAILABLE_BALANCE}}元</li>
+        <li>{{userInfo.AVAILABLE_BALANCE | farmatAmount}}元</li>
         <li class="doAgree">
           <h1>
                   <span v-if="agree" @click="agreement">
@@ -146,6 +146,10 @@
     },
     methods: {
       ...mapActions({setPayDetail: 'setPayDetail'}),
+      //去投资列表
+      ttyInvestmentList(){
+        this.$router.push({path:"/ttyInvestmentList",query:{proj_code:this.proj_code}})
+      },
       //去安全保障
       goMoneySafe() {
         window.location.href = "https://www.phtfdata.com/web6/hander/bxprotectedNew.do"
@@ -153,7 +157,7 @@
       //获取天天盈基本信息
       getTty() {
         this.userId = this.userInfo.ID;
-        this.userType = this.userInfo.USER_TYPE;
+        this.userType = "1";
         let userId = this.userInfo.ID;
         apis.DdProj(userId, "1").then((data) => {
           this.proj_code = data.result.main_data.PROJ_CODE;

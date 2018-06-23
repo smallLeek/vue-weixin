@@ -68,7 +68,7 @@
       ...mapActions({setAccessAuth: 'setAccessAuth'}),
       getBaseData() {
         let userId = this.userInfo.ID;
-        let userType = this.userInfo.USER_TYPE;
+        let userType = "1";
         apis.userBaseData(userId, userType).then((data) => {
           this.userData = data.result.main_data;
         })

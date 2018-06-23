@@ -115,7 +115,6 @@
       getBankInfo() {
         //首先获取当前用户信息
         let userId = this.userInfo.ID;
-        //let userType = this.userInfo.USER_TYPE;
         apis.userBaseData(userId,'1').then( (data) => {
           if(data.status == '00000000'){
             let userData = data.result.main_data;
@@ -155,7 +154,7 @@
         //判断输入的金额是否大于等于可用金额
         if(this.rechargeMoney< parseFloat(this.single_limit.replace(/,/g,""))){
           let userId = this.userInfo.ID;
-          let userType = this.userInfo.USER_TYPE;
+          let userType = "1";
           let rechargeway = "SWIFT";
           let bankcode = '';
           let paytype  = '';

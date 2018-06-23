@@ -249,7 +249,9 @@ export const api_url_borrow = origin_ProxyPath_dds + "/query/" + version + "/bor
 //天天盈项目详情
 export const api_url_DdProjDetail  = origin_ProxyPath_dds + "/query/" + version + "/DdProjDetail/" + version;
 //天天盈项目详情
-export const api_url_DdProjRedeemCustList = origin_ProxyPath_dds + "/query/" + version + "/DdProjRedeemCustList/" + version;
+export const api_url_DdProjRedeemCustList = origin_ProxyPath_dds + "/query/" + version + "/DdProjRedeemCustList/" + version;//天天盈项目详情
+//天天盈项目用户投资列表
+export const api_url_DdProjInvestCustList = origin_ProxyPath_dds + "/query/" + version + "/DdProjInvestCustList/" + version;
 /**
  * 天天盈文档有误，后台正在更新
  */
