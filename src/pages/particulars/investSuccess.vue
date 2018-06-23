@@ -2,9 +2,6 @@
   <!--月月盈和定投盈是一个页面-->
   <div class="investSuccess">
     <div class="title">
-      <b v-on:click="goBackOne()">
-        <img src="../../../static/images/goBack.png">
-      </b>
       <span>投资</span>
     </div>
     <div class="invest">
@@ -67,9 +64,6 @@
         let userState = store.state.user
         location.href = location.origin +  userState.accessAuth.whereToGo;
       },
-      goBackOne(){
-        this.$router.go(-1);
-      }
     },
     components: {
 
