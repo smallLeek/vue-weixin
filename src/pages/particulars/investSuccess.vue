@@ -62,7 +62,6 @@
     methods:{
       ...mapActions({setUserInfo: 'setUserInfo',setIsRealName:'setIsRealName',getTokenCode:'getTokenCode'}),
       getData(){
-        console.log(this.$route.query);
         this.withDraw = this.$route.query.withDraw;
         this.proj_name = this.$route.query.proj_name;
         this.proTime = this.$route.query.proTime;
