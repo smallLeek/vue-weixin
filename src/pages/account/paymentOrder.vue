@@ -14,7 +14,7 @@
       <ul>
         <li>
           <span>产品名称</span>
-          <span>{{payDetail.proCode}}</span>
+          <span>{{payDetail.pro_name}}</span>
         </li>
         <li v-if="payDetail.proTime">
           <span>投资期限</span>
@@ -99,7 +99,7 @@
       },
       goPay() {
         let self = this;
-        if (this.dds = 'dds') {
+        if (this.dds == 'dds') {
           apis.userBaseData(self.userInfo.ID, '1').then((data) => {
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
@@ -122,14 +122,14 @@
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
             if (this.is_check_tra_pwd == "0") {
-              apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.proName, this.payDetail.withDraw, this.is_check_tra_pwd, this.payDetail.proTime, 'https://www.phtfdata.com/wx/async').then((data) => {
+              apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.pro_code, this.payDetail.withDraw, this.is_check_tra_pwd, 'https://www.phtfdata.com/wx/async').then((data) => {
                 this.userData = data.result.main_data;
                 //跳转到新网
                 $('.xwUrl').append(this.userData.url);
               })
             } else {
               this.showCode = true;
-              apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.proName, this.payDetail.withDraw, this.is_check_tra_pwd, this.payDetail.proTime).then((data) => {
+              apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.pro_code, this.payDetail.withDraw, this.is_check_tra_pwd).then((data) => {
                 this.userData = data.result.main_data;
                 console.log(this.userData)
 

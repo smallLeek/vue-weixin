@@ -274,7 +274,7 @@
             let self =this
             this.setPayDetail({
               //项目名称
-              proName:self.proj_name,
+              pro_name:self.proj_name,
               //可用余额
               balance:self.userInfo.AVAILABLE_BALANCE,
               //投资金额

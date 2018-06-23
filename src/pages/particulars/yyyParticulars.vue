@@ -377,8 +377,8 @@
         this.setPayDetail({
           userId:self.userId,
           //项目名称
-          proName:self.proj_code,
-          proCode:self.yyyDetail.PROJ_NAME,
+          pro_code:self.proj_code,
+          pro_name:self.yyyDetail.PROJ_NAME,
           //可用余额
           balance:self.userInfo.AVAILABLE_BALANCE,
           //投资金额
