@@ -80,7 +80,7 @@
         <ul v-if="yyyDetailList">
           <li v-for="item in yyyDetailList">
             <span v-text="item.CUST_NAME"></span>
-            <span>{{item.NVEST_AMOUNT | farmatAmount}}</span>
+            <span>{{item.INVEST_AMOUNT | farmatAmount}}</span>
             <span v-text="item.CREATE_DATE">2018-05-30 11:14:41</span>
           </li>
         </ul>
@@ -258,7 +258,7 @@
       },
       getInvestList(){
         apis.ueryInvestedListApp(this.userId, this.userType,this.proj_code,'1','10' ).then((data) => {
-          this.yyyDetailList = data.result.main_data.data[0];
+          this.yyyDetailList = data.result.main_data.data;
         })
       },
       //让指定input获取焦点
