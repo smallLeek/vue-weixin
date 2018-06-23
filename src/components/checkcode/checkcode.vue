@@ -81,7 +81,6 @@
         }else if(this.publicCode.toUpperCase() ==this.checkCode) {
           this.isShow = false
           this.flag = 2;
-          console.log(this.url)
           if((URL in this.url) == false){
             this.$router.push({path:'/investSuccess',parmas:this.investInfo})
           }
