@@ -81,7 +81,7 @@
           this.isShow = false
           this.flag = 2;
           console.log(this.url)
-          if( (this.url.hasOwnProperty(URL)) == false){
+          if((URL in this.url) == false){
             this.$router.push("/home")
           }
         }else{

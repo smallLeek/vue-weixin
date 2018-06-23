@@ -52,11 +52,11 @@
         </li>
       </ul>
     </div>
-      <div class="modal-box" v-show="headShow">
-        <div class="close" @click="HShow()">
+    <div class="modal-box" v-show="headShow">
+      <div class="close" @click="HShow()">
 
-        </div>
       </div>
+    </div>
     <div class="risk">
       <span class="title-list" v-if="investscoreNo" @click="openInvest()">您尚未完成<span class="openInvest">《出借人风险承受能力评估》</span>，请知悉。</span>
       <span class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</span>

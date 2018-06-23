@@ -102,7 +102,7 @@
             apis.pdsInvestProj(this.userInfo.ID,'1',this.payDetail.proName,this.payDetail.withDraw,this.is_check_tra_pwd,this.payDetail.proTime,'https://www.phtfdata.com/wx/async').then( (data) => {
               this.userData = data.result.main_data;
               //跳转到新网
-              $('.xwUrl').append(this.userData.url)
+              $('.xwUrl').append(this.userData.url);
             })
           }else{
             this.showCode = true;

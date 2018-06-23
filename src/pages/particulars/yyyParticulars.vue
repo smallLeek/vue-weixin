@@ -87,9 +87,64 @@
         <p>已投资{{yyyDetail.CUST}}笔，投资总额{{yyyDetail.INVESTED_AMOUNT | farmatAmount}}元</p>
       </div>
     </div>
-    <div class="bottom_input">
+    <div  v-if="type == 0">
+      <div class="modal-box" v-show="headShow">
+        <div class="close" @click="HShow()">
+
+        </div>
+      </div>
+      <div class="bottom"  @click ='onIsFocus'>
+
+        <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
+          <div class="fenji">
+            <p v-if="investscoreNo" @click="openInvest()"><span>您尚未完成</span><span class="openInvest">《出借人风险承受能力评估》</span><span>,平台无法判断您是否能承受该项目的风险，请知悉。</span></p>
+            <p class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</p>
+          </div>
+          <ul class="boxline">
+            <li>起投金额</li>
+            <li>可投金额</li>
+            <li>最大单笔金额</li>
+          </ul>
+          <ul class="boxline boxColor">
+            <li>{{yyyDetail.MIN_BID_AMOUNT}}元</li>
+            <li>{{yyyDetail.SURPLUS_PART | farmatAmount}}元</li>
+            <li>{{yyyDetail.MAX_BID_AMOUNT}}元</li>
+          </ul>
+          <ul class="boxline boxBlance">
+            <li>账户余额</li>
+            <li></li>
+          </ul>
+          <ul class="boxline boxColor boxSafe" style="margin-top: -.2rem">
+            <li>{{userInfo.AVAILABLE_BALANCE}}元</li>
+            <li class="doAgree">
+              <h1>
+                  <span v-if="agree" @click="agreement">
+                    <img class="on" src="../../../static/images/investOn.png">阅读并同意
+                  </span>
+                <span v-if="!agree" @click="agreement">
+                    <img class="on" src="../../../static/images/investIn.png">阅读并同意
+                  </span>
+                <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
+              </h1>
+            </li>
+          </ul>
+        </div>
+        <div class="bottom_input">
+          <div class="input_text">
+            <input type="text" placeholder="投资金额" v-model="investMoney" @focus="showBox()" ref="content">
+            <span>元</span>
+          </div>
+          <div class="input_submit" @click="submitWithdraw()">
+            <a>立即投资</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="invest_no" v-if="type == 1">{{typeName}}</div>
+    <!--<div class="bottom_input">
       <div class="bottom_invest" v-if="type == 0">
-        <!--遮罩层-->
+        &lt;!&ndash;遮罩层&ndash;&gt;
         <div :class="{popup:isActive}">
           <div class="box">
             <div class="focusDiv" v-if="isActive" @click="hideBox()">
@@ -136,7 +191,7 @@
 
       </div>
      <div class="invest_no" v-if="type == 1">{{typeName}}</div>
-    </div>
+    </div>-->
     <!-- 信息披露弹窗 -->
     <informationDisclosure class="informationDisclosure"></informationDisclosure>
     <!-- 余额不足弹窗 -->
@@ -162,6 +217,7 @@
         userType:'',
         proj_code:'',
         yyyDetailList:null,
+        headShow:false,
         tabList:[
           {tabName:'风控措施'},
           {tabName:'项目简介'},
@@ -177,7 +233,10 @@
         isActive:false,
         investMoney:'',
         is_check_tra_pwd:0,
-        userData:null
+        userData:null,
+        is_authorized:'',
+        investscoreYes:false,
+        investscoreNo:false,
       }
     },
     computed: {
@@ -205,45 +264,64 @@
           this.investscore = userData.INVESTSCORE;
           this.available_balance = userData.AVAILABLE_BALANCE;
           this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
-        })
-        apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
-          this.yyyDetail = data.result.main_data.data[0];
-          //判断用户类型
-          if(user_role == "INVESTOR" ){
-            //判断用户是否授权
-            if (is_check_tra_pwd == "1") {
-              //判断授权是否过期 IS_Expired  1：未过期  0：过期
-              if (is_expired == '1') {
-                //判断是否售罄
-                if(this.yyyDetail.SURPLUS_PART != 0){
-                  //投资人分级判断
+          this.is_authorized = userData.IS_AUTHORIZED;
+          apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
+            this.yyyDetail = data.result.main_data.data[0];
+            //判断用户类型
+            if(user_role == "INVESTOR" ){
+              //判断用户是否授权
+              if (this.is_authorized == "1") {
+                //判断授权是否过期 IS_Expired  1：未过期  0：过期
+                if (is_expired == '1') {
+                  //判断是否售罄
+                  if(this.yyyDetail.SURPLUS_PART != 0){
+                    //投资人分级判断
+                    if(this.investscore=='0'){
+                      this.investscoreNo =true
+                    }else if(this.investscore=='1'){
+                      this.investscoreYes =true
+                    }
 
-                }else{
+                  }else{
+                    this.type ='1';
+                    this.typeName = "已售罄"
+                  }
+
+                }else {
+                  this.bs.$emit('e:alert', "您的用户授权已过期，无法进行投资操作!");
                   this.type ='1';
-                  this.typeName = "已售罄"
+                  this.typeName = "您的用户授权已过期，无法进行投资操作"
                 }
-
-              }else {
-                this.bs.$emit('e:alert', "您的用户授权已过期，无法进行投资操作!");
+              }else{
+                this.bs.$emit('e:alert', "您的用户未委托授权，无法进行投资操作!");
                 this.type ='1';
-                this.typeName = "您的用户授权已过期，无法进行投资操作"
+                this.typeName = "您的用户未委托授权，无法进行投资操作"
               }
             }else{
-              this.bs.$emit('e:alert', "您的用户未委托授权，无法进行投资操作!");
+              this.bs.$emit('e:alert', "您的账户类型不支持投资!");
               this.type ='1';
-              this.typeName = "您的用户未委托授权，无法进行投资操作"
+              this.typeName = "您的账户类型不支持投资"
             }
-          }else{
-            this.bs.$emit('e:alert', "您的账户类型不支持投资!");
-            this.type ='1';
-            this.typeName = "您的账户类型不支持投资"
-          }
+          })
         })
+
       },
       getInvestList(){
         apis.ueryInvestedListApp(this.userId, this.userType,this.proj_code,'1','10' ).then((data) => {
           this.yyyDetailList = data.result.main_data.data[0];
         })
+      },
+      //让指定input获取焦点
+      onIsFocus(){
+        this.$refs.content.focus()
+      },
+      //去投资人测评
+      openInvest(){
+        location.href ='http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID='+this.userInfo.ID
+      },
+      //遮罩层
+      HShow(){
+        this.headShow =false
       },
       //去月月盈的模版合同
       goLoan() {
@@ -259,14 +337,14 @@
       },
       //获取焦点 显示投资
       showBox(){
-        this.isActive = true
+        this.headShow =true
       },
       //获取焦点 显示投资
       hideBox(){
         this.isActive = true
       },
       //点击投资
-      investSubmit(){
+      submitWithdraw(){
         let self = this
         if(!self.agree){
           this.bs.$emit('e:alert', "请阅读并同意《风险揭示书》!");
@@ -308,8 +386,6 @@
         });
 
         self.$router.push({path:'paymentOrder'})
-
-
 
       }
     },
@@ -628,24 +704,106 @@
     }
   }
 
-  .bottom_input {
+  .informationDisclosure,
+  .notSufficientFunds {
+    display: none;
+  }
+  .invest_no{
     position: fixed;
-    bottom: 0;
-    height: 0.94rem;
-    width: 7.5rem;
-    margin: auto;
-    background-color: #fff;
-
-    .input_box{
+    bottom:0;
+    left:0;
+    width:100%;
+    height: 0.95rem;
+    line-height: 0.95rem;
+    background-color: #bbb;
+    font-size: 0.32rem;
+    text-align: center;
+    color: #fff;
+  }
+  .modal-box{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    .close{
+      background: rgba(0,0,0,.5);
+      height: 100%;
       width: 100%;
-      border-top: 0.8px solid #e0e0e0;
+    }
+  }
+  .bottom{
+    .bottomList{
+      position: fixed;
+      bottom: 0.93rem;
+      z-index: 99999999;
+      width: 7.5rem;
+      margin: auto;
+      background-color: #fff;
+      border-bottom: none;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .boxline{
+      font-size: 0.24rem;
+      margin: 0 0 0 .2rem;
+      color: #999;
+      li{
+        display: inline-block;
+        width: 30%;
+        padding-left:0.2rem;
+        margin-top: 0.29rem;
+      }
+    }
+    .boxColor{
+      font-size: 0.28rem;
+      color: #333;
+      li{
+        margin-top: 0.1rem;
+      }
+    }
+    .boxSafe{
+
+      li{
+        margin-bottom:0.28rem;
+      }
+      li:last-child{
+        width: 55%;
+        margin-left:1rem;
+        h1{
+          a{
+            font-size: 0.28rem;
+            color: #fb4747;
+          }
+          span{
+            font-size: 0.28rem;
+            color: #333;
+            img{
+              width: 0.26rem;
+              height: 0.26rem;
+              margin-right: 0.1rem;
+              margin-bottom: -.03rem;
+            }
+          }
+        }
+      }
+    }
+    .bottom_input {
+      position: fixed;
+      bottom: 0;
+      height: 0.94rem;
+      z-index: 9999999999999;
+      width: 7.5rem;
+      margin: auto;
+      background-color: #fff;
+      border-top: 1px solid #e0e0e0;
       .input_text {
         float: left;
         margin-top: 0.2rem;
         margin-left: 0.2rem;
         width: 4.7rem;
         height: 0.6rem;
-        line-height: 0.55rem;
         border: 1px solid #e0e0e0;
         border-radius: 1rem;
         input {
@@ -686,12 +844,10 @@
         color: #fff;
         font-size: 0.32rem;
         text-align: center;
-        border-top:1px solid #e0e0e0;
-        button {
+        a {
           display: block;
           width: 2.3rem;
           height: 0.94rem;
-          border: none;
           line-height: 0.94rem;
           color: #fff;
           font-size: 0.32rem;
@@ -704,75 +860,26 @@
       }
     }
   }
-
-  .informationDisclosure,
-  .notSufficientFunds {
-    display: none;
+  .doAgree{
+    position: absolute;
+    right: 0;
+    bottom: -.2rem;
+    z-index: 9999;
   }
-  .invest_no{
-    width:100%;
-    height: 0.95rem;
-    line-height: 0.95rem;
-    background-color: #bbb;
-    font-size: 0.32rem;
-    text-align: center;
-    color: #fff;
-  }
-  .popup {
-    position: fixed;
-    z-index: 9999999;
+  .title-list{
+    display: inline-block;
     width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    .box {
-      width: 100%;
-      background-color: #fff;
-      position: fixed;
-      bottom: 0;
-      .boxline{
-        font-size: 0.24rem;
-        color: #999;
-        li{
-          display: inline-block;
-          width: 30%;
-          padding-left:0.2rem;
-          margin-top: 0.29rem;
-        }
-      }
-      .boxColor{
-        font-size: 0.28rem;
-        color: #333;
-        li{
-          margin-top: 0.1rem;
-        }
-      }
-      .boxSafe{
-
-        li{
-          margin-bottom:0.28rem;
-        }
-        li:last-child{
-          width: 55%;
-          margin-left:1rem;
-          h1{
-            a{
-              font-size: 0.28rem;
-              color: #fb4747;
-            }
-            span{
-              font-size: 0.28rem;
-              color: #333;
-              img{
-                width: 0.26rem;
-                height: 0.26rem;
-                margin-right: 0.1rem;
-              }
-            }
-          }
-        }
-      }
-    }
+    height: .3rem;
+    font-size: .3rem;
+    color: #ccc;
+    padding-left: .2rem;
   }
+  .openInvest{
+    color: #0000f4;
+  }
+  .fenji p{
+    font-size: 0.24rem;
+    padding:0 0.2rem;
+  }
+
 </style>
