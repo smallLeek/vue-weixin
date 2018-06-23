@@ -7,9 +7,7 @@
     <!--</x-header>-->
     <modal></modal>
     <alert></alert>
-    <keep-alive>
     <router-view></router-view>
-    </keep-alive>
     <div class="xwUrl"></div>
   </div>
 </template>
