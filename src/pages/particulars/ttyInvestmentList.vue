@@ -11,7 +11,7 @@
       <span>投资金额(元)</span>
     </h1>
     <div class="list" v-show="userData">
-      <ul class="hasData" v-if="flag == 0">
+      <ul class="hasData" v-if="flag != 0">
         <li v-for="item in userData">
           <span>
               <b>{{item.MOBILE}}</b>
@@ -21,7 +21,7 @@
         </li>
       </ul>
       <div class="middle">
-        <div class="middleTop" v-if="flag != 0">
+        <div class="middleTop" v-if="flag == 0">
           <ul class="noData">
             <li>
               <img src="../../../static/images/noData.png" alt="">
