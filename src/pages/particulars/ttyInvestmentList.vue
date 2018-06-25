@@ -10,8 +10,8 @@
       <span>投资人/投资时间</span>
       <span>投资金额(元)</span>
     </h1>
-    <div class="list">
-      <ul v-if="userData">
+    <div class="list" v-show="userData">
+      <ul class="hasData" v-if="flag == 0">
         <li v-for="item in userData">
           <span>
               <b>{{item.MOBILE}}</b>
@@ -20,6 +20,18 @@
           <span>{{item.AMOUNT | farmatAmount}}</span>
         </li>
       </ul>
+      <div class="middle">
+        <div class="middleTop" v-if="flag != 0">
+          <ul class="noData">
+            <li>
+              <img src="../../../static/images/noData.png" alt="">
+            </li>
+            <li>暂无记录</li>
+          </ul>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </template>
@@ -30,7 +42,8 @@
   export default {
     data(){
       return {
-        userData:null
+        userData:null,
+        flag:false
       }
     },
     mounted(){
@@ -53,6 +66,7 @@
         console.log(proj_code)
         apis.DdProjInvestCustList(this.userInfo.ID,"1",proj_code,'15','1').then((data) => {
           this.userData = data.result.main_data.data;
+          this.flag = this.userData.length;
         })
       }
     }
@@ -115,7 +129,7 @@
   }
   .list{
     margin-top: 1.8rem;
-    ul{
+    .hasData{
       background-color: #fff;
       li{
         font-family: 黑体;
@@ -151,6 +165,31 @@
           line-height: 1.2rem;
           font-size: 0.36rem;
           color: #ff8400;
+        }
+      }
+    }
+    .middle{
+      height: 100%;
+      .middleTop{
+        height: 100%;
+        .noData{
+          width: 100%;
+          height: 2.3rem;
+          position: absolute;
+          margin:auto;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          li{
+            text-align: center;
+            font-size: 0.34rem;
+            color: #ccc;
+            img{
+              width: 1.85rem;
+              height: 2.04rem;
+            }
+          }
         }
       }
     }
