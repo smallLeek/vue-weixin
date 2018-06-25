@@ -111,7 +111,12 @@
                 //回到哪
                 this.setAccessAuth({whereToGo:"/wx/home"});
                 //跳转到新网
-                $('.xwUrl').append(this.userData.URL);
+                if(this.userData.response_code=='nopass'){
+                  regexfun.handleFailMsg(this,this.userData.message);
+                  return;
+                }else {
+                  $('.xwUrl').append(this.userData.URL);
+                }
               })
             } else {
               this.showCode = true;
@@ -135,7 +140,12 @@
                 //回到哪
                 this.setAccessAuth({whereToGo:"/wx/home"});
                 //跳转到新网
-                $('.xwUrl').append(this.userData.url);
+                if(this.userData.response_code=='nopass'){
+                  regexfun.handleFailMsg(this,this.userData.message);
+                  return;
+                }else {
+                  $('.xwUrl').append(this.userData.URL);
+                }
               })
             } else {
               this.showCode = true;

@@ -3,7 +3,6 @@ import Jsrsasign,{KJUR,hex2b64} from 'jsrsasign';
 import axios from '../../http/axios'
 import store from '../../vuex/store'
 import md5 from 'js-md5'
-import wx from 'weixin-js-sdk'
 
 let phtServer = {}
 
@@ -170,66 +169,7 @@ phtServer.CalcuMD5lower = function (pwd) {
   pwd = md5(pwd);
   return pwd;
 }
-/**
- * 微信开发sdk的引入
- * @returns {*}
- */
-phtServer.initWxJsAPI =function () {
-  let deferred = $.Deferred();
-  let promise = deferred.promise();
-  wx.config({
-    debug : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-    appId : 'wx5e02454342005e14', // 必填，公众号的唯一标识
-    timestamp : '1520233958', // 必填，生成签名的时间戳
-    nonceStr : 'BpDYxYFzerGJeWAp6CSpwyFBdydtsiyQ', // 必填，生成签名的随机串
-    signature :'ac9dc9a9fb874f301b5fa344e9b862fcd564442e',// 必填，签名，见附录1
-    jsApiList :['getNetworkType','scanQRCode','onMenuShareAppMessage']//必填，需要使用的JS接口列表
-  });
-  wx.ready(function () {
-    deferred.resolve(wx);
-  });
-  return promise;
-}
-/**
- * 获取网络状态
- */
-phtServer.getNetworkType=function(){
-  wx.getNetworkType({
-    success: function (res) {
-      let networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
-      alert(networkType)
-      return res;
 
-    }
-  });
-}
-/**
- * 打开扫码
- */
-phtServer.scanQRCode=function () {
-  wx.scanQRCode({
-    needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-    scanType: ["qrCode"], // 可以指定扫二维码还是一维码，默认二者都有
-    success: function (res) {
-     alert(res); // 当needResult 为 1 时，扫码返回的结果
-    }
-  });
-}
-
-phtServer.onMenuShareAppMessage =function () {
-  wx.onMenuShareAppMessage({
-    title: '普惠通数据信息技术有限公司', // 分享标题
-    desc: '这是分享的描述', // 分享描述
-    link: 'https://www.phtfdata.com/wx', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-    imgUrl: 'https://www.phtfdata.com/web6/images/logo-logo.png', // 分享图标
-    type: 'link', // 分享类型,music、video或link，不填默认为link
-    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-    success: function () {
-// 用户点击了分享后执行的回调函数
-
-    }
-  });
-}
 /**
  * 银行卡后四位
  * @param str

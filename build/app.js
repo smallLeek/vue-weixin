@@ -20,7 +20,7 @@ app.use(historyApiFallback({
 app.get('*', express.static(path.join(__dirname, '../dist')));
 
 
-app.post('/m/finance/register/isHand*',function(req, res){
+app.post('/wx/async*',function(req, res){
   console.log("dddddd");
   const url = req.url;
   res.redirect(url);
@@ -64,7 +64,13 @@ app.use('/coupons', proxy_coupons);
 const proxy_apts = proxy('/apts', { target: 'http://139.129.12.93:8089',changeOrigin: true,pathRewrite:{
   '^/apts': ''
 } });
-app.use('/apts', proxy_coupons);
+app.use('/apts', proxy_apts);
+
+//用户服务
+const proxy_texts = proxy('/texts', { target: 'http://139.129.12.93:8093',changeOrigin: true,pathRewrite:{
+    '^/texts': ''
+  } });
+app.use('/texts', proxy_texts);
 
 //************************************proxy end *******************************************************************************************
 

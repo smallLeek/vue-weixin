@@ -33,6 +33,7 @@ const origin_ProxyPath_dds = env.origin_baseUrl+env.origin_ProxyPath_xwddss+ env
 //优惠券服务
 const origin_ProxyPath_coupon = env.origin_baseUrl+env.origin_ProxyPath_coupons+ env.origin_ProxyPath_coupon;
 
+
 //新网银行注册绑卡
 const origin_ProxyPath_xwbankWebNotify = env.origin_baseUrl+env.origin_ProxyPath_apts+ env.origin_ProxyPath_xwbankWebNotify;
 
@@ -252,6 +253,5 @@ export const api_url_DdProjDetail  = origin_ProxyPath_dds + "/query/" + version 
 export const api_url_DdProjRedeemCustList = origin_ProxyPath_dds + "/query/" + version + "/DdProjRedeemCustList/" + version;//天天盈项目详情
 //天天盈项目用户投资列表
 export const api_url_DdProjInvestCustList = origin_ProxyPath_dds + "/query/" + version + "/DdProjInvestCustList/" + version;
-/**
- * 天天盈文档有误，后台正在更新
- */
+//微信获取签名
+export const api_url_getSignature =  origin_ProxyPath_coupon + "/query/" + '2.0' + "/getSignature/" + '2.0';

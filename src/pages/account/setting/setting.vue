@@ -62,7 +62,7 @@ export default {
         let investscore = this.userData.INVESTSCORE;
         let invest_score = this.userData.INVEST_SCORE;
         if (investscore == "0") {
-          let url = '/hander/investor.do?CUST_ID=' + userId;
+          let url = 'http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID=' + userId;
           window.location.href = url;
         } else{
           let url = 'http://139.129.12.93:3102/web2/hander/investorResult.do?CUST_ID=' + userId + '&INVEST_SCORE=' + invest_score;

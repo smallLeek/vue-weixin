@@ -483,6 +483,19 @@ function DdProjInvestCustList (USER_ID,USER_TYPE,PROJ_CODE,PER_PAGE_SIZE,CURR_PA
   }))
 }
 
+/**
+ * 获取微信签名
+ * @param WXURL
+ * @returns {*}
+ * @constructor
+ */
+function tSignature (WXURL) {
+  return phtServer.globalPostData(urls.api_url_getSignature,phtServer.submitData({
+    "WXURL":WXURL,
+  }))
+}
+
+
 
 export  {
   passwordRetrieval,
@@ -512,6 +525,7 @@ export  {
   exitLogin,
   pdsInvestProj,
   borrow,
-  DdProjInvestCustList
+  DdProjInvestCustList,
+  tSignature
 }
 

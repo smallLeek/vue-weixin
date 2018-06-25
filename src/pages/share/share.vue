@@ -1,11 +1,12 @@
 <template>
   <div>
-    <button @click="share">点击分享给好友</button>
+   <button @click="shareF()">分享给朋友</button>
   </div>
 </template>
 
 <script>
-  import {phtServer} from '../../assets/js/phtServer'
+  import '../../assets/js/jwt.share';
+  import {onMenuShareAppMessage} from '../../assets/js/jwt.share'
 export default {
    data () {
     return {
@@ -13,14 +14,10 @@ export default {
     }
 },
   methods:{
-     share(){
-       phtServer.onMenuShareAppMessage()
+    shareF(){
+      onMenuShareAppMessage()
+    },
 
-
-     },
-    getNetworkType(){
-      phtServer.getNetworkType()
-    }
   }
 
 }
