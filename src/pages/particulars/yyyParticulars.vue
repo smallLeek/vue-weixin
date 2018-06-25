@@ -267,7 +267,7 @@
       },
       //去投资人测评
       openInvest(){
-        location.href ='https://www.phtfdata.com/web6/hander/investor.do?CUST_ID='+this.userInfo.ID
+        location.href ='http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID='+this.userInfo.ID
       },
       //遮罩层
       HShow(){

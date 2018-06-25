@@ -91,7 +91,7 @@
         </li>
       </ul>
       </div>
-      <div class="bottom_input">
+      <div class="bottom_input" v-if="bottomInputShow">
         <div class="input_text">
           <input type="text" placeholder="投资金额" v-model="widthDrawMoney" @focus="showBox()" ref="content">
           <span>元</span>
@@ -99,6 +99,9 @@
         <div class="input_submit" @click="submitWithdraw()">
           <a>立即投资</a>
         </div>
+      </div>
+      <div class="bottom_over" v-if="bottomOverShow">
+        <span>已售罄</span>
       </div>
     </div>
   </div>
@@ -127,7 +130,10 @@
         investscore:null,
         investscoreNo:false,
         investscoreYes:false,
-        risk:false
+        risk:false,
+        nowMoney:null,
+        bottomInputShow:true,
+        bottomOverShow:false
 
 
       }
@@ -186,6 +192,11 @@
         let proj_code = this.proj_code;
         apis.DdProjDetail(userId, '1', proj_code).then((data) => {
           this.TtyDetail = data.result.main_data;
+          this.nowMoney=this.TtyDetail.NOWMONEY
+          if(this.nowMoney == 0){
+            this.bottomInputShow =false;
+            this.bottomOverShow =true
+          }
           this.rate = this.TtyDetail.RATE;
           this.proj_name = this.TtyDetail.PROJ_NAME
         })
@@ -211,8 +222,9 @@
           let is_expired = this.userInfo.IS_Expired;
           let min_money = this.TtyDetail.MIN_AMOUNT
           let max_money = this.TtyDetail.MAX_AMOUNT
-          let money= this.widthDrawMoney
+          let money= this.widthDrawMoney-0
           let accountBalance =this.userInfo.AVAILABLE_BALANCE
+
           if(user_role != 'INVESTOR'){
             flag = false
             regexfun.handleFailMsg(this, "您的账户类型不支持投资!");
@@ -242,6 +254,10 @@
           if(money<min_money){
             flag = false;
             regexfun.handleFailMsg(this,"投资金额必须大于起投金额");
+          }
+          if(money>this.nowMoney){
+            flag = false;
+            regexfun.handleFailMsg(this,"启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试");
           }
           //最大金额
           if(money>max_money){
@@ -526,6 +542,20 @@
           }
         }
       }
+    }
+    .bottom_over{
+      position: fixed;
+      bottom: 0;
+      height: 0.94rem;
+      text-align: center;
+      z-index: 9999999999999;
+      width: 7.5rem;
+      margin: auto;
+      font-size: .32rem;
+      background-color: #bbb;
+      line-height: 0.94rem;
+      border-top: 1px solid #e0e0e0;
+      color:#fff;
     }
     .bottom_input {
       position: fixed;
