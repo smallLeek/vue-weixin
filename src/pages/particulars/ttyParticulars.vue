@@ -279,16 +279,12 @@
             regexfun.handleFailMsg(this,"请阅读并同意《风险揭示书》!");
           }
           if(this.investscore=='0'){
-            flag = false;
             this.investscoreNo =true
             this.risk =true
-            regexfun.handleFailMsg(this,"请进行风险能力评估");
           }
           if(this.investscore=='1'){
-            flag = false;
             this.risk =true
             this.investscoreYes =true
-            regexfun.handleFailMsg(this,"该项目的风险程度超过您的风险承受能力，请知悉。");
           }
           if(flag){
             let self =this

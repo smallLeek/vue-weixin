@@ -1,6 +1,6 @@
 <template>
   <div>
-   <button @click="share()">分享给朋友</button>
+   <button>分享给朋友</button>
   </div>
 </template>
 

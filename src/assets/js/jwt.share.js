@@ -9,7 +9,7 @@ import * as apis from './jwt.apis'
 export function initWxJsAPI(){
   //const jsApiList = ['onMenuShareAppMessage'];  //js接口
   const curUrl = location.href.split('#')[0];    //要传的链接
-  const isDebug = false; //开启调试模式
+  const isDebug = true; //开启调试模式
   let deferred = $.Deferred();
   let promise = deferred.promise();
   //为了安全起见，微信的appId等配置信息通过后台获取
@@ -17,7 +17,7 @@ export function initWxJsAPI(){
   setTimeout(function () {
     apis.tSignature(curUrl).then(function(res){
       if(res.message == 'ok'){
-        let resData  = res.result.main_data.data[0];
+        var resData  = res.result.main_data.data[0];
         console.log(resData)
         wx.config({
           debug: isDebug, //开启调试模式
