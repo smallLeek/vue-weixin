@@ -76,20 +76,18 @@
         <li>账户余额</li>
         <li></li>
       </ul>
-      <ul class="boxline boxColor boxSafe" style="margin-top: -.2rem">
-        <li>{{userInfo.AVAILABLE_BALANCE | farmatAmount}}元</li>
-        <li class="doAgree">
-          <h1>
-                  <span v-if="agree" @click="agreement">
-                    <img class="on" src="../../../static/images/investOn.png">阅读并同意
-                  </span>
+        <div class="boxSafe">
+          <p>{{(userInfo.AVAILABLE_BALANCE) | farmatAmount}}元</p>
+          <p>
+              <span v-if="agree" @click="agreement">
+                <img class="on" src="../../../static/images/investOn.png">阅读并同意
+              </span>
             <span v-if="!agree" @click="agreement">
-                    <img class="on" src="../../../static/images/investIn.png">阅读并同意
-                  </span>
+                <img class="on" src="../../../static/images/investIn.png">阅读并同意
+              </span>
             <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
-          </h1>
-        </li>
-      </ul>
+          </p>
+        </div>
       </div>
       <div class="bottom_input" v-if="bottomInputShow">
         <div class="input_text">
@@ -486,7 +484,6 @@
     .bottomList{
       position: fixed;
       bottom: 0.93rem;
-      height: 2.4rem;
       z-index: 99999999;
       width: 7.5rem;
       margin: auto;
@@ -497,7 +494,6 @@
 
     .boxline{
       font-size: 0.24rem;
-      margin: 0 0 0 .2rem;
       color: #999;
       li{
         display: inline-block;
@@ -511,32 +507,6 @@
       color: #333;
       li{
         margin-top: 0.1rem;
-      }
-    }
-    .boxSafe{
-
-      li{
-        margin-bottom:0.28rem;
-      }
-      li:last-child{
-        width: 55%;
-        margin-left:1rem;
-        h1{
-          a{
-            font-size: 0.28rem;
-            color: #fb4747;
-          }
-          span{
-            font-size: 0.28rem;
-            color: #333;
-            img{
-              width: 0.26rem;
-              height: 0.26rem;
-              margin-right: 0.1rem;
-              margin-bottom: -.03rem;
-            }
-          }
-        }
       }
     }
     .bottom_over{
@@ -653,6 +623,39 @@
   .openInvest{
     color: #0000f4;
   }
-
+  .bottom{
+    .boxSafe{
+      p{
+        float: left;
+        width: 30%;
+        padding-bottom: 0.28rem;
+        font-size: 0.28rem;
+        color: #333;
+      }
+      p:first-child{
+        padding-left: 0.2rem;
+      }
+      p:last-child{
+        float: right;
+        width: 70%;
+        padding-right: 0.1rem;
+        text-align: right;
+        a{
+          font-size: 0.28rem;
+          color: #fb4747;
+        }
+        span{
+          font-size: 0.28rem;
+          color: #333;
+          img{
+            width: 0.26rem;
+            height: 0.26rem;
+            margin-right: 0.1rem;
+            margin-bottom: -.03rem;
+          }
+        }
+      }
+    }
+  }
 
 </style>
