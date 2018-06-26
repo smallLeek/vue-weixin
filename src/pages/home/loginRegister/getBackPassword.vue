@@ -32,6 +32,7 @@
   import {mapGetters, mapActions, mapState} from 'vuex'
   import * as apis from '../../../assets/js/jwt.apis'
   import {setInterval, setTimeout} from 'timers';
+  import * as userAge from '../../../assets/js/jwt.userUrl'
     export default {
     data(){
       return{
@@ -90,7 +91,7 @@
               apis.passwordRetrieval(self.bindPhoneNum,self.msgCode,pwd).then(data=>{
                 if(data.status==="00000000"){
                  regexfun.handleFailMsg(this,"密码重置成功，请输入新密码进行登录");
-                 this.$router.push({path:'loginRegister'})
+                  location.href =  userAge.loginUrl()
                 }else {
                   regexfun.handleFailMsg(self,data.message);
                   return;
