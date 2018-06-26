@@ -91,6 +91,9 @@
                 if(data.status==="00000000"){
                  regexfun.handleFailMsg(this,"密码重置成功，请输入新密码进行登录");
                  this.$router.push({path:'loginRegister'})
+                }else {
+                  regexfun.handleFailMsg(self,data.message);
+                  return;
                 }
               })
              }

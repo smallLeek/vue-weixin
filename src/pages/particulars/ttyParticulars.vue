@@ -106,8 +106,7 @@
 </template>
 <script>
   import * as apis from '../../assets/js/jwt.apis'
-  import {mapGetters, mapActions, mapState} from 'vuex'
-  import * as dealLogin from '../../assets/js/jwt.accessAuth'
+  import {mapGetters, mapActions} from 'vuex'
   import * as regexfun from '../../../src/assets/js/jwt.regex';
   import '../../assets/js/filter'
   export default {
@@ -149,6 +148,7 @@
       this.getTty();
     },
     methods: {
+      //视图发生动作
       ...mapActions({setPayDetail: 'setPayDetail'}),
       //去投资列表
       ttyInvestmentList(){
