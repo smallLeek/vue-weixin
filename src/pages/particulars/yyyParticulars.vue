@@ -320,10 +320,6 @@
         if(!(regexfun.regex(this, 'reg_finc_account', this.investMoney))){
           return regexfun.handleFailMsg(this,"请输入有效投资金额");
         }
-        if((self.investMoney-0)%(this.yyyDetail.MIN_BID_AMOUNT-0) != 0){
-          this.bs.$emit('e:alert', "投资金额应为最低投资额的整数倍!");
-          return;
-        }
         if((self.investMoney-0)>(this.available_balance -0)){
           this.bs.$emit('e:alert', "投资金额应在投标剩余金额范围之内!");
           return;

@@ -4,7 +4,7 @@
                 <ul>
                     <li>
                         <span><img src="../../../../static/images/login/login_num.png"></span>
-                        <span><input v-model="loginPhone" id="phonenum" type="text" placeholder="请输入手机号"></span>
+                        <span><input v-model="loginPhone" id="phonenum" type="text" placeholder="请输入手机号" maxlength="11"></span>
                     </li>
                     <li>
                         <span><img src="../../../../static/images/login/login_password.png"></span>
