@@ -238,6 +238,7 @@
                   }
 
                 }else {
+                  //vm.$emit( eventName, […args] )   触发当前实例上的事件。附加参数都会传给监听器回调。
                   this.bs.$emit('e:alert', "您的用户授权已过期，无法进行投资操作!");
                   this.type ='1';
                   this.typeName = "您的用户授权已过期，无法进行投资操作"

@@ -19,6 +19,8 @@
     },
     created(){
         let self = this;
+        //监听当前实例上的自定义事件。事件可以由vm.$emit触发。回调函数会接收所有传入事件触发函数的额外参数。
+        //vm.$on( event, callback )  事件名称   回调函数
         this.bs.$on('e:alert', function (data) {
         self.show = true;
         self.text = data;
