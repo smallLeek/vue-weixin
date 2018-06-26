@@ -115,10 +115,7 @@ const actions = {
   setPayDetail( { commit }, res ){
     storeUtil.setStore('payDetail', res)
     commit(types.PAY_DETAIL, res)
-
   },
-
-
 }
 
 const getters = {

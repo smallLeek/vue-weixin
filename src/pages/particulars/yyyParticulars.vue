@@ -126,20 +126,6 @@
               <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
             </p>
           </div>
-<!--          <ul class="boxline boxColor boxSafe">
-            <li>{{(userInfo.AVAILABLE_BALANCE) | farmatAmount}}元</li>
-            <li class="doAgree">
-              <p>
-                  <span v-if="agree" @click="agreement">
-                    <img class="on" src="../../../static/images/investOn.png">阅读并同意
-                  </span>
-                <span v-if="!agree" @click="agreement">
-                    <img class="on" src="../../../static/images/investIn.png">阅读并同意
-                  </span>
-                <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
-              </p>
-            </li>
-          </ul>-->
         </div>
         <div class="bottom_input">
           <div class="input_text">
