@@ -130,7 +130,10 @@ const getters = {
   showXwBank:state =>state.showXwBank,
   payDetail:state =>state.payDetail
 }
-
+/**
+ * 在mutaion写入改变对应state里面的方法，哪里需要改变状态值时，只需要commit对应的方法即可
+ * @type {{[p: string]: *}}
+ */
 const mutations = {
   /**
    * 每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。

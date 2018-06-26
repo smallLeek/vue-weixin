@@ -215,6 +215,7 @@
           this.is_authorized = userData.IS_AUTHORIZED;
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
+            this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
             //判断用户类型
             if(user_role == "INVESTOR" ){
               //判断用户是否授权
@@ -305,6 +306,10 @@
         }
         if(!(regexfun.regex(this, 'reg_finc_account', this.investMoney))){
           return regexfun.handleFailMsg(this,"请输入有效投资金额");
+        }
+        if((self.investMoney-0)<(this.min_bid_amount -0)){
+          regexfun.handleFailMsg(this,"投资金额必须大于起投金额");
+          return;
         }
         if((self.investMoney-0)>(this.available_balance -0)){
           this.bs.$emit('e:alert', "投资金额应在投标剩余金额范围之内!");
