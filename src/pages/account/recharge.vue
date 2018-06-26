@@ -144,13 +144,18 @@
       },
       //充值后余额
       getrechargeLast() {
-        this.rechargeLast = (this.rechargeMoney-0)+ (this.available_balance-0);
+        this.rechargeLast = ((this.rechargeMoney-0)+ (this.available_balance-0)).toFixed(2);
       },
       close(){
         this.rechargeMoney =''
       },
 //      立即充值
       goRecharge() {
+        if(this.rechargeMoney=='0'){
+          regexfun.handleFailMsg(this,'充值金额不能小于0.01元')
+          return;
+
+        }
         //判断输入的金额是否大于等于可用金额
         if(this.rechargeMoney< parseFloat(this.single_limit.replace(/,/g,""))){
           let userId = this.userInfo.ID;
