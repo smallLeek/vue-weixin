@@ -32,7 +32,6 @@
     props:[
       'withDraw',
       'url',
-      'investInfo'
     ],
     computed: {
       ...mapGetters(
@@ -62,29 +61,30 @@
       cancleBox() {
         this.isShow = false;
         this.showCode = false;
-        this.$emit("checkNewCode",this.showCode)
       },
       //确定按钮
       okBox() {
         //正确
         this.publicCode.toUpperCase()
+
         if(this.publicCode == '') {
+          debugger
           regexfun.handleFailMsg(this,"验证码不能为空");
         }else if(this.publicCode.toUpperCase() !=this.checkCode) {
+          debugger
           regexfun.handleFailMsg(this,"验证码不正确");
 //          刷新验证码
           this.createCode()
           this.publicCode = '';
         }else if(this.publicCode.toUpperCase() ==this.checkCode) {
+          debugger
           this.isShow = false
-          if((URL in this.url) == false){
-            this.$router.push({path:'/investSuccess',query:this.investInfo})
-          }
+          //调用父组件的方法
+          this.$emit("nopwdPay");
         }else{
+          debugger
 
         }
-
-
       }
     },
     created () {
