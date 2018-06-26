@@ -214,7 +214,6 @@
       submitWithdraw(){
         apis.userBaseData(this.userInfo.ID, '1').then((data) => {
           this.userData = data.result.main_data;
-          let flag = true;
           let user_role = this.userInfo.USER_ROLE;
           let is_check_tra_pwd = this.userData.IS_AUTHORIZED;
           let is_expired = this.userInfo.IS_Expired;
@@ -222,7 +221,8 @@
           let max_money = this.TtyDetail.MAX_AMOUNT
           let money= this.widthDrawMoney-0
           let accountBalance =this.userInfo.AVAILABLE_BALANCE
-
+          let day_limit = this.userInfo.DAY_LIMIT
+          let flag = true;
           if(user_role != 'INVESTOR'){
             flag = false
             regexfun.handleFailMsg(this, "您的账户类型不支持投资!");
@@ -266,6 +266,11 @@
           if(money>accountBalance){
             flag = false;
             regexfun.handleFailMsg(this,"投资额必须小于账户余额");
+          }
+          //单笔限额
+          if(money>day_limit){
+            flag = false;
+            regexfun.handleFailMsg(this,"投资金额必须小于或等于单笔限额");
           }
           //项目投资完
           if(this.tty.PROJ_STATUS!='6003'){

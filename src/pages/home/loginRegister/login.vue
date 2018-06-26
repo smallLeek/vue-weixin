@@ -1,5 +1,5 @@
 <template>
-        <div class="content" v-title="'登陆'">
+        <div class="content" v-title="'登录'">
             <div class="login_login">
                 <ul>
                     <li>
@@ -75,6 +75,7 @@ export default {
             regexfun.handleFailMsg(this,data.message)
           }else if(data.status =='00000000'){
             let userInfoList = data.result.main_data.data[0]
+            console.log(userInfoList)
             this.setUserInfo(userInfoList);
             this.setIsRealName(userInfoList.STATE);
             this.getTokenCode(userInfoList.token);

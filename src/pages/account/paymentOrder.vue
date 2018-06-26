@@ -103,7 +103,6 @@
             if (this.is_check_tra_pwd == "0") {
               apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code, this.domain).then((data) => {
                 this.userData = data.result.main_data.data[0];
-                console.log(this.userData)
                 //回到哪
                 this.setAccessAuth({whereToGo:"/wx/home"});
                 //跳转到新网

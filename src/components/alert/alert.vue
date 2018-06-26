@@ -26,7 +26,7 @@
         self.text = data;
         setTimeout(function () {
           self.show = false;
-        },1200);
+        },2000);
         });
     }
   }
