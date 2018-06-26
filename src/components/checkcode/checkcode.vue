@@ -25,7 +25,6 @@
       return {
         publicCode: '',
         checkCode: '',
-        flag: '',
         isShow:true,
         showCode:true
       }
@@ -71,16 +70,13 @@
         this.publicCode.toUpperCase()
         if(this.publicCode == '') {
           regexfun.handleFailMsg(this,"验证码不能为空");
-          this.flag = 0;
         }else if(this.publicCode.toUpperCase() !=this.checkCode) {
           regexfun.handleFailMsg(this,"验证码不正确");
 //          刷新验证码
           this.createCode()
           this.publicCode = '';
-          this.flag = 1;
         }else if(this.publicCode.toUpperCase() ==this.checkCode) {
           this.isShow = false
-          this.flag = 2;
           if((URL in this.url) == false){
             this.$router.push({path:'/investSuccess',query:this.investInfo})
           }

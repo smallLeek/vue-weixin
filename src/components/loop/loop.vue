@@ -99,6 +99,7 @@
           if(this.loginStatus == true){
             window.open(list.LINK_COMMENT)
           }else{
+            //如果没有登陆就进登陆页面
             location.href =  userAge.loginUrl()
           }
         }else{

@@ -2,9 +2,14 @@
  * http配置
  */
 import axios from 'axios';
-// 加载超时时间
+
+/**axios.defaults  全局默认配置
+ *  全局默认配置
+ * @type {number}
+ */
+// 加载超时时间 现在所有的请求都要等3S之后才会发出
 axios.defaults.timeout = 30000
-// http请求拦截器
+// http请求拦截器   添加一个响应拦截器
 // var baseURL ='https://www.phtfdata.com/'
 // var baseURL ='https://api.weixin.qq.com'
 axios.interceptors.request.use(config => {
