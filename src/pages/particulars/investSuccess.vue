@@ -8,7 +8,7 @@
       <div class="investTop">
         <div class="investIcon">
           <p>
-            <img src="../../../static/images/investOn.png" alt="">
+            <img src="../../../static/images/investSuccess.png" alt="">
           </p>
           <div class="investOn">
             投资提交成功
@@ -110,8 +110,8 @@
     }
     b{
       position: absolute;
-      width: 1rem;
-      height: 1rem;
+      width: 1.3rem;
+      height: 1.3rem;
       left: 0;
       top: -0.02rem
     }

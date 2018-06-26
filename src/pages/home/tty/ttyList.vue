@@ -25,11 +25,6 @@
           <span>需求金额</span>
           <span>剩余可投</span>
         </li>
-        <!-- 进度条 -->
-        <li @click="goPay()">
-          <span><s :style="{width:((tty.MAX_AMOUNT-tty.REDEEM_MAX_AMOUNT)/tty.REDEEM_MAX_AMOUNT)+'%'}"></s></span>
-          <span v-text="((tty.MAX_AMOUNT-tty.REDEEM_MAX_AMOUNT)/tty.REDEEM_MAX_AMOUNT)+'%'"></span>
-        </li>
         <li>
           <button v-on:click="ttyInvest" v-if="investText">立即投资</button>
           <button v-if="investText1" id="over">已售罄</button>
@@ -219,7 +214,7 @@
           right: 0;
         }
       }
-      li:nth-child(5) {
+      li:nth-child(4) {
         clear: both;
         padding-top: 0.3rem;
         padding-bottom: 0.3rem;
