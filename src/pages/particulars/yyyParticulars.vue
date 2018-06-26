@@ -114,10 +114,22 @@
             <li>账户余额</li>
             <li></li>
           </ul>
-          <ul class="boxline boxColor boxSafe" style="margin-top: -.2rem">
+          <div class="boxSafe">
+            <p>{{(userInfo.AVAILABLE_BALANCE) | farmatAmount}}元</p>
+            <p>
+              <span v-if="agree" @click="agreement">
+                <img class="on" src="../../../static/images/investOn.png">阅读并同意
+              </span>
+              <span v-if="!agree" @click="agreement">
+                <img class="on" src="../../../static/images/investIn.png">阅读并同意
+              </span>
+              <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
+            </p>
+          </div>
+<!--          <ul class="boxline boxColor boxSafe">
             <li>{{(userInfo.AVAILABLE_BALANCE) | farmatAmount}}元</li>
             <li class="doAgree">
-              <h1>
+              <p>
                   <span v-if="agree" @click="agreement">
                     <img class="on" src="../../../static/images/investOn.png">阅读并同意
                   </span>
@@ -125,9 +137,9 @@
                     <img class="on" src="../../../static/images/investIn.png">阅读并同意
                   </span>
                 <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
-              </h1>
+              </p>
             </li>
-          </ul>
+          </ul>-->
         </div>
         <div class="bottom_input">
           <div class="input_text">
@@ -711,7 +723,7 @@
 
     .boxline{
       font-size: 0.24rem;
-      margin: 0 0 0 .2rem;
+      margin: 0;
       color: #999;
       li{
         display: inline-block;
@@ -733,9 +745,9 @@
         margin-bottom:0.28rem;
       }
       li:last-child{
-        width: 55%;
-        margin-left:1rem;
-        h1{
+        width: 70%;
+        text-align: right;
+        p{
           a{
             font-size: 0.28rem;
             color: #fb4747;
@@ -845,5 +857,43 @@
     font-size: 0.24rem;
     padding:0 0.2rem;
   }
-
+  .boxBlance{
+    li{
+      height: 0.38rem;
+    }
+  }
+  .bottom{
+    .boxSafe{
+      p{
+        float: left;
+        width: 30%;
+        margin-bottom: 0.28rem;
+        font-size: 0.28rem;
+        color: #333;
+      }
+      p:first-child{
+        padding-left: 0.2rem;
+      }
+      p:last-child{
+        float: right;
+        width: 70%;
+        padding-right: 0.1rem;
+        text-align: right;
+        a{
+          font-size: 0.28rem;
+          color: #fb4747;
+        }
+        span{
+          font-size: 0.28rem;
+          color: #333;
+          img{
+            width: 0.26rem;
+            height: 0.26rem;
+            margin-right: 0.1rem;
+            margin-bottom: -.03rem;
+          }
+        }
+      }
+    }
+  }
 </style>
