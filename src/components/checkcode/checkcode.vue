@@ -66,23 +66,18 @@
       okBox() {
         //正确
         this.publicCode.toUpperCase()
-
         if(this.publicCode == '') {
-          debugger
           regexfun.handleFailMsg(this,"验证码不能为空");
         }else if(this.publicCode.toUpperCase() !=this.checkCode) {
-          debugger
           regexfun.handleFailMsg(this,"验证码不正确");
 //          刷新验证码
           this.createCode()
           this.publicCode = '';
         }else if(this.publicCode.toUpperCase() ==this.checkCode) {
-          debugger
           this.isShow = false
           //调用父组件的方法
           this.$emit("nopwdPay");
         }else{
-          debugger
 
         }
       }
