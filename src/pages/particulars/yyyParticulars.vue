@@ -185,6 +185,7 @@
         is_authorized:'',
         investscoreYes:false,
         investscoreNo:false,
+        amount_money:''
       }
     },
     computed: {
@@ -213,6 +214,7 @@
           this.available_balance = userData.AVAILABLE_BALANCE;
           this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
           this.is_authorized = userData.IS_AUTHORIZED;
+          this.amount_money =  userData.AMOUNT-0
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
             this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
@@ -305,7 +307,7 @@
           return;
         }
         //授权金额
-        if(self.investMoney >(this.userInfo.AMOUNT-0)){
+        if(self.investMoney >this.amount_money){
           this.bs.$emit('e:alert', "投资金额已大于授权金额");
           return;
         }

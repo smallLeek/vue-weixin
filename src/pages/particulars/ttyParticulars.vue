@@ -215,7 +215,7 @@
         apis.userBaseData(this.userInfo.ID, '1').then((data) => {
           this.userData = data.result.main_data;
           let user_role = this.userInfo.USER_ROLE;
-          let amount_money =  this.userInfo.AMOUNT-0
+          let amount_money =  this.userData.AMOUNT-0
           let is_check_tra_pwd = this.userData.IS_AUTHORIZED;
           let is_expired = this.userInfo.IS_Expired;
           let min_money = this.TtyDetail.MIN_AMOUNT-0
