@@ -26,7 +26,7 @@
           <span>剩余可投</span>
         </li>
         <li>
-          <button v-on:click="ttyInvest" v-if="investText">立即投资</button>
+          <button :class="{activeBtn:isActive}" v-on:click="ttyInvest" v-if="investText">立即投资</button>
           <button v-if="investText1" id="over">已售罄</button>
         </li>
       </ul>
@@ -49,6 +49,7 @@
         tty: null,
         investText:null,
         investText1:null,
+        isActive:false,
       }
     },
     computed: {
@@ -89,8 +90,9 @@
         dealLogin.dealLogin();
       },
       ttyInvest() {
-         this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/ttyParticulars"});
-         dealLogin.dealLogin();
+        this.isActive = true;
+        this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/ttyParticulars"});
+        dealLogin.dealLogin();
 
       }
     }
@@ -194,7 +196,7 @@
         span:first-child {
           float: left;
           margin-top: 0.16rem;
-          width: 6rem;
+          width: 5.8rem;
           height: 0.05rem;
           background-color: #e8e8e8;
           border-radius: 10px;
@@ -232,8 +234,8 @@
           border: none;
           outline: none;
         }
-        button:active {
-          background-color: #de2626;
+        .activeBtn{
+          background-color: #ff7676;
         }
       }
     }
@@ -254,7 +256,7 @@
       height: 1.58rem;
     }
   }
-   #over{
+  #over{
     background: #bbb;
   }
 </style>

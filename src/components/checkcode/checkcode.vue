@@ -61,6 +61,7 @@
       cancleBox() {
         this.isShow = false;
         this.showCode = false;
+        this.$emit("showthisCode");
       },
       //确定按钮
       okBox() {
