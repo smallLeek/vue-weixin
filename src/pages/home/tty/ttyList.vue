@@ -194,7 +194,7 @@
         span:first-child {
           float: left;
           margin-top: 0.16rem;
-          width: 6rem;
+          width: 5.8rem;
           height: 0.05rem;
           background-color: #e8e8e8;
           border-radius: 10px;

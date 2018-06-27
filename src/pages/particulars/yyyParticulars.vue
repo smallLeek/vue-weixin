@@ -307,6 +307,10 @@
         if(!(regexfun.regex(this, 'reg_finc_account', this.investMoney))){
           return regexfun.handleFailMsg(this,"请输入有效投资金额");
         }
+        if(((self.investMoney-0)%(this.min_bid_amount -0)) != 0){
+          regexfun.handleFailMsg(this,"投资金额必须为可投金额整数倍!");
+          return;
+        }
         if((self.investMoney-0)<(this.min_bid_amount -0)){
           regexfun.handleFailMsg(this,"投资金额必须大于起投金额");
           return;
