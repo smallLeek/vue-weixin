@@ -17,7 +17,7 @@
                     <b v-text="list.LOAN_LIMITTIME"></b>个月
                 </span>
               <span>
-                    <b v-text="list.SURPLUS_AMOUNT"></b>元
+                    <b>{{list.SURPLUS_AMOUNT | farmatAmount}}</b>元
             </span>
             </li>
             <li>
@@ -54,7 +54,7 @@
                     <b v-text="list.LOAN_LIMITTIME"></b>个月
                 </span>
               <span>
-                    <b v-text="list.SURPLUS_AMOUNT"></b>元
+                    <b> {{list.SURPLUS_AMOUNT | farmatAmount}}</b>元
             </span>
             </li>
             <li>
@@ -81,6 +81,7 @@
   import * as apis from '../../../assets/js/jwt.apis'
   import {mapGetters, mapActions, mapState} from 'vuex'
   import * as dealLogin from '../../../assets/js/jwt.accessAuth'
+  import '../../../assets/js/filter'
 
   export default {
     data() {
