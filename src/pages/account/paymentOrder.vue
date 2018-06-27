@@ -110,7 +110,7 @@
                   regexfun.handleFailMsg(this,this.userData.message);
                   return;
                 }else {
-                  $('.xwUrl').append(this.userData.URL);
+                  $('.xwUrl').append(this.userData.url);
                 }
               })
             }else {
@@ -132,7 +132,7 @@
                   regexfun.handleFailMsg(this,this.userData.message);
                   return;
                 }else {
-                  $('.xwUrl').append(this.userData.URL);
+                  $('.xwUrl').append(this.userData.url);
                 }
               })
             } else {
