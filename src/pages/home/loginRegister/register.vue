@@ -15,7 +15,7 @@
           </li>
           <li>
             <span><img src="../../../../static/images/login/login_password.png"></span>
-            <span><input type="password" placeholder="6~18位数字或字母为登陆密码" maxlength="18" v-model="registerPwd"></span>
+            <span><input type="password" placeholder="密码长度8~16位，必须包含字母和数字" maxlength="18" v-model="registerPwd"></span>
           </li>
           <li>
             <span><img src="../../../../static/images/login/login_password.png"></span>
@@ -35,7 +35,7 @@
           </span>
           <a href="https://www.phtfdata.com/web6/hander/enrolled.do" target="_blank">《注册协议》</a>
         </h1>
-        <input class="submit" type="button" value="提交" @click="register()">
+        <input class="submit" type="button" value="提交" @click="register()" :class="{ active: isActives }">
       </div>
     </div>
 </template>
@@ -58,14 +58,21 @@
         registerCount: "",
         registerShow: true,
         isPhone:'',
-        agree:''
+        agree:'',
+        isActives:false
       }
     },
     mounted() {
 
     },
+    computed: {
+      //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
+      ...mapGetters([
+        'loginStatus','userInfo','tokenCode','isRealName','accessAuth'
+      ])
+    },
     methods: {
-      ...mapActions({setAccessAuth: 'setAccessAuth'}),
+      ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut',setAccessAuth: 'setAccessAuth'}),
       //获取验证码
       getCode() {
         const TIME_COUNT = 60;
@@ -107,8 +114,8 @@
         });
       },
       register() {
+        this.isActives =true;
         let self = this
-
         //输入框不能为空
         if (!this.registerMobile || !this.registerCode || !this.registerPwd || !this.registerRepwd) {
           regexfun.handleFailMsg(self, "请完善您的信息");
@@ -151,8 +158,23 @@
         //注册接口
         apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile).then((data) => {
           if (data.message == "成功!") {
-            regexfun.handleFailMsg(self, "注册成功，请输入账号密码登陆");
-            location.href = location.origin +  '/loginRegister/login'
+            apis.newLogin(self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd), phtServer.CalcuMD5lower(self.registerPwd), "1").then((data) => {
+              if(data.status =='6027'){
+                regexfun.handleFailMsg(this,data.message)
+              }else if (data.status=='6026'){
+                regexfun.handleFailMsg(this,data.message)
+              }else if(data.status =='00000000'){
+                let userInfoList = data.result.main_data.data[0]
+                this.setUserInfo(userInfoList);
+                this.setIsRealName(userInfoList.STATE);
+                this.getTokenCode(userInfoList.token);
+                this.$router.push({path: '/home'})
+                dealLogin.dealLogin();
+              }else {
+                regexfun.handleFailMsg(this,data.message)
+              }
+
+            })
           } else if(data.status =="6015") {
             regexfun.handleFailMsg(self, "验证码输入有误!");
           }else {
@@ -356,6 +378,9 @@
         border: none;
         color: #fff;
         outline:none;
+      }
+      .active{
+        background-color: #ff7676;
       }
       input.on {
         background-color: #fb4747;

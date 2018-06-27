@@ -217,11 +217,11 @@
           let user_role = this.userInfo.USER_ROLE;
           let is_check_tra_pwd = this.userData.IS_AUTHORIZED;
           let is_expired = this.userInfo.IS_Expired;
-          let min_money = this.TtyDetail.MIN_AMOUNT
-          let max_money = this.TtyDetail.MAX_AMOUNT
+          let min_money = this.TtyDetail.MIN_AMOUNT-0
+          let max_money = this.TtyDetail.MAX_AMOUNT-0
           let money= this.widthDrawMoney-0
-          let accountBalance =this.userInfo.AVAILABLE_BALANCE
-          let day_limit = this.userInfo.DAY_LIMIT
+          let accountBalance =this.userInfo.AVAILABLE_BALANCE-0
+          let day_limit = this.userInfo.DAY_LIMIT-0
           let flag = true;
           if(user_role != 'INVESTOR'){
             flag = false

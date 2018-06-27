@@ -13,7 +13,7 @@
                     </li>
                 </ul>
                 <p><router-link to="/getBackPassword">找回密码？</router-link></p>
-                <input class="submit" @click="submit()"  type="button" value="提交">
+                <input class="submit" @click="submit()" :class="{ active: isActives }"  type="button" value="提交" >
             </div>
             <div class="login_register">
                 register
@@ -27,12 +27,14 @@ import * as apis from '../../../assets/js/jwt.apis'
 import { phtServer } from '../../../assets/js/phtServer'
 import {mapGetters, mapActions,mapState} from 'vuex'
 import * as dealLogin from '../../../assets/js/jwt.accessAuth'
+import {storeUtil} from '../../../assets/js/util/lib.store'
 export default {
      data(){
        return{
          code:null,
          loginPwd:null,
-         loginPhone:null
+         loginPhone:null,
+         isActives:false
        }
      },
   created(){
@@ -58,6 +60,7 @@ export default {
     methods: {
       ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut'}),
       submit() {
+        this.isActives =true;
            let flag=false;
            flag=regexfun.regex(this, 'mobile', this.loginPhone);
            if(flag == true){
@@ -74,8 +77,9 @@ export default {
           }else if (data.status=='6026'){
             regexfun.handleFailMsg(this,data.message)
           }else if(data.status =='00000000'){
+            let currentTime = new Date().getTime();
+            storeUtil.setStore('times',currentTime)
             let userInfoList = data.result.main_data.data[0]
-            console.log(userInfoList)
             this.setUserInfo(userInfoList);
             this.setIsRealName(userInfoList.STATE);
             this.getTokenCode(userInfoList.token);
@@ -172,6 +176,9 @@ export default {
             color: #fff;
             outline:none;
         }
+      .active{
+        background-color: #ff7676;
+      }
         input.on{
             background-color: #fb4747;
         }

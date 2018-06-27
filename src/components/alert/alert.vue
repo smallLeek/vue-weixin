@@ -1,7 +1,7 @@
 <template>
-    <div class="alert" @click="mover" v-if="show">
+    <span class="alert" @click="mover" v-if="show">
       {{text}}
-    </div>
+    </span>
 </template>
 <script>
   export default {
@@ -26,7 +26,7 @@
         self.text = data;
         setTimeout(function () {
           self.show = false;
-        },2000);
+        },1500);
         });
     }
   }
@@ -40,6 +40,7 @@
     bottom: 0;
     margin: auto;
     width:fit-content;
+    display: inline-block;
     width:-webkit-fit-content;
     width:-moz-fit-content;
     padding: 0 .3rem 0 0.3rem;
