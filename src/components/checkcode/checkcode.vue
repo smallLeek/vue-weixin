@@ -66,7 +66,6 @@
       okBox() {
         //正确
         this.publicCode.toUpperCase()
-
         if(this.publicCode == '') {
           regexfun.handleFailMsg(this,"验证码不能为空");
         }else if(this.publicCode.toUpperCase() !=this.checkCode) {
