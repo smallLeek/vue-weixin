@@ -30,12 +30,12 @@
         </li>
       </ul>
     </div>
-    <div class="btn" @click="goPay()">确认支付</div>
+    <div class="btn" @click="goPay()" :class="{activeBtn:isActive}">确认支付</div>
     <div class="remind">
       <h1>交易小贴士：</h1>
       <p>如您在“我的-安全中心-免支付密码投标”中已开通<b>免支付密码投标</b>，可免输入交易密码<b>快速投资</b>，未开通免支付密码投标需跳转到<b>新网银行存管页面</b>，输入交易密码进行投资确认。</p>
     </div>
-    <checkcode v-if="showCode" v-bind:withDraw="payDetail.withDraw" v-bind:url="userData" v-on:showthisCode="showCode = !showCode" v-on:nopwdPay="nopwdPay()"></checkcode>
+    <checkcode v-if="showCode" v-bind:withDraw="payDetail.withDraw" v-bind:url="userData" v-on:showthisCode="changeStatus()"  v-on:nopwdPay="nopwdPay()"></checkcode>
   </div>
 </template>
 <script>
@@ -54,7 +54,8 @@
         checkFlag:'',
         userData:null,
         dds:null,
-        investInfo:null
+        investInfo:null,
+        isActive:false,
       }
     },
     computed: {
@@ -95,6 +96,7 @@
         }
       },
       goPay() {
+        this.isActive = true;
         let self = this;
         console.log(this.showCode);
         if (this.dds == 'dds') {
@@ -170,6 +172,10 @@
               })
           })
         }
+      },
+      changeStatus(){
+        this.showCode = !this.showCode;
+        this.isActive = false;
       }
      },
     components: {
@@ -263,8 +269,8 @@
   color: #fff;
   background-color: #fb4747;
 }
-.btn:active{
-  background-color: #de2626;
+.activeBtn{
+  background-color: #ff7676;
 }
 .remind{
   margin-top: 0.9rem;

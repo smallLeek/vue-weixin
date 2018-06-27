@@ -30,7 +30,7 @@
         </li>
       </ul>
       <div class="investBottom">
-        <button class="br10" v-on:click="goBack()">确定</button>
+        <button  class="br10" :class="{activeBtn:isActive}" v-on:click="goBack()">确定</button>
       </div>
     </div>
   </div>
@@ -47,7 +47,8 @@
         isDq:true,
         withDraw:'',
         proj_name:'',
-        proTime:''
+        proTime:'',
+        isActive:false
       }
     },
     computed: {
@@ -67,21 +68,22 @@
         this.proTime = this.$route.query.proTime;
       },
       goBack(){
-          let userState = store.state.user
-          let  userId = store.state.user.userInfo.ID;
-          apis.userBaseData(userId,'1').then((data) => {
-            if(data.status == '00000000'){
-              location.href = location.origin +  userState.accessAuth.whereToGo;
-              let res = data.result.main_data
-              this.setUserInfo(res);
-              this.setIsRealName(res.STATE);
-              this.getTokenCode(res.token);
-            }else {
-              regexfun.handleFailMsg(this,data.message)
-            }
+        this.isActive = true;
+        let userState = store.state.user
+        let  userId = store.state.user.userInfo.ID;
+        apis.userBaseData(userId,'1').then((data) => {
+          if(data.status == '00000000'){
+            location.href = location.origin +  userState.accessAuth.whereToGo;
+            let res = data.result.main_data
+            this.setUserInfo(res);
+            this.setIsRealName(res.STATE);
+            this.getTokenCode(res.token);
+          }else {
+            regexfun.handleFailMsg(this,data.message)
+          }
 
 
-          })
+        })
       },
     },
     components: {
@@ -180,6 +182,9 @@
           height: 1rem;
           color: #fff;
           font-size: 0.38rem;
+        }
+        .activeBtn{
+          background-color:#ff7676 ;
         }
       }
     }
