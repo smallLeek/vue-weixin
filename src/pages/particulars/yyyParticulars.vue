@@ -304,6 +304,11 @@
           this.bs.$emit('e:alert', "投资金额不能为空!");
           return;
         }
+        //授权金额
+        if(self.investMoney >(this.userInfo.AMOUNT-0)){
+          this.bs.$emit('e:alert', "投资金额已大于授权金额");
+          return;
+        }
         if(!(regexfun.regex(this, 'reg_finc_account', this.investMoney))){
           return regexfun.handleFailMsg(this,"请输入有效投资金额");
         }

@@ -215,6 +215,7 @@
         apis.userBaseData(this.userInfo.ID, '1').then((data) => {
           this.userData = data.result.main_data;
           let user_role = this.userInfo.USER_ROLE;
+          let amount_money =  this.userInfo.AMOUNT-0
           let is_check_tra_pwd = this.userData.IS_AUTHORIZED;
           let is_expired = this.userInfo.IS_Expired;
           let min_money = this.TtyDetail.MIN_AMOUNT-0
@@ -252,6 +253,11 @@
           if(money<min_money){
             flag = false;
             regexfun.handleFailMsg(this,"投资金额必须大于起投金额");
+          }
+          //授权金额
+          if(money>amount_money){
+            flag = false;
+            regexfun.handleFailMsg(this,"投资金额已大于授权金额");
           }
           if(money>this.nowMoney){
             flag = false;
