@@ -50,6 +50,7 @@ Vue.filter('farmatDate',function () {
  */
 Vue.filter('farmatAmount', function(amount) {
   let result = "";
+  amount = (amount-0).toFixed(2);
   let arg0=(amount+"").split(".");
   let len= arg0[0].length;
   let count = parseInt(len/3);

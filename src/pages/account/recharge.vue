@@ -41,7 +41,7 @@
             <span id="close" @click="close()"><img src="../../../static/images/recharge/recharge_close.png"></span>
           </li>
           <li>
-            <span>充值后余额(元)：<b v-text="rechargeLast"></b></span>
+            <span>充值后余额(元)：<b>{{rechargeLast | farmatAmount}}</b></span>
           </li>
           <li>
             <span>本次最大充值金额(元)：<b>{{ single_limit}}</b></span>
@@ -160,7 +160,7 @@
         }
         this.isActives =true;
         //判断输入的金额是否大于等于可用金额
-        if(this.rechargeMoney< parseFloat(this.single_limit.replace(/,/g,""))){
+        if(this.rechargeMoney<= parseFloat(this.single_limit.replace(/,/g,""))){
           let userId = this.userInfo.ID;
           let userType = "1";
           let rechargeway = "SWIFT";

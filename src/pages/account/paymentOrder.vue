@@ -22,11 +22,11 @@
         </li>
         <li>
           <span>可用余额</span>
-          <span>{{payDetail.balance}}</span>
+          <span>{{(payDetail.balance) | farmatAmount}}元</span>
         </li>
         <li>
           <span>投资金额</span>
-          <span>{{payDetail.withDraw}}</span>
+          <span>{{(payDetail.withDraw) | farmatAmount}}元</span>
         </li>
       </ul>
     </div>
@@ -44,6 +44,7 @@
   import * as regexfun from '../../../src/assets/js/jwt.regex';
   import * as apis from '../../assets/js/jwt.apis'
   import checkcode from '../../components/checkcode/checkcode'
+  import '../../assets/js/filter'
   export default {
     data(){
       return{

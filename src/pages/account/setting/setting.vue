@@ -7,7 +7,7 @@
             <span>设置</span>
         </div>
         <div class="nav">
-            <ul>
+            <ul class="clearfix">
                 <li v-on:click="goDatum()">
                     <span><img src="../../../../static/images/setting/setting_datum.png"></span>
                     <span>我的资料</span>
@@ -142,7 +142,7 @@ export default {
                 }
             }
         li:nth-child(2n){
-            margin-left: 0.16rem;
+            margin-left: 0.15rem;
         }
     }
 }
