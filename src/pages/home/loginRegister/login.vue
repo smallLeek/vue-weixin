@@ -1,71 +1,70 @@
 <template>
-        <div class="content" v-title="'登录'">
-            <div class="login_login">
-                <ul>
-                    <li>
-                        <span><img src="../../../../static/images/login/login_num.png"></span>
-                        <span><input v-model="loginPhone" id="phonenum" type="text" placeholder="请输入手机号" maxlength="11"></span>
-                    </li>
-                    <li>
-                        <span><img src="../../../../static/images/login/login_password.png"></span>
-                        <span><input id="password" v-model="loginPwd" type="password" placeholder="请输入登录密码"></span>
-                        <span><img id="eye" src="../../../../static/images/login/login_eye_b.png"></span>
-                    </li>
-                </ul>
-                <p><router-link to="/getBackPassword">找回密码？</router-link></p>
-                <input class="submit" @click="submit()" :class="{ active: isActives }"  type="button" value="提交" >
-            </div>
-            <div class="login_register">
-                register
-            </div>
-        </div>
+  <div class="content" v-title="'登录'">
+    <div class="login_login">
+      <ul>
+        <li>
+          <span><img src="../../../../static/images/login/login_num.png"></span>
+          <span><input v-model="loginPhone" id="phonenum" type="text" placeholder="请输入手机号" maxlength="11"></span>
+        </li>
+        <li>
+          <span><img src="../../../../static/images/login/login_password.png"></span>
+          <span><input id="password" v-model="loginPwd" :type="inputType" placeholder="请输入登录密码"></span>
+          <span v-if="isEye" @click="isShow()"><img  src="../../../../static/images/login/login_eye_b.png"></span>
+          <span v-if="!isEye" @click="isShow()"><img src="../../../../static/images/login/login_eye_z.png"></span>
+        </li>
+      </ul>
+      <p><router-link to="/getBackPassword">找回密码？</router-link></p>
+      <input class="submit" @click="submit()" :class="{ active: isActives }"  type="button" value="提交" >
+    </div>
+  </div>
 </template>
 <script>
-import store from '../../../vuex/store'
-import * as regexfun from '../../../../src/assets/js/jwt.regex';
-import * as apis from '../../../assets/js/jwt.apis'
-import { phtServer } from '../../../assets/js/phtServer'
-import {mapGetters, mapActions,mapState} from 'vuex'
-import * as dealLogin from '../../../assets/js/jwt.accessAuth'
-import {storeUtil} from '../../../assets/js/util/lib.store'
-export default {
-     data(){
-       return{
-         code:null,
-         loginPwd:null,
-         loginPhone:null,
-         isActives:false
-       }
-     },
-  created(){
-    this.code = this.$route.query.code
-  },
-    mounted(){
-        $('#eye').click(function(){
-            if($('#password').attr('type')=='password'){
-                $('#password').attr('type','text');
-                $(this).attr('src',require('../../../../static/images/login/login_eye_z.png'))
-            }else{
-                $('#password').attr('type','password');
-                $(this).attr('src',require('../../../../static/images/login/login_eye_b.png'))
-            }
-        })
+  import * as regexfun from '../../../../src/assets/js/jwt.regex';
+  import * as apis from '../../../assets/js/jwt.apis'
+  import { phtServer } from '../../../assets/js/phtServer'
+  import {mapGetters, mapActions} from 'vuex'
+  import * as dealLogin from '../../../assets/js/jwt.accessAuth'
+  import {storeUtil} from '../../../assets/js/util/lib.store'
+  export default {
+    data(){
+      return{
+        code:null,
+        loginPwd:null,
+        loginPhone:null,
+        isActives:false,
+        isEye:true,
+        inputType:'password'
+      }
     },
-  computed: {
+    created(){
+      this.code = this.$route.query.code
+    },
+    mounted(){
+
+    },
+    computed: {
       //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
-    ...mapGetters([
-      'loginStatus','userInfo','tokenCode','isRealName','accessAuth'
-    ])
-  },
+      ...mapGetters([
+        'loginStatus','userInfo','tokenCode','isRealName','accessAuth'
+      ])
+    },
     methods: {
       ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut'}),
+      isShow(){
+        this.isEye = !this.isEye;
+        if( this.isEye == true){
+          this.inputType = "password";
+        }else{
+          this.inputType = "text";
+        }
+      },
       submit() {
         this.isActives =true;
-           let flag=false;
-           flag=regexfun.regex(this, 'mobile', this.loginPhone);
-           if(flag == true){
-               this.login()
-           }
+        let flag=false;
+        flag=regexfun.regex(this, 'mobile', this.loginPhone);
+        if(flag == true){
+          this.login()
+        }
       },
       login() {
         let phonenum = this.loginPhone;
@@ -92,99 +91,99 @@ export default {
         })
       }
     }
-}
+  }
 </script>
 <style lang="less" scoped>
-.login{
+  .login{
     background-color: #f8f8f8;
-}
-.content{
+  }
+  .content{
     padding: 0 0.3rem;
     margin-top: 0.34rem;
     >div{
-        display: none;
+      display: none;
     }
     .login_login{
-        display: block;
-        position: relative;
-        width: 6.9rem;
-        margin: auto;
-        p{
-            text-align: right;
-            font-size: 0.27rem;
-            color: #666666;
-            line-height: 0.9rem;
-        }
-        ul{
-            border: 1px solid #e0e0e0;
-            li{
-                width: 100%;
-                height: 0.9rem;
-                line-height: 0.9rem;
-                background-color: #fff;
-                span{
-                    height: 0.9rem;
-                    float: left;
-                    input{
-                        color: #333333;
-                        font-size: 0.3rem;
-                        border: none;
-                        outline:medium;
-                    }
-                    ::-moz-placeholder {
-                        font-size: 0.3rem;
-                        color: #999999;
-                    }
-                    :-ms-input-placeholder {
-                        font-size: 0.3rem;
-                        color: #999999;
-                    }
-                    ::-webkit-input-placeholder {
-                        font-size: 0.3rem;
-                        color: #999999;
-                    }
-                }
-                span:first-child{
-                    width: 1rem;
-                    text-align: center;
-                    img{
-                        width: 0.3rem;
-                    }
-                }
-            }
-            li:first-child{
-                border-bottom: 1px solid #e0e0e0;
-            }
-            li:last-child{
-                span:last-child{
-                    float: right;
-                    img{
-                        width: 0.5rem;
-                        margin-right: 0.2rem;
-                    }
-                }
-            }
-        }
-        .submit{
-            width: 6.9rem;
+      display: block;
+      position: relative;
+      width: 6.9rem;
+      margin: auto;
+      p{
+        text-align: right;
+        font-size: 0.27rem;
+        color: #666666;
+        line-height: 0.9rem;
+      }
+      ul{
+        border: 1px solid #e0e0e0;
+        li{
+          width: 100%;
+          height: 0.9rem;
+          line-height: 0.9rem;
+          background-color: #fff;
+          span{
             height: 0.9rem;
-            margin: auto;
-            border-radius: 0.06rem;
-            font-size: 0.35rem;
-            background-color: #fb4747;
-            border: none;
-            color: #fff;
-            outline:none;
+            float: left;
+            input{
+              color: #333333;
+              font-size: 0.3rem;
+              border: none;
+              outline:medium;
+            }
+            ::-moz-placeholder {
+              font-size: 0.3rem;
+              color: #999999;
+            }
+            :-ms-input-placeholder {
+              font-size: 0.3rem;
+              color: #999999;
+            }
+            ::-webkit-input-placeholder {
+              font-size: 0.3rem;
+              color: #999999;
+            }
+          }
+          span:first-child{
+            width: 1rem;
+            text-align: center;
+            img{
+              width: 0.3rem;
+            }
+          }
         }
+        li:first-child{
+          border-bottom: 1px solid #e0e0e0;
+        }
+        li:last-child{
+          span:last-child{
+            float: right;
+            img{
+              width: 0.5rem;
+              margin-right: 0.2rem;
+            }
+          }
+        }
+      }
+      .submit{
+        width: 6.9rem;
+        height: 0.9rem;
+        margin: auto;
+        border-radius: 0.06rem;
+        font-size: 0.35rem;
+        background-color: #fb4747;
+        border: none;
+        color: #fff;
+        outline:none;
+      }
       .active{
         background-color: #ff7676;
       }
-        input.on{
-            background-color: #fb4747;
-        }
+      input.on{
+        background-color: #fb4747;
+      }
     }
     .login_register{
 
     }
-}
+  }
 </style>
