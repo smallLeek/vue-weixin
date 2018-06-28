@@ -8,6 +8,9 @@ const ttyMore = resolve => require(['../pages/home/tty/ttyMore.vue'], resolve);
 const ttyHistory = resolve => require(['../pages/home/tty/ttyHistory.vue'], resolve);
 const yyyMore = resolve => require(['../pages/home/yyyDcy/yyyMore.vue'], resolve);
 const dcyMore = resolve => require(['../pages/home/yyyDcy/dcyMore.vue'], resolve);
+const userInfo = resolve => require(['../pages/home/userInfo/userInfo.vue'], resolve);
+const goXw = resolve => require(['../pages/home/goXw/goXw.vue'], resolve);
+
 
 // 我的账户
 const account = resolve => require(['../pages/account/account.vue'], resolve);
@@ -34,6 +37,8 @@ const ttyRecord = resolve => require(['../pages/account/ttyAccount/ttyRecord.vue
 
 // 定投盈账户
 const dtyAccount = resolve => require(['../pages/account/dtyAccount/dtyAccount.vue'], resolve);
+const aboutUs = resolve => require(['../pages/account/aboutUs/aboutUs.vue'], resolve);
+const securitys = resolve => require(['../pages/account/securitys.vue'], resolve);
 const benefitPlan = resolve => require(['../pages/account/dtyAccount/benefitPlan.vue'], resolve);
 const gainRecording = resolve => require(['../pages/account/dtyAccount/gainRecording.vue'], resolve);
 const projectProgress = resolve => require(['../pages/account/dtyAccount/projectProgress.vue'], resolve);
@@ -234,7 +239,23 @@ const router = new VueRouter({
     {  path: '/async',
       component: async,
 
-    }
+    },
+    {  path: '/aboutUs',
+      component: aboutUs,
+
+    },
+   {  path: '/securitys',
+      component: securitys,
+
+   },
+    {  path: '/userInfo',
+      component: userInfo,
+
+    },
+    {  path: '/goXw',
+      component: goXw,
+
+    },
   ]
 });
 export default router;

@@ -1,5 +1,5 @@
 <template>
-  <div class="recharge">
+  <div class="recharge" v-title="'账户充值'">
     <div class="title">
       <router-link to="/account">
         <img src="../../../static/images/goBack.png">
@@ -50,7 +50,8 @@
           <li>
             <span>卡支付额度：<b v-text="total_limit"></b></span>
           </li>
-          <li class="on" v-on:click="goRecharge()">立即充值</li>
+          <li v-on:click="goRecharge()" class="sixButton" :class="{ active: isActives }" v-if="!isActives">立即充值</li>
+          <li :class="{ active: isActives }" v-else>立即充值</li>
         </ul>
       </div>
       <div class="hint">
@@ -78,6 +79,7 @@
   export default {
     data() {
       return {
+        isActives:false,
         rechargeMoney:'',
         picture_url:'',//银行图标地址
         day_limit:'',//单日限额
@@ -151,11 +153,12 @@
       },
 //      立即充值
       goRecharge() {
-        if(this.rechargeMoney=='0'){
+        if(this.rechargeMoney=='0' || this.rechargeMoney==''){
           regexfun.handleFailMsg(this,'充值金额不能小于0.01元')
           return;
 
         }
+        this.isActives =true;
         //判断输入的金额是否大于等于可用金额
         if(this.rechargeMoney< parseFloat(this.single_limit.replace(/,/g,""))){
           let userId = this.userInfo.ID;
@@ -165,6 +168,7 @@
           let paytype  = '';
           let redirectUrl = '';
           apis.deposit(userId, "1", this.rechargeMoney, rechargeway, bankcode,paytype,this.domain).then( (data) => {
+            this.isActives =false
             let userData = data.result.main_data.url;
             $('.xwUrl').append(userData)
           })
@@ -237,7 +241,6 @@
         }
 
         span:last-child {
-          margin-top: 0.2rem;
           font-size: 0.24rem;
           color: #fff;
         }
@@ -382,7 +385,7 @@
             }
           }
         }
-        li:nth-child(6) {
+        .sixButton{
           width: 7rem;
           height: 0.8rem;
           line-height: 0.8rem;
@@ -391,11 +394,20 @@
           font-size: 0.3rem;
           text-align: center;
           color: #fff;
-          background-color: #c4c4c4;
+          background-color: #fb4747;
           border-radius: 0.12rem;
         }
-        li:nth-child(6) {
-          background-color: #fb4747;
+        .active{
+          background: #ff7676;
+          width: 7rem;
+          height: 0.8rem;
+          line-height: 0.8rem;
+          margin-top: 0.4rem;
+          margin-left: -0.05rem;
+          font-size: 0.3rem;
+          text-align: center;
+          color: #fff;
+          border-radius: 0.12rem;
         }
       }
     }

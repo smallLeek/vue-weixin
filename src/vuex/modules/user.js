@@ -17,7 +17,7 @@ const state = {
   wxCode : storeUtil.getStore('wxCode') || null,
   //token
   tokenCode:storeUtil.getStore('tokenCode') || null,
-  xwBank:null,
+  xwBank:storeUtil.getStore('xwBank') || null,
   xwInfo:false,
   //弹框
   showXwBank:false,
@@ -102,8 +102,9 @@ const actions = {
    * @param xwBank
    * @constructor
    */
-  USER_XW_BANK( { commit }, xwBank ){
-    commit(types.USER_XW_BANK, xwBank)
+  USER_XW_BANK( { commit }, res ){
+    storeUtil.setStore('xwBank', res)
+    commit(types.USER_XW_BANK, res)
 
   },
   /**

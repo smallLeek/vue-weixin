@@ -30,7 +30,8 @@
         </li>
       </ul>
     </div>
-    <div class="btn" @click="goPay()" :class="{activeBtn:isActive}">确认支付</div>
+    <div class="btn" @click="goPay()" :class="{activeBtn:isActive} " v-if="!isActive">确认支付</div>
+    <div class="btn" :class="{activeBtn:isActive}" v-else>确认支付</div>
     <div class="remind">
       <h1>交易小贴士：</h1>
       <p>如您在“我的-安全中心-免支付密码投标”中已开通<b>免支付密码投标</b>，可免输入交易密码<b>快速投资</b>，未开通免支付密码投标需跳转到<b>新网银行存管页面</b>，输入交易密码进行投资确认。</p>
@@ -98,13 +99,13 @@
       goPay() {
         this.isActive = true;
         let self = this;
-        console.log(this.showCode);
         if (this.dds == 'dds') {
           apis.userBaseData(self.userInfo.ID, '1').then((data) => {
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
             if (this.is_check_tra_pwd == "0") {
               apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code, this.domain).then((data) => {
+                this.isActive =false
                 this.userData = data.result.main_data.data[0];
                 //回到哪
                 this.setAccessAuth({whereToGo:"/wx/home"});
@@ -127,6 +128,7 @@
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
             if (this.is_check_tra_pwd == "0") {
               apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.pro_code, this.payDetail.withDraw, this.is_check_tra_pwd, this.domain).then((data) => {
+                this.isActive =false
                 this.userData = data.result.main_data;
                 //回到哪
                 this.setAccessAuth({whereToGo:"/wx/home"});
@@ -152,7 +154,7 @@
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
               this.showCode = true;
-              apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code).then((data) => {
+              apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code).then((data) => {    this.isActive =false
                 this.userData = data.result.main_data;
                 this.$router.push({path:'/investSuccess',query:this.investInfo})
                 //回到哪
@@ -165,6 +167,7 @@
             let userData = data.result.main_data;
               this.showCode = true;
               apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.pro_code, this.payDetail.withDraw, this.is_check_tra_pwd).then((data) => {
+                this.isActive =false
                 this.userData = data.result.main_data;
                 this.$router.push({path:'/investSuccess',query:this.investInfo})
                 //回到哪

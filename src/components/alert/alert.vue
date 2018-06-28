@@ -1,7 +1,7 @@
 <template>
-    <span class="alert" @click="mover" v-if="show">
+    <div class="alert" @click="mover" v-if="show">
       {{text}}
-    </span>
+    </div>
 </template>
 <script>
   export default {
@@ -33,27 +33,26 @@
 </script>
 <style>
   .alert{
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    margin: auto;
-    width:fit-content;
-    display: inline-block;
-    width:-webkit-fit-content;
-    width:-moz-fit-content;
+    margin: 60% auto 50% auto;
+    display: table;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
     padding: 0 .3rem 0 0.3rem;
-    height: 0.8rem;
     line-height: 0.8rem;
-    border: 0.01rem solid #CCC;
+    height: 0.8rem;
+    border: 0.01rem solid #ccc;
     text-align: center;
     font-size: 0.22rem;
     background-color: #000;
     opacity: 0.7;
     color: #fff;
     border-radius: 0.1rem;
-    overflow: hidden;
-    z-index:999999999999;
+    z-index:9999999999;
   }
 </style>

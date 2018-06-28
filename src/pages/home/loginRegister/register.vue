@@ -35,7 +35,10 @@
           </span>
           <a href="https://www.phtfdata.com/web6/hander/enrolled.do" target="_blank">《注册协议》</a>
         </h1>
-        <input class="submit" type="button" value="提交" @click="register()" :class="{ active: isActives }">
+        <input class="submit" type="button" value="提交" @click="register()" :class="{ active: isActives }"
+        v-if="!isActives">
+        <input class="submit" type="button" value="提交"  :class="{ active: isActives }"
+               v-else>
       </div>
     </div>
 </template>
@@ -155,10 +158,12 @@
           }
 
         }
+        self.isActives =true;
         //注册接口
         apis.XWnewAddPerson(self.registerMobile,self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd),phtServer.CalcuMD5lower(self.registerPwd),self.registerCode,self.registerRefmobile).then((data) => {
           if (data.message == "成功!") {
             apis.newLogin(self.registerMobile,phtServer.CalcuMD5lower(self.registerPwd), phtServer.CalcuMD5lower(self.registerPwd), "1").then((data) => {
+              self.isActives =false;
               if(data.status =='6027'){
                 regexfun.handleFailMsg(this,data.message)
               }else if (data.status=='6026'){

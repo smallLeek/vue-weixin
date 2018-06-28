@@ -77,7 +77,7 @@
         <li></li>
       </ul>
         <div class="boxSafe">
-          <p>{{(userInfo.AVAILABLE_BALANCE) | farmatAmount}}元</p>
+          <p>{{(this.userData.AVAILABLE_BALANCE) | farmatAmount}}元</p>
           <p>
               <span v-if="agree" @click="agreement">
                 <img class="on" src="../../../static/images/investOn.png">阅读并同意
@@ -217,12 +217,12 @@
           let user_role = this.userInfo.USER_ROLE;
           let amount_money =  this.userData.AMOUNT-0
           let is_check_tra_pwd = this.userData.IS_AUTHORIZED;
-          let is_expired = this.userInfo.IS_Expired;
+          let is_expired = this.userData.IS_Expired;
           let min_money = this.TtyDetail.MIN_AMOUNT-0
           let max_money = this.TtyDetail.MAX_AMOUNT-0
           let money= this.widthDrawMoney-0
-          let accountBalance =this.userInfo.AVAILABLE_BALANCE-0
-          let day_limit = this.userInfo.DAY_LIMIT-0
+          let accountBalance = this.userData.AVAILABLE_BALANCE-0
+          let day_limit =  this.userData.DAY_LIMIT-0
           let flag = true;
           if(user_role != 'INVESTOR'){
             flag = false
@@ -250,9 +250,9 @@
             regexfun.handleFailMsg(this,"请输入正确格式的投资金额");
           }
           //起投金额
-          if(money<min_money){
+          if(money>=min_money){
             flag = false;
-            regexfun.handleFailMsg(this,"投资金额必须大于起投金额");
+            regexfun.handleFailMsg(this,"投资金额必须大于或等于起投金额");
           }
           //授权金额
           if(money>amount_money){
@@ -273,10 +273,10 @@
             flag = false;
             regexfun.handleFailMsg(this,"投资额必须小于账户余额");
           }
-          //单笔限额
-          if(money>day_limit){
+          //单日限额
+          if(money<=day_limit){
             flag = false;
-            regexfun.handleFailMsg(this,"投资金额必须小于或等于单笔限额");
+            regexfun.handleFailMsg(this,"投资金额必须小于或等于单日限额");
           }
           //项目投资完
           if(this.tty.PROJ_STATUS!='6003'){

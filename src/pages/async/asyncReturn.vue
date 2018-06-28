@@ -13,6 +13,7 @@
 <script>
   import store from '../../vuex/store'
   import { mapGetters } from 'vuex';
+  import {setWechatTitle} from '../../assets/js/util/lib.setTitle'
     export default {
        data(){
          return{
@@ -26,6 +27,7 @@
         ]),
       },
       mounted(){
+        setWechatTitle(this.xwBank);
       },
       methods:{
         sure(){

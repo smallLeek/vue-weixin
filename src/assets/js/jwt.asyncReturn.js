@@ -1,6 +1,6 @@
 export function asyncInfo(infoName) {
   if(infoName=='PRG'){
-    return '账户激活成功'
+    return '开通新网存管账户成功'
   }else if(infoName=='ERG'){
     return '新网注册成功'
   }else if(infoName=='PBC'){
@@ -24,7 +24,7 @@ export function asyncInfo(infoName) {
   }else if(infoName == 'MFM'){
     return '预留手机号更新成功'
   }else if (infoName == 'ASU'){
-    return '激活账户成功'
+    return '开通新网存管账户成功'
   } else if(infoName =='RCG'){
     return '充值成功'
   }else if(infoName == 'WTD'){

@@ -13,7 +13,8 @@
                     </li>
                 </ul>
                 <p><router-link to="/getBackPassword">找回密码？</router-link></p>
-                <input class="submit" @click="submit()" :class="{ active: isActives }"  type="button" value="提交" >
+                <input class="submit" @click="submit()" :class="{ active: isActives }"  type="button" value="提交" v-if="!isActives" >
+              <input class="submit"  :class="{ active: isActives }"  type="button" value="提交" v-else >
             </div>
             <div class="login_register">
                 register
@@ -58,12 +59,12 @@ export default {
     ])
   },
     methods: {
-      ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut'}),
+      ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut',setAccessAuth:'setAccessAuth'}),
       submit() {
-        this.isActives =true;
            let flag=false;
            flag=regexfun.regex(this, 'mobile', this.loginPhone);
-           if(flag == true){
+           if(flag == true && this.loginPwd !=''){
+             this.isActives =true;
                this.login()
            }
       },
@@ -72,6 +73,7 @@ export default {
         let newPassword = phtServer.CalcuMD5(this.loginPwd);
         let password = phtServer.CalcuMD5lower(this.loginPwd);
         apis.newLogin(phonenum,password, newPassword, "1",this.code).then((data) => {
+          this.isActives = false
           if(data.status =='6027'){
             regexfun.handleFailMsg(this,data.message)
           }else if (data.status=='6026'){
@@ -83,8 +85,9 @@ export default {
             this.setUserInfo(userInfoList);
             this.setIsRealName(userInfoList.STATE);
             this.getTokenCode(userInfoList.token);
-            this.$router.push({path: '/home'})
+            this.setAccessAuth({whereToGo:"/wx/home"});
             dealLogin.dealLogin();
+            this.$router.push({path: '/home'})
           }else {
             regexfun.handleFailMsg(this,data.message)
           }

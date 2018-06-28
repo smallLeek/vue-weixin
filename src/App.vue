@@ -33,7 +33,7 @@ export default {
     }
   },
   mounted(){
-    this.setTime()
+    //this.setTime()
   },
   computed:{
     //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。

@@ -337,12 +337,10 @@
         if(this.investscore=='0'){
           this.investscoreNo =true
           this.risk =true
-          return regexfun.handleFailMsg(this,"请进行风险能力评估");
         }
         if(this.investscore=='1'){
           this.risk =true
           this.investscoreYes =true
-          return regexfun.handleFailMsg(this,"该项目的风险程度超过您的风险承受能力，请知悉。");
         }
         this.setPayDetail({
           userId:self.userId,

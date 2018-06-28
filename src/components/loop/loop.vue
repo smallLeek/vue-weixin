@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <div class="swiper-container">
       <div class="swiper-wrapper">
@@ -92,19 +91,24 @@
 
       },
       changeBanner (list) {
-        /**
-         * 判断点击banner图是否登录
-         */
-        if(list.IS_LOGIN == '1'){
-          if(this.loginStatus == true){
-            window.open(list.LINK_COMMENT)
-          }else{
-            //如果没有登陆就进登陆页面
-            location.href =  userAge.loginUrl()
-          }
+        if(list.FILE_PATH ==  "../../../static/images/home/risk.png"){
+          this.$router.push({path:'/blank'})
         }else{
-          window.open(list.LINK_COMMENT)
+          /**
+           * 判断点击banner图是否登录
+           */
+          if(list.IS_LOGIN == '1'){
+            if(this.loginStatus == true){
+              window.open(list.LINK_COMMENT)
+            }else{
+              //如果没有登陆就进登陆页面
+              location.href =  userAge.loginUrl()
+            }
+          }else{
+            window.open(list.LINK_COMMENT)
+          }
         }
+
       }
     }
   }

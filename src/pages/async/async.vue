@@ -64,6 +64,7 @@
             apis.queryNewAddPersonAsync( self.request_no,self.method_name,'1',userState.ID,'1').then((data) => {
               if(data.status =='00000000'){
                 let userData = data.result.main_data;
+                console.log(userData)
                 //XW_IS_ASYNC  新网异步是否返回  1:返回   0 否
                 if(userData.XW_IS_ASYNC == '1') {
                   //XW_ASYNC_STATE  新网异步返回状态  0 失败   1 成功
@@ -73,9 +74,8 @@
                     self.timer = null;
                     self.timer1 = null;
                     self.updateUserInfo();
-                    store.dispatch('USER_XW_BANK',info.asyncInfo(this.infoTitle) )
-                    console.log(userData)
                     this.$router.push({path: '/asyncReturn'})
+                    store.dispatch('USER_XW_BANK',info.asyncInfo(this.infoTitle) )
                   } else if (userData.XW_ASYNC_STATE == '0') {
                     regexfun.handleFailMsg(self, userData.XW_MESSAGE);
                     location.href = location.origin +  userState.accessAuth.whereBack
@@ -93,7 +93,8 @@
         },
         //异步回来刷新用户信息
         updateUserInfo(){
-          let  userId = store.state.user.userInfo.ID;
+          let  userId = this.userInfo.ID;
+          console.log(userId)
           apis.userBaseData(userId,'1').then((data) => {
             if(data.status == '00000000'){
               let res = data.result.main_data

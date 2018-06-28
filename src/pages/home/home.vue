@@ -55,19 +55,19 @@
       <h1><img src="../../../static/images/home/home_insurance _title.png"></h1>
       <ul>
           <li>
-        <a href="https://www.phtfdata.com/web6/hander/newBankHerd.do" target="_blank">
+        <a href="javascript:;" @click="goXw()" >
             <img src="../../../static/images/home/home_xwbank_cg.png">
             <span>新网银行存管</span>
         </a>
           </li>
           <li>
-        <a href="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do" target="_blank">
+        <a href="javascript:;" @click="goLine()">
             <img src="../../../static/images/home/home_insurance.png">
             <span>安全保障</span>
         </a>
           </li>
           <li>
-        <a href="https://www.phtfdata.com/web6/notice/infoShow.do?infoType=basic" target="_blank">
+        <a href="javascript:;" @click="goUserInfo()">
             <img src="../../../static/images/home/home_information_disclosure.png">
             <span>信息披露</span>
         </a>
@@ -143,6 +143,16 @@ export default {
 
         });
     },
+    goLine(){
+      this.$router.push({path:'/scuritys'})
+    },
+    goUserInfo(){
+      this.$router.push({path:'/userInfo'})
+    },
+    goXw(){
+      this.$router.push({path:'/goXw'})
+    },
+
     // 获取数据统计
     dataStatistics(){
         let that =this;
