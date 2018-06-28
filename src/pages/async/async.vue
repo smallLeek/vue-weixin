@@ -75,7 +75,7 @@
                     self.timer1 = null;
                     self.updateUserInfo();
                     this.$router.push({path: '/asyncReturn'})
-                    store.dispatch('USER_XW_BANK',userData.XW_MESSAGE )
+                    store.dispatch('USER_XW_BANK',info.asyncInfo(this.infoTitle))
                   } else if (userData.XW_ASYNC_STATE == '0') {
                     regexfun.handleFailMsg(self, userData.XW_MESSAGE);
                     location.href = location.origin +  userState.accessAuth.whereBack

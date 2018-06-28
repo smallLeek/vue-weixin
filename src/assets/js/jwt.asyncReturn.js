@@ -1,6 +1,6 @@
 export function asyncInfo(infoName) {
   if(infoName=='PRG'){
-    return '开通新网存管账户成功'
+    return '开通新网存管账户成功!'
   }else if(infoName=='ERG'){
     return '新网注册成功'
   }else if(infoName=='PBC'){
@@ -12,11 +12,11 @@ export function asyncInfo(infoName) {
   }else if(infoName == 'UBC'){
     return '解绑银行卡成功'
   }else if(infoName =='RPW'){
-    return '重置交易密码成功'
+    return '重置交易密码成功!'
   }else  if (infoName == 'IDQ'){
-    return '定投盈投资成功'
+    return '定投盈投资成功!'
   } else if (infoName =='EEE') {
-    return '天天盈投资成功'
+    return '天天盈投资成功!'
   }else  if(infoName == 'CKP'){
     return '验证交易密码成功'
   }else  if(infoName =='NCP'){
@@ -26,7 +26,7 @@ export function asyncInfo(infoName) {
   }else if (infoName == 'ASU'){
     return '开通新网存管账户成功'
   } else if(infoName =='RCG'){
-    return '充值成功'
+    return '充值成功!'
   }else if(infoName == 'WTD'){
     return '提现成功'
   }else if(infoName == 'ZZN'){
