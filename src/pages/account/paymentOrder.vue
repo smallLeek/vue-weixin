@@ -101,6 +101,7 @@
         this.isActive = true;
         let self = this;
         if (this.dds == 'dds') {
+
           apis.userBaseData(self.userInfo.ID, '1').then((data) => {
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
@@ -115,7 +116,7 @@
                   regexfun.handleFailMsg(this,this.userData.message);
                   return;
                 }else {
-                  $('.xwUrl').append(this.userData.url);
+                  $('.xwUrl').append(this.userData.URL);
                 }
               })
             }else {
