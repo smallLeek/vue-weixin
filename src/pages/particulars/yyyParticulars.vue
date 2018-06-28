@@ -27,7 +27,7 @@
       </li>
       <li>
         <span>剩余可投</span>
-        <span>{{yyyDetail.SURPLUS_PART | farmatAmount}}元</span>
+        <span>{{yyyDetail.SURPLUS_AMOUNT | farmatAmount}}元</span>
       </li>
       <li>
         <span>投资期限</span>
@@ -107,7 +107,7 @@
           </ul>
           <ul class="boxline boxColor">
             <li>{{yyyDetail.MIN_BID_AMOUNT |farmatAmount}}元</li>
-            <li>{{yyyDetail.SURPLUS_PART | farmatAmount}}元</li>
+            <li>{{yyyDetail.SURPLUS_AMOUNT | farmatAmount}}元</li>
             <li>{{yyyDetail.MAX_BID_AMOUNT | farmatAmount}}元</li>
           </ul>
           <ul class="boxline boxBlance">
@@ -303,7 +303,7 @@
           return;
         }
         if(self.investMoney == ""){
-          this.bs.$emit('e:alert', "投资金额不能为空!");
+          this.bs.$emit('e:alert', "金额最多12位整数，两位小数!");
           return;
         }
         //授权金额
@@ -312,14 +312,14 @@
           return;
         }
         if(!(regexfun.regex(this, 'reg_finc_account', this.investMoney))){
-          return regexfun.handleFailMsg(this,"请输入有效投资金额");
+          return regexfun.handleFailMsg(this,"金额最多12位整数，两位小数");
         }
         if(((self.investMoney-0)%(this.min_bid_amount -0)) != 0){
           regexfun.handleFailMsg(this,"投资金额必须为可投金额整数倍!");
           return;
         }
         if((self.investMoney-0)<(this.min_bid_amount -0)){
-          regexfun.handleFailMsg(this,"投资金额必须大于起投金额");
+          regexfun.handleFailMsg(this,"投资金额应大于起投金额");
           return;
         }
         if((self.investMoney-0)>(this.available_balance -0)){
@@ -327,22 +327,20 @@
           return;
         }
         if((self.investMoney-0)>(this.yyyDetail.MAX_BID_AMOUNT-0)){
-          this.bs.$emit('e:alert', "投资额应在单笔最大限额范围以内!");
+          this.bs.$emit('e:alert', "投资金额应小于最大单笔限额!");
           return;
         }
-        if((self.investMoney-0)>(this.yyyDetail.SURPLUS_PART -0)){
+        if((self.investMoney-0)>(this.yyyDetail.SURPLUS_AMOUNT -0)){
           this.bs.$emit('e:alert', "启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试!");
           return;
         }
         if(this.investscore=='0'){
           this.investscoreNo =true
           this.risk =true
-          return regexfun.handleFailMsg(this,"请进行风险能力评估");
         }
         if(this.investscore=='1'){
           this.risk =true
           this.investscoreYes =true
-          return regexfun.handleFailMsg(this,"该项目的风险程度超过您的风险承受能力，请知悉。");
         }
         this.setPayDetail({
           userId:self.userId,
