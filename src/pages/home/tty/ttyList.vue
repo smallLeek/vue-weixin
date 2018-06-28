@@ -17,13 +17,13 @@
             <b>按天计息</b>
           </span>
           <span>
-            <b>{{tty.MAX_AMOUNT | farmatAmount}}</b>元
+            <b>{{tty.MIN_AMOUNT | farmatAmount}}</b>元
           </span>
         </li>
         <li>
           <span>年化收益</span>
           <span>计息方式</span>
-          <span>剩余可投</span>
+          <span>起投金额</span>
         </li>
         <li>
           <button :class="{activeBtn:isActive}" v-if="investText">立即投资</button>
