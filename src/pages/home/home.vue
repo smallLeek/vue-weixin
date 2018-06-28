@@ -143,7 +143,7 @@ export default {
         });
     },
     goLine(){
-      this.$router.push({path:'/scuritys'})
+      this.$router.push({path:'/securitys'})
     },
     goUserInfo(){
       this.$router.push({path:'/userInfo'})

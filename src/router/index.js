@@ -23,6 +23,8 @@ const security = resolve => require(['../pages/account/setting/security.vue'], r
 const shareList = resolve => require(['../pages/account/shareList/shareList.vue'], resolve);
 const paymentOrder = resolve => require(['../pages/account/paymentOrder.vue'], resolve);
 const limitRecharge = resolve => require(['../pages/account/limitRecharge.vue'], resolve);
+const guarantee = resolve => require(['../pages/account/guarantee/guarantee.vue'], resolve);
+const loanNo = resolve => require(['../pages/account/loanNo/loanNo.vue'], resolve);
 
 // 登录注册
 const loginRegister = resolve => require(['../pages/home/loginRegister/loginRegister.vue'], resolve);
@@ -254,6 +256,14 @@ const router = new VueRouter({
     },
     {  path: '/goXw',
       component: goXw,
+
+    },
+    {  path: '/guarantee',
+      component: guarantee,
+
+    },
+    {  path: '/loanNo',
+      component: loanNo,
 
     },
   ]

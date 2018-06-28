@@ -123,7 +123,7 @@
               <span v-if="!agree" @click="agreement">
                 <img class="on" src="../../../static/images/investIn.png">阅读并同意
               </span>
-              <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
+              <a href="javascript:;" @click="guarantee()">《风险揭示书》</a>
             </p>
           </div>
         </div>
@@ -199,6 +199,9 @@
     },
     methods:{
       ...mapActions({setPayDetail: 'setPayDetail'}),
+      guarantee(){
+        this.$router.push({path:'/guarantee'})
+      },
       //月月盈列表
       getYyyDetail(){
         this.userId = this.userInfo.ID;
@@ -269,7 +272,7 @@
       },
       //去投资人测评
       openInvest(){
-        location.href ='http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID='+this.userInfo.ID
+        this.$router.push({path:'/blank'})
       },
       //遮罩层
       HShow(){
@@ -277,7 +280,7 @@
       },
       //去月月盈的模版合同
       goLoan() {
-        window.location.href= "https://www.phtfdata.com/web6/page/loanNo.do";
+        this.$router.push({path:'/loanNo'})
       },
       //tab页切换
       tab(index){
