@@ -7,26 +7,26 @@
         <!--<span v-on:click="goMore()">更多<img src="../../../../static/images/more.png"></span>-->
       </div>
       <!--天天盈项目-->
-      <ul v-if="tty">
-        <li v-text="tty.PROJ_NAME" @click="goPay()"></li>
-        <li @click="goPay()">
+      <ul v-if="tty" v-on:click="goPay()">
+        <li v-text="tty.PROJ_NAME"></li>
+        <li>
           <span>
             <b v-text="(tty.RATE).toFixed(0)"></b>%
           </span>
           <span>
-            <b>{{tty.REDEEM_MAX_AMOUNT | farmatDataWan}}</b>万元
+            <b>按天计息</b>
           </span>
           <span>
             <b>{{tty.MAX_AMOUNT | farmatAmount}}</b>元
           </span>
         </li>
-        <li @click="goPay()">
+        <li>
           <span>年化收益</span>
-          <span>需求金额</span>
+          <span>计息方式</span>
           <span>剩余可投</span>
         </li>
         <li>
-          <button :class="{activeBtn:isActive}" v-on:click="ttyInvest" v-if="investText">立即投资</button>
+          <button :class="{activeBtn:isActive}" v-if="investText">立即投资</button>
           <button v-if="investText1" id="over">已售罄</button>
         </li>
       </ul>
@@ -75,17 +75,20 @@
         let userType = '1';
         apis.DdProj(userId, userType).then((data) => {
           this.tty = data.result.main_data;
-          let proj_status = this.tty.PROJ_STATUS;
-          if (proj_status == "6003") {
-            this.investText = true;
-            this.investText1 =false
-          } else {
-            this.investText = false;
-            this.investText1 =true
+          if(this.tty != undefined){
+            let proj_status = this.tty.PROJ_STATUS;
+            if (proj_status == "6003") {
+              this.investText = true;
+              this.investText1 =false
+            } else {
+              this.investText = false;
+              this.investText1 =true
+            }
           }
         })
       },
       goPay(){
+        this.isActive = true;
         this.setAccessAuth({isNeedLogin:true,isNeedRealName:true,whereToGo:"/wx/ttyParticulars"});
         dealLogin.dealLogin();
       },

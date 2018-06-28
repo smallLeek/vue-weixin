@@ -30,6 +30,9 @@
               <span><b><s :style="{width:list.INVEST_PROGRESS+'%'}"></s></b></span>
               <span v-text="list.INVEST_PROGRESS+'%'"></span>
             </li>
+            <li class="dtyBtn">
+              <button>立即投资</button>
+            </li>
           </ul>
           <ul class="noProject" v-if="!yyyData">
             <img src="../../../../static/images/home/noProject.png">
@@ -66,6 +69,9 @@
             <li>
               <span><b><s :style="{width:(parseFloat(list.INVEST_PROGRESS)).toFixed(0)+'%'}"></s></b></span>
               <span v-text="(parseFloat(list.INVEST_PROGRESS)).toFixed(0)+'%'"></span>
+            </li>
+            <li class="dtyBtn">
+              <button>立即投资</button>
             </li>
           </ul>
           <ul class="noProject" v-if="!dcyData">
@@ -233,7 +239,26 @@
           line-height: 0.4rem;
         }
       }
+      button{
+        display: block;
+        color: #fff;
+        font-size: 0.3rem;
+        width: 5.4rem;
+        height: .7rem;
+        line-height: .7rem;
+        border-radius: 1rem;
+        background-color: #fb4747;
+        text-align: center;
+        margin: auto;
+        border: none;
+        outline: none;
+        margin-top: 0.3rem;
+      }
+      .dtyBtn{
+        padding-top: 0.3rem;
+      }
     }
+
   }
 
   .yyy_area ul, .dty_area ul{

@@ -4,7 +4,7 @@
             <a>
                 <img src="../../../static/images/goBack.png">
             </a>
-            <span>新闻</span>
+            <span>公告详情</span>
         </div>
         <div class="news_content">
           <div class="content" v-html="content">
