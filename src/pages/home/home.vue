@@ -91,7 +91,6 @@
   import { Swiper,SwiperItem } from 'vux'
   import '../../assets/js/filter'
   import * as apis from '../../assets/js/jwt.apis'
-  import { setTimeout } from 'timers';
   import * as regexfun from '../../../src/assets/js/jwt.regex';
   import * as urlReturn from '../../assets/js/jwt.userAgent'
 export default {

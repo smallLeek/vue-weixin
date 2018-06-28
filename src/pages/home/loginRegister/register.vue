@@ -44,7 +44,6 @@
   import * as apis from '../../../assets/js/jwt.apis'
   import {phtServer} from '../../../assets/js/phtServer'
   import {mapGetters, mapActions, mapState} from 'vuex'
-  import {setInterval, setTimeout} from 'timers';
   import * as dealLogin from '../../../assets/js/jwt.accessAuth'
   export default {
     data() {
