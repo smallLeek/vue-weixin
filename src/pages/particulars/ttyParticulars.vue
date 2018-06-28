@@ -85,7 +85,7 @@
             <span v-if="!agree" @click="agreement">
                 <img class="on" src="../../../static/images/investIn.png">阅读并同意
               </span>
-            <a href="https://www.phtfdata.com/web6/hander/guarantee.do" target="_blank">《风险揭示书》</a>
+            <a href="javascript:;" @click="guarantee()">《风险揭示书》</a>
           </p>
         </div>
       </div>
@@ -150,13 +150,16 @@
     methods: {
       //视图发生动作
       ...mapActions({setPayDetail: 'setPayDetail'}),
+      guarantee(){
+        this.$router.push({path:'/guarantee'})
+      },
       //去投资列表
       ttyInvestmentList(){
         this.$router.push({path:"/ttyInvestmentList",query:{proj_code:this.proj_code}})
       },
       //去安全保障
       goMoneySafe() {
-        window.location.href = "https://www.phtfdata.com/web6/hander/bxprotectedNew.do"
+       this.$router.push({path:'/securitys'})
       },
       //获取天天盈基本信息
       getTty() {
@@ -190,7 +193,7 @@
         (this.agree == false) ? this.agree = true : this.agree = false;
       },
       openInvest(){
-        location.href ='http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID='+this.userInfo.ID
+        this.$router.push({path:'/blank'})
       },
       //天天盈项目详情
       getTtyDetail() {
@@ -233,8 +236,6 @@
           let accountBalance = this.userData.AVAILABLE_BALANCE-0
           let day_limit =  this.userData.DAY_LIMIT-0
           let flag = true;
-          console.log(this.investscore);
-
           if(user_role != 'INVESTOR'){
             flag = false
             regexfun.handleFailMsg(this, "您的账户类型不支持投资!");
@@ -612,8 +613,7 @@
   .risk{
    position: fixed;
     width: 100%;
-    height: .4rem;
-    padding: .1rem;
+    height: .8rem;
     bottom: 3.33rem;
     background: #fff;
     z-index: 9999999999;
