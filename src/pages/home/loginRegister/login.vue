@@ -1,22 +1,23 @@
 <template>
-        <div class="content" v-title="'登录'">
-            <div class="login_login">
-                <ul>
-                    <li>
-                        <span><img src="../../../../static/images/login/login_num.png"></span>
-                        <span><input v-model="loginPhone" id="phonenum" type="text" placeholder="请输入手机号" maxlength="11"></span>
-                    </li>
-                    <li>
-                        <span><img src="../../../../static/images/login/login_password.png"></span>
-                        <span><input id="password" v-model="loginPwd" type="password" placeholder="请输入登录密码"></span>
-                        <span><img id="eye" src="../../../../static/images/login/login_eye_b.png"></span>
-                    </li>
-                </ul>
-                <p><router-link to="/getBackPassword">找回密码？</router-link></p>
-                <input class="submit" @click="submit()" :class="{ active: isActives }"  type="button" value="提交" v-if="!isActives" >
-              <input class="submit"  :class="{ active: isActives }"  type="button" value="提交" v-else >
-            </div>
-        </div>
+  <div class="content" v-title="'登录'">
+    <div class="login_login">
+      <ul>
+        <li>
+          <span><img src="../../../../static/images/login/login_num.png"></span>
+          <span><input v-model="loginPhone" id="phonenum" type="text" placeholder="请输入手机号" maxlength="11"></span>
+        </li>
+        <li>
+          <span><img src="../../../../static/images/login/login_password.png"></span>
+          <span><input id="password" v-model="loginPwd" :type="inputType" placeholder="请输入登录密码"></span>
+          <span><img v-if="isEye" src="../../../../static/images/login/login_eye_b.png" @click="isShow()"></span>
+          <span><img v-if="!isEye" src="../../../../static/images/login/login_eye_z.png" @click="isShow()"></span>
+        </li>
+      </ul>
+      <p><router-link to="/getBackPassword">找回密码？</router-link></p>
+      <input class="submit" @click="submit()" :class="{ active: isActives }"  type="button" value="提交" v-if="!isActives" >
+      <input class="submit"  :class="{ active: isActives }"  type="button" value="提交" v-else >
+    </div>
+  </div>
 </template>
 <script>
   import * as regexfun from '../../../../src/assets/js/jwt.regex';
@@ -50,13 +51,21 @@
     },
     methods: {
       ...mapActions({setUserInfo: 'setUserInfo',getTokenCode:'getTokenCode',setIsRealName:'setIsRealName',setSignOut:'setSignOut',setAccessAuth:'setAccessAuth'}),
+      isShow(){
+        this.isEye = !this.isEye;
+        if( this.isEye == true){
+          this.inputType = "password";
+        }else{
+          this.inputType = "text";
+        }
+      },
       submit() {
-           let flag=false;
-           flag=regexfun.regex(this, 'mobile', this.loginPhone);
-           if(flag == true && this.loginPwd !=''){
-             this.isActives =true;
-               this.login()
-           }
+        let flag=false;
+        flag=regexfun.regex(this, 'mobile', this.loginPhone);
+        if(flag == true && this.loginPwd !=''){
+          this.isActives =true;
+          this.login()
+        }
       },
       login() {
         let phonenum = this.loginPhone;
@@ -147,6 +156,15 @@
         }
         li:first-child{
           border-bottom: 1px solid #e0e0e0;
+        }
+        li:nth-last-child(1){
+          span:nth-last-child(2){
+            float: right;
+          }
+          img{
+            width: 0.5rem;
+            margin-right: 0.2rem;
+          }
         }
         li:last-child{
           span:last-child{
