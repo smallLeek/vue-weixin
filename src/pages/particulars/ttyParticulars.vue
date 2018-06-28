@@ -224,6 +224,7 @@
           let self =this;
           this.userData = data.result.main_data;
           let user_role = this.userInfo.USER_ROLE;
+          let amount_money =  this.userData.AMOUNT-0
           let is_check_tra_pwd = this.userData.IS_AUTHORIZED;
           let is_expired = this.userInfo.IS_Expired;
           let min_money = this.TtyDetail.MIN_AMOUNT-0
@@ -263,15 +264,15 @@
             flag = false;
             regexfun.handleFailMsg(this,"请阅读并同意《风险揭示书》!");
           }
-          //起投金额
-          if(flag && money<min_money){
+          //授权金额
+          if(flag && money>amount_money){
+            flag = false;
+            regexfun.handleFailMsg(this,"投资金额已大于授权金额");
+          }
+          if(flag && money>this.min_money){
             flag = false;
             regexfun.handleFailMsg(this,"投资金额应大于起投金额");
           }
-          // if(flag && money>this.nowMoney){
-          //   flag = false;
-          //   regexfun.handleFailMsg(this,"启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试");
-          // }
           //最大金额
           if(flag && money>max_money){
             flag = false;

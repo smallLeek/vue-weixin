@@ -49,7 +49,8 @@ export default {
         let self =this
         let currentTime =JSON.parse(storeUtil.getStore('times'))
         let lastTime = new Date().getTime();
-        let loginOutTime =currentTime
+        //let loginOutTime =24 * 60 * 60 * 1000;
+        let loginOutTime = 10 * 60 * 1000;
         if(lastTime - currentTime >loginOutTime){
           let userId = self.userInfo.ID;
           apis.exitLogin(userId,'1').then((data) =>{
@@ -66,7 +67,6 @@ export default {
       }
 
     }
-
 
   },
   components:{
