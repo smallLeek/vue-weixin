@@ -31,7 +31,7 @@
         <ul>
           <li>
             <span>充值金额(元)</span>
-            <span>账户余额(元)：<b v-text="available_balance"></b></span>
+            <span>账户余额(元)：<b>{{available_balance | farmatAmount}}</b></span>
           </li>
           <li>
             <span>￥</span>
