@@ -612,12 +612,15 @@
   }
   .risk{
    position: fixed;
+    padding-top: .1rem;
     width: 100%;
     height: .8rem;
     bottom: 3.33rem;
+    font-size: .32rem;
     background: #fff;
     z-index: 9999999999;
-    border: .01rem solid #e0e0e0;
+    border-top: .01rem solid #e0e0e0;
+    border-bottom: .01rem solid #e0e0e0;
     border-bottom: none;
     span{
       color: #333;
@@ -628,7 +631,7 @@
     display: inline-block;
     width: 100%;
     height: .3rem;
-    font-size: .12rem;
+    font-size: .24rem;
     color: #ccc;
     padding-left: .2rem;
   }

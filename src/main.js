@@ -22,9 +22,9 @@ Vue.prototype.http =axios;
 Vue.prototype.bs =new Vue();
 Vue.config.productionTip = false;
 //本地测试
-Vue.prototype.domain = 'http://localhost:8080/wx/async'
+//Vue.prototype.domain = 'http://localhost:8080/wx/async'
 //测试地址
-//Vue.prototype.domain = 'http://139.129.12.93:8085/wx/async';
+Vue.prototype.domain = 'http://139.129.12.93:8085/wx/async';
 //线上地址
 //Vue.prototype.domain = 'https://www.phtfdata.com/wx/async';
 
