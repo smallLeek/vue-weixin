@@ -22,12 +22,35 @@ export function ifAndroid() {
 
 
 export function ifIos() {
-  console.log(navigator.userAgent)
   return (navigator.userAgent.match(/(iPhone|iPad|iPod)?[\s\/]+([\d.]+)?/)) ? true : false;
 }
 
 export function ifSafari() {
   return ifIos() && navigator.userAgent.match(/Safari/);
+}
+
+export function downloads(openUrl ,downUrl) {
+  let t = 1000;
+  let hasApp = true;
+  setTimeout(function () {
+    if (hasApp) {
+      window.location.href = openUrl
+    } else {
+      window.location.href = downUrl
+    }
+    document.body.removeChild(ifr);
+  }, 2000)
+  let t1 = Date.now();
+  let ifr = document.createElement("iframe");
+  ifr.setAttribute('src', openUrl);
+  ifr.setAttribute('style', 'display:none');
+  document.body.appendChild(ifr);
+  let timeout = setTimeout(function () {
+    var t2 = Date.now();
+    if (!t1 || t2 - t1 < t + 100) {
+      hasApp = false;
+    }
+  }, t);
 }
 
 
@@ -54,22 +77,9 @@ export default function openApp() {
   let isAndroid = ifAndroid();
   let isIos = ifIos();
     if (isAndroid) {
-      window.location.href = androidOpenAppUrl;
-      //如果未安装超时会非常快
-      window.setTimeout(function () {
-        //未检测到安装
-         window.location.href = androidDownloadAppUrl;//打开app下载地址，由app开发人员提供
-      }, 1000)
+      downloads(androidOpenAppUrl,androidDownloadAppUrl)
     } else if (isIos) {
-      //如果未安装超时会非常快
-      window.setTimeout(function () {
-        var S = document.createElement("a"); //创建a元素
-        S.setAttribute("id","open_app_temp")
-        S.setAttribute("href", iosOpenAppUrl), S.style.display = "none", document.body.appendChild(S);
-        var T = document.createEvent("HTMLEvents"); // 返回新创建的 Event 对象，具有指定的类型。
-        T.initEvent("click", !1, !1)// 初始化新事件对象的属性,   S.dispatchEvent(T)  // 绑定事件
-        S.click();
-      },2000)
+      downloads(iosOpenAppUrl,iosDownloadAppUrl)
     }else{
       window.location.href = webPcUrl;
     }
