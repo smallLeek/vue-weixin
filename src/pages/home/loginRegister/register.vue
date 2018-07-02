@@ -19,7 +19,7 @@
           </li>
           <li>
             <span><img src="../../../../static/images/login/login_password.png"></span>
-            <span><input type="password" placeholder="请再次输入以上登陆密码" maxlength="18" v-model="registerRepwd"></span>
+            <span><input type="password" placeholder="请再次输入以上登录密码" maxlength="18" v-model="registerRepwd"></span>
           </li>
         </ul>
         <p>
@@ -132,7 +132,7 @@
 
         //判断密码
         if (!phtServer.reg_password(this.registerPwd)) {
-          regexfun.handleFailMsg(self, "密码不符合规则");
+          regexfun.handleFailMsg(self, "密码长度8~16位，必须包含字母和数字");
           return;
 
         }
