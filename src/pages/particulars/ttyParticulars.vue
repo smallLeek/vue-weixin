@@ -66,7 +66,7 @@
       <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
       <ul class="boxline">
         <li>起投金额</li>
-        <li>最大单笔金额</li>
+        <li>最大单笔限额</li>
       </ul>
       <ul class="boxline boxColor">
         <li>{{TtyDetail.MIN_AMOUNT | farmatAmount}}元</li>

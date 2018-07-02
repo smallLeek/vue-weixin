@@ -103,7 +103,7 @@
           <ul class="boxline">
             <li>起投金额</li>
             <li>可投金额</li>
-            <li>最大单笔金额</li>
+            <li>最大单笔限额</li>
           </ul>
           <ul class="boxline boxColor">
             <li>{{yyyDetail.MIN_BID_AMOUNT |farmatAmount}}元</li>
