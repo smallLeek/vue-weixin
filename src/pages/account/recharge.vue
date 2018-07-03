@@ -175,6 +175,7 @@
           })
         }else{
           this.bs.$emit('e:alert', "充值金额超出单笔限额!");
+          this.isActives =false;
         }
       },
       //输入充值金额正则
