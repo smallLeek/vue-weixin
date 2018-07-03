@@ -6,6 +6,7 @@
         <img src="../../../static/images/goBack.png">
       </router-link>
       <span v-text="yyyDetail.PROJ_NAME"></span>
+      <!--<b v-on:click="goEarnings()">收益试算</b>-->
     </div>
     <div class="fund">
       <h2>
@@ -199,6 +200,22 @@
     },
     methods:{
       ...mapActions({setPayDetail: 'setPayDetail'}),
+      //收益试suan
+  // {
+  //   //项目名称
+  //   proj_name:this.proj_name,
+  //     //年化收益
+  //     amoual_rate:(this.yyyDetail.ANNUAL_RATE).toFixed(0),
+  //   //投资期限
+  //   loan_limittime:this.yyyDetail.LOAN_LIMITTIME,
+  //   //起投金额
+  //   min_bid_amount: this.yyyDetail.MIN_BID_AMOUNT
+  //
+  // }
+  //     goEarnings(){
+  //       this.bs.$emit('e:earnings','12')
+  //       this.$router.push('/earnings');
+  //     },
       guarantee(){
         this.$router.push({path:'/guarantee'})
       },
@@ -318,7 +335,7 @@
           return regexfun.handleFailMsg(this,"金额最多12位整数，两位小数");
         }
         if(((self.investMoney-0)%(this.min_bid_amount -0)) != 0){
-          regexfun.handleFailMsg(this,"投资金额必须为可投金额整数倍!");
+          regexfun.handleFailMsg(this,"投资金额必须为起投金额整数倍!");
           return;
         }
         if((self.investMoney-0)<(this.min_bid_amount -0)){
@@ -402,6 +419,14 @@
       height: 1rem;
       left: 0;
       top: -0.02rem
+    }
+    b{
+      position: absolute;
+      width: 2rem;
+      height: 1rem;
+      right: 0;
+      top: -0.02rem;
+      font-weight: 400;
     }
   }
 
