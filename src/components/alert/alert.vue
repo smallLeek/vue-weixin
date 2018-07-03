@@ -26,19 +26,19 @@
         self.text = data;
         setTimeout(function () {
           self.show = false;
-        },1500);
+        },3500);
         });
     }
   }
 </script>
 <style>
   .alert{
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 3.85rem;
     left: 0;
     right: 0;
     bottom: 0;
-    margin: 60% auto 50% auto;
+    margin:0 auto;
     display: table;
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -53,6 +53,6 @@
     opacity: 0.7;
     color: #fff;
     border-radius: 0.1rem;
-    z-index:9999999999;
+    z-index:9999999999999999;
   }
 </style>

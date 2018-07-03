@@ -74,7 +74,7 @@
               }, 1000)
 
             } else {
-              regexfun.handleFailMsg(self, "验证码发送失败请稍后重试")
+              regexfun.handleFailMsg(self, "用户账号或手机号不存在！")
             }
 
           })

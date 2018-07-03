@@ -188,6 +188,7 @@
             })
           } else if(data.status =="6015") {
             regexfun.handleFailMsg(self, "验证码输入有误!");
+            this.isActives =false;
           }else {
             regexfun.handleFailMsg(self, data.message);
           }
