@@ -231,7 +231,7 @@
           let amount_money =  this.userData.AMOUNT-0
           let is_check_tra_pwd = this.userData.IS_AUTHORIZED;
           let is_expired = this.userData.IS_Expired;
-          let min_money = this.TtyDetail.MIN_AMOUNT-0
+          let min_money = this.TtyDetail.MIN_AMOUNT-0;
           let max_money = this.TtyDetail.MAX_AMOUNT-0
           let money= this.widthDrawMoney-0
           let accountBalance = this.userData.AVAILABLE_BALANCE-0
@@ -271,7 +271,8 @@
             flag = false;
             regexfun.handleFailMsg(this,"投资金额已大于授权金额");
           }
-          if(flag && money>this.min_money){
+          console.log(min_money);
+          if(flag && money<min_money){
             flag = false;
             regexfun.handleFailMsg(this,"投资金额应大于起投金额");
           }
