@@ -153,8 +153,9 @@
       },
 //      立即充值
       goRecharge() {
-        if(this.rechargeMoney=='0' || this.rechargeMoney==''){
+        if(this.rechargeMoney=='0' || this.rechargeMoney=='' || this.rechargeMoney== '0.' || this.rechargeMoney== '0.0' ||this.rechargeMoney== '0.00'){
           regexfun.handleFailMsg(this,'充值金额不能小于0.01元')
+          this.isActives =false;
           return;
 
         }

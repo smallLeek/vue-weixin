@@ -62,7 +62,9 @@
       submit() {
         let flag=false;
         flag=regexfun.regex(this, 'mobile', this.loginPhone);
-        if(flag == true && this.loginPwd !=''){
+        if(this.loginPwd =='' || this.loginPwd ==null){
+          regexfun.handleFailMsg(this,'请完善您的信息')
+        }else if(flag == true && this.loginPwd !=''&&this.loginPwd !=null){
           this.isActives =true;
           this.login()
         }

@@ -121,11 +121,13 @@
         //输入框不能为空
         if (!this.registerMobile || !this.registerCode || !this.registerPwd || !this.registerRepwd) {
           regexfun.handleFailMsg(self, "请完善您的信息");
+          this.isActives =false;
           return;
         }
         //判断手机号是否存在
         if (!self.isPhone) {
           regexfun.handleFailMsg(self, "纳尼！用户账号或手机已存在！");
+          this.isActives =false;
           return;
 
         }
@@ -133,26 +135,31 @@
         //判断密码
         if (!phtServer.reg_password(this.registerPwd)) {
           regexfun.handleFailMsg(self, "密码长度8~16位，必须包含字母和数字");
+          this.isActives =false;
           return;
 
         }
         //判断两次密码是否一致
         if (this.registerPwd !== this.registerRepwd) {
           regexfun.handleFailMsg(self, "两次密码不一致");
+          this.isActives =false;
           return;
         }
         //判断是否阅读金梧桐注册协议
         if (!this.agree) {
           regexfun.handleFailMsg(self, "请先阅读并同意注册协议");
+          this.isActives =false;
           return;
         }
         //判断推荐人手机号
         if(self.registerRefmobile!=''){
           if(!phtServer.reg_mobile(self.registerRefmobile)){
             regexfun.handleFailMsg(self, "推荐人手机号不正确");
+            this.isActives =false;
             return;
           }else if(self.registerRefmobile==self.registerMobile){
             regexfun.handleFailMsg(self, "推荐人手机号不能和注册手机号一致");
+            this.isActives =false;
             return;
           }
 
