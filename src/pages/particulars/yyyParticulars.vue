@@ -200,10 +200,6 @@
       this.getYyyDetail();
       this.getInvestList();
     },
-    updated(){
-       this.getYyyDetail();
-      // this.getInvestList();
-    },
     methods:{
       ...mapActions({setPayDetail: 'setPayDetail'}),
       //收益试suan
