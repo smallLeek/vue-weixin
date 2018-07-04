@@ -268,17 +268,21 @@
           //授权金额
           if(flag && money>amount_money){
             flag = false;
-            regexfun.handleFailMsg(this,"投资金额已大于授权金额");
-          }
-          console.log(min_money);
-          if(flag && money<min_money){
-            flag = false;
-            regexfun.handleFailMsg(this,"投资金额应大于起投金额");
+            regexfun.handleFailMsg(this,"投资金额已大于单笔授权金额！");
           }
           //最大金额
           if(flag && money>max_money){
             flag = false;
-            regexfun.handleFailMsg(this,"投资金额应小于最大单笔限额");
+            regexfun.handleFailMsg(this,"投资金额应小于最大单笔限额！");
+          }
+          //判断债权是否充足
+          if(flag && money<this.nowMoney){
+            flag = false;
+            regexfun.handleFailMsg(this,"启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试");
+          }
+          if(flag && money<min_money){
+            flag = false;
+            regexfun.handleFailMsg(this,"投资金额应大于起投金额");
           }
           //账户余额
           if(flag && money>accountBalance){
@@ -286,10 +290,10 @@
             regexfun.handleFailMsg(this,"您的存管账户余额不足，请先充值");
           }
           //单笔限额
-          if(flag && money>this.TtyDetail.MAX_AMOUNT){
-            flag = false;
-            regexfun.handleFailMsg(this,"投资金额应小于最大单笔限额");
-          }
+          // if(flag && money>this.TtyDetail.MAX_AMOUNT){
+          //   flag = false;
+          //   regexfun.handleFailMsg(this,"投资金额应小于最大单笔限额");
+          // }
           //项目投资完
           if(flag && this.tty.PROJ_STATUS!='6003'){
             flag = false;

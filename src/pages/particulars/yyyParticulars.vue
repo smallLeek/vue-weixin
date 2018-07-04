@@ -116,7 +116,7 @@
             <li></li>
           </ul>
           <div class="boxSafe">
-            <p>{{(userInfo.AVAILABLE_BALANCE) | farmatAmount}}元</p>
+            <p>{{(userData.AVAILABLE_BALANCE) | farmatAmount}}元</p>
             <p>
               <span v-if="agree" @click="agreement">
                 <img class="on" src="../../../static/images/investOn.png">阅读并同意
@@ -160,6 +160,7 @@
   export default {
     data() {
       return {
+        userData:null,
         yyyTitle: '',
         yyyDetail:null,
         userId:'',
@@ -198,6 +199,10 @@
       this.getYyyDetail();
       this.getInvestList();
     },
+    updated(){
+       this.getYyyDetail();
+      // this.getInvestList();
+    },
     methods:{
       ...mapActions({setPayDetail: 'setPayDetail'}),
       //收益试suan
@@ -229,12 +234,12 @@
         let is_check_tra_pwd = this.userInfo.IS_CHECK_TRA_PWD;
         let is_expired = this.userInfo.IS_Expired;
         apis.userBaseData(userId,'1').then( (data) => {
-          let userData = data.result.main_data;
-          this.investscore = userData.INVESTSCORE;
-          this.available_balance = userData.AVAILABLE_BALANCE;
-          this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
-          this.is_authorized = userData.IS_AUTHORIZED;
-          this.amount_money =  userData.AMOUNT-0
+          this.userData = data.result.main_data;
+          this.investscore = this.userData.INVESTSCORE;
+          this.available_balance = this.userData.AVAILABLE_BALANCE;
+          this.is_check_tra_pwd = this.userData.IS_CHECK_TRA_PWD;
+          this.is_authorized = this.userData.IS_AUTHORIZED;
+          this.amount_money =  this.userData.AMOUNT-0
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
             this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
@@ -326,34 +331,37 @@
           this.bs.$emit('e:alert', "金额最多12位整数，两位小数!");
           return;
         }
+        if((self.investMoney-0)>(this.yyyDetail.SURPLUS_AMOUNT -0)){
+          this.bs.$emit('e:alert', "投资金额已大于剩余可投金额!");
+          return;
+        }
+        //可用余额
+        if((self.investMoney-0)>(this.available_balance -0)){
+          this.bs.$emit('e:alert', "您的账户余额不足，请先充值!");
+          return;
+        }
         //授权金额
         if(self.investMoney >this.amount_money){
-          this.bs.$emit('e:alert', "投资金额已大于授权金额");
-          return;
-        }
-        if(!(regexfun.regex(this, 'reg_finc_account', this.investMoney))){
-          return regexfun.handleFailMsg(this,"金额最多12位整数，两位小数");
-        }
-        if(((self.investMoney-0)%(this.min_bid_amount -0)) != 0){
-          regexfun.handleFailMsg(this,"投资金额必须为起投金额整数倍!");
-          return;
-        }
-        if((self.investMoney-0)<(this.min_bid_amount -0)){
-          regexfun.handleFailMsg(this,"投资金额应大于起投金额");
-          return;
-        }
-        if((self.investMoney-0)>(this.available_balance -0)){
-          this.bs.$emit('e:alert', "投资金额应在投标剩余金额范围之内!");
+          this.bs.$emit('e:alert', "投资金额已大于单笔授权金额!");
           return;
         }
         if((self.investMoney-0)>(this.yyyDetail.MAX_BID_AMOUNT-0)){
           this.bs.$emit('e:alert', "投资金额应小于最大单笔限额!");
           return;
         }
-        if((self.investMoney-0)>(this.yyyDetail.SURPLUS_AMOUNT -0)){
-          this.bs.$emit('e:alert', "启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试!");
+
+        if(((self.investMoney-0)%(this.min_bid_amount -0)) != 0){
+          regexfun.handleFailMsg(this,"投资金额应为起投金额的倍数!");
           return;
         }
+        if((self.investMoney-0)<(this.min_bid_amount -0)){
+          regexfun.handleFailMsg(this,"投资金额应大于起投金额!");
+          return;
+        }
+        if(!(regexfun.regex(this, 'reg_finc_account', this.investMoney))){
+          return regexfun.handleFailMsg(this,"金额最多12位整数，两位小数");
+        }
+
         if(this.investscore=='0'){
           this.investscoreNo =true
           this.risk =true
@@ -368,7 +376,7 @@
           pro_code:self.proj_code,
           pro_name:self.yyyDetail.PROJ_NAME,
           //可用余额
-          balance:self.userInfo.AVAILABLE_BALANCE,
+          balance:self.userData.AVAILABLE_BALANCE,
           //投资金额
           withDraw:self.investMoney,
           //投资期限
