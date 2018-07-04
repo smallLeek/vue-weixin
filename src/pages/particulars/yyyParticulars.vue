@@ -156,6 +156,7 @@
   import * as apis from '../../assets/js/jwt.apis'
   import {mapGetters, mapActions, mapState} from 'vuex'
   import * as dealLogin from '../../assets/js/jwt.accessAuth'
+  import {setWechatTitle} from '../../assets/js/util/lib.setTitle'
   import '../../assets/js/filter'
   export default {
     data() {
@@ -237,6 +238,7 @@
           this.amount_money =  userData.AMOUNT-0
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
+            setWechatTitle(this.yyyDetail.PROJ_NAME);
             this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
             //判断用户类型
             if(user_role == "INVESTOR" ){
@@ -297,7 +299,7 @@
       },
       //去月月盈的模版合同
       goLoan() {
-        this.$router.push({path:'/loanNo'})
+        this.$router.push({path:'/loanNo' ,query:{pro:this.proj_code}})
       },
       //tab页切换
       tab(index){
