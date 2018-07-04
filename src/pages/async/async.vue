@@ -94,7 +94,6 @@
         //异步回来刷新用户信息
         updateUserInfo(){
           let  userId = this.userInfo.ID;
-          console.log(userId)
           apis.userBaseData(userId,'1').then((data) => {
             if(data.status == '00000000'){
               let res = data.result.main_data

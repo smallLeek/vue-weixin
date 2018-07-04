@@ -1,7 +1,7 @@
 <template>
   <div class="box" v-title="'合同模板'">
     <div class="title">
-      <router-link to="/setting">
+      <router-link :to="{path: 'yyyParticulars', query: {  proj_code:  this.proj_code}}">
         <img src="../../../../static/images/goBack.png">
       </router-link>
       <span>合同模板</span>
@@ -17,11 +17,12 @@
   export default {
     data(){
       return{
-
+        proj_code:null
       }
     },
     mounted(){
       this.goAboutUs()
+      this.proj_code = this.$route.query.pro;
     },
     methods:{
       goAboutUs(){

@@ -223,6 +223,7 @@
         this.headShow =true
       },
       submitWithdraw(){
+        this.$refs.content.blur();
         apis.userBaseData(this.userInfo.ID, '1').then((data) => {
           let self =this;
           this.userData = data.result.main_data;
@@ -253,9 +254,9 @@
             regexfun.handleFailMsg(this,"未到投资时间，如有需要请联系客服!");
           }
           //投资不能为空
-          if(flag && (this.widthDrawMoney == "" || this.widthDrawMoney == 0)){
+          if(flag && (this.widthDrawMoney == "" || this.widthDrawMoney == 0) ||this.widthDrawMoney == null){
             flag = false;
-            regexfun.handleFailMsg(self,"金额最多12位整数，两位小数");
+            regexfun.handleFailMsg(self,"请输入投资金额");
           }
           if(flag && !(regexfun.regex(this, 'reg_finc_account', this.widthDrawMoney))){
             flag = false;
