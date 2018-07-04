@@ -333,15 +333,14 @@
           this.bs.$emit('e:alert', "金额最多12位整数，两位小数!");
           return;
         }
+        if(!(regexfun.regex(this, 'reg_finc_account', this.investMoney))){
+          return regexfun.handleFailMsg(this,"金额最多12位整数，两位小数");
+        }
         if((self.investMoney-0)>(this.yyyDetail.SURPLUS_AMOUNT -0)){
           this.bs.$emit('e:alert', "投资金额已大于剩余可投金额!");
           return;
         }
-        //可用余额
-        if((self.investMoney-0)>(this.available_balance -0)){
-          this.bs.$emit('e:alert', "您的账户余额不足，请先充值!");
-          return;
-        }
+
         //授权金额
         if(self.investMoney >this.amount_money){
           this.bs.$emit('e:alert', "投资金额已大于单笔授权金额!");
@@ -360,8 +359,10 @@
           regexfun.handleFailMsg(this,"投资金额应大于起投金额!");
           return;
         }
-        if(!(regexfun.regex(this, 'reg_finc_account', this.investMoney))){
-          return regexfun.handleFailMsg(this,"金额最多12位整数，两位小数");
+        //可用余额
+        if((self.investMoney-0)>(this.available_balance -0)){
+          this.bs.$emit('e:alert', "您的账户余额不足，请先充值!");
+          return;
         }
 
         if(this.investscore=='0'){
