@@ -277,7 +277,7 @@
             regexfun.handleFailMsg(this,"投资金额应小于最大单笔限额！");
           }
           //判断债权是否充足
-          if(flag && money<this.nowMoney){
+          if(flag && money>this.nowMoney){
             flag = false;
             regexfun.handleFailMsg(this,"启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试");
           }
