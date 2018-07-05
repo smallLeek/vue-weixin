@@ -8,7 +8,7 @@
     </div>
     <div class="list" v-if="ttyList">
       <div class="header">
-        <img src="../../../../static/images/account/account_invest.png">正在投资以下债权
+        <img src="../../../../static/images/account/account_invest.png">申请转让成功后未到账金额
       </div>
       <ul  v-for="item in ttyList">
         <li>
@@ -21,7 +21,7 @@
     <div class="noData" v-if="!ttyList">
       <div>
         <img src="../../../../static/images/noData.png" alt="">
-        <p>暂无记录</p>
+        <p>还没有冻结中的债权</p>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
         let userId = this.userInfo.ID;
         let userType = '1';
         apis.userBaseData(userId,'1').then( (data) => {
-          apis.DdProjAccPrinList(userId, userType,'100','1').then((data) => {
+          apis.FreezePrincipalList(userId, userType,'100','1').then((data) => {
             this.ttyList = data.result.main_data.data;
           })
         })

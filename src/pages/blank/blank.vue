@@ -37,7 +37,6 @@
           this.userData = data.result.main_data;
           let investscore = this.userData.INVESTSCORE;
           let invest_score = this.userData.INVEST_SCORE;
-
           if (investscore == "0") {
             let url = 'http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID=' + userId;
             $('iframe').attr('src',url);

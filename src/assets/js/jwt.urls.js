@@ -253,5 +253,18 @@ export const api_url_DdProjDetail  = origin_ProxyPath_dds + "/query/" + version 
 export const api_url_DdProjRedeemCustList = origin_ProxyPath_dds + "/query/" + version + "/DdProjRedeemCustList/" + version;//天天盈项目详情
 //天天盈项目用户投资列表
 export const api_url_DdProjInvestCustList = origin_ProxyPath_dds + "/query/" + version + "/DdProjInvestCustList/" + version;
+
+//天天盈账务
+export const api_url_GetAcctRateInfoSum = origin_ProxyPath_dds + "/query/" + version + "/GetAcctRateInfoSum/" + version;
+
+//2.103.	天天盈-天天盈账户-在投本金列表
+export const api_url_DdProjAccPrinList = origin_ProxyPath_dds + "/query/" + version + "/DdProjAccPrinList/" + version;
+
+//2.102.	冻结本金(元)列表
+export const api_url_FreezePrincipalList = origin_ProxyPath_dds + "/query/" + version + "/FreezePrincipalList/" + version;
+//2.99.	天天盈项目用户交易记录
+export const api_url_DdProjTradeRecord= origin_ProxyPath_dds + "/query/" + version + "/DdProjTradeRecord/" + version;
+
+
 //微信获取签名
-export const api_url_getSignature =  origin_ProxyPath_coupon + "/query/" + '2.0' + "/getSignature/" + '2.0';
+export const api_url_getSignature =  origin_ProxyPath_coupon + "/query/" + '2.0' + "/DdProjTradeRecord/" + '2.0';

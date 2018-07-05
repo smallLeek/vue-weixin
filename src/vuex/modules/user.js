@@ -22,7 +22,9 @@ const state = {
   //弹框
   showXwBank:false,
   //支付订单详情
-  payDetail:JSON.parse(storeUtil.getStore('payDetail')) || {}
+  payDetail:JSON.parse(storeUtil.getStore('payDetail')) || {},
+  //天天盈的账户详情
+  ttyProj_code:storeUtil.getStore('ttyProj_code') || null
 
 }
 
@@ -48,7 +50,11 @@ const actions = {
     commit(types.SET_USER_INFO, res)
     commit(types.SET_LOGIN_STATUS, true)
   },
+  setProjCode({commit}, res){
+    storeUtil.setStore('ttyProj_code',res)
+    commit(types.SET_PROJ_CODE, res)
 
+  },
   /**
    * 退出登录
    * @param commit
@@ -129,7 +135,8 @@ const getters = {
   //新网提示信息
   xwBank:state =>state.xwBank,
   showXwBank:state =>state.showXwBank,
-  payDetail:state =>state.payDetail
+  payDetail:state =>state.payDetail,
+  getProjCode:state => state.ttyProj_code
 }
 /**
  * 在mutaion写入改变对应state里面的方法，哪里需要改变状态值时，只需要commit对应的方法即可
@@ -149,6 +156,13 @@ const mutations = {
    */
   [types.SET_USER_INFO](state, res) {
     state.userInfo = res
+  },
+  /**
+   * 天天盈的项目编号
+   *
+   */
+  [types.SET_PROJ_CODE](state, res){
+    state.ttyProj_code =res;
   },
   /**
    * 用户的登陆状态

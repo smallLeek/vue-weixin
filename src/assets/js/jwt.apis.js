@@ -484,6 +484,79 @@ function DdProjInvestCustList (USER_ID,USER_TYPE,PROJ_CODE,PER_PAGE_SIZE,CURR_PA
 }
 
 /**
+ *天天盈账务
+ *@param USER_ID 用户id
+ * @param USER_TYPE 用户类型
+ * @param PROJ_CODE 项目id
+ * @param CURR_PAGE_NUM   页数
+ * @param PER_PAGE_SIZE   每页几个
+ * @returns {*}
+ */
+function GetAcctRateInfoSum (USER_ID,USER_TYPE,PROJ_CODE,PER_PAGE_SIZE,CURR_PAGE_NUM) {
+  return phtServer.globalPostData(urls.api_url_GetAcctRateInfoSum,phtServer.submitData({
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE,
+    "PROJ_CODE":PROJ_CODE,
+    "PER_PAGE_SIZE":PER_PAGE_SIZE,
+    "CURR_PAGE_NUM":CURR_PAGE_NUM
+  }))
+}
+
+/**
+ *
+ *天天盈-天天盈账户-在投本金列表
+ *@param USER_ID 用户id
+ * @param USER_TYPE 用户类型
+ * @param CURR_PAGE_NUM   页数
+ * @param PER_PAGE_SIZE   每页几个
+ * @returns {*}
+ */
+function DdProjAccPrinList (USER_ID,USER_TYPE,PER_PAGE_SIZE,CURR_PAGE_NUM) {
+  return phtServer.globalPostData(urls.api_url_DdProjAccPrinList,phtServer.submitData({
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE,
+    "PER_PAGE_SIZE":PER_PAGE_SIZE,
+    "CURR_PAGE_NUM":CURR_PAGE_NUM
+  }))
+}
+/**
+ *
+ *冻结本金(元)列表
+ *@param USER_ID 用户id
+ * @param USER_TYPE 用户类型
+ * @param CURR_PAGE_NUM   页数
+ * @param PER_PAGE_SIZE   每页几个
+ * @returns {*}
+ */
+function FreezePrincipalList (USER_ID,USER_TYPE,PER_PAGE_SIZE,CURR_PAGE_NUM) {
+  return phtServer.globalPostData(urls.api_url_FreezePrincipalList,phtServer.submitData({
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE,
+    "PER_PAGE_SIZE":PER_PAGE_SIZE,
+    "CURR_PAGE_NUM":CURR_PAGE_NUM
+  }))
+}
+
+/**
+ *
+ *@param USER_ID 用户id
+ * @param USER_TYPE 用户类型
+ * @param  BUSITYPE  业务类型  0, 全部, 1,充值，2提现，3，天天盈，4，定投盈，5，分享奖励，6，存钱罐收益7，其他
+ * @param CURR_PAGE_NUM   页数
+ * @param PER_PAGE_SIZE   每页几个
+ * @returns {*}
+ * @constructor
+ */
+function DdProjTradeRecord (USER_ID,USER_TYPE,BUSITYPE,PER_PAGE_SIZE,CURR_PAGE_NUM) {
+  return phtServer.globalPostData(urls.api_url_DdProjTradeRecord,phtServer.submitData({
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE,
+    "BUSITYPE":BUSITYPE,
+    "PER_PAGE_SIZE":PER_PAGE_SIZE,
+    "CURR_PAGE_NUM":CURR_PAGE_NUM
+  }))
+}
+/**
  * 获取微信签名
  * @param WXURL
  * @returns {*}
@@ -526,6 +599,10 @@ export  {
   pdsInvestProj,
   borrow,
   DdProjInvestCustList,
-  tSignature
+  tSignature,
+  GetAcctRateInfoSum,
+  DdProjAccPrinList,
+  FreezePrincipalList,
+  DdProjTradeRecord
 }
 
