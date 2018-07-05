@@ -18,7 +18,6 @@ export function initWxJsAPI(){
     apis.tSignature(curUrl).then(function(res){
       if(res.message == 'ok'){
         var resData  = res.result.main_data.data[0];
-        console.log(resData)
         wx.config({
           debug: isDebug, //开启调试模式
           appId: resData.appid, // 必填，公众号的唯一标识
@@ -46,7 +45,6 @@ export function initWxJsAPI(){
 
 //分享给朋友
 export function onMenuShareAppMessage(){
-  console.log(1111)
   wx.onMenuShareAppMessage({
     title: '普惠通数据信息技术有限公司', // 分享标题
     desc: '这是分享的描述', // 分享描述

@@ -63,7 +63,6 @@
       getInvestData(){
         //获取proj_code
         let proj_code = this.$route.query.proj_code;
-        console.log(proj_code)
         apis.DdProjInvestCustList(this.userInfo.ID,"1",proj_code,'1000','1').then((data) => {
           this.userData = data.result.main_data.data;
           this.flag = this.userData.length;

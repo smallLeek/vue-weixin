@@ -174,7 +174,6 @@
           this.getDdProjRedeemCustList();
         })
         apis.userBaseData(userId,'1').then( (data) => {
-          console.log(data)
           this.userData = data.result.main_data;
           this.investscore  = this.userData.INVESTSCORE;
           if(this.investscore=='0'){
