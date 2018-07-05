@@ -174,6 +174,7 @@
           this.getDdProjRedeemCustList();
         })
         apis.userBaseData(userId,'1').then( (data) => {
+          console.log(data)
           this.userData = data.result.main_data;
           this.investscore  = this.userData.INVESTSCORE;
           if(this.investscore=='0'){
@@ -486,7 +487,7 @@
   .modal-box{
     height: 100%;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 999999;

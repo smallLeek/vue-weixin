@@ -71,6 +71,7 @@
           if(this.loginStatus == true){
             let userId = this.userInfo.ID;
             apis.userBaseData(userId,'1').then( (data) => {
+              console.log(data)
               this.userData = data.result.main_data;
               let investscore  = this.userData.INVESTSCORE;
               let invest_score = this.userData.INVEST_SCORE;
@@ -105,7 +106,8 @@
               location.href =  userAge.loginUrl()
             }
           }else{
-            window.open(list.LINK_COMMENT)
+            console.log(list.LINK_COMMENT)
+            this.$router.push({path:'/detail',query:{stage:list.LINK_COMMENT}})
           }
         }
 

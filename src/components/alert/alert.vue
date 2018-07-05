@@ -34,11 +34,11 @@
 <style>
   .alert{
     position: fixed;
-    top: 0;
+    top:3rem;
     left: 0;
     right: 0;
     bottom: 0;
-    margin: auto;
+    margin:auto;
     display: table;
     width: -webkit-fit-content;
     width: -moz-fit-content;
