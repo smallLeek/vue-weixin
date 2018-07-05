@@ -61,7 +61,7 @@
       this.getTty();
     },
     methods: {
-      ...mapActions({setAccessAuth: 'setAccessAuth'}),
+      ...mapActions({setAccessAuth: 'setAccessAuth',setProjCode:'setProjCode'}),
       getBaseData() {
         let userId = this.userInfo.ID;
         let userType = "1";
@@ -76,6 +76,8 @@
         apis.DdProj(userId, userType).then((data) => {
           this.tty = data.result.main_data;
           if(this.tty != undefined){
+            let proj_code = this.tty.PROJ_CODE;
+            this.setProjCode(proj_code);
             let proj_status = this.tty.PROJ_STATUS;
             if (proj_status == "6003") {
               this.investText = true;

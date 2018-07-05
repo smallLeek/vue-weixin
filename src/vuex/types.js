@@ -11,4 +11,5 @@ export const SET_WXCODE         = 'SET_WXCODE';     //微信登陆code
 export const USER_XW_BANK         = 'USER_XW_BANK';//新网的提示信息
 export const USER_XWBANK_STATE         = 'USER_XWBANK_STATE';//弹框
 export const PAY_DETAIL               = 'PAY_DETAIL';       //支付订单详情
+export const SET_PROJ_CODE  =        'SET_PROJ_CODE'; //  天天盈的项目编号
 

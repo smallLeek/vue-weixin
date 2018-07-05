@@ -34,6 +34,8 @@ const getBackPassword = resolve => require(['../pages/home/loginRegister/getBack
 
 // 天天盈账户
 const beingCapital = resolve => require(['../pages/account/ttyAccount/beingCapital.vue'], resolve);
+//冻结本金列表页面
+const djList = resolve => require(['../pages/account/ttyAccount/djList.vue'], resolve);
 const ttyAccount = resolve => require(['../pages/account/ttyAccount/ttyAccount.vue'], resolve);
 const ttyRecord = resolve => require(['../pages/account/ttyAccount/ttyRecord.vue'], resolve);
 
@@ -105,6 +107,10 @@ const router = new VueRouter({
     {
       path: '/beingCapital',
       component: beingCapital,
+    },
+    {
+      path: '/djList',
+      component: djList,
     },
     {
       path: '/ttyAccount',
