@@ -556,6 +556,40 @@ function DdProjTradeRecord (USER_ID,USER_TYPE,BUSITYPE,PER_PAGE_SIZE,CURR_PAGE_N
     "CURR_PAGE_NUM":CURR_PAGE_NUM
   }))
 }
+
+/**
+ *2.23.	定投盈 -投资项目
+ * @param CUST_ID
+ * @param CUST_TYPE
+ * @param INVEST 投资状态   查所有：空，投资中：7，已收益：6
+ * @param YJF_ID  投资id
+ * @param PER_PAGE_SIZE
+ * @param CURR_PAGE_NUM
+ * @returns {*}
+ */
+function queryInvestListApp (CUST_ID,CUST_TYPE,INVEST,YJF_ID,PER_PAGE_SIZE,CURR_PAGE_NUM) {
+  return phtServer.globalPostData(urls.api_url_queryInvestListApp,phtServer.submitData({
+    "CUST_ID":CUST_ID,
+    "CUST_TYPE":CUST_TYPE,
+    "INVEST":INVEST,
+    "YJF_ID":YJF_ID,
+    "PER_PAGE_SIZE":PER_PAGE_SIZE,
+    "CURR_PAGE_NUM":CURR_PAGE_NUM
+  }))
+}
+
+/**
+ *2.24.	定投盈-收益查询
+ * @param CUST_ID 用户ID
+ * @param CUST_TYPE 用户类型
+ * @returns {*}
+ */
+function accountProfitApp (CUST_ID,CUST_TYPE) {
+  return phtServer.globalPostData(urls.api_url_accountProfitApp,phtServer.submitData({
+    "CUST_ID":CUST_ID,
+    "CUST_TYPE":CUST_TYPE
+  }))
+}
 /**
  * 获取微信签名
  * @param WXURL
@@ -603,6 +637,8 @@ export  {
   GetAcctRateInfoSum,
   DdProjAccPrinList,
   FreezePrincipalList,
-  DdProjTradeRecord
+  DdProjTradeRecord,
+  queryInvestListApp,
+  accountProfitApp
 }
 

@@ -24,17 +24,13 @@
           <img src="../../../static/images/user/user_tty_icon.png">
           <span>天天盈</span>
         </li>
-        <li @click="withDraw()">
-          <router-link to="">
+        <li @click="dtyAccount()">
             <img src="../../../static/images/user/user_dty_icon.png">
             <span>定投盈</span>
-          </router-link>
         </li>
         <li @click="withDraw()">
-          <router-link to="">
             <img src="../../../static/images/user/user_Transaction_icon.png">
             <span>交易记录</span>
-          </router-link>
         </li>
         <li>
           <router-link to="/recharge">
@@ -128,6 +124,9 @@
       //去天天盈账户
       ttyAccount(){
         this.$router.push('/ttyAccount')
+      },
+      dtyAccount(){
+        this.$router.push('/dtyAccount')
       },
       shareInvitationShow(){
         $('.shareInvitation').show()
