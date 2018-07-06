@@ -7,7 +7,7 @@
       <span>天天盈交易记录</span>
     </div>
     <div class="list">
-      <ul v-if="ttyList">
+      <ul v-if="setList">
         <li v-for="item in ttyList">
           <p>
             <span>{{item.TYPESTR}}</span>
@@ -21,7 +21,7 @@
           </p>
         </li>
       </ul>
-      <div class="noData" v-if="!ttyList">
+      <div class="noData" v-if="!setList">
         <div>
           <img src="../../../../static/images/noData.png" alt="">
           <p>还没有冻结中的债权</p>
@@ -40,7 +40,8 @@
       return {
         ttyList:null,
         isType:'',
-        type:''
+        type:'',
+        setList:''
       }
     },
     computed:{
@@ -51,7 +52,7 @@
     },
     methods:{
       goBackOne(){
-        this.$router.go(-1);
+        this.$router.push({path:'/ttyaccount'})
       },
       getInvestList(){
         let userId = this.userInfo.ID;
@@ -60,6 +61,7 @@
         apis.userBaseData(userId,'1').then( (data) => {
           apis.DdProjTradeRecord(userId, userType, '3','100','1').then((data) => {
             this.ttyList= data.result.main_data.data;
+            this.setList = !(this.ttyList === undefined || this.ttyList.length == 0);
             (this.ttyList).map((item) => {
               this.type = item.TYPE;
               this.state = item.STATE;

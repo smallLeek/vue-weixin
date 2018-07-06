@@ -115,7 +115,7 @@
     },
     methods:{
       goBackOne(){
-        this.$router.go(-1);
+        this.$router.push({path:'/account'});
       },
       //获取账户信息
       getData(){

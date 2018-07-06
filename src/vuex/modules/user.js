@@ -24,7 +24,12 @@ const state = {
   //支付订单详情
   payDetail:JSON.parse(storeUtil.getStore('payDetail')) || {},
   //天天盈的账户详情
-  ttyProj_code:storeUtil.getStore('ttyProj_code') || null
+  ttyProj_code:storeUtil.getStore('ttyProj_code') || null,
+  //返回状态
+  allowBack:null,
+  //Code
+  Code:false,
+  earning:JSON.parse(storeUtil.getStore('earning')) || {},
 
 }
 
@@ -34,6 +39,13 @@ const actions = {
    */
   setXwBank( { commit }, showXwBank ){
     commit(types.USER_XWBANK_STATE, showXwBank)
+
+  },
+  /**
+   * code
+   */
+  setCode( { commit }, Code ){
+    commit(types.CODE_STATE, Code)
 
   },
 
@@ -119,9 +131,28 @@ const actions = {
    * @param xwBank
    * @constructor
    */
+  setEarning( { commit }, res ){
+    storeUtil.setStore('earning', res)
+    commit(types.EARAING, res)
+  },
+  /**
+   * 收益试算
+   * @param commit
+   * @param xwBank
+   * @constructor
+   */
   setPayDetail( { commit }, res ){
     storeUtil.setStore('payDetail', res)
     commit(types.PAY_DETAIL, res)
+  },
+  /**
+   * 禁止返回
+   * @param commit
+   * @param xwBank
+   * @constructor
+   */
+  setAllowBank( { commit }, res ){
+    commit(types.ALLOW_BANK, res)
   },
 }
 
@@ -136,7 +167,10 @@ const getters = {
   xwBank:state =>state.xwBank,
   showXwBank:state =>state.showXwBank,
   payDetail:state =>state.payDetail,
-  getProjCode:state => state.ttyProj_code
+  getProjCode:state => state.ttyProj_code,
+  allowBack:state => state.allowBack,
+  Code:state => state.Code,
+  earning:state => state.earning
 }
 /**
  * 在mutaion写入改变对应state里面的方法，哪里需要改变状态值时，只需要commit对应的方法即可
@@ -156,6 +190,14 @@ const mutations = {
    */
   [types.SET_USER_INFO](state, res) {
     state.userInfo = res
+  },
+  /**
+   * code
+   * @param state
+   * @param res
+   */
+  [types.CODE_STATE](state, res) {
+    state.Code = res
   },
   /**
    * 天天盈的项目编号
@@ -219,6 +261,17 @@ const mutations = {
     state.payDetail = payDetail
 
   },
+  //禁止返回
+  [types.ALLOW_BANK] ( state, allowBack){
+    state.allowBack = allowBack
+
+  },
+  //收益试算
+  [types.EARAING] ( state, earning){
+    state.earning = earning
+
+  },
+
 
 
 

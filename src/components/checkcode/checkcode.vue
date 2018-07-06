@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="popup" v-if="isShow==true">
+    <div class="popup"  v-show="Code">
       <div class="box">
         <p>确认支付金额<span v-text="withDraw"></span> 元</p>
         <div class="boxInput">
@@ -25,8 +25,6 @@
       return {
         publicCode: '',
         checkCode: '',
-        isShow:true,
-        showCode:true
       }
     },
     props:[
@@ -35,22 +33,22 @@
     ],
     computed: {
       ...mapGetters(
-        ['loginStatus', 'userInfo', 'tokenCode','payDetail']
+        ['loginStatus', 'userInfo', 'tokenCode','payDetail','Code']
       ),
     },
     methods: {
+      ...mapActions({setCode:'setCode'}),
       createCode: function() {
+        this.publicCode =''
         var code = ''
         this.checkCode =''
 //        验证码长度
         let codeLength = 4
 //        生成随机数
-        let random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
-
-          'S','T','U','V','W','X','Y','Z')
+        let random = new Array(0,1,2,3,4,5,6,7,8,9)
         for(var i=0; i<codeLength; i++) {
 //          取得随机数（0-35）
-          let index = Math.floor(Math.random()*36)
+          let index = Math.floor(Math.random()*10)
 //          根据索引取得随机数加到code上
           code += random[index]
         }
@@ -59,9 +57,8 @@
       },
       //取消输入验证码
       cancleBox() {
-        this.isShow = false;
-        this.showCode = false;
-        this.$emit("showthisCode");
+        this.$emit("changeStatus");
+        this.setCode(false)
       },
       //确定按钮
       okBox() {
@@ -75,7 +72,7 @@
           this.createCode()
           this.publicCode = '';
         }else if(this.publicCode.toUpperCase() ==this.checkCode) {
-          this.isShow = false
+          this.setCode(false)
           //调用父组件的方法
           this.$emit("nopwdPay");
         }else{

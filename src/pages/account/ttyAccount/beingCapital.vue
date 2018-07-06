@@ -44,7 +44,7 @@
     },
     methods:{
       goBackOne(){
-        this.$router.go(-1);
+        this.$router.push({path:'/ttyaccount'})
       },
       getAgainList(){
         let userId = this.userInfo.ID;

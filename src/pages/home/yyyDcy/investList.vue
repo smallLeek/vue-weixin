@@ -220,7 +220,7 @@
         span:first-child {
           float: left;
           margin-top: 0.16rem;
-          width: 5.8rem;
+          width: 88%;
           height: 0.05rem;
           background-color: #e8e8e8;
           border-radius: 10px;

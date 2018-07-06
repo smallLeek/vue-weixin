@@ -57,7 +57,7 @@
     methods:{
       //导航返回按钮
       goBackOne(){
-        this.$router.go(-1);
+        this.$router.push({path:'/ttyParticulars'});
       },
       //获取投资列表信息
       getInvestData(){

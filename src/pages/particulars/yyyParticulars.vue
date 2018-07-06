@@ -6,7 +6,7 @@
         <img src="../../../static/images/goBack.png">
       </router-link>
       <span v-text="yyyDetail.PROJ_NAME"></span>
-      <!--<b v-on:click="goEarnings()">收益试算</b>-->
+      <b v-on:click="goEarnings()">收益试算</b>
     </div>
     <div class="fund">
       <h2>
@@ -201,7 +201,7 @@
       this.getInvestList();
     },
     methods:{
-      ...mapActions({setPayDetail: 'setPayDetail'}),
+      ...mapActions({setPayDetail: 'setPayDetail',setEarning:'setEarning'}),
       //收益试suan
   // {
   //   //项目名称
@@ -214,10 +214,9 @@
   //   min_bid_amount: this.yyyDetail.MIN_BID_AMOUNT
   //
   // }
-  //     goEarnings(){
-  //       this.bs.$emit('e:earnings','12')
-  //       this.$router.push('/earnings');
-  //     },
+      goEarnings(){
+        this.$router.push({path:'/earnings',query:{id:this.$route.query.proj_code}});
+      },
       guarantee(){
         this.$router.push({path:'/guarantee'})
       },
@@ -239,6 +238,7 @@
           this.amount_money =  this.userData.AMOUNT-0
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
+            this.setEarning(yyyDetail)
             setWechatTitle(this.yyyDetail.PROJ_NAME);
             this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
             //判断用户类型

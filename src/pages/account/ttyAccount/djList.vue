@@ -4,9 +4,9 @@
       <b @click="goBackOne()">
         <img src="../../../../static/images/goBack.png">
       </b>
-      <span>在投本金</span>
+      <span>冻结本金</span>
     </div>
-    <div class="list" v-if="ttyList">
+    <div class="list" v-if="setList">
       <div class="header">
         <img src="../../../../static/images/account/account_invest.png">申请转让成功后未到账金额
       </div>
@@ -18,7 +18,7 @@
         <li>{{item.CREDITS | farmatAmount}}元</li>
       </ul>
     </div>
-    <div class="noData" v-if="!ttyList">
+    <div class="noData" v-if="!setList">
       <div>
         <img src="../../../../static/images/noData.png" alt="">
         <p>还没有冻结中的债权</p>
@@ -33,7 +33,8 @@
   export default {
     data(){
       return{
-        ttyList:null
+        ttyList:null,
+        setList:null
       }
     },
     computed:{
@@ -44,15 +45,14 @@
     },
     methods:{
       goBackOne(){
-        this.$router.go(-1);
+        this.$router.push({path:'/ttyaccount'})
       },
       getAgainList(){
         let userId = this.userInfo.ID;
         let userType = '1';
-        apis.userBaseData(userId,'1').then( (data) => {
           apis.FreezePrincipalList(userId, userType,'100','1').then((data) => {
             this.ttyList = data.result.main_data.data;
-          })
+            this.setList = !(this.ttyList === undefined || this.ttyList.length == 0);
         })
       }
     }

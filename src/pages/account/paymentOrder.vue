@@ -36,7 +36,7 @@
       <h1>交易小贴士：</h1>
       <p>如您在“我的-安全中心-免支付密码投标”中已开通<b>免支付密码投标</b>，可免输入交易密码<b>快速投资</b>，未开通免支付密码投标需跳转到<b>新网银行存管页面</b>，输入交易密码进行投资确认。</p>
     </div>
-    <checkcode v-if="showCode" v-bind:withDraw="payDetail.withDraw" v-bind:url="userData" v-on:showthisCode="changeStatus()"  v-on:nopwdPay="nopwdPay()"></checkcode>
+    <checkcode  v-bind:withDraw="payDetail.withDraw" v-bind:url="userData" v-on:nopwdPay="nopwdPay()" v-on:changeStatus="changeStatus()" ref="setCode"></checkcode>
   </div>
 </template>
 <script>
@@ -52,7 +52,6 @@
         timeS:null,
         is_check_tra_pwd:'',
         flag:0,
-        showCode:false,
         checkFlag:'',
         userData:null,
         dds:null,
@@ -62,7 +61,7 @@
     },
     computed: {
       ...mapGetters(
-        ['loginStatus', 'userInfo', 'tokenCode','accessAuth','payDetail']
+        ['loginStatus', 'userInfo', 'tokenCode','accessAuth','payDetail','Code']
       ),
     },
     mounted(){
@@ -70,9 +69,9 @@
       this.timeLoad()
     },
     methods:{
-      ...mapActions({setAccessAuth: 'setAccessAuth'}),
+      ...mapActions({setAccessAuth: 'setAccessAuth',setCode:'setCode'}),
       goBackOne(){
-        this.$router.go(-1);
+       this.$router.push({path:'/home'})
       },
       timeLoad(){
         let self =this;
@@ -101,49 +100,66 @@
         this.isActive = true;
         let self = this;
         if (this.dds == 'dds') {
-
           apis.userBaseData(self.userInfo.ID, '1').then((data) => {
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
             if (this.is_check_tra_pwd == "0") {
               apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code, this.domain).then((data) => {
-                this.isActive =false
-                this.userData = data.result.main_data.data[0];
-                //回到哪
                 this.setAccessAuth({whereToGo:"/wx/home"});
-                //跳转到新网
-                if(this.userData.response_code=='nopass'){
-                  regexfun.handleFailMsg(this,this.userData.message);
-                  return;
-                }else {
-                  $('.xwUrl').append(this.userData.URL);
+                this.isActive =false
+                if(data.status =='00000000'){
+                  this.userData = data.result.main_data.data[0];
+                  //跳转到新网
+                  if(this.userData.response_code=='nopass'){
+                    regexfun.handleFailMsg(this,this.userData.message);
+                    return;
+                  }else {
+                    $('.xwUrl').append(this.userData.URL);
+                  }
+                }else{
+                  regexfun.handleFailMsg(this,data.message);
                 }
+
               })
             }else {
-              this.showCode = true;
+              this.setCode(true);
+              this.$refs.setCode.createCode();
             }
           })
         } else {
           this.investInfo ={withDraw:this.payDetail.withDraw, proj_name:this.payDetail.pro_name, proTime:this.payDetail.proTime}
           apis.userBaseData(self.userInfo.ID, '1').then((data) => {
-            let userData = data.result.main_data;
-            this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
+            if(data.status == '00000000'){
+              let userData = data.result.main_data;
+              this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
+            }else {
+              regexfun.handleFailMsg(this,data.message);
+            }
+
             if (this.is_check_tra_pwd == "0") {
               apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.pro_code, this.payDetail.withDraw, this.is_check_tra_pwd, this.domain).then((data) => {
                 this.isActive =false
-                this.userData = data.result.main_data;
-                //回到哪
-                this.setAccessAuth({whereToGo:"/wx/home"});
-                //跳转到新网
-                if(this.userData.response_code=='nopass'){
-                  regexfun.handleFailMsg(this,this.userData.message);
-                  return;
+                if(data.status =='00000000'){
+                  //回到哪
+                  this.setAccessAuth({whereToGo:"/wx/home"});
+                  this.userData = data.result.main_data;
+                  //跳转到新网
+                  if(this.userData.response_code=='nopass'){
+                    regexfun.handleFailMsg(this,this.userData.message);
+                    return;
+                  }else {
+                    $('.xwUrl').append(this.userData.url);
+                  }
                 }else {
-                  $('.xwUrl').append(this.userData.url);
+                  regexfun.handleFailMsg(this,data.message);
                 }
+
+
+
               })
             } else {
-                this.showCode = true;
+              this.setCode(true);
+              this.$refs.setCode.createCode();
             }
           })
         }
@@ -155,31 +171,39 @@
           apis.userBaseData(self.userInfo.ID, '1').then((data) => {
             let userData = data.result.main_data;
             this.is_check_tra_pwd = userData.IS_CHECK_TRA_PWD;
-              this.showCode = true;
-              apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code).then((data) => {    this.isActive =false
-                this.userData = data.result.main_data;
-                this.$router.push({path:'/investSuccess',query:this.investInfo})
-                //回到哪
-                this.setAccessAuth({whereToGo:"/wx/home"});
+              apis.borrow(this.userInfo.ID, '1', this.payDetail.withDraw, this.payDetail.pro_code).then((data) => {
+                this.isActive =false
+                if(data.status =='00000000'){
+                  this.userData = data.result.main_data;
+                  this.$router.push({path:'/investSuccess',query:this.investInfo})
+                  //回到哪
+                  this.setAccessAuth({whereToGo:"/wx/home"});
+                }else if(data.message == "债权不相等!"){
+                  regexfun.handleFailMsg(this,data.message);
+                }
+
               })
           })
         } else {
           this.investInfo ={withDraw:this.payDetail.withDraw, proj_name:this.payDetail.pro_name, proTime:this.payDetail.proTime}
           apis.userBaseData(self.userInfo.ID, '1').then((data) => {
             let userData = data.result.main_data;
-              this.showCode = true;
               apis.pdsInvestProj(this.userInfo.ID, '1', this.payDetail.pro_code, this.payDetail.withDraw, this.is_check_tra_pwd).then((data) => {
                 this.isActive =false
-                this.userData = data.result.main_data;
-                this.$router.push({path:'/investSuccess',query:this.investInfo})
-                //回到哪
-                this.setAccessAuth({whereToGo:"/wx/home"});
+                if(data.status == '00000000'){
+                  this.userData = data.result.main_data;
+                  this.$router.push({path:'/investSuccess',query:this.investInfo})
+                  //回到哪
+                  this.setAccessAuth({whereToGo:"/wx/home"});
+                }else {
+                  regexfun.handleFailMsg(this,data.message);
+                }
+
               })
           })
         }
       },
       changeStatus(){
-        this.showCode = !this.showCode;
         this.isActive = false;
       }
      },

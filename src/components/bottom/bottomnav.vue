@@ -41,7 +41,7 @@
     z-index: 10000;
     bottom: 0;
     margin: auto;
-    width: 7.5rem;
+    width: 100%;
     height: 1.18rem;
     max-height: 80px;
     background-color: #fff;

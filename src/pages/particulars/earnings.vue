@@ -48,16 +48,16 @@
       }
     },
     mounted(){
+
       this.getDatas();
     },
     methods:{
       //顶部的返回按钮
       goBackOne(){
-        this.$router.go(-1);
+        this.$router.push({path:'/yyyParticulars',query:{proj_code:this.$route.query.id}});
       },
       //获得基本信息
       getDatas(){
-        console.log(1);
         console.log( this.bs.$on('e:earnings',function (data) {
           return data
         }));

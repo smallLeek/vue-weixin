@@ -85,6 +85,7 @@ const router = new VueRouter({
     {
       path: '/home',
       component: home,
+      meta: {allowBack: false}
     },
     {
       path: '/blank',
