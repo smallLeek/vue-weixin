@@ -50,7 +50,7 @@
     },
     methods:{
       goBackOne(){
-        this.$router.push('/dtyAccount');
+        this.$router.push({path:'/dtyAccount'});
       },
       getData(){
         let userId = this.userInfo.ID;

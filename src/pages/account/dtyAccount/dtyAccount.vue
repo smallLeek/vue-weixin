@@ -184,7 +184,7 @@
     },
     methods: {
       goBackOne() {
-        this.$router.push("/account");
+        this.$router.push({path:"/account"});
       },
       //收益记录
       isShowInfo() {
