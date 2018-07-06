@@ -25,7 +25,7 @@ export default {
   },
   methods:{
     downLoad(){
-      openApp()
+      openApp(this)
     }
   }
 }

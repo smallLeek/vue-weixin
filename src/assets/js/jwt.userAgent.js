@@ -25,6 +25,10 @@ export function ifIos() {
   return (navigator.userAgent.match(/(iPhone|iPad|iPod)?[\s\/]+([\d.]+)?/)) ? true : false;
 }
 
+export function ifWeChat() {
+  return	( window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger')?true:false;
+}
+
 export function ifSafari() {
   return ifIos() && navigator.userAgent.match(/Safari/);
 }
@@ -69,14 +73,17 @@ export function Html5Plus() {
 /**
  * 核心方法 打开App
  */
-export default function openApp() {
+export default function openApp(item) {
   if (isEmbedded()) {
     // 已经在app内部
     return;
   }
   let isAndroid = ifAndroid();
   let isIos = ifIos();
-    if (isAndroid) {
+  let isWeChat =ifWeChat();
+  if(isWeChat){
+  item.$router.push({path:'/downloads'})
+  }else if (isAndroid) {
       downloads(androidOpenAppUrl,androidDownloadAppUrl)
     } else if (isIos) {
       downloads(iosOpenAppUrl,iosDownloadAppUrl)

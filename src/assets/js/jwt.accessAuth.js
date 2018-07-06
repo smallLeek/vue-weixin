@@ -2,7 +2,6 @@
 import store from '../../vuex/store'
 import * as userAge from './jwt.userUrl'
 import * as apis from '../../assets/js/jwt.apis'
-import * as regexfun from '../../../src/assets/js/jwt.regex';
 
 /**
  * 处理登陆实名逻辑

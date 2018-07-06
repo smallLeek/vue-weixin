@@ -25,6 +25,8 @@ const paymentOrder = resolve => require(['../pages/account/paymentOrder.vue'], r
 const limitRecharge = resolve => require(['../pages/account/limitRecharge.vue'], resolve);
 const guarantee = resolve => require(['../pages/account/guarantee/guarantee.vue'], resolve);
 const loanNo = resolve => require(['../pages/account/loanNo/loanNo.vue'], resolve);
+const detail = resolve => require(['../pages/account/detail/detail.vue'], resolve);
+const downloads = resolve => require(['../pages/account/downloads/downloads.vue'], resolve);
 
 // 登录注册
 const loginRegister = resolve => require(['../pages/home/loginRegister/loginRegister.vue'], resolve);
@@ -270,6 +272,14 @@ const router = new VueRouter({
     },
     {  path: '/loanNo',
       component: loanNo,
+
+    },
+    {  path: '/detail',
+      component: detail,
+
+    },
+    {  path: '/downloads',
+      component: downloads,
 
     },
   ]

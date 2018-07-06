@@ -105,7 +105,8 @@
               location.href =  userAge.loginUrl()
             }
           }else{
-            window.open(list.LINK_COMMENT)
+            console.log(list.LINK_COMMENT)
+            this.$router.push({path:'/detail',query:{stage:list.LINK_COMMENT}})
           }
         }
 
