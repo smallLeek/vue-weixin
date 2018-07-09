@@ -28,7 +28,7 @@
             <img src="../../../static/images/user/user_dty_icon.png">
             <span>定投盈</span>
         </li>
-        <li @click="withDraw()">
+        <li @click="tradingRecord()">
             <img src="../../../static/images/user/user_Transaction_icon.png">
             <span>交易记录</span>
         </li>
@@ -133,6 +133,9 @@
       },
       withDraw(){
         $('.downloadRemind').show()
+      },
+      tradingRecord(){
+        this.$router.push({path:'/tradingRecord'})
       }
     },
     components: {

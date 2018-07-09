@@ -1,5 +1,5 @@
 <template>
-    <div class="record">
+    <div class="record" v-title="'交易记录'">
         <div class="title">
             <span>
                 <router-link to="/account">
@@ -204,8 +204,15 @@
     </div>
 </template>
 <script>
+  import formatTimes from '../../assets/js/util/lib.formatTime'
 export default {
+    data(){
+      return{
+        timeList:null
+      }
+    },
     mounted(){
+      this.timeList =formatTimes()
         $('.explainBtn').click(function(){
             $('.inquire').show()
         })
@@ -214,7 +221,7 @@ export default {
         })
 
 $(document).mouseup(function(e){
-  let _con = $('.inquire .box');   
+  let _con = $('.inquire .box');
   if(!_con.is(e.target) && _con.has(e.target).length === 0){
     $('.inquire').hide()
   }
