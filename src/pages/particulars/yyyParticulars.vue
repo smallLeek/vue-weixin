@@ -188,7 +188,8 @@
         is_authorized:'',
         investscoreYes:false,
         investscoreNo:false,
-        amount_money:''
+        amount_money:'',
+        min_bid_amount:''
       }
     },
     computed: {
@@ -202,18 +203,6 @@
     },
     methods:{
       ...mapActions({setPayDetail: 'setPayDetail',setEarning:'setEarning'}),
-      //收益试suan
-  // {
-  //   //项目名称
-  //   proj_name:this.proj_name,
-  //     //年化收益
-  //     amoual_rate:(this.yyyDetail.ANNUAL_RATE).toFixed(0),
-  //   //投资期限
-  //   loan_limittime:this.yyyDetail.LOAN_LIMITTIME,
-  //   //起投金额
-  //   min_bid_amount: this.yyyDetail.MIN_BID_AMOUNT
-  //
-  // }
       goEarnings(){
         this.$router.push({path:'/earnings',query:{id:this.$route.query.proj_code}});
       },
@@ -238,9 +227,9 @@
           this.amount_money =  this.userData.AMOUNT-0
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
+            this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
             this.setEarning(yyyDetail)
             setWechatTitle(this.yyyDetail.PROJ_NAME);
-            this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
             //判断用户类型
             if(user_role == "INVESTOR" ){
               //判断用户是否授权
@@ -346,8 +335,8 @@
           this.bs.$emit('e:alert', "投资金额应小于最大单笔限额!");
           return;
         }
-
         if(((self.investMoney-0)%(this.min_bid_amount -0)) != 0){
+
           regexfun.handleFailMsg(this,"投资金额应为起投金额的倍数!");
           return;
         }
