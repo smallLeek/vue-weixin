@@ -265,7 +265,7 @@
               this.type ='1';
               this.typeName = "您的账户类型不支持投资"
             }
-            this.setEarning(yyyDetail)
+            this.setEarning(this.yyyDetail)
           })
         })
 

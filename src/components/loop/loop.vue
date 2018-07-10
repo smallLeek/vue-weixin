@@ -92,7 +92,7 @@
 
       },
       changeBanner (list) {
-        if(list.FILE_PATH ==  "../../../static/images/home/risk.png"){
+        if(list.FILE_TITLE ==  "风险承受能力评估"){
           this.setAccessAuth({whereToGo:'/wx/home'})
           this.$router.push({path:'/blank'})
 
