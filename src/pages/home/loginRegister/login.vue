@@ -7,10 +7,10 @@
           <span><input v-model="loginPhone" id="phonenum" type="text" placeholder="请输入手机号" maxlength="11"></span>
         </li>
         <li>
-          <span><img src="../../../../static/images/login/login_password.png"></span>
+          <span class="img2"><img src="../../../../static/images/login/login_password.png"></span>
           <span><input id="password" v-model="loginPwd" :type="inputType" placeholder="请输入登录密码"></span>
-          <span><img v-if="isEye" src="../../../../static/images/login/login_eye_b.png" @click="isShow()"></span>
-          <span><img v-if="!isEye" src="../../../../static/images/login/login_eye_z.png" @click="isShow()"></span>
+          <span class="img1"><img v-if="isEye" src="../../../../static/images/login/login_eye_b.png" @click="isShow()"></span>
+          <span class="img1"><img v-if="!isEye" src="../../../../static/images/login/login_eye_z.png" @click="isShow()"></span>
         </li>
       </ul>
       <p><router-link to="/getBackPassword">找回密码？</router-link></p>
@@ -153,6 +153,7 @@
             text-align: center;
             img{
               width: 0.3rem;
+              vertical-align: middle;
             }
           }
         }
@@ -161,6 +162,7 @@
         }
         li:nth-last-child(1){
           span:nth-last-child(2){
+            text-align: center;
             float: right;
           }
           img{
@@ -175,6 +177,10 @@
               width: 0.5rem;
               margin-right: 0.2rem;
             }
+          }
+          .img2{
+            position: absolute;
+            left: .15rem;
           }
         }
       }
@@ -199,5 +205,8 @@
     .login_register{
 
     }
+  }
+  #password{
+    margin-left: 1rem;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="getBackPwd" v-title="'密码找回'">
     <div class="title">
-      <router-link to="/account">
+      <router-link to="/loginRegister/login">
         <img src="../../../../static/images/goBack.png">
       </router-link>
       <span>设置</span>
@@ -93,7 +93,7 @@
             apis.passwordRetrieval(self.bindPhoneNum, self.msgCode, pwd).then(data => {
               if (data.status === "00000000") {
                 regexfun.handleFailMsg(this, "密码重置成功，请输入新密码进行登录");
-                location.href = userAge.loginUrl()
+                this.$router.push({path:'/loginRegister/login'})
               } else {
                 regexfun.handleFailMsg(self, data.message);
                 return;

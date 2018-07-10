@@ -68,6 +68,7 @@ export default {
             text-align: center;
             font-size: 0.3rem;
             color: #fff;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
 
     }

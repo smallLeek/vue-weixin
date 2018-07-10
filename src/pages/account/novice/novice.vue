@@ -1,10 +1,10 @@
 <template>
-  <div class="box" v-title="'详情'">
+  <div class="box" v-title="'新手秘籍'">
     <div class="title">
-      <span @click="whereGo" class="Go">
+      <a @click="whereGO">
         <img src="../../../../static/images/goBack.png">
-      </span>
-      <span>详情</span>
+      </a>
+      <span>新手秘籍</span>
     </div>
     <div class="Container">
       <iframe  name="invest" frameBorder=0  width="100%"></iframe>
@@ -18,24 +18,23 @@
   export default {
     data(){
       return{
-        openUrl:null
+
       }
     },
     computed:{
       ...mapGetters([
-        'accessAuth'
+        'loginStatus','userInfo','tokenCode','accessAuth'
       ])
     },
     mounted(){
-      this.openUrl = this.$route.query.stage;
       this.goAboutUs()
     },
     methods:{
       goAboutUs(){
-        let url  =this.openUrl
+        let url  ="https://www.phtfdata.com/m/novice"
         $('iframe').attr('src',url);
       },
-      whereGo(){
+      whereGO(){
         location.href = location.origin +  this.accessAuth.whereToGo
       }
     }
@@ -62,7 +61,7 @@
       height: 0.5rem;
       vertical-align: middle;
     }
-    .Go{
+    a{
       position: absolute;
       width: 1rem;
       height: 1rem;
@@ -71,7 +70,6 @@
     }
   }
   .Container{
-    overflow: hidden;
     margin-top: 1rem;
     width: 7.5rem;
     height: 100%;

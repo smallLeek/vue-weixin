@@ -602,6 +602,32 @@ function tSignature (WXURL) {
   }))
 }
 
+/**
+ * 获取交易记录
+ * @param USER_ID
+ * @param USER_TYPE
+ * @param BEGIN_TIME
+ * @param END_TIME
+ * @param BUSITYPE
+ * @param QUERY_DATETYPE
+ * @param CURR_PAGE_NUM
+ * @param PER_PAGE_SIZE
+ * @returns {*}
+ */
+
+function tradAllRecord (USER_ID,USER_TYPE,BEGIN_TIME,END_TIME,BUSITYPE,QUERY_DATETYPE,CURR_PAGE_NUM,PER_PAGE_SIZE) {
+  return phtServer.globalPostData(urls.api_url_tradAllRecord,phtServer.submitData({
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE,
+    "BEGIN_TIME":BEGIN_TIME,
+    "END_TIME":END_TIME,
+    "BUSITYPE":BUSITYPE,
+    "QUERY_DATETYPE":QUERY_DATETYPE,
+    "CURR_PAGE_NUM":CURR_PAGE_NUM,
+    "PER_PAGE_SIZE":PER_PAGE_SIZE,
+  }))
+}
+
 
 
 export  {
@@ -639,6 +665,7 @@ export  {
   FreezePrincipalList,
   DdProjTradeRecord,
   queryInvestListApp,
-  accountProfitApp
+  accountProfitApp,
+  tradAllRecord
 }
 

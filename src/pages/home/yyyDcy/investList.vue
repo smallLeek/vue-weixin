@@ -4,7 +4,7 @@
     <div class="yyyList">
       <div class="yyy_area">
         <div class="area_title">
-          <img src="../../../../static/images/home/home_yyy_title.png" class="area_title_img">
+          <img @click.prevent src="../../../../static/images/home/home_yyy_title.png" class="area_title_img">
         </div>
         <div>
           <ul v-for="list in yyyData" v-if="yyyData" v-on:click="goYyy(list.PROJ_CODE)">
@@ -44,7 +44,7 @@
     <div class="dtyList">
       <div class="dty_area">
         <div class="area_title">
-          <img src="../../../../static/images/home/home_dcy_title.png" class="area_title_img">
+          <img @click.prevent src="../../../../static/images/home/home_dcy_title.png" class="area_title_img">
         </div>
         <div>
           <ul v-for="list in dcyData" v-if="dcyData" v-on:click="goDty(list.PROJ_CODE)">

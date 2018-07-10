@@ -49,6 +49,7 @@
 
     },
     methods:{
+      ...mapActions({setAccessAuth: 'setAccessAuth'}),
       loopBanner () {
         let that =this;
         apis.getBanner("huoqiapp_banner").then((data)=> {
@@ -60,7 +61,7 @@
             "CREATE_DATE": "",
             "FILE_LINK_TYPE": 1,
             "FILE_NAME": "app-banner-修改.png",
-            "FILE_PATH": "../../../static/images/home/risk.png",
+            "FILE_PATH":require("../../../static/images/home/risk.png"),
             "FILE_TITLE": "风险承受能力评估",
             "FILE_TYPE": "huoqiapp_banner",
             "IS_LOGIN": "1",
@@ -92,7 +93,9 @@
       },
       changeBanner (list) {
         if(list.FILE_PATH ==  "../../../static/images/home/risk.png"){
+          this.setAccessAuth({whereToGo:'/wx/home'})
           this.$router.push({path:'/blank'})
+
         }else{
           /**
            * 判断点击banner图是否登录
@@ -102,10 +105,11 @@
               window.open(list.LINK_COMMENT)
             }else{
               //如果没有登陆就进登陆页面
-              location.href =  userAge.loginUrl()
+              //location.href =  userAge.loginUrl()
+              this.$router.push({path:'/loginRegister/login'})
             }
           }else{
-            console.log(list.LINK_COMMENT)
+            this.setAccessAuth({whereToGo:'/wx/home'})
             this.$router.push({path:'/detail',query:{stage:list.LINK_COMMENT}})
           }
         }

@@ -143,6 +143,7 @@ export default {
         });
     },
     goLine(){
+      this.setAccessAuth({whereToGo:'/wx/home'})
       this.$router.push({path:'/securitys'})
     },
     goUserInfo(){

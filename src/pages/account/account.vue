@@ -44,19 +44,19 @@
             <span>账户提现</span>
           </router-link>
         </li>
-        <li @click="withDraw()">
+        <li @click="goNovice()">
           <router-link to="">
             <img src="../../../static/images/user/user_help_icon.png">
             <span>新手帮助</span>
           </router-link>
         </li>
-        <li @click="withDraw()">
-          <a @click="shareInvitationShow()">
+        <li @click="GoshareInfo()">
+          <a>
             <img src="../../../static/images/user/user_share_icon.png">
             <span>分享邀请</span>
           </a>
         </li>
-        <li @click="withDraw()">
+        <li @click="GoSecurity()">
           <a>
             <img src="../../../static/images/user/user_security_center_icon.png">
             <span>安全中心</span>
@@ -106,6 +106,7 @@
 
     },
     methods:{
+      ...mapActions({setAccessAuth: 'setAccessAuth'}),
       //我的-资产总计(元)/可用余额(元)/累计收益
       newAccountDataForApp() {
         let userId = this.userInfo.ID;
@@ -125,11 +126,18 @@
       ttyAccount(){
         this.$router.push('/ttyAccount')
       },
+      GoSecurity(){
+        this.$router.push('/security')
+      },
       dtyAccount(){
         this.$router.push('/dtyAccount')
       },
-      shareInvitationShow(){
-        $('.shareInvitation').show()
+      GoshareInfo(){
+        this.$router.push('/shareInfo')
+      },
+      goNovice(){
+        this.setAccessAuth({whereToGo:'/wx/account'})
+        this.$router.push('/novice')
       },
       withDraw(){
         $('.downloadRemind').show()

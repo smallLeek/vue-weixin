@@ -33,12 +33,6 @@ export default {
     }
   },
   mounted(){
-    window.addEventListener("popstate", function(e) {
-      if (!this.allowBack) {    //    这个allowBack 是存在vuex里面的变量
-        window.history.go(1)
-      }
-
-    }, false);
   },
   computed:{
     //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
