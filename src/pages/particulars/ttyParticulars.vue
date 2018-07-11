@@ -1,6 +1,9 @@
 <template>
   <div class="tty" v-title="'天天盈'" v-if="TtyDetail">
     <div class="modal-box" v-if="headShow">
+      <div class="closeModal" @click="mobileHide()">
+
+      </div>
       <div class="bottom"  @click ='onIsFocus'>
         <div class="risk" v-show="headShow" v-if="risk">
           <span class="title-list" v-if="investscoreNo" @click="openInvest()">您尚未完成<b class="openInvest">《出借人风险承受能力评估》</b>，平台无法判断您是否能承受该项目的风险,请知悉。</span>
@@ -88,7 +91,7 @@
     </div>
     <div class="bottom_input" v-if="bottomInputShow">
       <div class="input_text">
-        <input type="text" placeholder="投资金额" v-model="widthDrawMoney" @focus="showBox()" ref="content" @blur="mobileHide()">
+        <input type="text" placeholder="投资金额" v-model="widthDrawMoney" @focus="showBox()" ref="content">
         <span>元</span>
       </div>
       <div class="input_submit" @click="submitWithdraw()">
@@ -222,7 +225,7 @@
         this.headShow =true
       },
       submitWithdraw(){
-        this.$refs.content.blur();
+        this.$refs.content.focus();
         apis.userBaseData(this.userInfo.ID, '1').then((data) => {
           let self =this;
           this.userData = data.result.main_data;
@@ -332,6 +335,14 @@
     left: 0;
     z-index: 999999;
     background: rgba(0,0,0,.5);
+    .closeModal{
+      width: 100%;
+      height: 95%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,.5);
+    }
 
   }
 
