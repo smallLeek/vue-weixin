@@ -1,5 +1,5 @@
 <template>
-  <div class="earnings">
+  <div class="earnings" v-title="'收益试算'">
     <div class="title">
       <b @click="goBackOne()">
         <img src="../../../static/images/goBack.png">
@@ -11,63 +11,93 @@
       <ul>
         <li>
           <span><img src="../../../static/images/earnings/earnings_icon1.png">项目名称</span>
-          <span>按揭宝2015924</span>
+          <span>{{earning.PROJ_NAME}}</span>
         </li>
         <li>
-          <span><img src="../../../static/images/earnings/earnings_icon2.png">收益率 <b>15%</b></span>
-          <span><img src="../../../static/images/earnings/earnings_icon3.png">期限 <b>9个月</b></span>
+          <span><img src="../../../static/images/earnings/earnings_icon2.png">收益率 <b>{{earning.ANNUAL_RATE}}%</b></span>
+          <span><img src="../../../static/images/earnings/earnings_icon3.png">期限 <b>{{earning.LOAN_LIMITTIME}}个月</b></span>
         </li>
       </ul>
       <h1>输入本金</h1>
       <p>
         <span><img src="../../../static/images/earnings/earnings_icon4.png">计划投入本金</span>
-        <span><input type="number" placeholder="请输入起投金额整数倍"></span>
+        <span><input type="number" placeholder="请输入起投金额整数倍" v-model="earningMoney"></span>
       </p>
-      <h2>起投金额100元</h2>
+      <h2>起投金额{{earning.MIN_BID_AMOUNT}}元</h2>
     </div>
     <div class="bth">
-      <a class="input_btn">收益试算</a>
-      <ul>
+      <a class="input_btn" @click="getMoneyShow()">收益试算</a>
+      <ul v-if="getMoney">
         <li>
           <span>预计收益</span>
-          <span>82.5</span>
+          <span>{{getMoney}}</span>
         </li>
         <li>
           <span>预计本息</span>
-          <span>3082.5</span>
+          <span>{{moreMoney}}</span>
         </li>
       </ul>
     </div>
   </div>
 </template>
 <script>
+  import * as regexfun from '../../../src/assets/js/jwt.regex';
+  import {mapGetters} from 'vuex'
   export default {
     data(){
       return {
         datas:null,
+        rechargeLast:null,
+        earningMoney:null,
+        getMoney:null,
+        moreMoney:null
+      }
+    },
+    computed: {
+      ...mapGetters(
+        ['earning']
+      ),
+    },
+    watch: {
+      earningMoney: function (value) {
+        this.getrechargeLast();
+        this.clearNoNum(value);
       }
     },
     mounted(){
-
-      this.getDatas();
     },
     methods:{
+      getrechargeLast() {
+        this.rechargeLast = ((this.earningMoney-0).toFixed(2));
+      },
       //顶部的返回按钮
       goBackOne(){
         this.$router.push({path:'/yyyParticulars',query:{proj_code:this.$route.query.id}});
       },
-      //获得基本信息
-      getDatas(){
-        console.log( this.bs.$on('e:earnings',function (data) {
-          return data
-        }));
-        this.bs.$on('e:earnings', function (data) {
-          console.log(data);
-          // setTimeout(function () {
-          //   console.log(data);
-          //   this.datas =  data;
-          // },1500);
-        });
+      //输入充值金额正则
+      clearNoNum (obj){
+        if(typeof obj == "number"){
+          obj = obj + '';
+        }
+        obj = obj.replace(/[^\d.]/g,"");
+        obj = obj.replace(/^\./g,"");
+        obj = obj.replace(/\.{2,}/g,".");
+        obj = obj.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+        obj = obj.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');
+        if(obj.indexOf(".")< 0 && obj !=""){
+          obj= parseFloat(obj);
+        }
+        this.earningMoney = obj
+      },
+      getMoneyShow(){
+        if (this.rechargeLast%(this.earning.MIN_BID_AMOUNT-0)!=0 ||this.rechargeLast==null ||this.rechargeLast==''||this.rechargeLast==0){
+          regexfun.handleFailMsg(this,'投资金额必须为最低投资金额的整数倍')
+        }else{
+          this.getMoney =(this.rechargeLast*((this.earning.ANNUAL_RATE-0)/100)/12*(this.earning.LOAN_LIMITTIME-0)).toFixed(2);
+
+          this.moreMoney = ((this.rechargeLast-0)+ (this.getMoney-0)).toFixed(2)
+        }
+
       }
     }
   }

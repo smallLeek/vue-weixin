@@ -1,9 +1,9 @@
 <template>
   <div class="box" v-title="'风险揭示书'">
     <div class="title">
-      <router-link to="/setting">
+      <a @click="goBacks()">
         <img src="../../../../static/images/goBack.png">
-      </router-link>
+      </a>
       <span>风险揭示书</span>
     </div>
     <div class="Container">
@@ -24,6 +24,9 @@
       this.goAboutUs()
     },
     methods:{
+      goBacks(){
+        this.$router.go(-1);
+      },
       goAboutUs(){
         let url  ="https://www.phtfdata.com/web6/hander/guarantee.do"
         $('iframe').attr('src',url);

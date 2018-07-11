@@ -7,226 +7,82 @@
                 </router-link>
             </span>
             <span>交易记录</span>
-            <span>
-                <a class="explainBtn"><img src="../../../static/images/transaction_filtrate.png"></a>
-            </span>
-        </div>
-        <div class="nav">
-            <ul>
-                <li>
-                    <span>5月</span>
-                    <span>2018</span>
-                </li>
-                <li class="on">
-                    <span>4月</span>
-                    <span>2018</span>
-                </li>
-                <li>
-                    <span>3月</span>
-                    <span>2018</span>
-                </li>
-                <li>
-                    <span>2月</span>
-                    <span>2018</span>
-                </li>
-                <li>
-                    <span>1月</span>
-                    <span>2018</span>
-                </li>
-                <li>
-                    <span>12月</span>
-                    <span>2017</span>
-                </li>
-            </ul>
         </div>
         <div class="list">
-            <h1>
+            <h1  v-if="tradAllRecordLists">
                 <span>项目</span>
                 <span>单位(元)</span>
             </h1>
-            <ul>
-                <li>
+            <ul  v-if="tradAllRecordLists">
+                <li v-for="item in tradAllRecordList">
                     <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
+                        <span>{{item.TYPESTR}}</span>
+                        <span>{{item.SHOWTIME}}</span>
                     </p>
                     <p>
-                        <span>+1.63</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span class="on">-10,100.00</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span>+1.63</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span class="on">-10,100.00</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span>+1.63</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span class="on">-10,100.00</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span>+1.63</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span class="on">-10,100.00</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span>+1.63</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span class="on">-10,100.00</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span>+1.63</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span class="on">-10,100.00</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span>+1.63</span>
-                        <span>交易成功</span>
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        <span>刮刮卡</span>
-                        <span>2015-12-22 09:28:09</span>
-                    </p>
-                    <p>
-                        <span class="on">-10,100.00</span>
-                        <span>交易成功</span>
+                        <span :class="{ 'on': item.TYPE=='1' || item.TYPE=='4' || item.TYPE=='12' || item.TYPE=='3'||
+                         item.TYPE=='11','active':item.TYPE=='0' && item.STATE=='交易失败','actives':item=='1'&&item.STATE=='交易失败'}">{{fn(item)}}{{item.AMOUNT | farmatAmount}}</span>
+                        <span>{{item.STATE}}</span>
                     </p>
                 </li>
             </ul>
-        </div>
-        <div class="inquire">
-            <div class="box">
-                <ul>
-                    <li class="on">全部</li>
-                    <li>充值</li>
-                    <li>提现</li>
-                    <li>天天盈</li>
-                    <li>定投盈</li>
-                    <li>分享奖励</li>
-                    <li>存钱罐收益</li>
-                    <li>其他</li>
-                </ul>
+          <div class="noData" v-if="!tradAllRecordLists">
+            <div>
+              <img src="../../../static/images/noData.png" alt="">
+              <p>还没有交易记录</p>
             </div>
+          </div>
         </div>
     </div>
 </template>
 <script>
-  import formatTimes from '../../assets/js/util/lib.formatTime'
+  import formatTimes from '../../assets/js/util/lib.formatTime';
+  import * as apis from '../../assets/js/jwt.apis';
+  import {mapGetters, mapActions,mapState} from 'vuex'
+  import '../../assets/js/filter'
 export default {
     data(){
       return{
-        timeList:null
+        timeList:null,
+        tradAllRecordList:null,
+        addSlow:null,
+        tradAllRecordLists:null
       }
     },
+  computed:{
+  ...mapGetters([
+      'loginStatus','userInfo','tokenCode'
+    ])
+  },
     mounted(){
       this.timeList =formatTimes()
-        $('.explainBtn').click(function(){
-            $('.inquire').show()
-        })
-        $('.inquire .box li').click(function(){
-            $('.inquire').hide()
-        })
+      let beginTime =this.timeList.min;
+      let endTime = this.timeList.max;
+      apis.tradAllRecord(this.userInfo.ID,'1',beginTime[5],endTime[0],'0',endTime[0],'1','100000').then((data)=>{
+        if(data.status ='00000000'){
+         this.tradAllRecordList =data.result.main_data.data;
+          this.tradAllRecordLists = !(this.tradAllRecordList === undefined || this.tradAllRecordList.length == 0);
+        }
 
-$(document).mouseup(function(e){
-  let _con = $('.inquire .box');
-  if(!_con.is(e.target) && _con.has(e.target).length === 0){
-    $('.inquire').hide()
+      })
+
+    },
+  methods:{
+      fn(item){
+        if (item.TYPE=='1'||item.TYPE=='3'||item.TYPE=='4'||item.TYPE=='11'||item.TYPE=='12'||item.TYPE=='14'||item.TYPE=='15'||item.TYPE=='16') {
+          return '-'
+        }else if(item.TYPE=='9'){
+          if (item.TYPESTR=="商品兑换"||item.TYPESTR=="预付利息"||item.TYPESTR=="项目手续费") {
+           return '-'
+          }else {
+            return '+'
+          }
+        }else {
+          return "+"
+        }
+
+      }
   }
-});
-    }
 }
 </script>
 <style lang="less" scoped>
@@ -236,50 +92,28 @@ $(document).mouseup(function(e){
 }
 /* title */
 .title{
-    margin: auto;
-    width: 7.5rem;
+  margin: auto;
+  width: 7.5rem;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.36rem;
+  text-align: center;
+  color: #fff;
+  background-color: #fb4747;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  img{
+    height: 0.5rem;
+    vertical-align: middle;
+  }
+  a{
+    position: absolute;
+    width: 1rem;
     height: 1rem;
-    line-height: 1rem;
-    font-size: 0.4rem;
-    text-align: center;
-    color: #fff;
-    background-color: #fd4747;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    span{
-        flex: 1;
-    }
-    span:first-child{
-        img{
-            position: absolute;
-            left: 0.2rem;
-            top: 0.25rem;
-            height: 0.5rem;
-        }
-        a{
-            display: block;
-            width: 1rem;
-            height: 1rem;
-        }
-    }
-    span:nth-child(2){
-        font-size: 0.36rem;
-    }
-    span:last-child{
-        a{
-            float: right;
-            margin-right: 0.3rem;
-            margin-top: 0.05rem;
-            width: 1rem;
-            height: 1rem;
-        }
-        img{
-            margin-top: -0.1rem;
-            height: 0.4rem;
-        }
-    }
+    left: 0;
+    top: -0.02rem
+  }
 }
 .nav{
         width: 7.5rem;
@@ -318,7 +152,7 @@ $(document).mouseup(function(e){
     h1{
         position: fixed;
         margin: auto;
-        top: 2.2rem;
+        top: 1rem;
         width: 7.5rem;
         height: 0.6rem;
         line-height: 0.7rem;
@@ -336,7 +170,7 @@ $(document).mouseup(function(e){
         }
     }
     ul{
-        margin-top: 2.8rem;
+        margin-top: 1.8rem;
         padding: 0 0.2rem;
         background-color: #fff;
         border-top: 1px solid #e0e0e0;
@@ -375,6 +209,12 @@ $(document).mouseup(function(e){
                 span.on{
                     color: #ff8400
                 }
+              span.active{
+                color:#999
+              }
+              span.actives{
+                color:#999
+              }
             }
         }
         li:last-child{
@@ -420,5 +260,26 @@ $(document).mouseup(function(e){
             }
         }
     }
+}
+.noData{
+  text-align: center;
+  div{
+    position: absolute;
+    width: 100%;
+    height: 2.04rem;
+    margin: auto;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    p{
+      font-size: 0.32rem;
+      color: #666;
+    }
+    img{
+      width: 1.85rem;
+      height: 2.04rem;
+    }
+  }
 }
 </style>

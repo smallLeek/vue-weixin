@@ -1,5 +1,5 @@
 <template>
-  <div class="ttyAccount">
+  <div class="ttyAccount" v-title="'天天盈账务'">
     <div class="title">
       <b @click="goBackOne()">
         <img src="../../../../static/images/goBack.png">
@@ -10,7 +10,7 @@
     <div v-if="ttyDetail">
       <div class="fund">
         <h2><img src="../../../../static/images/account/account_rate.png"> 昨日年化收益:</h2>
-        <h1>{{ttyDetail.Y_PERCENT}}<span>%</span></h1>
+        <h1>{{ttyDetail.Y_PERCENT | farmatAmount}}<span>%</span></h1>
         <ul class="fund_model">
           <li>
             <span>昨日收益(元)</span>
@@ -63,6 +63,7 @@
         <button v-on:click="goTty()">投资</button>
       </div>
     </div>
+    <download-remind class="none"></download-remind>
     <div class="explain" v-if="isShow">
       <h1>账户说明</h1>
       <ul>
@@ -95,8 +96,8 @@
         <img class="closeBtn" src="../../../../static/images/account/account_close.png">
       </p>
     </div>
-    <download-remind class="none"></download-remind>
   </div>
+
 </template>
 <script>
   import * as apis from '../../../assets/js/jwt.apis'

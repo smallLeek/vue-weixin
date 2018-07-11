@@ -3,7 +3,7 @@
     <!-- 天天盈专区 -->
     <div class="tty_area">
       <div class="area_title">
-        <img src="../../../../static/images/home/home_tty_title.png" class="area_title_img">
+        <img @click.prevent src="../../../../static/images/home/home_tty_title.png" class="area_title_img">
         <!--<span v-on:click="goMore()">更多<img src="../../../../static/images/more.png"></span>-->
       </div>
       <!--天天盈项目-->

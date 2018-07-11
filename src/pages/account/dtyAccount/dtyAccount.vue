@@ -76,7 +76,8 @@
               <p>
                 <span>投资金额</span>
                 <span>待收收益</span>
-                <span>还款日期</span>
+                <span v-if="item.STATUS_NAME == '投资中'">投资进度</span>
+                <span v-else>还款日期</span>
               </p>
               <p>
                 <span>{{item.INVEST_AMOUNT |farmatAmount}}元</span>
@@ -100,7 +101,8 @@
               <p>
                 <span>投资金额</span>
                 <span>待收收益</span>
-                <span>还款日期</span>
+                <span v-if="item.STATUS_NAME == '投资中'">投资进度</span>
+                <span v-else>还款日期</span>
               </p>
               <p>
                 <span>{{item.INVEST_AMOUNT |farmatAmount}}元</span>
@@ -494,7 +496,7 @@
             text-align: center;
             span{
               flex: 1;
-              color: #e7e7e7;
+              color: #999;
             }
           }
           p:last-child{

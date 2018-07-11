@@ -1,7 +1,7 @@
 <template>
-  <div class="security">
+  <div class="security" v-title="'安全中心'">
     <div class="title">
-        <router-link to="/setting">
+        <router-link to="/account">
             <img src="../../../../static/images/goBack.png">
         </router-link>
         <span>安全中心</span>
@@ -56,14 +56,14 @@
             <span><b>未开启</b><img src="../../../../static/images/security/security_more.png"></span>
           </a>
         </li>
-      </ul>      
+      </ul>
     </div>
 
   </div>
 </template>
 <script>
 export default {
-  
+
 }
 </script>
 <style lang="less" scoped>
@@ -155,7 +155,7 @@ export default {
       span:first-child{
         b:last-child{
           display: none;
-        }            
+        }
       }
     }
     li.on{

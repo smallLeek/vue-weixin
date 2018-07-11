@@ -1,5 +1,5 @@
 <template>
-    <div class="setting">
+    <div class="setting" v-title="'设置'">
         <div class="title">
             <router-link to="/account">
                 <img src="../../../../static/images/goBack.png">
@@ -30,7 +30,7 @@
             <input type="button" value="退出当前账号">
         </div>
         <div class="bottom">
-            <img src="../../../../static/images/setting/setting_service.png">
+            <img @click.prevent  src="../../../../static/images/setting/setting_service.png">
         </div>
     </div>
 </template>
@@ -50,15 +50,17 @@ export default {
     ])
   },
   methods:{
-    ...mapActions({setSignOut:'setSignOut'}),
+    ...mapActions({setSignOut:'setSignOut',setAccessAuth:'setAccessAuth'}),
     goDatum(){
       this.$router.push({path: '/datum'})
     },
     //去风险承受能力评估
     goRisk() {
+      this.setAccessAuth({whereToGo:'/wx/setting'})
      this.$router.push({path:'/blank'})
     },
     securitys(){
+      this.setAccessAuth({whereToGo:'/wx/setting'})
       this.$router.push({path:'/securitys'})
     },
     aboutUs(){

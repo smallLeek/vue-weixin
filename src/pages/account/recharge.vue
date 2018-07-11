@@ -113,6 +113,7 @@
       }
     },
     methods: {
+      ...mapActions({setAccessAuth: 'setAccessAuth'}),
 //    获取银行卡信息
       getBankInfo() {
         //首先获取当前用户信息
@@ -142,7 +143,8 @@
       },
       //更多问题
       novice(){
-        location.href = "https://www.phtfdata.com/m/novice"
+        this.setAccessAuth({whereToGo:'/wx/recharge'})
+        this.$router.push({path:'/novice'})
       },
       //充值后余额
       getrechargeLast() {

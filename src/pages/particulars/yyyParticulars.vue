@@ -228,7 +228,6 @@
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
             this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
-            this.setEarning(yyyDetail)
             setWechatTitle(this.yyyDetail.PROJ_NAME);
             //判断用户类型
             if(user_role == "INVESTOR" ){
@@ -266,6 +265,7 @@
               this.type ='1';
               this.typeName = "您的账户类型不支持投资"
             }
+            this.setEarning(this.yyyDetail)
           })
         })
 

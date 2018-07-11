@@ -149,9 +149,9 @@
     },
     methods: {
       //视图发生动作
-      ...mapActions({setPayDetail: 'setPayDetail'}),
+      ...mapActions({setPayDetail: 'setPayDetail',setAccessAuth:'accessAuth'}),
       guarantee(){
-        this.$router.push({path:'/guarantee'})
+        this.$router.push({path:'/guarantee'});
       },
       //去投资列表
       ttyInvestmentList(){

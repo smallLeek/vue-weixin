@@ -1,9 +1,9 @@
 <template>
   <div class="box" v-title="'安全保障'">
     <div class="title">
-      <router-link to="/setting">
+      <a @click="whereGO">
         <img src="../../../static/images/goBack.png">
-      </router-link>
+      </a>
       <span>安全保障</span>
     </div>
     <div class="Container">
@@ -14,11 +14,17 @@
 </template>
 
 <script>
+  import {mapGetters, mapActions,mapState} from 'vuex'
   export default {
     data(){
       return{
 
       }
+    },
+    computed:{
+      ...mapGetters([
+        'loginStatus','userInfo','tokenCode','accessAuth'
+      ])
     },
     mounted(){
       this.goAboutUs()
@@ -27,6 +33,9 @@
       goAboutUs(){
         let url  ="https://www.phtfdata.com/web6/hander/MsafetyGuarantee.do"
         $('iframe').attr('src',url);
+      },
+      whereGO(){
+        location.href = location.origin +  this.accessAuth.whereToGo
       }
     }
   }

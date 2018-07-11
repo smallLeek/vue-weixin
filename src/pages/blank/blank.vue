@@ -1,9 +1,9 @@
 <template>
   <div class="box" v-title="'风险能力评估'">
     <div class="title">
-      <router-link to="/setting">
+      <a @click="whereGo">
         <img src="../../../static/images/goBack.png">
-      </router-link>
+      </a>
       <span>风险能力评估</span>
     </div>
     <div class="Container">
@@ -24,7 +24,7 @@
     },
     computed:{
       ...mapGetters([
-        'loginStatus','userInfo','tokenCode'
+        'loginStatus','userInfo','tokenCode','accessAuth'
       ])
     },
     mounted() {
@@ -45,6 +45,9 @@
             $('iframe').attr('src',url);
           }
         })
+      },
+      whereGo(){
+        location.href = location.origin +  this.accessAuth.whereToGo
       }
     }
   }

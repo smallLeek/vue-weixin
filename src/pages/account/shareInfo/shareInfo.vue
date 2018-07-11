@@ -1,10 +1,10 @@
 <template>
-  <div class="box" v-title="'详情'">
+  <div class="box" v-title="'分享奖励'">
     <div class="title">
-      <span @click="whereGo" class="Go">
+      <router-link to="/account">
         <img src="../../../../static/images/goBack.png">
-      </span>
-      <span>详情</span>
+      </router-link>
+      <span>分享奖励</span>
     </div>
     <div class="Container">
       <iframe  name="invest" frameBorder=0  width="100%"></iframe>
@@ -14,29 +14,20 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions,mapState} from 'vuex'
   export default {
     data(){
       return{
-        openUrl:null
+        proj_code:null
       }
     },
-    computed:{
-      ...mapGetters([
-        'accessAuth'
-      ])
-    },
     mounted(){
-      this.openUrl = this.$route.query.stage;
       this.goAboutUs()
+      this.proj_code = this.$route.query.pro;
     },
     methods:{
       goAboutUs(){
-        let url  =this.openUrl
+        let url  ="https://www.phtfdata.com/web6/hander/shareIntro.do"
         $('iframe').attr('src',url);
-      },
-      whereGo(){
-        location.href = location.origin +  this.accessAuth.whereToGo
       }
     }
   }
@@ -62,7 +53,7 @@
       height: 0.5rem;
       vertical-align: middle;
     }
-    .Go{
+    a{
       position: absolute;
       width: 1rem;
       height: 1rem;
