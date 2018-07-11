@@ -1,5 +1,39 @@
 <template>
   <div class="tty" v-title="'天天盈'" v-if="TtyDetail">
+    <div class="modal-box" v-if="headShow">
+      <div class="bottom"  @click ='onIsFocus'>
+        <div class="risk" v-show="headShow" v-if="risk">
+          <span class="title-list" v-if="investscoreNo" @click="openInvest()">您尚未完成<b class="openInvest">《出借人风险承受能力评估》</b>，平台无法判断您是否能承受该项目的风险,请知悉。</span>
+          <span class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</span>
+        </div>
+        <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
+          <ul class="boxline">
+            <li>起投金额</li>
+            <li>最大单笔限额</li>
+          </ul>
+          <ul class="boxline boxColor">
+            <li>{{TtyDetail.MIN_AMOUNT | farmatAmount}}元</li>
+            <li>{{TtyDetail.MAX_AMOUNT | farmatAmount}}元</li>
+          </ul>
+          <ul class="boxline boxBlance">
+            <li>账户余额</li>
+            <li></li>
+          </ul>
+          <div class="boxSafe">
+            <p>{{(this.userData.AVAILABLE_BALANCE) | farmatAmount}}元</p>
+            <p>
+              <span v-if="agree" @click="agreement">
+                <img class="on" src="../../../static/images/investOn.png">阅读并同意
+              </span>
+              <span v-if="!agree" @click="agreement">
+                <img class="on" src="../../../static/images/investIn.png">阅读并同意
+              </span>
+              <a href="javascript:;" @click="guarantee()">《风险揭示书》</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="title">
       <router-link to="/home">
         <img src="../../../static/images/goBack.png">
@@ -52,55 +86,17 @@
         </li>
       </ul>
     </div>
-    <div class="modal-box" v-show="headShow">
-      <div class="close" @click="HShow()">
-
+    <div class="bottom_input" v-if="bottomInputShow">
+      <div class="input_text">
+        <input type="text" placeholder="投资金额" v-model="widthDrawMoney" @focus="showBox()" ref="content" @blur="mobileHide()">
+        <span>元</span>
+      </div>
+      <div class="input_submit" @click="submitWithdraw()">
+        <a>立即投资</a>
       </div>
     </div>
-
-    <div class="bottom"  @click ='onIsFocus'>
-      <div class="risk" v-show="headShow" v-if="risk">
-        <span class="title-list" v-if="investscoreNo" @click="openInvest()">您尚未完成<b class="openInvest">《出借人风险承受能力评估》</b>，平台无法判断您是否能承受该项目的风险,请知悉。</span>
-        <span class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</span>
-      </div>
-      <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
-      <ul class="boxline">
-        <li>起投金额</li>
-        <li>最大单笔限额</li>
-      </ul>
-      <ul class="boxline boxColor">
-        <li>{{TtyDetail.MIN_AMOUNT | farmatAmount}}元</li>
-        <li>{{TtyDetail.MAX_AMOUNT | farmatAmount}}元</li>
-      </ul>
-      <ul class="boxline boxBlance">
-        <li>账户余额</li>
-        <li></li>
-      </ul>
-        <div class="boxSafe">
-          <p>{{(this.userData.AVAILABLE_BALANCE) | farmatAmount}}元</p>
-          <p>
-              <span v-if="agree" @click="agreement">
-                <img class="on" src="../../../static/images/investOn.png">阅读并同意
-              </span>
-            <span v-if="!agree" @click="agreement">
-                <img class="on" src="../../../static/images/investIn.png">阅读并同意
-              </span>
-            <a href="javascript:;" @click="guarantee()">《风险揭示书》</a>
-          </p>
-        </div>
-      </div>
-      <div class="bottom_input" v-if="bottomInputShow">
-        <div class="input_text">
-          <input type="text" placeholder="投资金额" v-model="widthDrawMoney" @focus="showBox()" ref="content">
-          <span>元</span>
-        </div>
-        <div class="input_submit" @click="submitWithdraw()">
-          <a>立即投资</a>
-        </div>
-      </div>
-      <div class="bottom_over" v-if="bottomOverShow">
-        <span>已售罄</span>
-      </div>
+    <div class="bottom_over" v-if="bottomOverShow">
+      <span>已售罄</span>
     </div>
   </div>
 </template>
@@ -188,6 +184,9 @@
       },
       onIsFocus(){
         this.$refs.content.focus()
+      },
+      mobileHide(){
+        this.headShow =false
       },
       agreement(){
         (this.agree == false) ? this.agree = true : this.agree = false;
@@ -325,6 +324,17 @@
   }
 </script>
 <style lang="less" scoped>
+  .modal-box{
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    background: rgba(0,0,0,.5);
+
+  }
+
   .tty {
     background-color: #f8f8f8;
     padding-bottom: 0.94rem;
@@ -483,22 +493,13 @@
       }
     }
   }
-  .modal-box{
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999999;
-    .close{
-      background: rgba(0,0,0,.5);
-      height: 100%;
-      width: 100%;
-    }
-  }
   .bottom{
+    -webkit-tap-highlight-color: transparent;
+    position: absolute;
+    left: 0;
+    bottom: 0;
     .bottomList{
-      position: fixed;
+      position: absolute;
       bottom: 0.93rem;
       z-index: 99999999;
       width: 7.5rem;
@@ -526,7 +527,7 @@
       }
     }
     .bottom_over{
-      position: fixed;
+      position: absolute;
       bottom: 0;
       height: 0.94rem;
       text-align: center;
@@ -539,76 +540,6 @@
       border-top: 1px solid #e0e0e0;
       color:#fff;
     }
-    .bottom_input {
-      position: fixed;
-      bottom: 0;
-      height: 0.94rem;
-      z-index: 9999999999999;
-      width: 7.5rem;
-      margin: auto;
-      background-color: #fff;
-      border-top: 1px solid #e0e0e0;
-      .input_text {
-        float: left;
-        margin-top: 0.2rem;
-        margin-left: 0.2rem;
-        width: 4.7rem;
-        height: 0.6rem;
-        border: 1px solid #e0e0e0;
-        border-radius: 1rem;
-        input {
-          float: left;
-          width: 3.5rem;
-          margin-left: 0.2rem;
-          margin-top: 0.1rem;
-          font-size: 0.3rem;
-          border: none;
-          outline: medium;
-          color: #333333;
-        }
-        ::-moz-placeholder {
-          color: #999999;
-          line-height: 0.35rem;
-        }
-        :-ms-input-placeholder {
-          color: #999999;
-          line-height: 0.35rem;
-        }
-        ::-webkit-input-placeholder {
-          color: #999999;
-          line-height: 0.35rem;
-        }
-        span {
-          float: right;
-          margin-right: 0.2rem;
-          line-height: 0.6rem;
-          font-size: 0.3rem;
-          color: #333333;
-        }
-      }
-      .input_submit {
-        float: right;
-        width: 2.3rem;
-        height: 0.94rem;
-        line-height: 0.94rem;
-        color: #fff;
-        font-size: 0.32rem;
-        text-align: center;
-        a {
-          display: block;
-          width: 2.3rem;
-          height: 0.94rem;
-          line-height: 0.94rem;
-          color: #fff;
-          font-size: 0.32rem;
-          text-align: center;
-          background-color: #ffae00;
-        }
-        .end {
-          background-color: #bbbbbb;
-        }
-      }
-    }
   }
   .doAgree{
     position: absolute;
@@ -617,9 +548,9 @@
     z-index: 9999;
   }
   .risk{
-   position: fixed;
+   position: absolute;
     padding-top: .1rem;
-    width: 100%;
+    width: 7.5rem;
     height: .8rem;
     bottom: 3.33rem;
     font-size: .32rem;
@@ -675,6 +606,76 @@
             margin-bottom: -.03rem;
           }
         }
+      }
+    }
+  }
+  .bottom_input {
+    position: fixed;
+    bottom: 0;
+    height: 0.94rem;
+    z-index: 9999999999999;
+    width: 7.5rem;
+    margin: auto;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    .input_text {
+      float: left;
+      margin-top: 0.2rem;
+      margin-left: 0.2rem;
+      width: 4.7rem;
+      height: 0.6rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 1rem;
+      input {
+        float: left;
+        width: 3.5rem;
+        margin-left: 0.2rem;
+        margin-top: 0.1rem;
+        font-size: 0.3rem;
+        border: none;
+        outline: medium;
+        color: #333333;
+      }
+      ::-moz-placeholder {
+        color: #999999;
+        line-height: 0.35rem;
+      }
+      :-ms-input-placeholder {
+        color: #999999;
+        line-height: 0.35rem;
+      }
+      ::-webkit-input-placeholder {
+        color: #999999;
+        line-height: 0.35rem;
+      }
+      span {
+        float: right;
+        margin-right: 0.2rem;
+        line-height: 0.6rem;
+        font-size: 0.3rem;
+        color: #333333;
+      }
+    }
+    .input_submit {
+      float: right;
+      width: 2.3rem;
+      height: 0.94rem;
+      line-height: 0.94rem;
+      color: #fff;
+      font-size: 0.32rem;
+      text-align: center;
+      a {
+        display: block;
+        width: 2.3rem;
+        height: 0.94rem;
+        line-height: 0.94rem;
+        color: #fff;
+        font-size: 0.32rem;
+        text-align: center;
+        background-color: #ffae00;
+      }
+      .end {
+        background-color: #bbbbbb;
       }
     }
   }
