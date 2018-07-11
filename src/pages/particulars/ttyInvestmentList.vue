@@ -12,7 +12,7 @@
     </h1>
     <div class="list" v-show="userData">
       <ul class="hasData" v-if="flag != 0">
-        <li v-for="item in userData">
+        <li v-for="item in userData" > 
           <span>
               <b>{{item.MOBILE}}</b>
               <b>{{item.ACCOUNT_DATETIME}}</b>
