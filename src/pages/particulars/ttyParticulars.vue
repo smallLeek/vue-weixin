@@ -526,20 +526,6 @@
         margin-top: 0.1rem;
       }
     }
-    .bottom_over{
-      position: absolute;
-      bottom: 0;
-      height: 0.94rem;
-      text-align: center;
-      z-index: 9999999999999;
-      width: 7.5rem;
-      margin: auto;
-      font-size: .32rem;
-      background-color: #bbb;
-      line-height: 0.94rem;
-      border-top: 1px solid #e0e0e0;
-      color:#fff;
-    }
   }
   .doAgree{
     position: absolute;
@@ -678,6 +664,20 @@
         background-color: #bbbbbb;
       }
     }
+  }
+  .bottom_over{
+    position: absolute;
+    bottom: 0;
+    height: 0.94rem;
+    text-align: center;
+    z-index: 9999999999999;
+    width: 7.5rem;
+    margin: auto;
+    font-size: .32rem;
+    background-color: #bbb;
+    line-height: 0.94rem;
+    border-top: 1px solid #e0e0e0;
+    color:#fff;
   }
 
 </style>
