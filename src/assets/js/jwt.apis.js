@@ -362,8 +362,9 @@ function queryNewAddPersonAsync(REQUEST_NO,METHOD_NAME,METHOD_TYPE,USER_ID,USER_
  * @param userRole
  * @param USER_ID
  * @param USER_TYPE
+ * @param redirectUrl
  */
-function xwbankWebNotify (platformUserNo, cust_type, userRole, USER_ID, USER_TYPE,redirectUrl) {
+function activateStockedUser (platformUserNo, cust_type, userRole, USER_ID, USER_TYPE,redirectUrl) {
   return phtServer.globalPostData(urls.api_url_activateStockedUser, phtServer.submitData({
     "platformUserNo": platformUserNo,
     "cust_type": cust_type,
@@ -678,7 +679,6 @@ export  {
   DdProj,
   selectMoneyManagementZTYD,
   WeiXinnewLogin,
-  xwbankWebNotify,
   DdProjDetail,
   DdProjRedeemCustList,
   queryProjDetail,
@@ -695,6 +695,7 @@ export  {
   queryInvestListApp,
   accountProfitApp,
   tradAllRecord,
-  changePhoneNum
+  changePhoneNum,
+  activateStockedUser
 }
 
