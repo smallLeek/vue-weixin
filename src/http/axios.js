@@ -56,7 +56,7 @@ axios.interceptors.response.use(data => {
 }, error => {
     $.showphtModal({
       withOneButton:0,
-      errorMsg: error.message,
+      errorMsg: "网络异常，请稍后重试！",
       type: 3
     })
 

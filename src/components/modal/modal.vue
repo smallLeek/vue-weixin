@@ -369,7 +369,7 @@
     -webkit-justify-content: center;
     -moz-justify-content: center;
     -ms-justify-content: center;
-    z-index: 9999999999999;
+    z-index: 99999999999999999999;
   }
   .pht-dialog-window{
     padding: .1rem 0;
