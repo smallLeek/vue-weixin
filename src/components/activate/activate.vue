@@ -17,6 +17,7 @@
 <script>
   import * as apis from '../../assets/js/jwt.apis.js'
   import store from '../../vuex/store'
+  import * as regexfun from '../../../src/assets/js/jwt.regex';
   export default {
     data(){
       return{
@@ -38,8 +39,13 @@
          */
         let userState = store.state.user;
         let userInfoList = userState.userInfo;
-        apis.personalRegister(userInfoList.YJF_ID,userInfoList.ID,"1",userInfoList.USER_ROLE, this.domain).then((data) => {
-          $('.xwUrl').append(data.result.main_data.url)
+        apis.activateStockedUser(userInfoList.YJF_ID,"1",userInfoList.USER_ROLE,userInfoList.ID, "1",this.domain).then((data) => {
+          if(data.status =='00000000'){
+            $('.xwUrl').append(data.result.main_data.url)
+          }else{
+            regexfun.handleFailMsg(this,data.message)
+          }
+
 
         })
 
@@ -62,7 +68,7 @@
       margin: 0 auto;
       background: rgba(0,0,0,0.5)!important;
       .XwBox{
-        background: url("../../../static/images/xwBank.png") no-repeat;
+        background: url("../../../static/images/n_xinwang_alert.png") no-repeat;
         background-size: contain;
         position: relative;
         width: 90%;
