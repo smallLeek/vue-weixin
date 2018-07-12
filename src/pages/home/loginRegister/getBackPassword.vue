@@ -53,7 +53,7 @@
     },
     methods: {
       getMsgCode: function () {
-        let TIME_COUNT = 10;
+        let TIME_COUNT = 60;
         let self = this;
         let bindPhoneNum = this.bindPhoneNum;
         if (regexfun.regex(this, 'mobile', bindPhoneNum)) {
