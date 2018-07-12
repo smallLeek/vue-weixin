@@ -7,12 +7,12 @@
       <div  v-if="type == 0">
 
         <div class="bottom"  @click ='onIsFocus'>
-
+          <div class="fenji">
+            <p v-if="investscoreNo" @click="openInvest()"><span>您尚未完成</span><span class="openInvest">《出借人风险承受能力评估》</span><span>,平台无法判断您是否能承受该项目的风险，请知悉。</span></p>
+            <p class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</p>
+          </div>
           <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
-            <div class="fenji">
-              <p v-if="investscoreNo" @click="openInvest()"><span>您尚未完成</span><span class="openInvest">《出借人风险承受能力评估》</span><span>,平台无法判断您是否能承受该项目的风险，请知悉。</span></p>
-              <p class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</p>
-            </div>
+
             <ul class="boxline">
               <li>起投金额</li>
               <li>可投金额</li>
@@ -107,10 +107,9 @@
       <div class="content1" v-show="num ==0">
         <div class="content1_title">
           <span>项目名称</span>
-          <span>天天盈2015924</span>
+          <span>{{yyyDetail.PROJ_NAME}}</span>
         </div>
-        <img :src="yyyDetail.BACKWARD_URL" alt="">
-      </div> 
+      </div>
       <div class="content2" v-show="num ==1">
         <p v-text="yyyDetail.GUAR_INTRO"></p>
       </div>
@@ -141,11 +140,11 @@
       </div>
     </div>
     <div class="invest_no" v-if="type == 1">{{typeName}}</div>
-    <!-- 信息披露弹窗 -->
-    <informationDisclosure class="informationDisclosure"></informationDisclosure>
-    <!-- 余额不足弹窗 -->
-    <notSufficientFunds class="notSufficientFunds"></notSufficientFunds>
-    <!--请输入验证码-->
+    <!--&lt;!&ndash; 信息披露弹窗 &ndash;&gt;-->
+    <!--<informationDisclosure class="informationDisclosure"></informationDisclosure>-->
+    <!--&lt;!&ndash; 余额不足弹窗 &ndash;&gt;-->
+    <!--<notSufficientFunds class="notSufficientFunds"></notSufficientFunds>-->
+    <!--&lt;!&ndash;请输入验证码&ndash;&gt;-->
 
   </div>
 </template>
@@ -184,7 +183,6 @@
         isActive:false,
         investMoney:'',
         is_check_tra_pwd:0,
-        userData:null,
         is_authorized:'',
         investscoreYes:false,
         investscoreNo:false,
@@ -227,6 +225,7 @@
           this.amount_money =  this.userData.AMOUNT-0
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
+            console.log(this.yyyDetail)
             this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
             setWechatTitle(this.yyyDetail.PROJ_NAME);
             //判断用户类型
@@ -634,7 +633,6 @@
 
   .tab_content {
     .content1 {
-      padding-bottom: 1rem;
       background-color: #fff;
       text-align: center;
       .content1_title {
@@ -652,10 +650,6 @@
           float: right;
           color: #333333
         }
-      }
-      img{
-        width: 100%;
-        height:100%;
       }
     }
     .content2 {
@@ -749,16 +743,12 @@
     display: inline-block;
     width: 100%;
     height: .3rem;
-    font-size: .3rem;
-    color: #ccc;
+    font-size: .24rem;
+    color: #666;
     padding-left: .2rem;
   }
   .openInvest{
     color: #0000f4;
-  }
-  .fenji p{
-    font-size: 0.24rem;
-    padding:0 0.2rem;
   }
   .boxBlance{
     li{
@@ -926,5 +916,19 @@
         background-color: #bbbbbb;
       }
     }
+  }
+  .fenji{
+    position: absolute;
+    color: #666666;
+    padding-top: .1rem;
+    width: 7.5rem;
+    height: .8rem;
+    bottom: 3.33rem;
+    font-size: .24rem;
+    background: #fff;
+    z-index: 9999999999;
+    border-top: .01rem solid #e0e0e0;
+    border-bottom: .01rem solid #e0e0e0;
+    border-bottom: none;
   }
 </style>

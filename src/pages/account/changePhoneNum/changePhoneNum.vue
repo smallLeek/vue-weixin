@@ -1,5 +1,5 @@
 <template>
-  <div class="changePhoneNum" title="修改手机号码">
+  <div class="changePhoneNum" v-title="'修改手机号码'">
     <div class="title">
       <a v-on:click="backToSecurity()">
         <img src="../../../../static/images/goBack.png">
