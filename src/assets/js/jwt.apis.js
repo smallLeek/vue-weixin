@@ -245,6 +245,22 @@ function sendMessageValidCode(MOBILE,USER_TYPE,VALID_TYPE) {
 }
 
 /**
+ * 修改手机号码
+ * @param CUST_ID
+ * @param MOBILE
+ * @param USER_TYPE
+ * @param VALID_TYPE
+ * @returns {*}
+ */
+function sendMessageValidCodeWithId(CUST_ID,MOBILE,USER_TYPE,VALID_TYPE) {
+  return phtServer.globalPostData(urls.api_url_sendMessageValidCode,phtServer.submitData({
+    "CUST_ID": CUST_ID,
+    "MOBILE": MOBILE,
+    "USER_TYPE": USER_TYPE,
+    "VALID_TYPE": VALID_TYPE,
+  }))
+}
+/**
  * 融资端注册
  * @param MOBILE
  * @param LOGIN_CODE
@@ -628,12 +644,24 @@ function tradAllRecord (USER_ID,USER_TYPE,BEGIN_TIME,END_TIME,BUSITYPE,QUERY_DAT
   }))
 }
 
+function changePhoneNum (USER_ID,USER_TYPE,OLD_PHONE_NUM,OLD_MSG_CODE,NEW_PHONE_NUM,NEW_MSG_CODE) {
+  return phtServer.globalPostData(urls.api_url_modifyRegistMobile,phtServer.submitData({
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE,
+    "OLD_MOBILE":OLD_PHONE_NUM,
+    "OLD_MOBILE_VALID_CODE":OLD_MSG_CODE,
+    "NEW_MOBILE":NEW_PHONE_NUM,
+    "NEW_MOBILE_VALID_CODE":NEW_MSG_CODE,
+  }))
+}
+
 
 
 export  {
   passwordRetrieval,
   sendMessageMobileValidCode,
   sendMessageValidCode,
+  sendMessageValidCodeWithId,
   newAddPersonXW,
   XWnewAddPerson,
   getBanner,
@@ -666,6 +694,7 @@ export  {
   DdProjTradeRecord,
   queryInvestListApp,
   accountProfitApp,
-  tradAllRecord
+  tradAllRecord,
+  changePhoneNum
 }
 
