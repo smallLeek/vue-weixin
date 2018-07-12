@@ -44,7 +44,6 @@
         secondRegetText: "获取短信验证码",
       }
     },
-    watch: {},
     computed: {
       ...mapGetters(['userInfo', "accessAuth"])
     },
@@ -61,7 +60,7 @@
         apis.sendMessageValidCodeWithId(id, phoneNum, "1", VALID_TYPE).then(data => {
           if (data.status === "00000000") {
             regexfun.handleFailMsg(self, "验证码已发送");
-            let TIME_COUNT = 10;
+            let TIME_COUNT = 60;
             let timeCount;
             var timer_0ld =null;
             timeCount = TIME_COUNT;
@@ -97,7 +96,7 @@
             if (data.status === "00000000") {
               regexfun.handleFailMsg(self, "验证码已发送");
               let timeCount;
-              let TIME_COUNT = 10;
+              let TIME_COUNT = 60;
                timeCount = TIME_COUNT;
               var timer_new =null;
               timer_new = setInterval(() => {
@@ -135,7 +134,7 @@
               // 清除用户信息
               let userId = this.userInfo.ID;
               apis.exitLogin(userId, '1').then((data) => {
-                if (data.status = '00000000') {
+                if (data.status =='00000000') {
                   this.setSignOut();
                   this.$router.push({path: '/loginRegister/login'})
                 } else {
