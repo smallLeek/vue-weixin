@@ -21,6 +21,8 @@ const state = {
   xwInfo:false,
   //弹框
   showXwBank:false,
+  //激活弹窗
+  showActivate:false,
   //支付订单详情
   payDetail:JSON.parse(storeUtil.getStore('payDetail')) || {},
   //天天盈的账户详情
@@ -154,6 +156,15 @@ const actions = {
   setAllowBank( { commit }, res ){
     commit(types.ALLOW_BANK, res)
   },
+  /**
+   * 激活弹窗
+   * @param commit
+   * @param xwBank
+   * @constructor
+   */
+  setActivate( { commit }, res ){
+    commit(types.ACTIVATE, res)
+  },
 }
 
 const getters = {
@@ -170,7 +181,8 @@ const getters = {
   getProjCode:state => state.ttyProj_code,
   allowBack:state => state.allowBack,
   Code:state => state.Code,
-  earning:state => state.earning
+  earning:state => state.earning,
+  showActivate:state => state.showActivate,
 }
 /**
  * 在mutaion写入改变对应state里面的方法，哪里需要改变状态值时，只需要commit对应的方法即可
@@ -269,6 +281,11 @@ const mutations = {
   //收益试算
   [types.EARAING] ( state, earning){
     state.earning = earning
+
+  },
+  //激活弹窗
+  [types.ACTIVATE] ( state, showActivate){
+    state.showActivate = showActivate
 
   },
 
