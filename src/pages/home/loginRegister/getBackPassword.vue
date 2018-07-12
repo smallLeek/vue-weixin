@@ -11,7 +11,7 @@
         <li>
           <input type="text" maxlength="11" placeholder="请输入绑定手机号" v-model="bindPhoneNum">
           <span class="getCode">
-            <button class="codeText" @click="getMsgCode()">
+            <button class="codeText"  @click="getMsgCode()" v-bind:disabled="disabled">
              <span v-show="regetText">{{timeCount}}{{regetText}}</span>
            </button>
           </span>
@@ -48,11 +48,12 @@
         timeShow: false,
         timeCount: "",
         regetText: "获取验证码",
+        disabled:false
       }
     },
     methods: {
-      getMsgCode() {
-        let TIME_COUNT = 60;
+      getMsgCode: function () {
+        let TIME_COUNT = 10;
         let self = this;
         let bindPhoneNum = this.bindPhoneNum;
         if (regexfun.regex(this, 'mobile', bindPhoneNum)) {
@@ -60,19 +61,20 @@
             if (data.status === "00000000") {
               regexfun.handleFailMsg(self, "验证码已发送");
 
-              self.timeCount = TIME_COUNT;
-              self.regetText = "s后重新获取"
-              var abc = null;
-              self.timer = setInterval(() => {
-                if (self.timeCount > 1 && self.timeCount <= TIME_COUNT) {
-                  self.timeCount--;
-                } else {
-                  self.regetText = "重新获取";
-                  self.timeCount = "";
-                  window.clearInterval(self.timer);
-                }
-              }, 1000)
-
+                self.timeCount = TIME_COUNT;
+                self.regetText = "s后重新获取"
+                var abc = null;
+                self.timer = setInterval(() => {
+                  if (self.timeCount > 1 && self.timeCount <= TIME_COUNT) {
+                    self.disabled = true;
+                    self.timeCount--;
+                  } else {
+                    self.disabled = false;
+                    self.regetText = "重新获取";
+                    self.timeCount = "";
+                    window.clearInterval(self.timer);
+                  }
+                }, 1000)
             } else {
               regexfun.handleFailMsg(self, "用户账号或手机号不存在！")
             }

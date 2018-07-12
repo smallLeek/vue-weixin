@@ -110,8 +110,8 @@
           <span>天天盈2015924</span>
         </div>
         <img :src="yyyDetail.BACKWARD_URL" alt="">
-      </div>
-      <div class="content2"v-show="num ==1">
+      </div> 
+      <div class="content2" v-show="num ==1">
         <p v-text="yyyDetail.GUAR_INTRO"></p>
       </div>
       <div class="content3" v-show="num ==2">
