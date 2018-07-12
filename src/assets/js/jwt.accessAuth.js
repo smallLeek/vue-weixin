@@ -28,8 +28,13 @@ import * as apis from '../../assets/js/jwt.apis'
            if(userState.accessAuth.isNeedRealName == false){
              location.href = location.origin + userState.accessAuth.whereToGo
            } else {
-             $('.XwBank').show();
-             store.dispatch('setXwBank', true);
+             if(res.STATE== "0"){
+               $('.XwBank').show();
+               store.dispatch('setXwBank', true);
+             }else{
+
+             }
+
 
            }
          }
