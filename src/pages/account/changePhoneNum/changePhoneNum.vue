@@ -28,7 +28,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapGetters, mapActions, mapState} from 'vuex';
+  import {mapGetters, mapActions} from 'vuex';
   import * as regexfun from '../../../../src/assets/js/jwt.regex';
   import * as apis from '../../../assets/js/jwt.apis';
 

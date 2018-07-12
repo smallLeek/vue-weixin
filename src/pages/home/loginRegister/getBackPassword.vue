@@ -34,9 +34,7 @@
 <script>
   import * as regexfun from '../../../../src/assets/js/jwt.regex';
   import {phtServer} from '../../../assets/js/phtServer'
-  import {mapGetters, mapActions, mapState} from 'vuex'
   import * as apis from '../../../assets/js/jwt.apis'
-  import * as userAge from '../../../assets/js/jwt.userUrl'
 
   export default {
     data() {
