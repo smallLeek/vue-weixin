@@ -1,6 +1,5 @@
 <template>
   <!--月月盈和定投盈是一个页面-->
-  <div style="background:red">
     <div class="yyy" v-if="yyyDetail">
       <div class="modal-box" v-if="headShow">
         <div class="closeModal" @click="mobileHide()">
@@ -139,16 +138,14 @@
           <a>立即投资</a>
         </div>
       </div>
-        <!-- <div>你好吗</div> -->
+      
       <div class="invest_no" v-if="type == 1">{{typeName}}</div>
       <!-- 信息披露弹窗 -->
-      <informationDisclosure class="informationDisclosure"></informationDisclosure>
+      <!-- <informationDisclosure class="informationDisclosure"></informationDisclosure> -->
       <!-- 余额不足弹窗 -->
-      <notSufficientFunds class="notSufficientFunds"></notSufficientFunds>
+      <!-- <notSufficientFunds class="notSufficientFunds"></notSufficientFunds> -->
       <!--请输入验证码-->
-
     </div>
-  </div>
 </template>
 <script>
 import informationDisclosure from "../../components/informationDisclosure/informationDisclosure.vue";
