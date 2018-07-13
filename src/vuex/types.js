@@ -15,4 +15,5 @@ export const SET_PROJ_CODE  =        'SET_PROJ_CODE'; //  天天盈的项目编�
 export const ALLOW_BANK  =        'ALLOW_BANK'; //  天天盈的项目编号
 export const CODE_STATE  =        'CODE_STATE'; //  Code
 export const EARAING  =        'EARAING'; //  收益试算
+export const ACTIVATE  =        'ACTIVATE'; //  激活弹窗
 

@@ -44,15 +44,15 @@
     width: -moz-fit-content;
     width: fit-content;
     padding: 0 .3rem 0 0.3rem;
-    line-height: 0.8rem;
-    height: 0.8rem;
+    line-height: 1rem;
+    height: 1rem;
     border: 0.01rem solid #ccc;
     text-align: center;
-    font-size: 0.22rem;
+    font-size: 0.28rem;
     background-color: #000;
-    opacity: 0.7;
+    opacity: 0.8;
     color: #fff;
     border-radius: 0.1rem;
-    z-index:9999999999999999;
+    z-index:99999999;
   }
 </style>

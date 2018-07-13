@@ -228,6 +228,7 @@ export default {
           .queryProjDetail(this.userId, this.userType, this.proj_code)
           .then(data => {
             this.yyyDetail = data.result.main_data.data[0];
+            console.log(this.yyyDetail);
             this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
             setWechatTitle(this.yyyDetail.PROJ_NAME);
             //判断用户类型

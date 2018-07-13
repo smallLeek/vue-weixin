@@ -245,6 +245,22 @@ function sendMessageValidCode(MOBILE,USER_TYPE,VALID_TYPE) {
 }
 
 /**
+ * 修改手机号码
+ * @param CUST_ID
+ * @param MOBILE
+ * @param USER_TYPE
+ * @param VALID_TYPE
+ * @returns {*}
+ */
+function sendMessageValidCodeWithId(CUST_ID,MOBILE,USER_TYPE,VALID_TYPE) {
+  return phtServer.globalPostData(urls.api_url_sendMessageValidCode,phtServer.submitData({
+    "CUST_ID": CUST_ID,
+    "MOBILE": MOBILE,
+    "USER_TYPE": USER_TYPE,
+    "VALID_TYPE": VALID_TYPE,
+  }))
+}
+/**
  * 融资端注册
  * @param MOBILE
  * @param LOGIN_CODE
@@ -629,12 +645,57 @@ function tradAllRecord (USER_ID,USER_TYPE,BEGIN_TIME,END_TIME,BUSITYPE,QUERY_DAT
   }))
 }
 
+/**
+ * 修改手机号码
+ * @param USER_ID
+ * @param USER_TYPE
+ * @param OLD_PHONE_NUM
+ * @param OLD_MSG_CODE
+ * @param NEW_PHONE_NUM
+ * @param NEW_MSG_CODE
+ * @returns {*}
+ */
+function changePhoneNum (USER_ID,USER_TYPE,OLD_PHONE_NUM,OLD_MSG_CODE,NEW_PHONE_NUM,NEW_MSG_CODE) {
+  return phtServer.globalPostData(urls.api_url_modifyRegistMobile,phtServer.submitData({
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE,
+    "OLD_MOBILE":OLD_PHONE_NUM,
+    "OLD_MOBILE_VALID_CODE":OLD_MSG_CODE,
+    "NEW_MOBILE":NEW_PHONE_NUM,
+    "NEW_MOBILE_VALID_CODE":NEW_MSG_CODE,
+  }))
+}
+
+/**
+ * 修改登录密码
+ * @param USER_ID
+ * @param USER_TYPE
+ * @param OLDPWD_WITH_UPPERCASE
+ * @param OLDPWD_NO_UPPERCASE
+ * @param NEWPWD_WITH_UPPERCASE
+ * @param NEWPWD_NO_UPPERCASE
+ * @returns {*}
+ */
+function findPassword (USER_ID,USER_TYPE,OLDPWD_WITH_UPPERCASE,OLDPWD_NO_UPPERCASE,NEWPWD_WITH_UPPERCASE,NEWPWD_NO_UPPERCASE) {
+  return phtServer.globalPostData(urls.api_url_setNewPassword,phtServer.submitData({
+    "USER_ID":USER_ID,
+    "USER_TYPE":USER_TYPE,
+    "OLD_PASSWORD":OLDPWD_WITH_UPPERCASE,
+    "NEWOLD_PASSWORD":OLDPWD_NO_UPPERCASE,
+    "NEW_PASSWORD":NEWPWD_WITH_UPPERCASE,
+    "NEWNEW_PASSWORD":NEWPWD_NO_UPPERCASE,
+  }))
+
+
+}
+
 
 
 export  {
   passwordRetrieval,
   sendMessageMobileValidCode,
   sendMessageValidCode,
+  sendMessageValidCodeWithId,
   newAddPersonXW,
   XWnewAddPerson,
   getBanner,
@@ -667,6 +728,8 @@ export  {
   queryInvestListApp,
   accountProfitApp,
   tradAllRecord,
-  activateStockedUser
+  changePhoneNum,
+  activateStockedUser,
+  findPassword
 }
 
