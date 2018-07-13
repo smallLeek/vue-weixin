@@ -19,6 +19,7 @@ import modal from "./components/modal/modal.vue";
 import alert from "./components/alert/alert.vue";
 import openBank from "./components/openXWBank/openXWBANK.vue";
 import { XHeader } from "vux";
+import activate from "./components/activate/activate.vue";
 import * as apis from "./assets/js/jwt.apis";
 import { mapGetters, mapActions, mapState } from "vuex";
 import { storeUtil } from "./assets/js/util/lib.store";
@@ -42,7 +43,8 @@ export default {
       "tokenCode",
       "isRealName",
       "accessAuth",
-      "allowBack"
+      "allowBack",
+      "showActivate"
     ])
   },
   methods: {
