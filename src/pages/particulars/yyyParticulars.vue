@@ -1,7 +1,7 @@
 <template>
   <!--月月盈和定投盈是一个页面-->
   <div class="yyy" v-if="yyyDetail">
-    <div class="modal-box" v-if="headShow">
+    <div class="modal-box" v-if="headShow" @touchmove.prevent>
       <div class="closeModal" @click="mobileHide()">
       </div>
       <div  v-if="type == 0">
@@ -225,7 +225,6 @@
           this.amount_money =  this.userData.AMOUNT-0
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
-            console.log(this.yyyDetail)
             this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
             setWechatTitle(this.yyyDetail.PROJ_NAME);
             //判断用户类型
@@ -299,16 +298,10 @@
         (this.agree == false) ? this.agree = true : this.agree = false;
       },
       mobileHide(){
-        let mo=function(e){e.preventDefault();};
-        document.body.style.overflow='';//出现滚动条
-        document.removeEventListener("touchmove",mo,false);
         this.headShow =false
       },
       //获取焦点 显示投资
       showBox(){
-        let mo=function(e){e.preventDefault();};
-        document.body.style.overflow='hidden';
-        document.addEventListener("touchmove",mo,false);
         this.headShow =true
       },
       //获取焦点 显示投资
