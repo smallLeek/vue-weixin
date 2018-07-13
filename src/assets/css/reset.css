@@ -1,50 +1,130 @@
 /* CSS Document */
-html, body, div, span, object, iframe, h1, h2,
-h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn,
-em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd,
-ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
-tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption,
-figure, footer, header, hgroup, menu, nav, section, summary, time, mark,
-audio, video {
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
   outline: 0;
   vertical-align: baseline;
-  outline-style: none; /*FF*/
+  outline-style: none;
+  /*FF*/
 }
+
 /*盒子模型*/
-html{
+
+html {
   font-size: 85px;
+  height: 100%;
 }
 
-*{
-  box-sizing:border-box;
-  -moz-box-sizing:border-box; /* Firefox */
-  -webkit-box-sizing:border-box; /* Safari */
-}
-ul,li{
-  list-style: none;
-}
-a{
-  margin:0;
-  padding:0;
-  border:0;
-  font-size:100%;
-  vertical-align:baseline;
-  background:transparent;
-  text-decoration: none;
-  color:#999999;
+body {
+  height: 100%;
 }
 
-ol, ul {
+* {
+  -moz-box-sizing: border-box;
+  /* Firefox */
+  -webkit-box-sizing: border-box;
+  /* Safari */
+  box-sizing: border-box;
+}
+
+ul,
+li {
   list-style: none;
 }
 
-a:hover, a:focus {
+a {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
   text-decoration: none;
-  bblr: expression(this.onFocus=this.blur()); /*IE*/
-  outline-style: none; /*FF*/
+  color: #999999;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+  bblr: expression(this.onFocus=this.blur());
+  /*IE*/
+  outline-style: none;
+  /*FF*/
 }
 
 table {
@@ -52,21 +132,28 @@ table {
   border-spacing: 0;
 }
 
-input, select {
+input,
+select {
   vertical-align: middle;
 }
 
-body{
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
+body {
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
   background-color: #f8f8f8;
 }
+
 * {
   margin: 0;
   padding: 0;
 }
+
 /*浮动*/
+
 .fl {
   float: left;
 }
@@ -76,15 +163,17 @@ body{
 }
 
 /* 清除IOS默认input样式 */
-input{
-  -webkit-appearance:none;
+
+input {
+  -webkit-appearance: none;
 }
 
 /* 清除a标签点击样式 */
-a:hover{
+
+a:hover {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   -webkit-user-select: none;
   -moz-user-focus: none;
-  -moz-user-select: none;  
+  -moz-user-select: none;
   text-decoration: none;
 }

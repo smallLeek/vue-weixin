@@ -89,6 +89,7 @@
         </li>
       </ul>
     </div>
+
     <div class="bottom_input" v-if="bottomInputShow">
       <div class="input_text">
         <input type="text" placeholder="投资金额" v-model="widthDrawMoney" @focus="showBox()" ref="content">
@@ -98,597 +99,604 @@
         <a>立即投资</a>
       </div>
     </div>
+
     <div class="bottom_over" v-if="bottomOverShow">
       <span>已售罄</span>
-    </div>
+    </div> 
   </div>
 </template>
 <script>
-  import * as apis from '../../assets/js/jwt.apis'
-  import {mapGetters, mapActions} from 'vuex'
-  import * as regexfun from '../../../src/assets/js/jwt.regex';
-  import '../../assets/js/filter'
-  export default {
-    data() {
-      return {
-        userId: '',
-        userType: '',
-        proj_code: '',
-        TtyDetail: null,
-        rate: '',
-        proj_name: '',
-        userData:'',
-        CustList: '',
-        tty:null,
-        widthDrawMoney:null,
-        headShow:false,
-        agree:false,
-        investscore:null,
-        investscoreNo:false,
-        investscoreYes:false,
-        risk:false,
-        nowMoney:null,
-        bottomInputShow:true,
-        bottomOverShow:false
-
-
-      }
+import * as apis from "../../assets/js/jwt.apis";
+import { mapGetters, mapActions } from "vuex";
+import * as regexfun from "../../../src/assets/js/jwt.regex";
+import "../../assets/js/filter";
+export default {
+  data() {
+    return {
+      userId: "",
+      userType: "",
+      proj_code: "",
+      TtyDetail: null,
+      rate: "",
+      proj_name: "",
+      userData: "",
+      CustList: "",
+      tty: null,
+      widthDrawMoney: null,
+      headShow: false,
+      agree: false,
+      investscore: null,
+      investscoreNo: false,
+      investscoreYes: false,
+      risk: false,
+      nowMoney: null,
+      bottomInputShow: true,
+      bottomOverShow: false
+    };
+  },
+  computed: {
+    ...mapGetters(["loginStatus", "userInfo", "tokenCode", "accessAuth"]),
+    //title
+    ttyTitle() {
+      return this.proj_name + "(" + this.rate + "%)";
+    }
+  },
+  mounted() {
+    this.getTty();
+  },
+  methods: {
+    //视图发生动作
+    ...mapActions({
+      setPayDetail: "setPayDetail",
+      setAccessAuth: "accessAuth"
+    }),
+    guarantee() {
+      this.$router.push({ path: "/guarantee" });
     },
-    computed: {
-      ...mapGetters(
-        ['loginStatus', 'userInfo', 'tokenCode', 'accessAuth']
-      ),
-      //title
-      ttyTitle() {
-        return this.proj_name + "(" + this.rate + "%)";
-      }
+    //去投资列表
+    ttyInvestmentList() {
+      this.$router.push({
+        path: "/ttyInvestmentList",
+        query: { proj_code: this.proj_code }
+      });
     },
-    mounted() {
-      this.getTty();
+    //去安全保障
+    goMoneySafe() {
+      this.$router.push({ path: "/securitys" });
     },
-    methods: {
-      //视图发生动作
-      ...mapActions({setPayDetail: 'setPayDetail',setAccessAuth:'accessAuth'}),
-      guarantee(){
-        this.$router.push({path:'/guarantee'});
-      },
-      //去投资列表
-      ttyInvestmentList(){
-        this.$router.push({path:"/ttyInvestmentList",query:{proj_code:this.proj_code}})
-      },
-      //去安全保障
-      goMoneySafe() {
-       this.$router.push({path:'/securitys'})
-      },
-      //获取天天盈基本信息
-      getTty() {
-
-        this.userId = this.userInfo.ID;
-        this.userType = "1";
-        let userId = this.userInfo.ID;
-        apis.DdProj(userId, "1").then((data) => {
-          this.proj_code = data.result.main_data.PROJ_CODE;
-          this.tty = data.result.main_data;
-          this.getTtyDetail();
-          this.getDdProjRedeemCustList();
-        })
-        apis.userBaseData(userId,'1').then( (data) => {
-          this.userData = data.result.main_data;
-          this.investscore  = this.userData.INVESTSCORE;
-          if(this.investscore=='0'){
-            this.investscoreNo =true
-            this.risk =true
-          }
-          if(this.investscore=='1'){
-            this.risk =true
-            this.investscoreYes =true
-          }
-        })
-      },
-      onIsFocus(){
-        this.$refs.content.focus()
-      },
-      mobileHide(){
-        this.headShow =false
-      },
-      agreement(){
-        (this.agree == false) ? this.agree = true : this.agree = false;
-      },
-      openInvest(){
-        this.$router.push({path:'/blank'})
-      },
-      //天天盈项目详情
-      getTtyDetail() {
-        let userId = this.userInfo.ID;
-        let proj_code = this.proj_code;
-        apis.DdProjDetail(userId, '1', proj_code).then((data) => {
-          this.TtyDetail = data.result.main_data;
-          this.nowMoney=this.TtyDetail.NOWMONEY
-          if(this.nowMoney == 0){
-            this.bottomInputShow =false;
-            this.bottomOverShow =true
-          }
-          this.rate = this.TtyDetail.RATE;
-          this.proj_name = this.TtyDetail.PROJ_NAME
-        })
-      },
-      getDdProjRedeemCustList() {
-        let proj_code = this.proj_code;
-        apis.DdProjRedeemCustList(this.userId, this.userType, proj_code, 1, 10).then((data) => {
+    //获取天天盈基本信息
+    getTty() {
+      this.userId = this.userInfo.ID;
+      this.userType = "1";
+      let userId = this.userInfo.ID;
+      apis.DdProj(userId, "1").then(data => {
+        this.proj_code = data.result.main_data.PROJ_CODE;
+        this.tty = data.result.main_data;
+        this.getTtyDetail();
+        this.getDdProjRedeemCustList();
+      });
+      apis.userBaseData(userId, "1").then(data => {
+        this.userData = data.result.main_data;
+        this.investscore = this.userData.INVESTSCORE;
+        if (this.investscore == "0") {
+          this.investscoreNo = true;
+          this.risk = true;
+        }
+        if (this.investscore == "1") {
+          this.risk = true;
+          this.investscoreYes = true;
+        }
+      });
+    },
+    onIsFocus() {
+      this.$refs.content.focus();
+    },
+    mobileHide() {
+      this.headShow = false;
+    },
+    agreement() {
+      this.agree == false ? (this.agree = true) : (this.agree = false);
+    },
+    openInvest() {
+      this.$router.push({ path: "/blank" });
+    },
+    //天天盈项目详情
+    getTtyDetail() {
+      let userId = this.userInfo.ID;
+      let proj_code = this.proj_code;
+      apis.DdProjDetail(userId, "1", proj_code).then(data => {
+        this.TtyDetail = data.result.main_data;
+        this.nowMoney = this.TtyDetail.NOWMONEY;
+        if (this.nowMoney == 0) {
+          this.bottomInputShow = false;
+          this.bottomOverShow = true;
+        }
+        this.rate = this.TtyDetail.RATE;
+        this.proj_name = this.TtyDetail.PROJ_NAME;
+      });
+    },
+    getDdProjRedeemCustList() {
+      let proj_code = this.proj_code;
+      apis
+        .DdProjRedeemCustList(this.userId, this.userType, proj_code, 1, 10)
+        .then(data => {
           this.CustList = data.result.main_data.data;
-        })
-      },
-      HShow(){
-        this.headShow =false;
-      },
-      showBox(){
-        this.headShow =true
-      },
-      submitWithdraw(){
-        this.$refs.content.focus();
-        apis.userBaseData(this.userInfo.ID, '1').then((data) => {
-          let self =this;
-          this.userData = data.result.main_data;
-          let user_role = this.userInfo.USER_ROLE;
-          let amount_money =  this.userData.AMOUNT-0
-          let is_check_tra_pwd = this.userData.IS_AUTHORIZED;
-          let is_expired = this.userData.IS_Expired;
-          let min_money = this.TtyDetail.MIN_AMOUNT-0;
-          let max_money = this.TtyDetail.MAX_AMOUNT-0
-          let money= this.widthDrawMoney-0
-          let accountBalance = this.userData.AVAILABLE_BALANCE-0
-          let day_limit =  this.userData.DAY_LIMIT-0
-          let flag = true;
-          if(user_role != 'INVESTOR'){
-            flag = false
-            regexfun.handleFailMsg(this, "您的账户类型不支持投资!");
-          }
-          if (is_check_tra_pwd=='0') {
-            flag = false
-            regexfun.handleFailMsg(this,"您的用户未委托授权，无法进行投资操作!");
-          }
-          if(is_expired == '0'){
-            flag = false
-            regexfun.handleFailMsg(this, "您的用户授权已过期，无法进行投资操作!");
-          }
-          if( this.tty.INVEST_STATUS == "1" ){
-            flag = false;
-            regexfun.handleFailMsg(this,"未到投资时间，如有需要请联系客服!");
-          }
-          //投资不能为空
-          if(flag && (this.widthDrawMoney == "" || this.widthDrawMoney == 0) ||this.widthDrawMoney == null){
-            flag = false;
-            regexfun.handleFailMsg(self,"请输入投资金额");
-          }
-          if(flag && !(regexfun.regex(this, 'reg_finc_account', this.widthDrawMoney))){
-            flag = false;
-            regexfun.handleFailMsg(this,"金额最多12位整数，两位小数");
-          }
-          if(flag && this.agree == false){
-            flag = false;
-            regexfun.handleFailMsg(this,"请阅读并同意《风险揭示书》!");
-          }
-          //授权金额
-          if(flag && money>amount_money){
-            flag = false;
-            regexfun.handleFailMsg(this,"投资金额已大于单笔授权金额！");
-          }
-          //最大金额
-          if(flag && money>max_money){
-            flag = false;
-            regexfun.handleFailMsg(this,"投资金额应小于最大单笔限额！");
-          }
-          //判断债权是否充足
-          if(flag && money>this.nowMoney){
-            flag = false;
-            regexfun.handleFailMsg(this,"启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试");
-          }
-          if(flag && money<min_money){
-            flag = false;
-            regexfun.handleFailMsg(this,"投资金额应大于起投金额");
-          }
-          //账户余额
-          if(flag && money>accountBalance){
-            flag = false;
-            regexfun.handleFailMsg(this,"您的存管账户余额不足，请先充值");
-          }
-          //单笔限额
-          // if(flag && money>this.TtyDetail.MAX_AMOUNT){
-          //   flag = false;
-          //   regexfun.handleFailMsg(this,"投资金额应小于最大单笔限额");
-          // }
-          //项目投资完
-          if(flag && this.tty.PROJ_STATUS!='6003'){
-            flag = false;
-            regexfun.handleFailMsg(this,"当前项目已被抢光，敬请期待下一期!");
-          }
-          if(flag){
-            let self =this
-            this.setPayDetail({
-              //项目名称
-              pro_name:self.proj_name,
-              //可用余额
-              balance:self.userInfo.AVAILABLE_BALANCE,
-              //投资金额
-              withDraw:this.widthDrawMoney,
-              //投资期限
-              proTime:null,
-              pro_code:this.TtyDetail.PROJ_CODE
-            });
-            self.$router.push({path:'paymentOrder', query: {dds: 'dds'}})
-
-
-          }
-        })
-
-
-      }
+        });
+    },
+    HShow() {
+      this.headShow = false;
+    },
+    showBox() {
+      this.headShow = true;
+    },
+    submitWithdraw() {
+      this.$refs.content.focus();
+      apis.userBaseData(this.userInfo.ID, "1").then(data => {
+        let self = this;
+        this.userData = data.result.main_data;
+        let user_role = this.userInfo.USER_ROLE;
+        let amount_money = this.userData.AMOUNT - 0;
+        let is_check_tra_pwd = this.userData.IS_AUTHORIZED;
+        let is_expired = this.userData.IS_Expired;
+        let min_money = this.TtyDetail.MIN_AMOUNT - 0;
+        let max_money = this.TtyDetail.MAX_AMOUNT - 0;
+        let money = this.widthDrawMoney - 0;
+        let accountBalance = this.userData.AVAILABLE_BALANCE - 0;
+        let day_limit = this.userData.DAY_LIMIT - 0;
+        let flag = true;
+        if (user_role != "INVESTOR") {
+          flag = false;
+          regexfun.handleFailMsg(this, "您的账户类型不支持投资!");
+        }
+        if (is_check_tra_pwd == "0") {
+          flag = false;
+          regexfun.handleFailMsg(this, "您的用户未委托授权，无法进行投资操作!");
+        }
+        if (is_expired == "0") {
+          flag = false;
+          regexfun.handleFailMsg(this, "您的用户授权已过期，无法进行投资操作!");
+        }
+        if (this.tty.INVEST_STATUS == "1") {
+          flag = false;
+          regexfun.handleFailMsg(this, "未到投资时间，如有需要请联系客服!");
+        }
+        //投资不能为空
+        if (
+          (flag && (this.widthDrawMoney == "" || this.widthDrawMoney == 0)) ||
+          this.widthDrawMoney == null
+        ) {
+          flag = false;
+          regexfun.handleFailMsg(self, "请输入投资金额");
+        }
+        if (
+          flag &&
+          !regexfun.regex(this, "reg_finc_account", this.widthDrawMoney)
+        ) {
+          flag = false;
+          regexfun.handleFailMsg(this, "金额最多12位整数，两位小数");
+        }
+        if (flag && this.agree == false) {
+          flag = false;
+          regexfun.handleFailMsg(this, "请阅读并同意《风险揭示书》!");
+        }
+        //授权金额
+        if (flag && money > amount_money) {
+          flag = false;
+          regexfun.handleFailMsg(this, "投资金额已大于单笔授权金额！");
+        }
+        //最大金额
+        if (flag && money > max_money) {
+          flag = false;
+          regexfun.handleFailMsg(this, "投资金额应小于最大单笔限额！");
+        }
+        //判断债权是否充足
+        if (flag && money > this.nowMoney) {
+          flag = false;
+          regexfun.handleFailMsg(
+            this,
+            "启禀陛下，您出借的银子较多，小的立即去准备，请稍后再试"
+          );
+        }
+        if (flag && money < min_money) {
+          flag = false;
+          regexfun.handleFailMsg(this, "投资金额应大于起投金额");
+        }
+        //账户余额
+        if (flag && money > accountBalance) {
+          flag = false;
+          regexfun.handleFailMsg(this, "您的存管账户余额不足，请先充值");
+        }
+        //单笔限额
+        // if(flag && money>this.TtyDetail.MAX_AMOUNT){
+        //   flag = false;
+        //   regexfun.handleFailMsg(this,"投资金额应小于最大单笔限额");
+        // }
+        //项目投资完
+        if (flag && this.tty.PROJ_STATUS != "6003") {
+          flag = false;
+          regexfun.handleFailMsg(this, "当前项目已被抢光，敬请期待下一期!");
+        }
+        if (flag) {
+          let self = this;
+          this.setPayDetail({
+            //项目名称
+            pro_name: self.proj_name,
+            //可用余额
+            balance: self.userInfo.AVAILABLE_BALANCE,
+            //投资金额
+            withDraw: this.widthDrawMoney,
+            //投资期限
+            proTime: null,
+            pro_code: this.TtyDetail.PROJ_CODE
+          });
+          self.$router.push({ path: "paymentOrder", query: { dds: "dds" } });
+        }
+      });
     }
   }
+};
 </script>
 <style lang="less" scoped>
-  .modal-box{
-    height: 100%;
-    position: fixed;
+.modal-box {
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  background: rgba(0, 0, 0, 0.5);
+  .closeModal {
     width: 100%;
+    height: 95%;
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: 999999;
-    background: rgba(0,0,0,.5);
-    .closeModal{
-      width: 100%;
-      height: 95%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: rgba(0,0,0,.5);
-    }
-
+    background: rgba(0, 0, 0, 0.5);
   }
+}
 
-  .tty {
-    background-color: #f8f8f8;
-    padding-bottom: 0.94rem;
+.tty {
+  background-color: #f8f8f8;
+  padding-bottom: 0.94rem;
+}
+
+/* title */
+.title {
+  margin: auto;
+  width: 7.5rem;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.36rem;
+  text-align: center;
+  color: #fff;
+  background-color: #fb4747;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  img {
+    height: 0.5rem;
+    vertical-align: middle;
   }
-
-  /* title */
-  .title {
-    margin: auto;
-    width: 7.5rem;
+  a {
+    position: absolute;
+    width: 1rem;
     height: 1rem;
-    line-height: 1rem;
-    font-size: 0.36rem;
-    text-align: center;
-    color: #fff;
-    background-color: #fb4747;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-    img {
-      height: 0.5rem;
-      vertical-align: middle;
-    }
-    a {
-      position: absolute;
-      width: 1rem;
-      height: 1rem;
-      left: 0;
-      top: -0.02rem
-    }
-  }
-
-  .fund {
-    height: 2.7rem;
-    background: linear-gradient(to bottom, #fb4747 0%, #fb6547 100%);
-    text-align: center;
-    color: #fff;
-    margin-top: 1rem;
-    h2 {
-      font-size: 0.26rem;
-      font-weight: 500;
-      color: #fff;
-      span:nth-child(2) {
-        margin: 0 0.02rem;
-      }
-      span:first-child,
-      span:last-child {
-        display: inline-block;
-        width: 0.6rem;
-        vertical-align: middle;
-        margin-top: -0.06rem;
-        border-bottom: 1px solid #ffa7a7;
-      }
-    }
-    h1 {
-      padding-bottom: .1rem;
-      font-weight: 500;
-      font-size: 1.3rem;
-      line-height: 1;
-      b {
-        font-weight: normal;
-      }
-      span {
-        font-size: 0.46rem;
-      }
-    }
-    ul {
-      width: 5rem;
-      height: 0.38rem;
-      margin: 0.2rem auto 0 auto;
-      display: flex;
-      li {
-        flex: 1;
-        float: left;
-        height: 0.38rem;
-        line-height: 0.36rem;
-        margin-right: 0.2rem;
-        border-radius: 1rem;
-        font-size: 0.24rem;
-        border: 1px solid #fff;
-        box-sizing: border-box;
-      }
-      li:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-
-  .schedule {
-    ul {
-      margin-top: 0.2rem;
-      padding-left: 0.2rem;
-      background-color: #fff;
-      border-top: 1px solid #e0e0e0;
-      border-bottom: 1px solid #e0e0e0;
-      li {
-        height: 0.9rem;
-        line-height: 0.9rem;
-        padding-right: 0.2rem;
-        font-size: 0.3rem;
-        border-bottom: 1px solid #e0e0e0;
-        span:first-child {
-          float: left;
-          color: #666666;
-        }
-        span:last-child {
-          color: #333333;
-          float: right;
-          img {
-            height: 0.2rem;
-            margin-top: -0.1rem;
-            margin-left: 0.2rem;
-          }
-        }
-        a {
-          display: block;
-          height: 0.9rem;
-        }
-      }
-      li:last-child {
-        border: none;
-      }
-    }
-  }
-
-  .creditor_list {
-    margin-top: 0.3rem;
-    h1 {
-      font-weight: 500;
-      padding-left: 0.2rem;
-      height: 0.8rem;
-      line-height: 0.8rem;
-      font-size: 0.3rem;
-      color: #333333;
-      background-color: #e0e0e0;
-    }
-    ul {
-      background-color: #fff;
-      border-top: 1px solid #e0e0e0;
-      border-bottom: 1px solid #e0e0e0;
-      padding-left: 0.2rem;
-      li {
-        height: 0.9rem;
-        line-height: 0.9rem;
-        padding-right: 0.2rem;
-        font-size: 0.3rem;
-        border-bottom: 1px solid #e0e0e0;
-        span:first-child {
-          float: left;
-        }
-        span:last-child {
-          float: right;
-        }
-      }
-      li:last-child {
-        border: none
-      }
-    }
-  }
-  .bottom{
-    -webkit-tap-highlight-color: transparent;
-    position: absolute;
     left: 0;
-    bottom: 0;
-    .bottomList{
-      position: absolute;
-      bottom: 0.93rem;
-      z-index: 99999999;
-      width: 7.5rem;
-      margin: auto;
-      background-color: #fff;
-      border-bottom: none;
-      border-top: 1px solid #e0e0e0;
-    }
+    top: -0.02rem;
+  }
+}
 
-    .boxline{
+.fund {
+  height: 2.7rem;
+  background: linear-gradient(to bottom, #fb4747 0%, #fb6547 100%);
+  text-align: center;
+  color: #fff;
+  margin-top: 1rem;
+  h2 {
+    font-size: 0.26rem;
+    font-weight: 500;
+    color: #fff;
+    span:nth-child(2) {
+      margin: 0 0.02rem;
+    }
+    span:first-child,
+    span:last-child {
+      display: inline-block;
+      width: 0.6rem;
+      vertical-align: middle;
+      margin-top: -0.06rem;
+      border-bottom: 1px solid #ffa7a7;
+    }
+  }
+  h1 {
+    padding-bottom: 0.1rem;
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 1;
+    b {
+      font-weight: normal;
+    }
+    span {
+      font-size: 0.46rem;
+    }
+  }
+  ul {
+    width: 5rem;
+    height: 0.38rem;
+    margin: 0.2rem auto 0 auto;
+    display: flex;
+    li {
+      flex: 1;
+      float: left;
+      height: 0.38rem;
+      line-height: 0.36rem;
+      margin-right: 0.2rem;
+      border-radius: 1rem;
       font-size: 0.24rem;
-      color: #999;
-      li{
-        display: inline-block;
-        width: 46%;
-        padding-left:0.2rem;
-        margin-top: 0.29rem;
-      }
+      border: 1px solid #fff;
+      box-sizing: border-box;
     }
-    .boxColor{
-      font-size: 0.28rem;
-      color: #333;
-      li{
-        margin-top: 0.1rem;
-      }
+    li:last-child {
+      margin-right: 0;
     }
   }
-  .doAgree{
-    position: absolute;
-    right: 0;
-    bottom: -.2rem;
-    z-index: 9999;
-  }
-  .risk{
-   position: absolute;
-    padding-top: .1rem;
-    width: 7.5rem;
-    height: .8rem;
-    bottom: 3.33rem;
-    font-size: .32rem;
-    background: #fff;
-    z-index: 9999999999;
-    border-top: .01rem solid #e0e0e0;
-    border-bottom: .01rem solid #e0e0e0;
-    border-bottom: none;
-    span{
-      color: #333;
-    }
-  }
-  .title-list{
-    position: absolute;
-    display: inline-block;
-    width: 100%;
-    height: .3rem;
-    font-size: .24rem;
-    color: #ccc;
-    padding-left: .2rem;
-  }
-  .openInvest{
-    color: #0000f4;
-  }
-  .bottom{
-    .boxSafe{
-      p{
+}
+
+.schedule {
+  ul {
+    margin-top: 0.2rem;
+    padding-left: 0.2rem;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    li {
+      height: 0.9rem;
+      line-height: 0.9rem;
+      padding-right: 0.2rem;
+      font-size: 0.3rem;
+      border-bottom: 1px solid #e0e0e0;
+      span:first-child {
         float: left;
-        width: 30%;
-        padding-bottom: 0.28rem;
-        font-size: 0.28rem;
-        color: #333;
+        color: #666666;
       }
-      p:first-child{
-        padding-left: 0.2rem;
-      }
-      p:last-child{
+      span:last-child {
+        color: #333333;
         float: right;
-        width: 70%;
-        padding-right: 0.1rem;
-        text-align: right;
-        a{
-          font-size: 0.28rem;
-          color: #fb4747;
+        img {
+          height: 0.2rem;
+          margin-top: -0.1rem;
+          margin-left: 0.2rem;
         }
-        span{
-          font-size: 0.28rem;
-          color: #333;
-          img{
-            width: 0.26rem;
-            height: 0.26rem;
-            margin-right: 0.1rem;
-            margin-bottom: -.03rem;
-          }
-        }
+      }
+      a {
+        display: block;
+        height: 0.9rem;
       }
     }
+    li:last-child {
+      border: none;
+    }
   }
-  .bottom_input {
-    position: fixed;
-    bottom: 0;
-    height: 0.94rem;
-    z-index: 9999999999999;
+}
+
+.creditor_list {
+  margin-top: 0.3rem;
+  h1 {
+    font-weight: 500;
+    padding-left: 0.2rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    font-size: 0.3rem;
+    color: #333333;
+    background-color: #e0e0e0;
+  }
+  ul {
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    padding-left: 0.2rem;
+    li {
+      height: 0.9rem;
+      line-height: 0.9rem;
+      padding-right: 0.2rem;
+      font-size: 0.3rem;
+      border-bottom: 1px solid #e0e0e0;
+      span:first-child {
+        float: left;
+      }
+      span:last-child {
+        float: right;
+      }
+    }
+    li:last-child {
+      border: none;
+    }
+  }
+}
+.bottom {
+  -webkit-tap-highlight-color: transparent;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  .bottomList {
+    position: absolute;
+    bottom: 0.93rem;
+    z-index: 99999999;
     width: 7.5rem;
     margin: auto;
     background-color: #fff;
+    border-bottom: none;
     border-top: 1px solid #e0e0e0;
-    .input_text {
+  }
+
+  .boxline {
+    font-size: 0.24rem;
+    color: #999;
+    li {
+      display: inline-block;
+      width: 46%;
+      padding-left: 0.2rem;
+      margin-top: 0.29rem;
+    }
+  }
+  .boxColor {
+    font-size: 0.28rem;
+    color: #333;
+    li {
+      margin-top: 0.1rem;
+    }
+  }
+}
+.doAgree {
+  position: absolute;
+  right: 0;
+  bottom: -0.2rem;
+  z-index: 9999;
+}
+.risk {
+  position: absolute;
+  padding-top: 0.1rem;
+  width: 7.5rem;
+  height: 0.8rem;
+  bottom: 3.33rem;
+  font-size: 0.32rem;
+  background: #fff;
+  z-index: 9999999999;
+  border-top: 0.01rem solid #e0e0e0;
+  border-bottom: 0.01rem solid #e0e0e0;
+  border-bottom: none;
+  span {
+    color: #333;
+  }
+}
+.title-list {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 0.3rem;
+  font-size: 0.24rem;
+  color: #ccc;
+  padding-left: 0.2rem;
+}
+.openInvest {
+  color: #0000f4;
+}
+.bottom {
+  .boxSafe {
+    p {
       float: left;
-      margin-top: 0.2rem;
-      margin-left: 0.2rem;
-      width: 4.7rem;
-      height: 0.6rem;
-      border: 1px solid #e0e0e0;
-      border-radius: 1rem;
-      input {
-        float: left;
-        width: 3.5rem;
-        margin-left: 0.2rem;
-        margin-top: 0.1rem;
-        font-size: 0.3rem;
-        border: none;
-        outline: medium;
-        color: #333333;
-      }
-      ::-moz-placeholder {
-        color: #999999;
-        line-height: 0.35rem;
-      }
-      :-ms-input-placeholder {
-        color: #999999;
-        line-height: 0.35rem;
-      }
-      ::-webkit-input-placeholder {
-        color: #999999;
-        line-height: 0.35rem;
+      width: 30%;
+      padding-bottom: 0.28rem;
+      font-size: 0.28rem;
+      color: #333;
+    }
+    p:first-child {
+      padding-left: 0.2rem;
+    }
+    p:last-child {
+      float: right;
+      width: 70%;
+      padding-right: 0.1rem;
+      text-align: right;
+      a {
+        font-size: 0.28rem;
+        color: #fb4747;
       }
       span {
-        float: right;
-        margin-right: 0.2rem;
-        line-height: 0.6rem;
-        font-size: 0.3rem;
-        color: #333333;
+        font-size: 0.28rem;
+        color: #333;
+        img {
+          width: 0.26rem;
+          height: 0.26rem;
+          margin-right: 0.1rem;
+          margin-bottom: -0.03rem;
+        }
       }
     }
-    .input_submit {
+  }
+}
+.bottom_input {
+  position: fixed;
+  bottom: 0;
+  height: 0.94rem;
+  z-index: 9999999999999;
+  width: 7.5rem;
+  margin: auto;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+  .input_text {
+    float: left;
+    margin-top: 0.2rem;
+    margin-left: 0.2rem;
+    width: 4.7rem;
+    height: 0.6rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 1rem;
+    input {
+      float: left;
+      width: 3.5rem;
+      margin-left: 0.2rem;
+      margin-top: 0.1rem;
+      font-size: 0.3rem;
+      border: none;
+      outline: medium;
+      color: #333333;
+    }
+    ::-moz-placeholder {
+      color: #999999;
+      line-height: 0.35rem;
+    }
+    :-ms-input-placeholder {
+      color: #999999;
+      line-height: 0.35rem;
+    }
+    ::-webkit-input-placeholder {
+      color: #999999;
+      line-height: 0.35rem;
+    }
+    span {
       float: right;
+      margin-right: 0.2rem;
+      line-height: 0.6rem;
+      font-size: 0.3rem;
+      color: #333333;
+    }
+  }
+  .input_submit {
+    float: right;
+    width: 2.3rem;
+    height: 0.94rem;
+    line-height: 0.94rem;
+    color: #fff;
+    font-size: 0.32rem;
+    text-align: center;
+    a {
+      display: block;
       width: 2.3rem;
       height: 0.94rem;
       line-height: 0.94rem;
       color: #fff;
       font-size: 0.32rem;
       text-align: center;
-      a {
-        display: block;
-        width: 2.3rem;
-        height: 0.94rem;
-        line-height: 0.94rem;
-        color: #fff;
-        font-size: 0.32rem;
-        text-align: center;
-        background-color: #ffae00;
-      }
-      .end {
-        background-color: #bbbbbb;
-      }
+      background-color: #ffae00;
+    }
+    .end {
+      background-color: #bbbbbb;
     }
   }
-  .bottom_over{
-    position: absolute;
-    bottom: 0;
-    height: 0.94rem;
-    text-align: center;
-    z-index: 9999999999999;
-    width: 7.5rem;
-    margin: auto;
-    font-size: .32rem;
-    background-color: #bbb;
-    line-height: 0.94rem;
-    border-top: 1px solid #e0e0e0;
-    color:#fff;
-  }
-
+}
+.bottom_over {
+  position: absolute;
+  bottom: 0;
+  height: 0.94rem;
+  text-align: center;
+  z-index: 9999999999999;
+  width: 7.5rem;
+  margin: auto;
+  font-size: 0.32rem;
+  background-color: #bbb;
+  line-height: 0.94rem;
+  border-top: 1px solid #e0e0e0;
+  color: #fff;
+}
 </style>
