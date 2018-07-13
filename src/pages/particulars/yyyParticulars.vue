@@ -299,10 +299,16 @@
         (this.agree == false) ? this.agree = true : this.agree = false;
       },
       mobileHide(){
+        let mo=function(e){e.preventDefault();};
+        document.body.style.overflow='';//出现滚动条
+        document.removeEventListener("touchmove",mo,false);
         this.headShow =false
       },
       //获取焦点 显示投资
       showBox(){
+        let mo=function(e){e.preventDefault();};
+        document.body.style.overflow='hidden';
+        document.addEventListener("touchmove",mo,false);
         this.headShow =true
       },
       //获取焦点 显示投资

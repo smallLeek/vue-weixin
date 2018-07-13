@@ -44,7 +44,7 @@
     text-align: center;
     color: #fff;
     background-color: #fb4747;
-    position: fixed;
+    position: absolute;
     top: 0;
     z-index: 1;
     img{
@@ -68,5 +68,6 @@
   .Container iframe{
     width: 7.5rem;
     height: 12rem;
+    vertical-align:bottom;
   }
 </style>

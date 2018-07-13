@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="margin-bottom: -7rem">
     <open-bank v-if="showXwBank" v-show="loginStatus"></open-bank>
     <activate v-if="showActivate" v-show="loginStatus"> </activate>
     <!--<x-header v-show="showBar" :left-options="{showBack: false}" :right-options="{showMore: showMore}" style="background: #fb4747" >{{title}}-->

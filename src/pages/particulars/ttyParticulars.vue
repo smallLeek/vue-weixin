@@ -189,6 +189,9 @@
         this.$refs.content.focus()
       },
       mobileHide(){
+        let mo=function(e){e.preventDefault();};
+        document.body.style.overflow='';//出现滚动条
+        document.removeEventListener("touchmove",mo,false);
         this.headShow =false
       },
       agreement(){
@@ -222,6 +225,9 @@
         this.headShow =false;
       },
       showBox(){
+        let mo=function(e){e.preventDefault();};
+        document.body.style.overflow='hidden';
+        document.addEventListener("touchmove",mo,false);
         this.headShow =true
       },
       submitWithdraw(){
