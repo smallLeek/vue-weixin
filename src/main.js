@@ -16,6 +16,12 @@ import './assets/css/swiper.css'
 
  //FastClick.attach(document.body)
 
+//添加自定义键盘
+import  wcKeyBoard from 'wc-keyboard'
+import 'wc-keyboard/style.css'
+Vue.use(wcKeyBoard)
+
+
 Vue.use(VueScroller)
 Vue.prototype.$echarts = echarts
 Vue.prototype.http =axios;
