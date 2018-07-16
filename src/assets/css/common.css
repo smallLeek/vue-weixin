@@ -88,4 +88,7 @@
 .justify {
   text-align: justify;
 }
-
+/*文字水平居中*/
+.text_center{
+  text-align: center;
+}

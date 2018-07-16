@@ -2,12 +2,14 @@
   <!--月月盈和定投盈的合同模版-->
   <div class="container">
     <div class="loanNoContainer">
-      <ul class="loanHerd">
-        <li class="active">合同模板1</li>
-        <li>合同模板2</li>
-      </ul>
+      <div class="loanHerd">
+        <ul>
+          <li class="fl" v-bind:class="{active: isActive}" v-on:click="activeThis('one')">合同模板1</li>
+          <li class="fr" v-bind:class="{active: isTwoActive}" v-on:click="activeThis('two')">合同模板2</li>
+        </ul>
+      </div>
       <ul class="loanContainer">
-        <li class="loanCon">
+        <li class="loanCon" v-if="isActive">
           <div class="st_war">
             <div class="st_mainer">
               <div class="st_main">
@@ -35,34 +37,34 @@
                     </li>
                     <li class="float">
                       <span class="fn_left num_list mt10">第二条 借款基本信息</span>
-                        <p class="tableP">
-                          <span style="text-align:center;font-weight:bold; width: 60%;">借款金额（各出借人金额详见本合同附件一）</span>
-                          <span style="text-align:center;">￥<b>**</b>万元整<br/>大写：人民币<b>**</b>万元整 </span>
-                        </p>
-                        <p class="tableP">
-                          <span style="text-align:center;font-weight:bold; width: 60%;" class="w241">借款年利率</span>
-                          <span style="text-align:center;"><b>**%</b></span>
-                        </p>
-                        <p class="tableP">
-                          <span style="text-align:center;font-weight:bold; width: 60%;" class="w241">借款期限</span>
-                          <span style="text-align:center;"><b>**个月</b></span>
-                        </p>
-                        <p class="tableP">
-                          <span style="text-align:center;font-weight:bold; width: 60%;" class="w241">借款用途</span>
-                          <span style="text-align:center;"><b>*******</b></span>
-                        </p>
-                        <p class="tableP">
-                          <span style="text-align:center;font-weight:bold; width: 60%;">还款方式</span>
-                          <span style="text-align:center;"><b>*****</b></span>
-                        </p>
-                        <p class="tableP">
-                          <span style="text-align:center;font-weight:bold; width: 60%;">还款金额</span>
-                          <span style="text-align:center;"> <b>￥***元</b></span>
-                        </p>
+                      <p class="tableP clearfix">
+                        <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款金额（各出借人金额详见本合同附件一）</span>
+                        <span style="text-align:center; width: 40%;float: right;">￥<b>**</b>万元整<br/>大写：人民币<b>**</b>万元整 </span>
+                      </p>
+                      <p class="tableP clearfix">
+                        <span style="text-align:center;font-weight:bold; width: 60%; float: left;" class="w241">借款年利率</span>
+                        <span style="text-align:center; width: 40%;float: right;"><b>**%</b></span>
+                      </p>
+                      <p class="tableP clearfix">
+                        <span style="text-align:center;font-weight:bold; width: 60%; float: left;" class="w241">借款期限</span>
+                        <span style="text-align:center; width: 40%;float: right;"><b>**个月</b></span>
+                      </p>
+                      <p class="tableP clearfix">
+                        <span style="text-align:center;font-weight:bold; width: 60%; float: left;" class="w241">借款用途</span>
+                        <span style="text-align:center; width: 40%;float: right;"><b>*******</b></span>
+                      </p>
+                      <p class="tableP clearfix">
+                        <span style="text-align:center;font-weight:bold; width: 60%; float: left;">还款方式</span>
+                        <span style="text-align:center; width: 40%;float: right;"><b>*****</b></span>
+                      </p>
+                      <p class="tableP clearfix">
+                        <span style="text-align:center;font-weight:bold; width: 60%; float: left; border-bottom: 0.05px solid #5a5a5a;">还款金额</span>
+                        <span style="text-align:center; width: 40%;float: right;border-bottom: 0.05px solid #5a5a5a;"> <b>￥***元</b></span>
+                      </p>
                       <p class="fn_left">详细内容与本次所出借项目描述一致</p>
                     </li>
                     <li class="float">
-                      <span class="fn_left num_list">第三条 各方权利及义务</span>
+                      <span class="fn_left num_list fontt">第三条 各方权利及义务</span>
                       <span class="fn_left num_list">（一）甲方的权利及义务</span>
                       <p class="fn_left ti">1.承诺提供的信息真实有效，借款资金的来源合法，自愿向乙方进行出借形成债权。</p>
                       <p class="fn_left ti">2.保证通过金梧桐开通的存（托）管账户状态正常，确保资金划入、划出交易的完成。</p>
@@ -120,15 +122,17 @@
                 </ul>
 
               </div>
+
             </div>
           </div>
+
 
           <div class="st_war">
             <div class="st_mainer">
               <div class="st_main">
                 <h1 class="text_center">网络借贷服务协议</h1>
-                <p class="text_center fw" style="width:60%;float:right;">协议编号:</p>
-                <div class="float" style="width:100%;">
+                <p class="text_center fw fontP" >协议编号:</p>
+                <div class="float"  style="width:100%;">
                   <ol class="float w1000">
                     <li class="float">
                       <span class="fn_left num_list">1.出借人（以下简称甲方）：</span>
@@ -138,10 +142,6 @@
                       <span class="fn_left num_list">2.借款人（以下简称乙方）: </span>
                       <p class="fn_left">姓名/名称：</p>
                     </li>
-                    <!--   <li class="float">
-                        <span class="fn_left num_list">3.保证人（以下简称丙方）：</span>
-                          <p class="fn_left">姓名/名称：</p>
-                      </li> -->
                     <li class="float">
                       <span class="fn_left num_list">3.网站服务人（以下简称丙方）：</span>
                       <p class="fn_left">北京普惠通数据信息技术有限公司</p>
@@ -157,45 +157,41 @@
                       <p class="fn_left ti">4.募集期：是指乙方在金梧桐平台发布资金需求时所设定的筹资时间段。甲方资金在募集期至本协议生效期间不计利息。但丙方将为甲方向资金存（托）管机构争取收益补偿。</p>
                       <p class="fn_left ti">5.存（托）管方：是指获得相关资质的、为金梧桐平台提供资金存（托）管服务的支付机构或银行。所有金梧桐平台的服务接受方资金均存（托）管在支付方开设的存（托）管账户内，并由支付方完成所有资金清结算。</p>
                       <p class="fn_left ti">6.存（托）管账户：指协议各方在资金存（托）管方开立的账户。</p>
-                      <!--  <p class="fn_left ti">7.存（托）管账户：指协议各方在资金存（托）管方开立的账户。</p> -->
                     </li>
                     <li class="float">
                       <span class="fn_left num_list mt10">第二条 借款基本信息</span>
-                      <!--  <span class="fn_left num_list mt5">（一）基本信息</span> -->
-                      <table class="float n_table mt10" width="82%" border="1">
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;">借款金额（各出借人金额详见本合同附件一）</th>
-                          <td style="text-align:center;">￥<b>**</b>万元整<br/>大写：人民币<b>**</b>元整 </td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">借款年利率</th>
-                          <td style="text-align:center;"><b>**%</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">平台服务费（年化）</th>
-                          <td style="text-align:center;"><b>**%</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">借款期限</th>
-                          <td style="text-align:center;"><b>**个月</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">借款用途</th>
-                          <td style="text-align:center;"><b>*******</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;">还款方式</th>
-                          <td style="text-align:center;"><b>*****</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;">还款金额</th>
-                          <td style="text-align:center;"> <b>￥***元</b></td>
-                        </tr>
-                      </table>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款金额（各出借人金额详见本合同附件一）</span>
+                          <span style="text-align:center; width: 40%;float: right;">￥<b>**</b>万元整<br/>大写：人民币<b>**</b>元整 </span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款年利率</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>**%</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">平台服务费（年化）</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>**%</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款期限</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>**个月</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款用途</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>*******</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">还款方式</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>*****</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;border-bottom: 0.05px solid #5a5a5a;">还款金额</span>
+                          <span style="text-align:center; width: 40%;float: right;border-bottom: 0.05px solid #5a5a5a;"> <b>￥***元</b></span>
+                        </p>
                       <p class="fn_left">以《网络借贷协议》为准</p>
                     </li>
                     <li class="float">
-                      <span class="fn_left num_list">第三条 各方权利及义务</span>
+                      <span class="fn_left num_list fontt">第三条 各方权利及义务</span>
                       <span class="fn_left num_list">（一）甲方的权利及义务</span>
                       <p class="fn_left ti">1.甲方拥有参考丙方推荐后最终决定出借资金给特定借款人的权利。</p>
                       <p class="fn_left ti">2.对于丙方基于推荐出借的需要而提供给甲方的借款人的个人证件及其他相关信用信息，甲方应仅用于出借参考，不得向任何乙方、丙方以外的第三方透露；甲方应对借款人的信用信息及乙方、丙方的业务内容保密。如甲方擅自、不恰当地向他人透露借款人的信用信息或乙方、丙方的商业秘密，由此造成借款人或乙方、丙方的损失，甲方须承担全部责任。</p>
@@ -275,11 +271,12 @@
                 </ul>
               </div>
 
+<<<<<<< HEAD
 
             </div>
           </div>
         </li>
-        <li class=loanCon style="display: none;">
+        <li class='loanCon' v-else>
           <div class="st_war">
             <div class="st_mainer">
               <div class="st_main">
@@ -313,36 +310,34 @@
                     <li class="float">
                       <span class="fn_left num_list mt10">第二条 借款基本信息</span>
                       <!--  <span class="fn_left num_list mt5">（一）基本信息</span> -->
-                      <table class="float n_table mt10" width="82%" border="1">
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;">借款金额（各出借人金额详见本合同附件一）</th>
-                          <td style="text-align:center;">￥<b>**</b>万元整<br/>大写：人民币<b>**</b>万元整 </td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">借款年利率</th>
-                          <td style="text-align:center;"><b>**%</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">借款期限</th>
-                          <td style="text-align:center;"><b>**个月</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">借款用途</th>
-                          <td style="text-align:center;"><b>*******</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;">还款方式</th>
-                          <td style="text-align:center;"><b>*****</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;">还款金额</th>
-                          <td style="text-align:center;"> <b>￥***元</b></td>
-                        </tr>
-                      </table>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款金额（各出借人金额详见本合同附件一）</span>
+                          <span style="text-align:center; width: 40%;float: right;">￥<b>**</b>万元整<br/>大写：人民币<b>**</b>万元整 </span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款年利率</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>**%</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款期限</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>**个月</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款用途</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>*******</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">还款方式</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>*****</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left; border-bottom: 0.05px solid #5a5a5a;">还款金额</span>
+                          <span style="text-align:center; width: 40%;float: right; border-bottom: 0.05px solid #5a5a5a;"> <b>￥***元</b></span>
+                        </p>
                       <p class="fn_left">详细内容与本次所出借项目描述一致</p>
                     </li>
                     <li class="float">
-                      <span class="fn_left num_list">第三条 各方权利及义务</span>
+                      <span class="fn_left num_list fontt">第三条 各方权利及义务</span>
                       <span class="fn_left num_list">（一）甲方的权利及义务</span>
                       <p class="fn_left ti">1.承诺提供的信息真实有效，借款资金的来源合法，自愿向乙方进行出借形成债权。</p>
                       <p class="fn_left ti">2.保证通过金梧桐开通的存（托）管账户状态正常，确保资金划入、划出交易的完成。</p>
@@ -457,40 +452,38 @@
                     <li class="float">
                       <span class="fn_left num_list mt10">第二条 借款基本信息</span>
                       <!--  <span class="fn_left num_list mt5">（一）基本信息</span> -->
-                      <table class="float n_table mt10" width="82%" border="1">
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;">借款金额（各出借人金额详见本合同附件一）</th>
-                          <td style="text-align:center;">￥<b>**</b>万元整<br/>大写：人民币<b>**</b>万元整 </td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">借款年利率</th>
-                          <td style="text-align:center;"><b>**%</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">平台服务费（年化）</th>
-                          <td style="text-align:center;"><b>**%</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">借款期限</th>
-                          <td style="text-align:center;"><b>**个月</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;" class="w241">借款用途</th>
-                          <td style="text-align:center;"><b>*******</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;">还款方式</th>
-                          <td style="text-align:center;"><b>*****</b></td>
-                        </tr>
-                        <tr>
-                          <th style="text-align:center;font-weight:bold;">还款金额</th>
-                          <td style="text-align:center;"> <b>￥***元</b></td>
-                        </tr>
-                      </table>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款金额（各出借人金额详见本合同附件一）</span>
+                          <span style="text-align:center; width: 40%;float: right;">￥<b>**</b>万元整<br/>大写：人民币<b>**</b>万元整 </span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款年利率</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>**%</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">平台服务费（年化）</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>**%</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款期限</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>**个月</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款用途</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>*******</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;">还款方式</span>
+                          <span style="text-align:center; width: 40%;float: right;"><b>*****</b></span>
+                        </p>
+                        <p class="tableP clearfix">
+                          <span style="text-align:center;font-weight:bold; width: 60%; float: left;border-bottom: 0.05px solid #5a5a5a;">还款金额</span>
+                          <span style="text-align:center; width: 40%;float: right;border-bottom: 0.05px solid #5a5a5a;"> <b>￥***元</b></span>
+                        </p>
                       <p class="fn_left">以《网络借贷及保证协议》为准</p>
                     </li>
                     <li class="float">
-                      <span class="fn_left num_list">第三条 各方权利及义务</span>
+                      <span class="fn_left num_list fontt">第三条 各方权利及义务</span>
                       <span class="fn_left num_list">（一）甲方的权利及义务</span>
                       <p class="fn_left ti">1.甲方拥有参考丙方推荐后最终决定出借资金给特定借款人的权利。</p>
                       <p class="fn_left ti">2.对于丁方基于推荐出借的需要而提供给甲方的借款人的个人证件及其他相关信用信息，甲方应仅用于出借参考，不得向任何乙方、丙方以及丁方以外的第四方透露；甲方应对借款人的信用信息及乙方、丙方以及丁方的业务内容保密。如甲方擅自、不恰当地向他人透露借款人的信用信息或乙方、丙方以及丁方的商业秘密，由此造成借款人或乙方、丙方及丁方的损失，甲方须承担全部责任。</p>
@@ -527,7 +520,6 @@
                       <p class="fn_left ti">2.丁方未全面履行本协议约定的义务，或因系统的不稳定性造成信息泄漏而给甲方、乙方或丙方造成损失的，应当承担相应的责任。</p>
                       <p class="fn_left ti">3.任何一方违反本协议的约定，均应承担违约责任，赔偿守约方因此遭受的损失；如多方违约，应根据实际情况按比例承担相应的责任。违约方应赔偿因其违约而造成守约方的损失，包括但不限于可期待利益、仲裁费用及合理的律师费用等，但不得超过违约方订立本协议时可以预见或应当预见的因违反本协议可能造成的损失。</p>
                     </li>
-
                     <li class="float">
                       <span class="fn_left num_list">第五条 各方约定的其他事项</span>
                       <p class="fn_left ti">1.各方授予金梧桐向合作银行及其他机构查询并获取其真实身份及协议项下交易信息（不含密码）的权利。</p>
@@ -577,7 +569,7 @@
                 <ul class="sss_ul float w1000 mt16">
                   <li><span class="float">网站服务人：</span><span class="fr">法定代表人或授权代理人：</span></li>
                   <li><span class="float">（公章或协议专用章）</span><span class="fr">（签字或盖章）</span></li>
-                  <li><span class="float">    年     月      日</span><span class="fr"></span></li>
+                  <li><span class="float">     年     月      日</span><span class="fr"></span></li>
                 </ul>
               </div>
             </div>
@@ -589,44 +581,34 @@
 </template>
 
 <script>
+  export default {
+    data() {
+      return {
+        isActive:true,
+        isTwoActive:false,
+        loanList:[
+          {listName:'合同模板1'},
+          {listName:'合同模板2'},
+        ]
+      }
+    },
+    methods:{
+      //点击tab按钮
+      activeThis(item){
+        if(item == "one"){
+          this.isActive = true;
+          this.isTwoActive = false;
+        }else if (item == "two") {
+          this.isActive = false;
+          this.isTwoActive = true;
+        }else{
 
+        }
+      }
+    },
+  }
 </script>
 
 <style lang="less" scoped>
-  table{
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
-  .container{
-    font-size: 0.26rem;
-    color: #333;
-    .loanNoContainer{
-      padding:0 0.15rem;
-      h1{
-        font-size: 0.34rem;
-        font-weight: 700;
-        text-align: center;
-      }
-      .fontP{
-        font-size: 0.24rem;
-        color: #666;
-      }
-      .num_list{
-        font-size: 0.28rem;
-        font-weight: 700;
-      }
-      .tableP{
-        width: 100%;
-        padding:0.2rem 0;
-        text-align: center;
-        span{
-          display: inline-block;
-          text-align: center;
-        }
-        span:first-child{
-          font-weight: 700;
-        }
-      }
-    }
-  }
+  @import "../../../assets/css/loanNo.less";
 </style>
