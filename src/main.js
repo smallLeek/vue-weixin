@@ -28,20 +28,6 @@ Vue.config.productionTip = false;
 //线上地址
 //Vue.prototype.domain = 'https://www.phtfdata.com/wx/async';
 Vue.prototype.domain = 'http://m.phtfdata.com/wx/async';
-<<<<<<< HEAD
-// router.beforeEach((to, from, next) => {
-  // next();
-  // let allowBack = true    //    给个默认值true
-  // if (to.meta.allowBack !== undefined) {
-  //   allowBack = to.meta.allowBack
-  // }
-  // if (!allowBack) {
-  //   history.pushState(null, null, location.href) 
-  // }
-  // store.dispatch('setAllowBank',allowBack)
-// })
-=======
->>>>>>> de858c9931a0ec2e46e83b81d7312bccc3aaf476
 
 new Vue({
   el: '#app',
