@@ -83,6 +83,7 @@ video {
 html {
   font-size: 85px;
   height: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
