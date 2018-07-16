@@ -69,10 +69,10 @@
                 var width=$(phtModalEntity.headerClass).width();
                 var height=width/headerRate;
 
-                $(phtModalEntity.headerClass).css({
-                  height:height,
-                  top:-(height-3)
-                });
+                // $(phtModalEntity.headerClass).css({
+                //   height:height,
+                //   top:-(height-3)
+                // });
               })
             }
             function showOkHeader(){
@@ -348,6 +348,7 @@
     display: none;
   }
   .pht-dialog-contianer{
+    overflow: auto;
     position: fixed;
     left: 0;
     top: 0;
@@ -369,36 +370,37 @@
     -webkit-justify-content: center;
     -moz-justify-content: center;
     -ms-justify-content: center;
-    z-index: 9999999999999;
+    z-index: 99999999999999999999;
   }
   .pht-dialog-window{
     padding: .1rem 0;
-    border-radius:0 0 0.02rem 0.02rem;
+    border-radius:0 0 0.2rem 0.2rem;
     background: #fff;
     position: relative;
-    box-shadow: 0 0.01rem 0.01rem #D6DBE1;
-    width:80%;
+    width:79.3%;
   }
   .pht-dialog-header{
     width: 100%;
-    height: 0.55rem;
+    height: 2.2rem;
     margin: 0 auto;
-    background: url("../../../static/images/list_box_fail.png") no-repeat 0 0;
+    background: #fff;
     background-size: 100%;
     position: absolute;
-    top: -0.46rem;
+    top: -1.9rem;
   }
   .pht-dialog-header.ok{
     background: url("../../../static/images/success.png") no-repeat 0 0;
-    background-size: 100%;
+    background-size: cover;
+    background-position:.2rem;
   }
   .pht-dialog-header.fail{
     background: url("../../../static/images/list_box_fail.png") no-repeat 0 0;
-    background-size: 100%;
+    background-size:cover;
+    background-position: center;
   }
   .pht-dialog-header.notice{
-    background: url("../../../static/images/list_box_notice.png") no-repeat 0 0;
-    background-size: 100%;
+    background: url("../../../static/images/list_box_fail.png") no-repeat 0 0;
+    background-position: center;
   }
   .pht-dialog-content{
     padding: 1rem 1rem 1rem;
@@ -419,7 +421,7 @@
     padding: 3% 12%;
     overflow: hidden;
     color: #797F8B;
-    border-radius: 0.04rem;
+    border-radius: .4rem;
     margin: 0.3rem 1rem;
     font-size: 0.14rem;
     outline: none;
@@ -429,9 +431,10 @@
     border: solid 0.01rem #C0C3C8;
   }
   .pht-dialog-footer button.only{
-    width: 60%;
-    background-color: #79808A;
+    width: 50%;
+    background-color: #fb4747;
     color: #fff;
+    margin-top: 0;
     box-shadow: 0 0.03rem 0.03rem #e0e0e0;
     border: none;
   }

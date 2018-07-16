@@ -29,7 +29,8 @@ const detail = resolve => require(['../pages/account/detail/detail.vue'], resolv
 const downloads = resolve => require(['../pages/account/downloads/downloads.vue'], resolve);
 const shareInfo = resolve => require(['../pages/account/shareInfo/shareInfo.vue'], resolve);
 const novice = resolve => require(['../pages/account/novice/novice.vue'], resolve);
-
+const changePhoneNum = resolve => require(['../pages/account/changePhoneNum/changePhoneNum.vue'],resolve);
+const findPassword = resolve => require(['../pages/account/findPassword/findPassword.vue'],resolve);
 // 登录注册
 const loginRegister = resolve => require(['../pages/home/loginRegister/loginRegister.vue'], resolve);
 const login = resolve => require(['../pages/home/loginRegister/login.vue'], resolve);
@@ -260,6 +261,12 @@ const router = new VueRouter({
    {  path: '/securitys',
       component: securitys,
 
+   },
+    {  path: '/changePhoneNum',
+      component: changePhoneNum,
+   },
+    {  path: '/findPassword',
+      component: findPassword,
    },
     {  path: '/userInfo',
       component: userInfo,

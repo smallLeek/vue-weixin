@@ -1,6 +1,48 @@
 <template>
   <!--月月盈和定投盈是一个页面-->
   <div class="yyy" v-if="yyyDetail">
+    <div class="modal-box" v-if="headShow" @touchmove.prevent>
+      <div class="closeModal" @click="mobileHide()">
+      </div>
+      <div  v-if="type == 0">
+
+        <div class="bottom"  @click ='onIsFocus'>
+          <div class="fenji">
+            <p v-if="investscoreNo" @click="openInvest()"><span>您尚未完成</span><span class="openInvest">《出借人风险承受能力评估》</span><span>,平台无法判断您是否能承受该项目的风险，请知悉。</span></p>
+            <p class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</p>
+          </div>
+          <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
+
+            <ul class="boxline">
+              <li>起投金额</li>
+              <li>可投金额</li>
+              <li>最大单笔限额</li>
+            </ul>
+            <ul class="boxline boxColor">
+              <li>{{yyyDetail.MIN_BID_AMOUNT |farmatAmount}}元</li>
+              <li>{{yyyDetail.SURPLUS_AMOUNT | farmatAmount}}元</li>
+              <li>{{yyyDetail.MAX_BID_AMOUNT | farmatAmount}}元</li>
+            </ul>
+            <ul class="boxline boxBlance">
+              <li>账户余额</li>
+              <li></li>
+            </ul>
+            <div class="boxSafe">
+              <p>{{(userData.AVAILABLE_BALANCE) | farmatAmount}}元</p>
+              <p>
+              <span v-if="agree" @click="agreement">
+                <img class="on" src="../../../static/images/investOn.png">阅读并同意
+              </span>
+                <span v-if="!agree" @click="agreement">
+                <img class="on" src="../../../static/images/investIn.png">阅读并同意
+              </span>
+                <a href="javascript:;" @click="guarantee()">《风险揭示书》</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="title">
       <router-link to="/home">
         <img src="../../../static/images/goBack.png">
@@ -65,11 +107,10 @@
       <div class="content1" v-show="num ==0">
         <div class="content1_title">
           <span>项目名称</span>
-          <span>天天盈2015924</span>
+          <span>{{yyyDetail.PROJ_NAME}}</span>
         </div>
-        <img :src="yyyDetail.BACKWARD_URL" alt="">
       </div>
-      <div class="content2"v-show="num ==1">
+      <div class="content2" v-show="num ==1">
         <p v-text="yyyDetail.GUAR_INTRO"></p>
       </div>
       <div class="content3" v-show="num ==2">
@@ -88,64 +129,22 @@
         <p>已投资{{yyyDetail.CUST}}笔，投资总额{{yyyDetail.INVESTED_AMOUNT | farmatAmount}}元</p>
       </div>
     </div>
-    <div  v-if="type == 0">
-      <div class="modal-box" v-show="headShow">
-        <div class="close" @click="HShow()">
 
-        </div>
+    <div class="bottom_input" v-if="type == 0">
+      <div class="input_text">
+        <input type="text" placeholder="投资金额" v-model="investMoney" @focus="showBox()" ref="content">
+        <span>元</span>
       </div>
-      <div class="bottom"  @click ='onIsFocus'>
-
-        <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
-          <div class="fenji">
-            <p v-if="investscoreNo" @click="openInvest()"><span>您尚未完成</span><span class="openInvest">《出借人风险承受能力评估》</span><span>,平台无法判断您是否能承受该项目的风险，请知悉。</span></p>
-            <p class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</p>
-          </div>
-          <ul class="boxline">
-            <li>起投金额</li>
-            <li>可投金额</li>
-            <li>最大单笔限额</li>
-          </ul>
-          <ul class="boxline boxColor">
-            <li>{{yyyDetail.MIN_BID_AMOUNT |farmatAmount}}元</li>
-            <li>{{yyyDetail.SURPLUS_AMOUNT | farmatAmount}}元</li>
-            <li>{{yyyDetail.MAX_BID_AMOUNT | farmatAmount}}元</li>
-          </ul>
-          <ul class="boxline boxBlance">
-            <li>账户余额</li>
-            <li></li>
-          </ul>
-          <div class="boxSafe">
-            <p>{{(userData.AVAILABLE_BALANCE) | farmatAmount}}元</p>
-            <p>
-              <span v-if="agree" @click="agreement">
-                <img class="on" src="../../../static/images/investOn.png">阅读并同意
-              </span>
-              <span v-if="!agree" @click="agreement">
-                <img class="on" src="../../../static/images/investIn.png">阅读并同意
-              </span>
-              <a href="javascript:;" @click="guarantee()">《风险揭示书》</a>
-            </p>
-          </div>
-        </div>
-        <div class="bottom_input">
-          <div class="input_text">
-            <input type="text" placeholder="投资金额" v-model="investMoney" @focus="showBox()" ref="content">
-            <span>元</span>
-          </div>
-          <div class="input_submit" @click="submitWithdraw()">
-            <a>立即投资</a>
-          </div>
-        </div>
+      <div class="input_submit" @click="submitWithdraw()">
+        <a>立即投资</a>
       </div>
     </div>
-
     <div class="invest_no" v-if="type == 1">{{typeName}}</div>
-    <!-- 信息披露弹窗 -->
-    <informationDisclosure class="informationDisclosure"></informationDisclosure>
-    <!-- 余额不足弹窗 -->
-    <notSufficientFunds class="notSufficientFunds"></notSufficientFunds>
-    <!--请输入验证码-->
+    <!--&lt;!&ndash; 信息披露弹窗 &ndash;&gt;-->
+    <!--<informationDisclosure class="informationDisclosure"></informationDisclosure>-->
+    <!--&lt;!&ndash; 余额不足弹窗 &ndash;&gt;-->
+    <!--<notSufficientFunds class="notSufficientFunds"></notSufficientFunds>-->
+    <!--&lt;!&ndash;请输入验证码&ndash;&gt;-->
 
   </div>
 </template>
@@ -184,7 +183,6 @@
         isActive:false,
         investMoney:'',
         is_check_tra_pwd:0,
-        userData:null,
         is_authorized:'',
         investscoreYes:false,
         investscoreNo:false,
@@ -299,6 +297,9 @@
       agreement() {
         (this.agree == false) ? this.agree = true : this.agree = false;
       },
+      mobileHide(){
+        this.headShow =false
+      },
       //获取焦点 显示投资
       showBox(){
         this.headShow =true
@@ -309,6 +310,7 @@
       },
       //点击投资
       submitWithdraw(){
+        this.$refs.content.focus();
         let self = this
         if(!self.agree){
           this.bs.$emit('e:alert', "请阅读并同意《风险揭示书》!");
@@ -384,6 +386,24 @@
   }
 </script>
 <style lang="less" scoped>
+  .modal-box{
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    background: rgba(0,0,0,.5);
+    .closeModal{
+      width: 100%;
+      height: 95%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,.5);
+    }
+
+  }
   .none{
     display: none;
   }
@@ -612,7 +632,6 @@
 
   .tab_content {
     .content1 {
-      padding-bottom: 1rem;
       background-color: #fff;
       text-align: center;
       .content1_title {
@@ -630,10 +649,6 @@
           float: right;
           color: #333333
         }
-      }
-      img{
-        width: 100%;
-        height:100%;
       }
     }
     .content2 {
@@ -716,22 +731,66 @@
     text-align: center;
     color: #fff;
   }
-  .modal-box{
-    height: 100%;
-    width: 100%;
+
+  .doAgree{
     position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999999;
-    .close{
-      background: rgba(0,0,0,.5);
-      height: 100%;
-      width: 100%;
+    right: 0;
+    bottom: -.2rem;
+    z-index: 9999;
+  }
+  .title-list{
+    display: inline-block;
+    width: 100%;
+    height: .3rem;
+    font-size: .24rem;
+    color: #666;
+    padding-left: .2rem;
+  }
+  .openInvest{
+    color: #0000f4;
+  }
+  .boxBlance{
+    li{
+      height: 0.38rem;
+    }
+  }
+  .bottom{
+    .boxSafe{
+      p{
+        float: left;
+        width: 30%;
+        margin-bottom: 0.28rem;
+        font-size: 0.28rem;
+        color: #333;
+      }
+      p:first-child{
+        padding-left: 0.2rem;
+      }
+      p:last-child{
+        float: right;
+        width: 70%;
+        padding-right: 0.1rem;
+        text-align: right;
+        a{
+          font-size: 0.28rem;
+          color: #fb4747;
+        }
+        span{
+          font-size: 0.28rem;
+          color: #333;
+          img{
+            width: 0.26rem;
+            height: 0.26rem;
+            margin-right: 0.1rem;
+            margin-bottom: -.03rem;
+          }
+        }
+      }
     }
   }
   .bottom{
     .bottomList{
-      position: fixed;
+      position: absolute;
       bottom: 0.93rem;
       z-index: 99999999;
       width: 7.5rem;
@@ -785,135 +844,90 @@
         }
       }
     }
-    .bottom_input {
-      position: fixed;
-      bottom: 0;
-      height: 0.94rem;
-      z-index: 9999999999999;
-      width: 7.5rem;
-      margin: auto;
-      background-color: #fff;
-      border-top: 1px solid #e0e0e0;
-      .input_text {
+
+  }
+  .bottom_input {
+    position: fixed;
+    bottom: 0;
+    height: 0.94rem;
+    z-index: 9999999999999;
+    width: 7.5rem;
+    margin: auto;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    .input_text {
+      float: left;
+      margin-top: 0.2rem;
+      margin-left: 0.2rem;
+      width: 4.7rem;
+      height: 0.6rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 1rem;
+      input {
         float: left;
-        margin-top: 0.2rem;
+        width: 3.5rem;
         margin-left: 0.2rem;
-        width: 4.7rem;
-        height: 0.6rem;
-        border: 1px solid #e0e0e0;
-        border-radius: 1rem;
-        input {
-          float: left;
-          width: 3.5rem;
-          margin-left: 0.2rem;
-          margin-top: 0.1rem;
-          font-size: 0.3rem;
-          border: none;
-          outline: medium;
-          color: #333333;
-        }
-        ::-moz-placeholder {
-          color: #999999;
-          line-height: 0.35rem;
-        }
-        :-ms-input-placeholder {
-          color: #999999;
-          line-height: 0.35rem;
-        }
-        ::-webkit-input-placeholder {
-          color: #999999;
-          line-height: 0.35rem;
-        }
-        span {
-          float: right;
-          margin-right: 0.2rem;
-          line-height: 0.6rem;
-          font-size: 0.3rem;
-          color: #333333;
-        }
+        margin-top: 0.1rem;
+        font-size: 0.3rem;
+        border: none;
+        outline: medium;
+        color: #333333;
       }
-      .input_submit {
+      ::-moz-placeholder {
+        color: #999999;
+        line-height: 0.35rem;
+      }
+      :-ms-input-placeholder {
+        color: #999999;
+        line-height: 0.35rem;
+      }
+      ::-webkit-input-placeholder {
+        color: #999999;
+        line-height: 0.35rem;
+      }
+      span {
         float: right;
+        margin-right: 0.2rem;
+        line-height: 0.6rem;
+        font-size: 0.3rem;
+        color: #333333;
+      }
+    }
+    .input_submit {
+      float: right;
+      width: 2.3rem;
+      height: 0.94rem;
+      line-height: 0.94rem;
+      color: #fff;
+      font-size: 0.32rem;
+      text-align: center;
+      a {
+        display: block;
         width: 2.3rem;
         height: 0.94rem;
         line-height: 0.94rem;
         color: #fff;
         font-size: 0.32rem;
         text-align: center;
-        a {
-          display: block;
-          width: 2.3rem;
-          height: 0.94rem;
-          line-height: 0.94rem;
-          color: #fff;
-          font-size: 0.32rem;
-          text-align: center;
-          background-color: #ffae00;
-        }
-        .end {
-          background-color: #bbbbbb;
-        }
+        background-color: #ffae00;
+      }
+      .end {
+        background-color: #bbbbbb;
       }
     }
   }
-  .doAgree{
+  .fenji{
     position: absolute;
-    right: 0;
-    bottom: -.2rem;
-    z-index: 9999;
-  }
-  .title-list{
-    display: inline-block;
-    width: 100%;
-    height: .3rem;
-    font-size: .3rem;
-    color: #ccc;
-    padding-left: .2rem;
-  }
-  .openInvest{
-    color: #0000f4;
-  }
-  .fenji p{
-    font-size: 0.24rem;
-    padding:0 0.2rem;
-  }
-  .boxBlance{
-    li{
-      height: 0.38rem;
-    }
-  }
-  .bottom{
-    .boxSafe{
-      p{
-        float: left;
-        width: 30%;
-        margin-bottom: 0.28rem;
-        font-size: 0.28rem;
-        color: #333;
-      }
-      p:first-child{
-        padding-left: 0.2rem;
-      }
-      p:last-child{
-        float: right;
-        width: 70%;
-        padding-right: 0.1rem;
-        text-align: right;
-        a{
-          font-size: 0.28rem;
-          color: #fb4747;
-        }
-        span{
-          font-size: 0.28rem;
-          color: #333;
-          img{
-            width: 0.26rem;
-            height: 0.26rem;
-            margin-right: 0.1rem;
-            margin-bottom: -.03rem;
-          }
-        }
-      }
-    }
+    color: #666666;
+    padding-top: .1rem;
+    width: 7.5rem;
+    height: .8rem;
+    bottom: 3.33rem;
+    font-size: .24rem;
+    background: #fff;
+    z-index: 9999999999;
+    border-top: .01rem solid #e0e0e0;
+    border-bottom: .01rem solid #e0e0e0;
+    border-bottom: none;
   }
 </style>

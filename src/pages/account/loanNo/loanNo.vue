@@ -123,13 +123,8 @@
 
               </div>
 
-
             </div>
           </div>
-
-
-
-
 
 
           <div class="st_war">
@@ -165,7 +160,6 @@
                     </li>
                     <li class="float">
                       <span class="fn_left num_list mt10">第二条 借款基本信息</span>
-                      <!--  <span class="fn_left num_list mt5">（一）基本信息</span> -->
                         <p class="tableP clearfix">
                           <span style="text-align:center;font-weight:bold; width: 60%; float: left;">借款金额（各出借人金额详见本合同附件一）</span>
                           <span style="text-align:center; width: 40%;float: right;">￥<b>**</b>万元整<br/>大写：人民币<b>**</b>元整 </span>
@@ -277,6 +271,7 @@
                 </ul>
               </div>
 
+<<<<<<< HEAD
 
             </div>
           </div>
@@ -525,7 +520,6 @@
                       <p class="fn_left ti">2.丁方未全面履行本协议约定的义务，或因系统的不稳定性造成信息泄漏而给甲方、乙方或丙方造成损失的，应当承担相应的责任。</p>
                       <p class="fn_left ti">3.任何一方违反本协议的约定，均应承担违约责任，赔偿守约方因此遭受的损失；如多方违约，应根据实际情况按比例承担相应的责任。违约方应赔偿因其违约而造成守约方的损失，包括但不限于可期待利益、仲裁费用及合理的律师费用等，但不得超过违约方订立本协议时可以预见或应当预见的因违反本协议可能造成的损失。</p>
                     </li>
-
                     <li class="float">
                       <span class="fn_left num_list">第五条 各方约定的其他事项</span>
                       <p class="fn_left ti">1.各方授予金梧桐向合作银行及其他机构查询并获取其真实身份及协议项下交易信息（不含密码）的权利。</p>

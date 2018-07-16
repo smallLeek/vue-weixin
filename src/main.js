@@ -14,8 +14,6 @@ import wx from 'weixin-js-sdk'
 import VueScroller from 'vue-scroller'
 import './assets/css/swiper.css'
 
- //FastClick.attach(document.body)
-
 Vue.use(VueScroller)
 Vue.prototype.$echarts = echarts
 Vue.prototype.http =axios;
@@ -28,7 +26,6 @@ Vue.config.productionTip = false;
 //线上地址
 //Vue.prototype.domain = 'https://www.phtfdata.com/wx/async';
 Vue.prototype.domain = 'http://m.phtfdata.com/wx/async';
-
 new Vue({
   el: '#app',
   router,

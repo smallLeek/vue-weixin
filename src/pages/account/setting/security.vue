@@ -9,11 +9,11 @@
     <div class="content">
       <h1>金梧桐账号设置</h1>
       <ul>
-        <li>
+        <li v-on:click="changePhoneNum()">
           <span><img src="../../../../static/images/security/security_Phonum.png">登录手机号修改</span>
           <span>已绑定<img src="../../../../static/images/security/security_more.png"></span>
         </li>
-        <li>
+        <li v-on:click="findPassword()">
           <span><img src="../../../../static/images/security/security_modificationPassword.png">登录密码修改</span>
           <span><img src="../../../../static/images/security/security_more.png"></span>
         </li>
@@ -62,7 +62,20 @@
   </div>
 </template>
 <script>
+  import {mapGetters, mapActions,mapState} from 'vuex'
 export default {
+
+  methods:{
+    ...mapActions({setAccessAuth:'setAccessAuth'}),
+    changePhoneNum(){
+      this.setAccessAuth({whereToGo:'/wx/security'})
+      this.$router.push({path:'/changePhoneNum'})
+    },
+    findPassword(){
+      this.setAccessAuth({whereToGo:'/wx/security'})
+      this.$router.push({path:'/findPassword'})
+    }
+  }
 
 }
 </script>
