@@ -93,8 +93,13 @@
       },
       changeBanner (list) {
         if(list.FILE_TITLE ==  "风险承受能力评估"){
-          this.setAccessAuth({whereToGo:'/wx/home'})
-          this.$router.push({path:'/blank'})
+          if(this.loginStatus == true){
+            this.setAccessAuth({whereToGo:'/wx/home'})
+            this.$router.push({path:'/blank'})
+          }else{
+            this.setAccessAuth({whereToGo:'/wx/home'})
+            this.$router.push({path:'/loginRegister/login'})
+          }
 
         }else{
           /**
@@ -102,7 +107,8 @@
            */
           if(list.IS_LOGIN == '1'){
             if(this.loginStatus == true){
-              window.open(list.LINK_COMMENT)
+              this.setAccessAuth({whereToGo:'/wx/home'})
+              this.$router.push({path:'/detail',query:{stage:list.LINK_COMMENT}})
             }else{
               //如果没有登陆就进登陆页面
               //location.href =  userAge.loginUrl()

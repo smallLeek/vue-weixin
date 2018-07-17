@@ -7,7 +7,7 @@
       <span>关于我们</span>
     </div>
     <div class="Container">
-      <iframe  name="invest" frameBorder=0  width="100%"></iframe>
+      <iframe  name="invest" frameBorder=0  width="100%" style="border:0px;padding:0px;margin:0px"></iframe>
     </div>
 
   </div>

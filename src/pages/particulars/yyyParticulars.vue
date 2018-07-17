@@ -7,8 +7,8 @@
       <div  v-if="type == 0">
 
         <div class="bottom"  @click ='onIsFocus'>
-          <div class="fenji">
-            <p v-if="investscoreNo" @click="openInvest()"><span>您尚未完成</span><span class="openInvest">《出借人风险承受能力评估》</span><span>,平台无法判断您是否能承受该项目的风险，请知悉。</span></p>
+          <div class="fenji" v-if="risk">
+            <p v-if="investscoreNo" @click="openInvest()" class="title-list"><span>您尚未完成</span><span class="openInvest">《出借人风险承受能力评估》</span><span>,平台无法判断您是否能承受该项目的风险，请知悉。</span></p>
             <p class="title-list" v-if="investscoreYes">该项目的风险程度超过您的风险承受能力，请知悉</p>
           </div>
           <div v-if="headShow" class="bottomList" @click ='onIsFocus'>
@@ -190,7 +190,8 @@
         investscoreYes:false,
         investscoreNo:false,
         amount_money:'',
-        min_bid_amount:''
+        min_bid_amount:'',
+        risk:false
       }
     },
     computed: {
@@ -226,6 +227,14 @@
           this.is_check_tra_pwd = this.userData.IS_CHECK_TRA_PWD;
           this.is_authorized = this.userData.IS_AUTHORIZED;
           this.amount_money =  this.userData.AMOUNT-0
+          if(this.investscore=='0'){
+            this.investscoreNo =true
+            this.risk =true
+          }
+          if(this.investscore=='1'){
+            this.risk =true
+            this.investscoreYes =true
+          }
           apis.queryProjDetail(this.userId, this.userType,this.proj_code ).then((data) => {
             this.yyyDetail = data.result.main_data.data[0];
             this.min_bid_amount = this.yyyDetail.MIN_BID_AMOUNT;
@@ -354,15 +363,6 @@
         if((self.investMoney-0)>(this.available_balance -0)){
           this.bs.$emit('e:alert', "您的账户余额不足，请先充值!");
           return;
-        }
-
-        if(this.investscore=='0'){
-          this.investscoreNo =true
-          this.risk =true
-        }
-        if(this.investscore=='1'){
-          this.risk =true
-          this.investscoreYes =true
         }
         this.setPayDetail({
           userId:self.userId,
@@ -757,7 +757,7 @@
     height: .3rem;
     font-size: .24rem;
     color: #666;
-    padding-left: .2rem;
+    padding:0 0.2rem 0 0.2rem;
   }
   .openInvest{
     color: #0000f4;

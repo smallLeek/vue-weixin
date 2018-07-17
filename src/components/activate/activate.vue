@@ -61,11 +61,12 @@
       position: fixed;
       top:0;
       left: 0;
+      bottom: 0;
+      right: 0;
       height: 100%;
       width: 100%;
       z-index: 99999999;
-      max-width: 750px;
-      margin: 0 auto;
+      margin: auto;
       background: rgba(0,0,0,0.5)!important;
       .XwBox{
         background: url("../../../static/images/n_xinwang_alert.png") no-repeat;

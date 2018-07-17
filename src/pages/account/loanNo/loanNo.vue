@@ -278,9 +278,6 @@
                   <li><span class="float">     年     月      日</span><span class="fr"></span></li>
                 </ul>
               </div>
-
-<<<<<<< HEAD
-
             </div>
           </div>
         </li>
