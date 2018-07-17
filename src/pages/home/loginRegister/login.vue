@@ -86,9 +86,7 @@
             this.setUserInfo(userInfoList);
             this.setIsRealName(userInfoList.STATE);
             this.getTokenCode(userInfoList.token);
-            this.setAccessAuth({whereToGo:"/wx/home"});
             dealLogin.dealLogin();
-            this.$router.push({path: '/home'})
           }else {
             regexfun.handleFailMsg(this,data.message)
           }

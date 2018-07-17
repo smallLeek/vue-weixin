@@ -55,17 +55,19 @@
     position: fixed;
     top:0;
     left: 0;
+    bottom: 0;
+    right: 0;
     height: 100%;
     width: 100%;
     z-index: 99999999;
     max-width: 750px;
-    margin: 0 auto;
+    margin: auto;
     background: rgba(0,0,0,0.5)!important;
     .XwBox{
       background: url("../../../static/images/xwBank.png") no-repeat;
       background-size: contain;
       position: relative;
-      width: 90%;
+      width: 80%;
       top: 50%;
       margin: -5rem auto 0 auto;
       height: 10rem;
