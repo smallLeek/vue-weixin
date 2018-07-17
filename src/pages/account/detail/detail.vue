@@ -7,9 +7,8 @@
       <span>详情</span>
     </div>
     <div class="Container">
-      <iframe  name="invest" frameBorder=0  width="100%"></iframe>
+      <iframe  name="invest" frameBorder=0  width="100%" height="100%"></iframe>
     </div>
-
   </div>
 </template>
 
@@ -43,6 +42,9 @@
 </script>
 
 <style lang="less" scoped>
+  iframe{
+    vertical-align:bottom;
+  }
   .box{
     overflow: auto;
   }
@@ -78,6 +80,6 @@
   }
   .Container iframe{
     width: 7.5rem;
-    height: 12rem;
+    height: 13rem;
   }
 </style>
