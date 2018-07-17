@@ -2,19 +2,49 @@ table{
   border-collapse: collapse;
   border-spacing: 0;
 }
+.title{
+  margin: auto;
+  width: 7.5rem;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.36rem;
+  text-align: center;
+  color: #fff;
+  background-color: #fb4747;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  img{
+    height: 0.5rem;
+    vertical-align: middle;
+  }
+  b{
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    left: 0;
+    top: -0.02rem
+  }
+}
 .container{
   font-size: 0.26rem;
   color: #333;
   .loanNoContainer{
-    padding:0 0.15rem;
+    padding-top: 0.9rem;
+    .loanContainer{
+      padding:0 0.15rem;
+    }
     h1{
       font-size: 0.34rem;
       font-weight: 700;
       text-align: center;
+      padding-top:0.36rem;
     }
     .fontP{
       font-size: 0.24rem;
       color: #666;
+      padding-top:0.16rem;
+      padding-bottom:0.46rem;
     }
     .num_list{
       font-size: 0.28rem;
@@ -58,4 +88,11 @@ table{
       }
     }
   }
+}
+.line{
+  width: 7.5rem;
+  height: 0.2rem;
+  background-color:#f5f5f5;
+  border-top:0.5px solid #e5e5e5;
+  border-bottom:0.5px solid #e5e5e5;
 }

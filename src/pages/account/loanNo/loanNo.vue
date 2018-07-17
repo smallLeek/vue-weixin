@@ -1,6 +1,13 @@
 <template>
   <!--月月盈和定投盈的合同模版-->
   <div class="container">
+    <div class="title">
+      <b @click="goBackOne()">
+        <img src="../../../../static/images/goBack.png">
+      </b>
+      <span>合同模版</span>
+    </div>
+
     <div class="loanNoContainer">
       <div class="loanHerd">
         <ul>
@@ -8,6 +15,7 @@
           <li class="fr" v-bind:class="{active: isTwoActive}" v-on:click="activeThis('two')">合同模板2</li>
         </ul>
       </div>
+      <div class="line"></div>
       <ul class="loanContainer">
         <li class="loanCon" v-if="isActive">
           <div class="st_war">
@@ -590,6 +598,9 @@
       }
     },
     methods:{
+      goBackOne() {
+        this.$router.go(-1);
+      },
       //点击tab按钮
       activeThis(item){
         if(item == "one"){

@@ -99,28 +99,30 @@
       </ul>
     </div>
     <div class="tab">
-      <ul>
+      <ul >
         <li v-for="(item, index) in tabList" v-text="item.tabName" :class="{tabOn:index==num}" @click="tab(index)"></li>
       </ul>
     </div>
+
     <div class="tab_content">
-      <div class="content1" v-show="num ==0">
+      <div class="content1" v-show="num==0">
         <div class="content1_title">
           <span>项目名称</span>
           <span>{{yyyDetail.PROJ_NAME}}</span>
         </div>
-      </div>
-      <div class="content2" v-show="num ==1">
+       </div>
+
+      <div class="content2" v-show="num==1">
         <p v-text="yyyDetail.GUAR_INTRO"></p>
       </div>
-      <div class="content3" v-show="num ==2">
+      <div class="content3" v-show="num==2"> 
         <h1>
           <span>用户</span>
           <span>投资金额(元)</span>
           <span>时间</span>
         </h1>
         <ul v-if="yyyDetailList">
-          <li v-for="item in yyyDetailList">
+          <li v-for="item in yyyDetailList" >
             <span v-text="item.CUST_NAME"></span>
             <span>{{item.INVEST_AMOUNT | farmatAmount}}</span>
             <span v-text="item.CREATE_DATE">2018-05-30 11:14:41</span>
@@ -157,6 +159,7 @@
   import * as dealLogin from '../../assets/js/jwt.accessAuth'
   import {setWechatTitle} from '../../assets/js/util/lib.setTitle'
   import '../../assets/js/filter'
+  import { Tab, TabItem } from 'vux'
   export default {
     data() {
       return {
@@ -299,8 +302,9 @@
         this.$router.push({path:'/loanNo' ,query:{pro:this.proj_code}})
       },
       //tab页切换
-      tab(index){
-        this.num = index;
+      tab(number){
+        console.log(number)
+        this.num = number;
       },
       //是否选中风险揭示书
       agreement() {
@@ -382,6 +386,8 @@
     components: {
       informationDisclosure,
       notSufficientFunds,
+      Tab,
+      TabItem
     }
   }
 </script>
@@ -625,10 +631,15 @@
       }
       li.tabOn {
         color: #fff;
-        background-color: #fb4747
+        background-color: #fb4747;
       }
     }
   }
+
+
+
+
+
 
   .tab_content {
     .content1 {
@@ -651,10 +662,12 @@
         }
       }
     }
+  
     .content2 {
       padding: 0 0.2rem;
-      padding-bottom: 1rem;
+      // padding-bottom: 1rem;
       background-color: #fff;
+    
       h1 {
         font-size: 0.3rem;
         color: #333333;
