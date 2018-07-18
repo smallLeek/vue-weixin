@@ -129,6 +129,7 @@
           background-color: #fff;
           span{
             height: 0.9rem;
+            line-height: 0.8rem;
             float: left;
             input{
               color: #333333;

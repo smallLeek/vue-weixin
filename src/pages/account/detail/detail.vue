@@ -7,14 +7,13 @@
       <span>详情</span>
     </div>
     <div class="Container">
-      <iframe  name="invest" frameBorder=0  width="100%"></iframe>
+      <iframe  name="invest" frameBorder=0  width="100%" height="100%"></iframe>
     </div>
-
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapActions,mapState} from 'vuex'
+  import {mapGetters} from 'vuex'
   export default {
     data(){
       return{
@@ -28,7 +27,7 @@
     },
     mounted(){
       this.openUrl = this.$route.query.stage;
-      this.goAboutUs()
+      this.goAboutUs(this.openUrl);
     },
     methods:{
       goAboutUs(){
@@ -43,6 +42,9 @@
 </script>
 
 <style lang="less" scoped>
+  iframe{
+    vertical-align:bottom;
+  }
   .box{
     overflow: auto;
   }

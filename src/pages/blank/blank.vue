@@ -42,9 +42,11 @@
           let invest_score = this.userData.INVEST_SCORE;
           if (investscore == "0") {
             let url = 'http://139.129.12.93:3102/web2/hander/investor.do?CUST_ID=' + userId+'&'+'whereGo='+this.accessAuth.whereToGo;
+            alert(url)
             $('iframe').attr('src',url);
           } else{
             let url = 'http://139.129.12.93:3102/web2/hander/investorResult.do?CUST_ID=' + userId + '&INVEST_SCORE=' + invest_score+'&'+'whereGo='+this.accessAuth.whereToGo;
+           alert(url)
             $('iframe').attr('src',url);
           }
         })

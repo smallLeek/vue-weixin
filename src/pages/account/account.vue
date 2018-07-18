@@ -19,7 +19,7 @@
     </div>
     <!-- 菜单 -->
     <div class="menu">
-      <ul>
+      <ul class="clearfix">
         <li @click="ttyAccount()">
           <img src="../../../static/images/user/user_tty_icon.png">
           <span>天天盈</span>
