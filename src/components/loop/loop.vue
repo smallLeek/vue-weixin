@@ -10,11 +10,9 @@
 </template>
 
 <script>
-  import { phtServer } from '../../assets/js/phtServer'
   import Swiper from '../../../static/idangerous.swiper'
   import * as apis from '../../assets/js/jwt.apis'
-  import {mapGetters, mapActions,mapState} from 'vuex'
-  import * as userAge from '../../assets/js/jwt.userUrl'
+  import {mapGetters, mapActions} from 'vuex'
   export default {
     data() {
       return {
