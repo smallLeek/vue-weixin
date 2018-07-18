@@ -28,6 +28,9 @@
       ])
     },
     mounted() {
+      if(this.accessAuth.whereToGo=='/wx/blank'){
+        this.accessAuth.whereToGo ='/wx/home'
+      }
       this.openPage();
     },
     methods:{
@@ -47,7 +50,6 @@
         })
       },
       whereGo(){
-        console.log(this.accessAuth.whereToGo)
         location.href = location.origin +  this.accessAuth.whereToGo
       }
     }

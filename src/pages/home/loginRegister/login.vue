@@ -86,6 +86,9 @@
             this.setUserInfo(userInfoList);
             this.setIsRealName(userInfoList.STATE);
             this.getTokenCode(userInfoList.token);
+            if(userInfoList.STATE =='0' || userInfoList.STATE =='2' ){
+              this.$router.push({path:'/home'})
+            }
             dealLogin.dealLogin();
           }else {
             regexfun.handleFailMsg(this,data.message)

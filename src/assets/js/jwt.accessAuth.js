@@ -29,11 +29,20 @@ import * as apis from '../../assets/js/jwt.apis'
              location.href = location.origin + userState.accessAuth.whereToGo
            } else {
              if(res.STATE== "0"){
-               $('.XwBank').show();
-               store.dispatch('setXwBank', true);
+               if(userState.accessAuth.whereToGo=='/wx/blank'){
+                 location.href = location.origin + userState.accessAuth.whereToGo
+               }else {
+                 $('.XwBank').show();
+                 store.dispatch('setXwBank', true);
+               }
+
              }else if(res.STATE== "2"){
-               $('.activation').show();
-               store.dispatch('setActivate', true);
+               if(userState.accessAuth.whereToGo=='/wx/blank'){
+                 location.href = location.origin + userState.accessAuth.whereToGo
+               }else {
+                 $('.XwBank').show();
+                 store.dispatch('setXwBank', true);
+               }
              }else {
                alert("登陆异常")
              }
