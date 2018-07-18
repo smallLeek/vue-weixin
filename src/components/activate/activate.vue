@@ -72,9 +72,9 @@
         background: url("../../../static/images/n_xinwang_alert.png") no-repeat;
         background-size: contain;
         position: relative;
-        width: 90%;
+        width: 80%;
         top: 50%;
-        margin: -5rem auto 0 auto;
+        margin: -4rem auto 0 auto;
         height: 10rem;
         .XwBank-close{
           position: absolute;

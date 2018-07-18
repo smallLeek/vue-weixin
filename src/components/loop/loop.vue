@@ -95,7 +95,7 @@
             this.setAccessAuth({whereToGo:'/wx/home'})
             this.$router.push({path:'/blank'})
           }else{
-            this.setAccessAuth({whereToGo:'/wx/home'})
+            this.setAccessAuth({whereToGo:'/wx/blank'})
             this.$router.push({path:'/loginRegister/login'})
           }
 
