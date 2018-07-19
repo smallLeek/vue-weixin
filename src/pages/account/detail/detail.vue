@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions,mapState} from 'vuex'
+  import {mapGetters} from 'vuex'
   export default {
     data(){
       return{
@@ -27,7 +27,7 @@
     },
     mounted(){
       this.openUrl = this.$route.query.stage;
-      this.goAboutUs()
+      this.goAboutUs(this.openUrl);
     },
     methods:{
       goAboutUs(){

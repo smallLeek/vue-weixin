@@ -21,7 +21,7 @@ axios.interceptors.request.use(config => {
   $.showphtModal({
     withOneButton:0,
     errorMsg:"连接超时！请稍后！",
-    type: 1
+    type: 3
   })
   return Promise.reject(error)
 })
@@ -34,7 +34,7 @@ axios.interceptors.response.use(data => {
     $.showphtModal({
       withOneButton:0,
       errorMsg: '由于您长时间未操作！请重新登录！',
-      type: 2
+      type: 3
     });
 
   }else if( data.data.response.status=="00000000" ){

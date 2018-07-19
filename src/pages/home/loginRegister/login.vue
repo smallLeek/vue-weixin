@@ -86,6 +86,9 @@
             this.setUserInfo(userInfoList);
             this.setIsRealName(userInfoList.STATE);
             this.getTokenCode(userInfoList.token);
+            if(userInfoList.STATE =='0' || userInfoList.STATE =='2' ){
+              this.$router.push({path:'/home'})
+            }
             dealLogin.dealLogin();
           }else {
             regexfun.handleFailMsg(this,data.message)
@@ -126,6 +129,7 @@
           background-color: #fff;
           span{
             height: 0.9rem;
+            line-height: 0.8rem;
             float: left;
             input{
               color: #333333;

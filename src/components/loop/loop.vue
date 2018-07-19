@@ -10,11 +10,9 @@
 </template>
 
 <script>
-  import { phtServer } from '../../assets/js/phtServer'
   import Swiper from '../../../static/idangerous.swiper'
   import * as apis from '../../assets/js/jwt.apis'
-  import {mapGetters, mapActions,mapState} from 'vuex'
-  import * as userAge from '../../assets/js/jwt.userUrl'
+  import {mapGetters, mapActions} from 'vuex'
   export default {
     data() {
       return {
@@ -97,7 +95,7 @@
             this.setAccessAuth({whereToGo:'/wx/home'})
             this.$router.push({path:'/blank'})
           }else{
-            this.setAccessAuth({whereToGo:'/wx/home'})
+            this.setAccessAuth({whereToGo:'/wx/blank'})
             this.$router.push({path:'/loginRegister/login'})
           }
 

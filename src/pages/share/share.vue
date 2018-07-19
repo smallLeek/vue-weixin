@@ -1,6 +1,8 @@
 <template>
-  <div>
-   <button>分享给朋友</button>
+  <div class="share">
+    <div>
+      分享分享
+    </div>
   </div>
 </template>
 
