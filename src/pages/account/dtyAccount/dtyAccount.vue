@@ -56,7 +56,7 @@
     </div>
     <div class="content">
       <div class="content1" v-if="dtyList">
-        <ul v-for="item in dtyList">
+        <ul v-for="item in dtyList" v-if="len">
             <li>
               <span>年化收益</span>
               <span><b>{{item.ANNUAL_RATE}}</b>%</span>
@@ -86,9 +86,15 @@
               </p>
             </li>
         </ul>
+        <div class="noData" v-if="!len">
+          <div>
+            <img src="../../../../static/images/noData.png" alt="">
+            <p>暂无收益记录</p>
+          </div>
+        </div>
       </div>
       <div class="content2" v-if="dtyList">
-        <ul v-for="item in dtyList">
+        <ul v-for="item in dtyList" v-if="len">
             <li>
               <span>年化收益</span>
               <span><b>{{item.ANNUAL_RATE}}</b>%</span>
@@ -111,9 +117,15 @@
               </p>
             </li>
         </ul>
+        <div class="noData" v-if="!len">
+          <div>
+            <img src="../../../../static/images/noData.png" alt="">
+            <p>暂无收益记录</p>
+          </div>
+        </div>
       </div>
       <div class="content3" v-if="dtyList">
-        <ul class="on" v-for="item in dtyList">
+        <ul class="on" v-for="item in dtyList" v-if="!len">
             <li>
               <span>年化收益</span>
               <span><b>{{item.ANNUAL_RATE}}</b>%</span>
@@ -135,6 +147,12 @@
               </p>
             </li>
         </ul>
+        <div class="noData" v-if="!len">
+          <div>
+            <img src="../../../../static/images/noData.png" alt="">
+            <p>暂无收益记录</p>
+          </div>
+        </div>
       </div>
       <div class="content4" v-if="profitList">
         <div class="information">
@@ -176,7 +194,8 @@
       return {
         AccountData:null,
         dtyList:null,
-        profitList:null
+        profitList:null,
+        len:false
       }
     },
     computed: {
@@ -212,6 +231,7 @@
         apis.queryInvestListApp(userId, userType,invest, yjf_id, '100', '1' ).then((data) => {
           if (data.status == '00000000') {
             this.dtyList = data.result.main_data.data;
+            this.len = this.dtyList.length;
           }else{
             regexfun.handleFailMsg(this, data.message);
           }
@@ -571,6 +591,27 @@
     }
     .content1{
       display: block;
+    }
+  }
+  .noData{
+    text-align: center;
+    div{
+      position: absolute;
+      width: 100%;
+      height: 2.04rem;
+      margin: auto;
+      top:7rem;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      p{
+        font-size: 0.32rem;
+        color: #666;
+      }
+      img{
+        width: 1.85rem;
+        height: 2.04rem;
+      }
     }
   }
 </style>

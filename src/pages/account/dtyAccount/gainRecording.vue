@@ -19,16 +19,15 @@
             <span>{{item.EXPIRE}}</span>
             <span>{{item.PLAN_INCOME}}</span>
           </li>
-        </ul>  <div>
-        <img src="../../../../static/images/noData.png" alt="">
-        <p>暂无收益记录</p>
-      </div>
-      </div>
+        </ul>
       </div>
       <div class="noData" v-if="dtyList.length == 0">
-
+        <div>
+          <img src="../../../../static/images/noData.png" alt="">
+          <p>暂无收益记录</p>
+        </div>
+      </div>
     </div>
-
   </div>
 </template>
 <script>
