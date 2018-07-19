@@ -6,9 +6,9 @@ import * as apis from './jwt.apis'
  * 初始化微信SDK
  * @type {string[]}
  */
+const curUrl = location.href.split('#')[0];    //要传的链接
 export function initWxJsAPI(){
   //const jsApiList = ['onMenuShareAppMessage'];  //js接口
-  const curUrl = location.href.split('#')[0];    //要传的链接
   const isDebug = true; //开启调试模式
   let deferred = $.Deferred();
   let promise = deferred.promise();
@@ -18,6 +18,7 @@ export function initWxJsAPI(){
     apis.tSignature(curUrl).then(function(res){
       if(res.message == 'ok'){
         var resData  = res.result.main_data.data[0];
+        console.log(resData.signature)
         wx.config({
           debug: isDebug, //开启调试模式
           appId: resData.appid, // 必填，公众号的唯一标识
@@ -34,7 +35,7 @@ export function initWxJsAPI(){
         $.showphtModal({
           withOneButton:0,
           errorMsg:"微信初始化失败!",
-          type: 1
+          type: 3
         })
       }
     },60);
@@ -48,7 +49,7 @@ export function onMenuShareAppMessage(){
   wx.onMenuShareAppMessage({
     title: '普惠通数据信息技术有限公司', // 分享标题
     desc: '这是分享的描述', // 分享描述
-    link: 'http://192.168.1.108:8080/wx', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
     imgUrl: 'https://www.phtfdata.com/web6/images/logo-logo.png', // 分享图标
     type: 'link', // 分享类型,music、video或link，不填默认为link
     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空

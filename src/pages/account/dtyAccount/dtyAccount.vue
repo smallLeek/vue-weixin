@@ -189,6 +189,7 @@
   import {mapGetters} from 'vuex'
   import '../../../assets/js/filter'
   import * as regexfun from '../../../../src/assets/js/jwt.regex';
+import { setTimeout } from 'timers';
   export default {
     data(){
       return {
@@ -278,10 +279,17 @@
           $('.tab ul li:nth-child(4) img').attr('src',require('../../../../static/images/dcy/dcy_icon04.png'))
         }
       })
-    }
+
+    },
+    created() {
+       this.$nextTick(()=>{
+          // this. getContentHeight();
+       })
+    },
   }
 </script>
 <style lang="less" scoped>
+
   .dty{
     background-color: #f5f5f5;
   }
