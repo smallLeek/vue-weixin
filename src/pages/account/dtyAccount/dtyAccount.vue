@@ -55,7 +55,9 @@
       </ul>
     </div>
     <div class="content">
-      <div class="content1" v-if="dtyList">
+       
+      <div class="content1 lb_content1"  v-if="dtyList">
+    
         <ul v-for="item in dtyList">
             <li>
               <span>年化收益</span>
@@ -171,6 +173,7 @@
   import {mapGetters} from 'vuex'
   import '../../../assets/js/filter'
   import * as regexfun from '../../../../src/assets/js/jwt.regex';
+import { setTimeout } from 'timers';
   export default {
     data(){
       return {
@@ -258,10 +261,17 @@
           $('.tab ul li:nth-child(4) img').attr('src',require('../../../../static/images/dcy/dcy_icon04.png'))
         }
       })
-    }
+    
+    },
+    created() {
+       this.$nextTick(()=>{
+          // this. getContentHeight(); 
+       })
+    },
   }
 </script>
 <style lang="less" scoped>
+   
   .dty{
     background-color: #f5f5f5;
   }
