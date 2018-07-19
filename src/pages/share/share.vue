@@ -9,7 +9,6 @@
 <script>
  import * as wxShare from '../../assets/js/jwt.share'
 export default {
-
    data () {
     return {
 

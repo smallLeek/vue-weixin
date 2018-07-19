@@ -18,6 +18,7 @@ export function initWxJsAPI(){
     apis.tSignature(curUrl).then(function(res){
       if(res.message == 'ok'){
         var resData  = res.result.main_data.data[0];
+        console.log(resData.signature)
         wx.config({
           debug: isDebug, //开启调试模式
           appId: resData.appid, // 必填，公众号的唯一标识
