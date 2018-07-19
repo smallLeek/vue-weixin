@@ -1,12 +1,15 @@
 <template>
-  <div>
-   <button>分享给朋友</button>
+  <div class="share">
+    <div>
+      分享分享
+    </div>
   </div>
 </template>
 
 <script>
  import * as wxShare from '../../assets/js/jwt.share'
 export default {
+
    data () {
     return {
 

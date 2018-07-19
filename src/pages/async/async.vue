@@ -45,7 +45,7 @@
         load() {
           let userState = store.state.user
           let self = this
-          this.count = 60
+          this.count = 30
           self.timer = setInterval(() => {
             if (self.count > 0 && self.count <= self.count) {
               self.count--;

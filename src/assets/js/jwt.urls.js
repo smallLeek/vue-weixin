@@ -267,4 +267,4 @@ export const api_url_DdProjTradeRecord= origin_ProxyPath_dds + "/query/" + versi
 
 
 //微信获取签名
-export const api_url_getSignature =  origin_ProxyPath_coupon + "/query/" + '2.0' + "/DdProjTradeRecord/" + '2.0';
+export const api_url_getSignature =  origin_ProxyPath_coupon + "/query/" + '2.0' + "/getSignature/" + '2.0';
