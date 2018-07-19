@@ -12,22 +12,23 @@
         <span>时间</span>
         <span>金额(元)</span>
       </div>
-      <div class="list">
+      <div class="list" v-if="dtyList.length != 0">
         <ul>
           <li v-for="item in dtyList">
             <span>{{item.PRODUCT_NAME}}</span>
             <span>{{item.EXPIRE}}</span>
             <span>{{item.PLAN_INCOME}}</span>
           </li>
-        </ul>
+        </ul>  <div>
+        <img src="../../../../static/images/noData.png" alt="">
+        <p>暂无收益记录</p>
       </div>
+      </div>
+      </div>
+      <div class="noData" v-if="dtyList.length == 0">
+
     </div>
-   <div class="noData" v-if="!dtyList">
-     <div>
-       <img src="../../../../static/images/noData.png" alt="">
-       <p>暂无收益记录</p>
-     </div>
-   </div>
+
   </div>
 </template>
 <script>
