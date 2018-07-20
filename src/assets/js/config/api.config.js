@@ -8,7 +8,7 @@ const api_env_keys = {
 const config = {
   dev_onLine:{
     origin_baseUrl:"",
-    origin_ProxyPath:"/apis",
+    origin_ProxyPath:"/wx/apis",
     //3102 地址和线上地址不一样做区分(8093端口线上)
     inline_path :"/xwuser",
     //消息服务
@@ -49,31 +49,31 @@ const config = {
     inline_path:"/user",
 
     //消息服务
-    origin_ProxyPath_datas:'/datas',
+    origin_ProxyPath_datas:'/wx/datas',
     origin_ProxyPath_msgcenter:'/msgcenter',
 
     //用户服务
-    origin_ProxyPath_texts:'/texts',
+    origin_ProxyPath_texts:'/wx/texts',
     origin_ProxyPath_user:'/user',
 
     //红包服务
-    origin_ProxyPath_redpackets:'/redpackets',
+    origin_ProxyPath_redpackets:'/wx/redpackets',
     origin_ProxyPath_redpacket:'/redpacket',
 
     //定投盈
-    origin_ProxyPath_xwpdss:'/xwpdss',
+    origin_ProxyPath_xwpdss:'/wx/xwpdss',
     origin_ProxyPath_pds:'/pds',
 
     //天天盈服务
-    origin_ProxyPath_xwddss:'/xwddss',
+    origin_ProxyPath_xwddss:'/wx/xwddss',
     origin_ProxyPath_dds:'/dds',
 
     //优惠券服务
-    origin_ProxyPath_coupons:'/coupons',
+    origin_ProxyPath_coupons:'/wx/coupons',
     origin_ProxyPath_coupon:'/coupon',
 
     //新网银行注册绑卡
-    origin_ProxyPath_apts:'/apts',
+    origin_ProxyPath_apts:'/wx/apts',
     origin_ProxyPath_xwbankWebNotify:'/xwbankWebNotify',
   },
   build:{

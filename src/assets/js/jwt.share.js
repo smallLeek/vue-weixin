@@ -18,7 +18,7 @@ export function initWxJsAPI(){
     apis.tSignature(curUrl).then(function(res){
       if(res.message == 'ok'){
         var resData  = res.result.main_data.data[0];
-        console.log(resData.signature)
+        console.log(resData)
         wx.config({
           debug: isDebug, //开启调试模式
           appId: resData.appid, // 必填，公众号的唯一标识
@@ -45,13 +45,13 @@ export function initWxJsAPI(){
 }
 
 //分享给朋友
-export function onMenuShareAppMessage(){
+export function onMenuShareAppMessage(obj){
   wx.onMenuShareAppMessage({
-    title: '普惠通数据信息技术有限公司', // 分享标题
-    desc: '这是分享的描述', // 分享描述
-    link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-    imgUrl: 'https://www.phtfdata.com/web6/images/logo-logo.png', // 分享图标
-    type: 'link', // 分享类型,music、video或link，不填默认为link
+    title: obj.title, // 分享标题
+    desc: obj.desc, // 分享描述
+    link: obj.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    imgUrl:obj.imgUrl, // 分享图标
+    type:obj.type, // 分享类型,music、video或link，不填默认为link
     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
     success: function () {
 // 用户点击了分享后执行的回调函数

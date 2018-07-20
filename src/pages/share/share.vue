@@ -16,7 +16,13 @@ export default {
 },
   mounted(){
     wxShare.initWxJsAPI().then(function () {
-      wxShare.onMenuShareAppMessage()
+      wxShare.onMenuShareAppMessage({
+        title:"这是分享的标题",
+        desc:"这是分享的描述",
+        link:"https://www.phtfdata.com/wx/home",
+        imgUrl:"https://www.phtfdata.com/web6/images/wen2.png",
+        type:"link"
+      })
     })
   },
   methods:{
